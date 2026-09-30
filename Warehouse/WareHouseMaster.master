@@ -1,0 +1,758 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="~/WareHouseMaster.master.cs" Inherits="WareHouseMaster" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link href="WareHouseMasterCSSAndJs/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <%--datepicker--%>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
+
+    <link rel="stylesheet" href="WareHouseMasterCSSAndJs/Assets/style.css" />
+
+    <title>Reports</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <%--datepicker--%>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+    <asp:ContentPlaceHolder ID="ContentPageHead" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <style>
+        /* Sidebar Styles */
+        #sidebar {
+            width: 250px;
+            background: #343a40;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            transition: all 0.3s ease;
+            overflow-y: auto;
+        }
+
+            #sidebar.active {
+                margin-left: -250px;
+            }
+
+        .sidebar-nav li a {
+            color: #fff;
+            padding: 10px 20px;
+            display: block;
+        }
+
+        .main {
+            margin-left: 250px;
+            transition: all 0.3s ease;
+        }
+
+            .main.active {
+                margin-left: 0;
+            }
+
+        /* Active submenu */
+        .sidebar-link.active {
+            background: rgba(0, 170, 210, 0.35);
+            color: #fff !important;
+            font-weight: 600;
+            border-left: 5px solid #00AAD2;
+        }
+
+        /* Glow effect */
+        .sidebar-link.active {
+            box-shadow: inset 4px 0 0 #00AAD2, 0 0 8px rgba(0,170,210,.6);
+        }
+    </style>
+
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: .3px;
+        }
+
+        /* Sidebar Gradient */
+        #sidebar {
+            width: 250px;
+            background: linear-gradient(180deg, #2c3e50, #34495e);
+            color: #fff;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            transition: all 0.3s ease;
+            overflow-y: auto;
+            box-shadow: 3px 0 10px rgba(0,0,0,.2);
+        }
+
+            #sidebar.active {
+                margin-left: -260px;
+            }
+
+        .sidebar-logo h4 {
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #f1f1f1;
+            text-align: center;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 4px;
+        }
+
+        .sidebar-link {
+            color: #dcdcdc !important;
+            padding: 12px 20px;
+            display: block;
+            border-radius: 6px;
+            transition: 0.3s;
+            font-size: 15px;
+            font-weight: 400;
+        }
+
+            .sidebar-link:hover {
+                background: rgba(255,255,255,0.15);
+                color: #fff !important;
+                transform: translateX(4px);
+                text-decoration: none;
+            }
+
+            .sidebar-link i {
+                width: 20px;
+            }
+
+        .collapse .sidebar-link {
+            font-size: 12px;
+            opacity: .9;
+        }
+
+        .main {
+            margin-left: 250px;
+            transition: all 0.3s ease;
+            background: #f5f6fa;
+            min-height: 100vh;
+        }
+
+            .main.active {
+                margin-left: 0;
+            }
+
+        .navbar {
+            box-shadow: rgba(0,0,0,0.1) 0px 2px 5px;
+        }
+
+        .navbar-brand span {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        main.content {
+            background: #fff;
+            border-radius: 10px;
+            padding: 25px;
+            min-height: 500px;
+            margin-top: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.08);
+        }
+
+        footer {
+            font-size: 14px;
+            background: #fff !important;
+            box-shadow: 0px -2px 6px rgba(0,0,0,0.08);
+        }
+    </style>
+
+    <style>
+        .btn-group .multiselect {
+            text-align: left;
+            border-radius: 4px;
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            background-color: #fff;
+            color: #555;
+            font-size: 16px;
+            padding: 8px 12px;
+            height: auto;
+        }
+
+        .dataTables_wrapper .dataTables_length {
+            margin-right: 10px;
+        }
+
+        .dataTables_wrapper .dataTables_filter {
+            margin-left: auto;
+        }
+    </style>
+    <style>
+        /* FORCE GRIDVIEW HEADER BACKGROUND */
+        table.dataTable thead th,
+        table.table thead th,
+        table.table th,
+        .Grid th {
+            background-color: #00AAD2 !important;
+            color: #ffffff !important;
+            text-align: center !important;
+            vertical-align: middle !important;
+            white-space: normal !important;
+            word-break: break-word;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .table > :not(caption) > * > * {
+            background-color: transparent;
+        }
+
+        asp\:GridView th {
+            background-color: #00AAD2 !important;
+            color: #fff !important;
+        }
+    </style>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
+
+    <%-- DataTables Core and Buttons --%>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" />
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.colVis.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/colreorder/1.7.0/css/colReorder.dataTables.min.css" />
+<script type="text/javascript" src="https://cdn.datatables.net/colreorder/1.7.0/js/dataTables.colReorder.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
+
+    <script>
+        function toggleNav() {
+            const sidebar = document.getElementById('sidebar');
+            const main = document.getElementById('mainBody');
+            const toggleBtn = document.getElementById('toggleBtn');
+
+            const sidebarMargin = window.getComputedStyle(sidebar).marginLeft;
+            if (sidebarMargin === '0px') {
+                sidebar.style.marginLeft = '-260px';
+                main.style.marginLeft = '0';
+                toggleBtn.style.marginLeft = '0';
+            } else {
+                sidebar.style.marginLeft = '0';
+                main.style.marginLeft = '250px';
+                toggleBtn.style.marginLeft = '270px';
+            }
+        }
+    </script>
+
+    <style>
+        #sidebar {
+            transition: margin 0.3s ease;
+        }
+
+        #mainBody {
+            transition: margin 0.3s ease;
+        }
+
+        #pageLoader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+            #pageLoader img {
+                width: 150px;
+                height: 150px;
+            }
+
+        .dataTables_wrapper .dataTables_length select,
+        .dataTables_wrapper .dataTables_filter input {
+            display: inline-block !important;
+            width: auto !important;
+            min-width: 80px;
+            max-width: 200px;
+        }
+
+        .dataTables_wrapper .dt-buttons {
+            margin-bottom: 10px;
+        }
+
+            .dataTables_wrapper .dt-buttons .btn {
+                margin-right: 5px;
+            }
+
+        .dataTables_wrapper .dataTables_scroll {
+            width: 100% !important;
+        }
+
+        .dt-button {
+            font-size: 14px !important;
+            padding: 5px 10px !important;
+        }
+
+        .sidebar-link.active {
+            background: rgba(255, 255, 255, 0.25);
+            color: #fff !important;
+            font-weight: 600;
+            border-left: 4px solid #00AAD2;
+        }
+
+        .sidebar-item > a[aria-expanded="true"] {
+            background: rgba(0,170,255,0.15);
+            color: #fff !important;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.checkbox-multiselect').multiselect({
+                enableFiltering: true,
+                includeSelectAllOption: true,
+                maxHeight: 250,
+                nonSelectedText: 'Select one or more...',
+                buttonWidth: '100%',
+                enableCaseInsensitiveFiltering: true,
+
+                onDropdownShown: function () {
+                    var $container = $('.multiselect-container');
+
+                    // close (×) button remove
+                    $container.find('.multiselect-clear-filter').remove();
+
+                    // focus search box
+                    $container.find('.multiselect-search').focus();
+                }
+            });
+
+
+            $(document).ready(function () {
+                $('.datepicker').datepicker({
+                    format: 'dd-mm-yyyy',
+                    autoclose: true,
+                    todayHighlight: true
+                });
+            });
+        });
+
+
+
+        function BindDatatable(gv) {
+
+            var table = gv.DataTable({
+
+                paging: true,
+                searching: true,
+                ordering: true,
+                info: true,
+
+                lengthMenu: [
+                    [10, 20, 30, 50, -1],
+                    ['10', '20', '30', '50', 'All']
+                ],
+
+                pageLength: 10,
+                scrollX: true,
+                lengthChange: true,
+                destroy: true,
+                autoWidth: false,
+
+                colReorder: {
+                    fixedColumnsLeft: 1
+                },
+
+                dom: '<"top d-flex justify-content-between align-items-center"Bfl>rt<"bottom"ip><"clear">',
+
+                buttons: [
+
+                    // Column Visibility
+                    {
+                        extend: 'colvis',
+                        text: 'Show / Hide Columns 👁️',
+                        columns: ':not(.noVis)'
+                    },
+
+                    // Excel Export
+                    {
+                        extend: 'excelHtml5',
+                        title: 'Godown_Wise_Report',
+                        text: 'Export to Excel 💾',
+                        exportOptions: {
+                            columns: ':visible:not(.noVis)'
+                        }
+                    },
+
+                    // PDF Export
+                    {
+                        extend: 'pdfHtml5',
+                        title: 'Godown_Wise_Report',
+                        text: 'Export to PDF 📄',
+                        orientation: 'landscape',
+                        pageSize: 'A4',
+                        exportOptions: {
+                            columns: ':visible:not(.noVis)'
+                        },
+                        customize: function (doc) {
+                            doc.styles.tableHeader.alignment = 'center';
+                            doc.styles.tableHeader.fontSize = 10;
+                            doc.defaultStyle.fontSize = 9;
+                        }
+                    },
+
+                    // CSV Export
+                    {
+                        extend: 'csvHtml5',
+                        text: 'Export CSV',
+                        exportOptions: {
+                            columns: ':visible:not(.noVis)'
+                        }
+                    },
+
+                    // Print
+                    {
+                        extend: 'print',
+                        text: 'Print 🖨️',
+                        exportOptions: {
+                            columns: ':visible:not(.noVis)'
+                        },
+                        customize: function (win) {
+                            $(win.document.body)
+                                .css('font-size', '10pt')
+                                .prepend('<h4 class="text-center">Godown Wise Report</h4>');
+                        }
+                    }
+                ],
+
+                initComplete: function () {
+                    const wrapper = $(this).closest('.dataTables_wrapper');
+
+                    wrapper.find('select')
+                        .addClass('form-select form-control');
+
+                    wrapper.find('input[type=search]')
+                        .addClass('form-control form-control-sm')
+                        .attr('placeholder', 'Search...');
+
+                    wrapper.find('.dt-buttons')
+                        .addClass('d-flex flex-wrap gap-2 mb-2');
+                },
+
+                columnDefs: [
+
+                    // Hide default columns
+                    {
+                        targets: [3, 4],
+                        visible: false
+                    },
+
+                    // Serial Number Column
+                    {
+                        targets: 0,
+                        orderable: false,
+                        searchable: false,
+                        width: "50px",
+                        className: 'noVis',
+                        render: function (data, type, row, meta) {
+                            return meta.row + 1;
+                        }
+                    }
+                ],
+
+                drawCallback: function () {
+                    $('.dataTables_scrollHeadInner, \
+               .dataTables_scrollHeadInner table, \
+               .dataTables_scrollBody table')
+                        .css('width', '100%');
+                }
+
+            });
+
+
+        table.on('order.dt search.dt', function () {
+            
+            table.column(0, { search: 'applied', order: 'applied' })
+                .nodes()
+                .each(function (cell, i) {
+                    cell.innerHTML = i + 1;
+                });
+        }).draw();
+        $("#recordCountDiv").prependTo($(".dataTables_wrapper .top"));
+}
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var currentUrl = window.location.pathname.toLowerCase();
+            var activeLink = null;
+
+            $('.sidebar-link').each(function () {
+                var linkUrl = $(this).attr('href');
+                if (!linkUrl) return;
+                linkUrl = linkUrl.toLowerCase();
+
+                if (currentUrl.indexOf(linkUrl) !== -1) {
+                    $(this).addClass('active');
+                    activeLink = this;
+
+                    var parentCollapse = $(this).closest('.collapse');
+                    if (parentCollapse.length) {
+                        parentCollapse.addClass('show');
+                        parentCollapse
+                            .prev('.sidebar-link')
+                            .removeClass('collapsed')
+                            .attr('aria-expanded', 'true');
+                    }
+                }
+            });
+
+            if (activeLink) {
+                setTimeout(function () {
+                    activeLink.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }, 500);
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <form id="form1" runat="server">
+        <div id="pageLoader">
+            <img src="../../WareHouseMasterCSSAndJs/Assets/mpwlc3.gif" alt="Loading..." />
+        </div>
+
+        <div class="wrapper">
+            <aside id="sidebar">
+                <div class="h-100">
+                    <div class="sidebar-logo p-3" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                        <img src="../../WareHouseMasterCSSAndJs/Assets/mpwlc.png" alt="MPWLC Logo" style="height: 40px; width: auto; border-radius: 4px;" />
+                        <h4 class="text-white" style="margin: 0; font-weight: 600; letter-spacing: 1px;">MPWLC</h4>
+                    </div>
+
+                    <hr style="margin: 0px;" />
+
+                    <ul class="sidebar-nav list-unstyled">
+                        <li class="sidebar-item">
+                            <a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/DashboardNew.aspx") %>" class="sidebar-link show-loader"><i class="fa-solid fa-dashboard pe-2" style="text-decoration: none;"></i>Dashboard</a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard" style="text-decoration: none;">
+                                <i class="fa-solid fa-sliders pe-2"></i>Storage Reports
+                            </a>
+                            <ul id="dashboard" class="collapse list-unstyled">
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Godown_Wise_Qty_Available_Last_10_Year.aspx") %>" class="sidebar-link show-loader">1 Godown Wise Stock Position</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_District_Wise_Qty_Available_Last_10_Year_All_CommodityNew.aspx") %>" class="sidebar-link show-loader">2 District Wise Stock Position for All Commodity</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Branch_Wise_Qty_Available_Last_10_Year_New.aspx") %>" class="sidebar-link show-loader">3 Branch Wise Last 10 Year Stock Position</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_District_Wise_Qty_Available_Last_10_YearNew.aspx") %>" class="sidebar-link show-loader">4 District Wise Last 10 Year Stock Position</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_District_Wise_Qty_Available_Last_10_Year_For_Storage_TypeNew.aspx") %>" class="sidebar-link show-loader">5 District Storage Wise Last 10 Year Stock Position</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Region_Wise_Qty_Available_Last_10_Year_For_Storage_TypeNew.aspx") %>" class="sidebar-link show-loader">6 Region Storage Wise Last 10 Year Stock Position</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Branch_Wise_Qty_Available_Last_10_Year_Date_Wise_New.aspx") %>" class="sidebar-link show-loader">7 Branch Commodity,CropYear,Date Wise Stock Position</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Godown_Wise_Qty_Available_Last_10_Year_Date_WiseNew.aspx") %>" class="sidebar-link show-loader">8 Godown Commodity,CropYear,Date Wise Stock Position</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_District_Wise_Qty_Avl_COmplete_JVSNew.aspx") %>" class="sidebar-link show-loader">9 Complete JVS District Wise Stock Position</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Godown_Wise_Qty_Available_Last_10_Year_Date_Wise_SiloBagsNew.aspx") %>" class="sidebar-link show-loader">10 Silo Bags Stock Position Crop Year Wise</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Godown_Wise_Qty_Available_Last_10_Year_Date_Wise_CAPNew.aspx") %>" class="sidebar-link show-loader">11 CAP Stock Position Crop Year Wise</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Godown_CapacityNew.aspx") %>" class="sidebar-link show-loader">12 Capacity wise Godown List</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/ViewUpdateGodownDetails2023_New.aspx") %>" class="sidebar-link show-loader">13 View Update Godown List 2023</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_District_Wise_Qty_Available_Last_10_Year_Date_Wise_New.aspx") %>" class="sidebar-link show-loader">14 District Commodity,CropYear,Date Wise Stock Position</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Godown_Wise_Qty_Available_Last_10_Year_Date_Wise_HireType_New.aspx") %>" class="sidebar-link show-loader">15 Godown Commodity,CropYear,Hired Type ,Storage,Date Wise Stock Position</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_DistrictWise_HiredTypeWise_GodownCapacity_New.aspx") %>" class="sidebar-link show-loader">16 District Hired Type Godown Capacity</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Godown_Wise_Qty_Available_Last_10_Year_Date_Wise_SteelSilo_New.aspx") %>" class="sidebar-link show-loader">17 Steel Silo</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Owned_Godown_Details_New.aspx") %>" class="sidebar-link show-loader">18 Owned,PVT.PEG,BOT-AUB,CWC,Steel Silo,Hired,Tribal Schemes Godown Capacity and available Stock Position in M.T.</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_District_Wise_Qty_Avl_Complete_JVS_Owned_New.aspx") %>" class="sidebar-link show-loader">19 Region,District wise Total Capacity,Available Capacity,Vacant Capacity Report</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_District_Wise_FAQ_Non_FAQ_DCC_Stock_position_New.aspx") %>" class="sidebar-link show-loader">20 District wise FAQ , Non-FAQ and DCC Stock position</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Dist_Yearwise_StockPosition_New.aspx") %>" class="sidebar-link show-loader">21 Report for Stock Position District wise-Year wise</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_AvlQty_Vacant_and_Godown_Capacity_New.aspx") %>" class="sidebar-link show-loader">22 District Wise Capacity,Avl. Stock and Vacant Capacity</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Date_Wise_All_Crop_wise_Balance_Details_District_Wise_Hired_New.aspx") %>" class="sidebar-link show-loader">23 District Wise Hired Type Wise Capacity in MT</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Region_Wise_Stock_Position_Fill_Detail_By_BM_New.aspx") %>" class="sidebar-link show-loader">24 Region Crop Year Wise Stock Entry By Branch Manager (Review Report)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_District_Wise_Stock_Position_Fill_Detail_By_BM_New.aspx") %>" class="sidebar-link show-loader">25 District Crop Year Wise Stock Entry By Branch Manager (Review Report)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_District_CropYear_Wise_StockPosition_New.aspx") %>" class="sidebar-link show-loader">26 Report For Review of District , Crop Year Wise, Commodity Wise Stock Position Report (Month wise in MT)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_District_Wise_DCC_Stock_Position_New.aspx") %>" class="sidebar-link show-loader">27 Godown wise DCC Stock Position Entry by BM</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_District_Wise_DCC_Stock_Position_Entry_by_BM_New.aspx") %>" class="sidebar-link show-loader">28 District Crop Year wise DCC Stock Position Entry by BM</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Region_FY_DepositorWise_PaymentStatus_New.aspx") %>" class="sidebar-link show-loader">29 जमाकर्ता से भुगतान की स्थिति (प्रोफोर्मा-अ)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Region_FY_GodownWise_PaymentStatus_New.aspx") %>" class="sidebar-link show-loader">30 निजी गोदामों के भुगतान की स्थिति (प्रोफोर्मा-ब)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Godown_Wise_Payment_Status_For_Owned_Godown_New.aspx") %>" class="sidebar-link show-loader">31 Owned Godown Wise Payment Status</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_District_Wise_Payment_status_Godown_Type_Wise_New.aspx") %>" class="sidebar-link show-loader">32 Godown Type Wise Payment Status</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Payment_Status_OF_Finacial_Year_hired_Type_Wise_New.aspx") %>" class="sidebar-link show-loader">33 Financial Year wise Payment Status</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Region_FY_DepositorWise_PaymentStatusWithDistrict_New.aspx") %>" class="sidebar-link show-loader">34 जमाकर्ता से भुगतान की स्थिति (प्रोफोर्मा-अ)-जिलावार-शाखावार</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Region_FY_GodownWise_PaymentStatusWithDistrict_New.aspx") %>" class="sidebar-link show-loader">35 निजी गोदामों के भुगतान की स्थिति (प्रोफोर्मा-ब)-जिलावार-शाखावार</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Region_Wise_Payment_Status_New.aspx") %>" class="sidebar-link show-loader">36 संभागवार जमाकर्ता से भुगतान की स्थिति (प्रोफोर्मा-अ)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_FinancialYear_Wise_Payment_Status_Offline_New.aspx") %>" class="sidebar-link show-loader">37 संभागवार जमाकर्ता वर्ष वार भुगतान की स्थिति (प्रोफोर्मा-अ)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_District_Wise_HiredTypeWise_Capacity_New.aspx") %>" class="sidebar-link show-loader">38 District Godown Type Wise Godown Number and Capcity in LMT</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_District_CropYear_Depositorwise_StockPosition_NAFED_New.aspx") %>" class="sidebar-link show-loader">39 Report for Stock Availability Position District, Depositor, CropYear, Commodity wise for NAFED/MARKFED/NCCF(Quantity in MT)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/GetGodownDetails_Region_HiredWise_New.aspx") %>" class="sidebar-link show-loader">40 Report for Godown Details Region wise (Capacity in MT)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/GetGodownDetails_DistrictBranchWise_New.aspx") %>" class="sidebar-link show-loader">41 Report for Godown Details District Branch wise (Capacity in MT)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Region_FY_DepositorWise_PaymentStatus_JVS_New.aspx") %>" class="sidebar-link show-loader">42 Report for Depositor wise Payment Status with JVS Payment From Branch</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Region_FY_DepositorWise_JVSOwnerPaymentStatus_RM_New.aspx") %>" class="sidebar-link show-loader">43 Report for Depositor wise Payment Status with JVS Payment from Region</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_District_Wise_FAQ_Non_FAQ_DCC_Stock_position_New_CropYear_New.aspx") %>" class="sidebar-link show-loader">44 FAQ,Non-FAQ,DCC and other Data details (Real Time)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_District_Wise_Qty_Available_Last_10_Year_Date_Wise_New_New.aspx") %>" class="sidebar-link show-loader">44 District Crop Year Wise Stock Position(Drill Down)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_District_Wise_Qty_Available_Last_10_Year_Date_Wise_Depositor_New.aspx") %>" class="sidebar-link show-loader">45 Rpt District Wise Qty Available Last 10 Year Date Wise Depositor</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_District_Wise_Stock_Position_Without_DCC_New.aspx") %>" class="sidebar-link show-loader">46 District, Commodity Wise Stock Position Without DCC Stock</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Region_Wise_DCC_Stock_Position_New.aspx") %>" class="sidebar-link show-loader">47 क्षेत्रीय कार्यालय वार डीसीसी ,कीटग्रस्‍त स्‍कंध ,आटा फारमेशन,फारेन मेटर एवं खराब बारदाने में भंडारित स्‍कंध की शेष मात्रा</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_DistrictAll_CropYear_Depositorwise_StockPosition_NAFED_New.aspx") %>" class="sidebar-link show-loader">48 Summary Report for Stock Availability Position Depositor, CropYear, Commodity wise for NAFED/MARKFED/NCCF(Quantity in MT)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_DistrictAll_CropYear_Depositorwise_StockPosition_NAFED_Dlahan_Tilhan_New.aspx") %>" class="sidebar-link show-loader">49 Dlahan, Tilhan Summary Report for Stock Availability for NAFED/MARKFED/NCCF(Quantity in MT)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Region_Commodity_Wise_Stock_Position_New.aspx") %>" class="sidebar-link show-loader">50 Division Distirct Wise All Commodity Stock Position</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Region_Wise_Stock_entry_by_BM_New.aspx") %>" class="sidebar-link show-loader">51 Division Wise All Commodity Stock Position (Entry by BM)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_All_Type_Wise_Stock_entry_by_BM_New.aspx") %>" class="sidebar-link show-loader">52 All Type Wise Stock Position (Entry by BM)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_All_Type_Wise_Stock_Online_New.aspx") %>" class="sidebar-link show-loader">53 All Type Wise Stock Position (Online)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Region_Hired_type_wise_Godown_Details_New.aspx") %>" class="sidebar-link show-loader">54 Division,District,Branch,Godown And Hired Type Godown Capacity & Avl. Stock</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Branch_Commodity_Wise_Stock_Position_For_Spicial_PV_DistrictWIse_New.aspx") %>" class="sidebar-link show-loader">55 District,Godown Wise Stock Position</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Check_Godown_Status_For_All_New.aspx") %>" class="sidebar-link show-loader">56 Check Godown Details by Godown ID(All Information)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Acceptance_Wise_WHR_Details_For_All_New.aspx") %>" class="sidebar-link show-loader">57 Acceptance Wise WHR Details</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Godown_Wise_Qty_Available_and_VacantCapacity_New.aspx") %>" class="sidebar-link show-loader">58 Godown Wise Commodity wise Capcity ,Avl. Stock and Vacant Capacity in MT</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Godown_Depositor_Wise_Stock_position_New.aspx") %>" class="sidebar-link show-loader">59 District, Godown, Depositor, Commodity Wise Stock Position in MT</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Date_Region_Wise_Stock_position_New.aspx") %>" class="sidebar-link show-loader">60 Region, District, Depositor, Commodity Wise Stock Position in MT</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_GodownType_Wise_Capacity_Vacant_Details_New.aspx") %>" class="sidebar-link show-loader">61 Godown Wise Capacity , Avl. Stock and Vacant Details</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Depositor_Wise_Available_Qty_Date_Wise_New.aspx") %>" class="sidebar-link show-loader">62 Depositor Wise Stock Position in MT</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Godown_Wise_Update_Capcity_diffirence_New.aspx") %>" class="sidebar-link show-loader">63 Godown Wise Update Diffirence Capacity in MT</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_Godown_CropYear_Depositorwise_StockPosition_New.aspx") %>" class="sidebar-link show-loader">64 District,Godown,Depositor,CropYear Wise,Commodity Wise Stock Position Report in MT</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_District_Wise_Qty_Available_Last_10_Year_Date_Wise_AND_Depositer_Wise_New.aspx") %>" class="sidebar-link show-loader">65 Depositor,Commodity Wise Stock Position Report in MT</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Godown_Mapping_With_WeightBridge_New.aspx") %>" class="sidebar-link show-loader">66 Godown Mapping With Weighbridge</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Rpt_DistrictWise_HiredTypeWise_VacantGodownCapacity.aspx") %>" class="sidebar-link show-loader">67 Rpt District Wise Hired Type Wise Vacant Godown Capacity</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/Godown_Wise_Rabi_Kharif_Multiple_CropYear_Report.aspx") %>" class="sidebar-link show-loader">68 Rpt District Wise Hired Type Wise Vacant Godown Capacity</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewStorageCapacityReport/RM_Pending_Report.aspx") %>" class="sidebar-link show-loader">69 RM Pending Report</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#NewBillingReport" style="text-decoration: none;">
+                                <i class="fa-solid fa-sliders pe-2"></i>New Billing Report
+                            </a>
+                            <ul id="NewBillingReport" class="collapse list-unstyled">
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_GodownFinancialYearWisePaymentStatus_New.aspx") %>" class="sidebar-link show-loader">1 Payment Status Godown Type,Financial Year Month Wise Submision,Receiving and Pending Amount in (Cr.)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_Get_Recived_and_Pending_Amount_From_Aug_At_MPSCSC_New.aspx") %>" class="sidebar-link show-loader">2 Region District Wise Pendancy on MPSCSC</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_JVS_Payment_Against_Received_Payment_From_MPSCSC_New.aspx") %>" class="sidebar-link show-loader">3 Date/UTR Wise Payment Status (Receiving and Pay to Godown) at Various Level</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_Payment_Status_OF_Financial_Year_hired_Type_MPSCSC_New.aspx") %>" class="sidebar-link show-loader">4 Finacial Year Wise Payment Status</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_Region_Wise_Payment_status_For_JVS_New.aspx") %>" class="sidebar-link show-loader">5 Region Financial Year Wise Payment Status</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_Region_Wise_DSC_Payment_details_New.aspx") %>" class="sidebar-link show-loader">6 SC,Rent Bill Payment, DSC, BM, Godown and DM MPSCSC/HO MPSCSC Payment Status</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_Date_Wise_Payment_Received_From_MPSCSC_New.aspx") %>" class="sidebar-link show-loader">7 Date wise Payment Received From MPSCSC</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_Godown_Wise_Payment_Status_From_MPSCSC_New.aspx") %>" class="sidebar-link show-loader">8 Godown Wise/Bill Wise Pendency At MPSCSC</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_Pending_Bill_Details_Summary_New.aspx") %>" class="sidebar-link show-loader">9 Pending Bills For Generation at Branch Level(SC)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_District_Wise_Pending_Bill_Details_Summary_New.aspx") %>" class="sidebar-link show-loader">10 District Wise SC Pending Bills For Generation at Branch</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_JVS_Payment_Against_Received_Payment_From_MPSCSC_Region_Wise_New.aspx") %>" class="sidebar-link show-loader">11 Region District Wise Pendency at Various Level against Received Payment from MPSCSC(August 2021)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_Region_Wise_JVS_Payment_Against_Received_Payment_From_MPSCSC_New.aspx") %>" class="sidebar-link show-loader">12 Region Wise Pendency at Various Level against Received Payment from MPSCSC(August 2021)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_Update_Loss_Gain_by_RM_New.aspx") %>" class="sidebar-link show-loader">13 Region Wise Loss Gain Entry BY RM</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/GetDistrict_Wise_JVS_Payment_Against_Received_Payment_Status_New.aspx") %>" class="sidebar-link show-loader">14 District Wise JVS Payment Against Received Payment Status</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_Penging_Rent_Bill_Generation_Against_Received_Amount_From_MPSCSC_New.aspx") %>" class="sidebar-link show-loader">15 Penging Rent Bill Generation Against Received Amount From MPSCSC</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_NAFED_Payment_Status_All_New.aspx") %>" class="sidebar-link show-loader">16 NAFED Payment Status From 1st Apr. 2024</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_NAFED_Payment_Summary_New.aspx") %>" class="sidebar-link show-loader">17 Region, District Wise NAFED Payment Summary From 1st Apr. 2024(Only Pvt. Warehouse)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_Get_Rent_Bill_Generation_Pendancy_SUMMARY_New.aspx") %>" class="sidebar-link show-loader">18 Region, District, Wise Pending Rent Bill Generation From Aug. 2020</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_District_Wise_NAFED_Payment_Summary_New.aspx") %>" class="sidebar-link show-loader">19 District Wise NAFED Payment Summary From 1st Apr. 2024(Only Pvt. Warehouse)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_NAFED_Payment_Summary_For_Review_New.aspx") %>" class="sidebar-link show-loader">20 Region Wise NAFED Summary For Review</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_Region_Get_Rent_Bill_Generation_Pendancy_SUMMARy_New.aspx") %>" class="sidebar-link show-loader">21 Region Wise Pending Rent Bill Generation For Review</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_MPSCSC_Payment_Receive_and_Payto_Godown_Review_New.aspx") %>" class="sidebar-link show-loader">22 Region Wise Summary For Review MPSCSC</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_StorageAndREnt_Bill_Pendency_New.aspx") %>" class="sidebar-link show-loader">23 Financial Year Wise Pending Bill Generation</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Get_Branch_Wise_JVS_Payment_Against_Received_Payment_Pending_Rent_Bill_For_Generation_New.aspx") %>" class="sidebar-link show-loader">24 Branch Wise Rent Bill Pending Against Receive Storage Bill From MPSCSC</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_District_Wise_Pending_Rent_Bill_Details_Summary_New.aspx") %>" class="sidebar-link show-loader">25 Year Wise Rent Bill Generation</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_Get_FinancialYear_Wise_Pending_Bill_For_Submission_to_MPSCSC_New.aspx") %>" class="sidebar-link show-loader">26 Pending Bill For Submission</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_Search_Godown_Payment_Status_By_Godown_Name_New.aspx") %>" class="sidebar-link show-loader">27 Godown Wise Payment Status by Godown Name For MPSCSC</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Godown_Wise_Repush_Bill_Details_New.aspx") %>" class="sidebar-link show-loader">28 Godown Wise details paid Zero payment From MPSCSC</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/District_wise_paid_One_RS_payment_From_MPSCSC_New.aspx") %>" class="sidebar-link show-loader">29 Godown Wise details paid One payment From MPSCSC</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Reject_by_HO_MPSCSC_New.aspx") %>" class="sidebar-link show-loader">30 Godown Wise Reject bill by HO MPSCSC</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_Stack_Wise_Fumigation_New.aspx") %>" class="sidebar-link show-loader">31 Fumigation Summary Report</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_Stack_Wise_Moisture_New.aspx") %>" class="sidebar-link show-loader">32 Moisture Summary Report</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_Region_Wise_Payment_status_For_All_New.aspx") %>" class="sidebar-link show-loader">33 Region Financial Year Wise Payment Status(For All Type of Godown)</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_District_Wise_NAFED_Payment_Summary_For_Review_New.aspx") %>" class="sidebar-link show-loader">34 District Wise Pendancy at NAFED</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_Stack_Wise_Fumigation_Post_Mansoon_New.aspx") %>" class="sidebar-link show-loader">35 Post Mansoon Fumigation Summary Report</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_Pending_Bill_For_Generation_State_New.aspx") %>" class="sidebar-link show-loader">36 Pending Bill For Generation</a></li>
+                                <li><a href="<%= ResolveClientUrl("~/Reports/NewBillingReports/Rpt_RM_Deduction_Entry_For_Weakly_Metting_New.aspx") %>" class="sidebar-link show-loader">37 Rm Deduction Report</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <div class="main" id="mainBody" style="transition: all 0.3s ease; margin-left: 250px;">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-3"
+                    style="z-index: 1110; width: 100%; position: fixed; top: 0; left: 0; border-radius: 0;">
+
+                    <div class="d-flex align-items-center">
+                        <button id="toggleBtn" class="btn btn-primary me-3" type="button" onclick="toggleNav()"
+                            style="margin-left: 270px; transition: margin 0.3s ease;">
+                            <i class="fas fa-bars"></i>
+                        </button>
+
+                        <a class="navbar-brand d-flex align-items-center ms-2" href="#">
+                            <img src="/SRV/Assets/mpwlc.png" alt="MPWLC Logo" style="height: 40px;" class="me-2 rounded" />
+                            <span class="fw-bold">Madhya Pradesh Warehousing and Logistics Corporation</span>
+                        </a>
+                    </div>
+
+                    <div class="ms-auto">
+                        <asp:LinkButton ID="lnkLogout" runat="server" CssClass="text-white nav-link" OnClick="lnkLogout_Click">
+                            <i class="fas fa-sign-out-alt"></i>&nbsp;Logout
+                        </asp:LinkButton>
+                    </div>
+                </nav>
+
+                <main class="content p-3"
+                    style="margin-top: 63px; min-height: 500px; overflow-x: auto; width: 100%;">
+                    <div class="container-fluid">
+                        <asp:ContentPlaceHolder ID="ContentPageBody" runat="server"></asp:ContentPlaceHolder>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <footer class="footer mt-auto py-3 bg-light border-top">
+            <div class="container text-center">
+                <span class="text-muted">© <%= DateTime.Now.Year %>  Madhya Pradesh Warehousing & Logistics Corporation All rights reserved.</span>
+                <asp:ContentPlaceHolder ID="ContentPageWidget" runat="server"></asp:ContentPlaceHolder>
+            </div>
+        </footer>
+
+        <asp:ContentPlaceHolder ID="ContentPageScript" runat="server">
+        </asp:ContentPlaceHolder>
+
+    </form>
+
+    <script>
+        $(window).on('load', function () {
+            $('#pageLoader').fadeOut('slow');
+        });
+
+        $(document).on('click', '.show-loader', function () {
+            $('#pageLoader').show();
+        });
+
+        $(document).ready(function () {
+            let oldValue = '';
+            $(document).on('focus', '.show-loader-ddl', function () {
+                oldValue = $(this).val();
+            });
+
+            $(document).on('change', '.show-loader-ddl', function () {
+                let newValue = $(this).val();
+                if (newValue !== oldValue && newValue !== "0") {
+                    $('#pageLoader').show();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

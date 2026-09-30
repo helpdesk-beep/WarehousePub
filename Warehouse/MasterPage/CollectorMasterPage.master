@@ -1,0 +1,221 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="CollectorMasterPage.master.cs" Inherits="MasterPage_CollectorMasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Collector</title>
+    <link href="../css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../sdmenu/sdmenu.css" />
+    <link href="../css/style_new.css" rel="stylesheet" type="text/css" />
+    <%--<script type="text/javascript" src="../JS/ValdationsClientSide.js"></script>--%>
+    <script type="text/javascript" src="../../JS/popcalendar.js"></script>
+    <script type="text/javascript" src="../../JS/ShowCalender.js"></script>
+    <script type="text/javascript" src="../../JS/allFormValidations.js"></script>
+    <script type="text/javascript" src="../JS/allFormValidations.js"></script>
+    <%--Changes on 12-05-2026--%>
+    <style>
+        /* 1. Hide the top Google Translate frame/banner */
+        .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon {
+            display: none !important;
+        }
+
+        body {
+            top: 0px !important;
+        }
+
+        /* 2. Hide the Google logo and branding in the dropdown */
+        .goog-te-gadget {
+            font-family: 'Arial', sans-serif !important;
+            color: transparent !important; /* Hides the "Powered by" text */
+        }
+
+            .goog-te-gadget .goog-te-combo {
+                color: #333 !important; /* Keeps the dropdown text visible */
+                padding: 8px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                background-color: #fff;
+            }
+
+        /* 3. Remove the tooltip popups when hovering over translated text */
+        #goog-gt-tt, .goog-te-balloon-frame {
+            display: none !important;
+        }
+
+        .goog-text-highlight {
+            background: none !important;
+            box-shadow: none !important;
+        }
+    </style>
+    <style>
+        /* Dropdown ke andar ke text ko hamesha readable rakhne ke liye */
+        .goog-te-combo {
+            text-transform: none !important;
+        }
+        /* Targeted fix for the iframe class you mentioned */
+        .VIpgJd-ZVi9od-ORHb-OEVmcd,
+        .goog-te-banner-frame,
+        #goog-gt-tt,
+        .goog-te-balloon-frame,
+        #\:2\.container {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+        /* Prevent the page from shifting down */
+        body {
+            top: 0px !important;
+        }
+
+        /* Remove the hover highlight effect */
+        .goog-text-highlight {
+            background: none !important;
+            box-shadow: none !important;
+        }
+    </style>
+    <%--END--%>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <table width="100%">
+                <tr>
+                    <td valign="top">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr class="inner-top">
+                                <td>
+                                    <table width="788" border="0" cellspacing="0" cellpadding="0">
+                                        <tr class="inner-top">
+                                            <td></td>
+                                        </tr>
+                                        <tr class="inner-top">
+                                            <td style="height: 56px"></td>
+                                            <td style="width: 349px; height: 56px;" align="center" class="whiteTxtBold">Integrated Information System for Foodgrains Management</td>
+                                            <td colspan="2" style="height: 56px">
+                                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                        <td style="width: 16px">&nbsp;</td>
+                                                        <td align="center" style="width: 222px">&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="height: 30x; width: 16px;">
+                                                            <img src="../images/welcome-left-cut.jpg" hspace="0" vspace="0" border="0" height="30" style="width: 35px"></td>
+                                                        <td align="center" class="welcomeBg" style="height: 30px; width: 222px;">Welcome,&nbsp;
+                                                            <asp:Label ID="UxUserName" runat="server" Text="User Name" Width="68px"></asp:Label><span class="blackTxt">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                                                            <%--  <a href="../Default2.aspx?Logout=true" target="_top">Sign Out</a>--%>
+                                                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Default2.aspx">Sign Out</asp:HyperLink>
+
+                                                        </td>
+                                                        <td style="height: 30px">
+                                                            <img src="../images/welcome-right-cut.jpg" hspace="0" vspace="0" border="0" height="30" style="width: 34px"></td>
+                                                    </tr>
+
+                                                </table>
+                                            </td>
+                                            <td style="height: 56px"></td>
+                                            <td align="center" class="whiteTxtBold" style="height: 56px">MPWLC STORAGE MODULE</td>
+                                            <%--Changes on 12-05-2026--%>
+                                            <td class="col-md-3 col-sm-6 text-center">
+                                                <div id="google_translate_element"></div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="3" align="left" valign="top">
+                        <div>
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td align="left" valign="top" style="width: 200px">
+                                        <asp:Panel ID="Panel1" runat="server" Height="10px" Width="200px">
+                                            <div id="my_menu" class="sdmenu" style="width: 200px">
+                                                <div id="divdshbrd" runat="server" visible="true" style="width: 200px">
+                                                    <span id="spanHome" visible="true" runat="server">Dashboard</span>
+                                                    <asp:HyperLink ID="hypHome" Visible="true" runat="server" Width="200px" NavigateUrl="~/District/MPSCSC_District_Billing_Dashboard.aspx">Dashboard</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink4" Visible="true" runat="server" Width="200px" NavigateUrl="~/District/Rpt_Branch_StockEntry_by_BM_For_District.aspx">Stock Entry By Branch Manager</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink7" Visible="true" runat="server" Width="200px" NavigateUrl="~/District/Rpt_Procurement_SoyaBeens_E_WHR_For_Region_2024_25.aspx">Soya-Beens e-whr submission 2024-25</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink2" Visible="true" runat="server" Width="200px" NavigateUrl="~/District/Rpt_Procurement_SoyaBeens_2024_25.aspx">Soya-Beens Procurement<br /> 2024-25</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink5" Visible="true" runat="server" Width="200px" NavigateUrl="~/District/Rpt_Moisture_Reports.aspx">	Moisture Report</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink6" Visible="true" runat="server" Width="200px" NavigateUrl="~/District/Rpt_District_Wise_Fumigation.aspx">Pre Mansoon Fumigation Report</asp:HyperLink>
+                                                </div>
+                                            </div>
+                                        </asp:Panel>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td valign="top">
+                        <table>
+                            <tr>
+                                <td style="width: 215px" rowspan="2">&nbsp;<asp:Image ID="Image1" runat="server" ImageUrl="~/images/niclogo.gif" /></td>
+                                <td valign="top">
+                                    <%-- <asp:Panel ID="Panel2" runat="server" ScrollBars="Both" Height="100%" Width="100%">
+                             
+                                </asp:Panel>--%>
+                                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                                    </asp:ContentPlaceHolder>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+
+        </div>
+    </form>
+    <%--changes On 12-05-2026--%>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+        // Dropdown fix ke liye naya logic
+        $(window).load(function () {
+            // Jab dropdown change ho, toh hum check karenge
+            $('.goog-te-combo').on('change', function () {
+                var lang = $(this).val();
+                // Agar language Hindi select hui hai toh ensure karein ki wo dikhe
+                if (lang === 'hi') {
+                    console.log("Hindi Selected");
+                }
+            });
+
+            // Interval check: Kabhi-kabhi Google Translate der se load hota hai
+            var checkInterval = setInterval(function () {
+                var combo = document.querySelector('.goog-te-combo');
+                if (combo) {
+                    // Agar cookie mein Hindi saved hai par dropdown me nahi dikh raha
+                    var langCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+                    if (langCookie && langCookie.includes('/en/hi')) {
+                        combo.value = 'en';
+                    }
+                    clearInterval(checkInterval);
+                }
+            }, 500);
+        });
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <%--END--%>
+</body>
+</html>

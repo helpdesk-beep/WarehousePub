@@ -1,0 +1,522 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="PrivateWarehouse.master.cs" Inherits="MasterPage_PrivateWarehouse" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <link href="../css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../sdmenu/sdmenu.css" />
+    <style type="text/css">
+        body {
+            background-image: url(images/Mainbg.jpg);
+            background-repeat: repeat;
+        }
+
+        .BTNBLUE {
+            border: 1px solid #7eb9d0;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-family: arial, helvetica, sans-serif;
+            padding: 10px 10px 10px 10px;
+            text-decoration: none;
+            display: inline-block;
+            text-shadow: -1px -1px 0 rgba(0,0,0,0.3);
+            font-weight: bold;
+            color: #FFFFFF;
+            background-color: #a7cfdf;
+            background-image: linear-gradient(to bottom, #a7cfdf, #23538a);
+        }
+
+            .BTNBLUE:hover {
+                border: 1px solid #5ca6c4;
+                background-color: #82bbd1;
+                background-image: linear-gradient(to bottom, #82bbd1, #193b61);
+            }
+    </style>
+    <%--Changes on 12-05-2026--%>
+    <style>
+        /* 1. Hide the top Google Translate frame/banner */
+        .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon {
+            display: none !important;
+        }
+
+        body {
+            top: 0px !important;
+        }
+
+        /* 2. Hide the Google logo and branding in the dropdown */
+        .goog-te-gadget {
+            font-family: 'Arial', sans-serif !important;
+            color: transparent !important; /* Hides the "Powered by" text */
+        }
+
+            .goog-te-gadget .goog-te-combo {
+                color: #333 !important; /* Keeps the dropdown text visible */
+                padding: 8px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                background-color: #fff;
+            }
+
+        /* 3. Remove the tooltip popups when hovering over translated text */
+        #goog-gt-tt, .goog-te-balloon-frame {
+            display: none !important;
+        }
+
+        .goog-text-highlight {
+            background: none !important;
+            box-shadow: none !important;
+        }
+    </style>
+    <style>
+        /* Dropdown ke andar ke text ko hamesha readable rakhne ke liye */
+        .goog-te-combo {
+            text-transform: none !important;
+        }
+        /* Targeted fix for the iframe class you mentioned */
+        .VIpgJd-ZVi9od-ORHb-OEVmcd,
+        .goog-te-banner-frame,
+        #goog-gt-tt,
+        .goog-te-balloon-frame,
+        #\:2\.container {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+        /* Prevent the page from shifting down */
+        body {
+            top: 0px !important;
+        }
+
+        /* Remove the hover highlight effect */
+        .goog-text-highlight {
+            background: none !important;
+            box-shadow: none !important;
+        }
+    </style>
+    <%--END--%>
+
+    <script type="text/javascript" src="../../JS/popcalendar.js"></script>
+
+    <script type="text/javascript" src="../../JS/ShowCalender.js"></script>
+
+    <%--
+ <script type="text/javascript" src="../../JS/allFormValidations.js"></script> 
+
+    <script type="text/javascript" src="../JS/allFormValidations.js"></script>    --%>
+    <%--
+    <script type="text/javascript" src="../JS/chksql.js"></script>    
+
+    <script type="text/javascript" src="../JS/MD5.js"></script>  
+
+    <script type="text/javascript" src="../../JS/calendar_eu.js"></script>   --%>
+
+    <script type="text/javascript">
+        window.history.forward(0);
+    </script>
+
+    <title>Warehouse</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+        <script language="JavaScript1.2">
+var message="MPWLC STORAGE MODULE"
+var neonbasecolor="gray"
+var neontextcolor="yellow"
+var flashspeed=100  //in milliseconds
+
+///No need to edit below this line/////
+
+var n=0
+if (document.all||document.getElementById){
+document.write('<font color="'+neonbasecolor+'">')
+for (m=0;m<message.length;m++)
+document.write('<span id="neonlight'+m+'">'+message.charAt(m)+'</span>')
+document.write('</font>')
+}
+else
+document.write(message)
+
+function crossref(number){
+var crossobj=document.all? eval("document.all.neonlight"+number) : document.getElementById("neonlight"+number)
+return crossobj
+}
+
+function neon(){
+
+//Change all letters to base color
+if (n==0){
+for (m=0;m<message.length;m++)
+//eval("document.all.neonlight"+m).style.color=neonbasecolor
+crossref(m).style.color=neonbasecolor
+}
+
+//cycle through and change individual letters to neon color
+crossref(n).style.color=neontextcolor
+
+if (n<message.length-1)
+n++
+else{
+n=0
+clearInterval(flashing)
+setTimeout("beginneon()",1500)
+return
+}
+}
+
+function beginneon(){
+if (document.all||document.getElementById)
+flashing=setInterval("neon()",flashspeed)
+}
+beginneon()
+        </script>
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <cc1:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
+        </cc1:ToolkitScriptManager>
+        <div>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr class="inner-top" style="height: 80px">
+                    <td style="width: 500px;" align="center" class="whiteTxtBold">Integrated Information System for Foodgrains Management
+                        <br />
+                        Starttime-<asp:Label ID="lbl_start" runat="server" Text="Label"></asp:Label>
+                        <br />
+                        End time-<asp:Label ID="lbl_end" runat="server" Text="Label"></asp:Label>
+                        </BR>
+                    </td>
+                    <td align="center" valign="middle">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td style="height: 30px; width: 16px;">
+                                    <img src="../images/welcome-left-cut.jpg" height="30" style="width: 35px" alt="" />
+                                </td>
+                                <td align="center" class="welcomeBg" style="height: 30px; width: 422px;">Welcome,&nbsp;
+                                    <asp:Label ID="UxUserName" runat="server" Text="User Name" Width="290px" Font-Bold="true"></asp:Label><span
+                                        class="blackTxt">&nbsp;&nbsp;|&nbsp;&nbsp;</span></br>
+                                    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Default2.aspx">Sign Out</asp:HyperLink>
+                                </td>
+                                <td style="height: 30px">
+                                    <img src="../images/welcome-right-cut.jpg" height="30" style="width: 34px" alt="" />
+                                </td>
+                                <%--Changes on 12-05-2026--%>
+                                <td class="col-md-3 col-sm-6 text-center">
+                                    <div id="google_translate_element"></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td align="center" class="whiteTxtBold" style="width: 400px">
+                        <asp:Label ID="lblagency" runat="server" Text="WAREHOUSE MANAGEMENT SYSTEM"></asp:Label></br> </BR>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" align="left" valign="top">
+                        <div>
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td align="left" valign="top" style="width: 205px">
+                                        <asp:Panel ID="Panel1" runat="server" ScrollBars="Vertical" Height="600px" Width="200px">
+                                            <div id="my_menu" class="sdmenu">
+                                                <div id="divHome" runat="server" visible="true" style="width: 200px">
+                                                    <span id="spanHome" visible="true" runat="server">Home</span>
+                                                    <asp:HyperLink ID="hypHome" Visible="true" runat="server" Width="200px" NavigateUrl="~/Pvt_Warehouse_Welcome.aspx">Home</asp:HyperLink>
+                                                </div>
+                                                <div id="divIni" runat="server" visible="false" style="width: 200px">
+                                                    <span id="spanInitialization" visible="true" runat="server">Initialization</span>
+                                                    <%--<asp:HyperLink ID="HyperLink42" Visible="true" runat="server" Width="200px" NavigateUrl="~/WarehouseLevel/Godown_Compalint.aspx">Complaint</asp:HyperLink>--%>
+                                                    <asp:HyperLink ID="hypOpeningBal" Visible="true" runat="server" Width="200px" NavigateUrl="~/IssueCenterLevel/Storage/DepositorwithWHR.aspx">Opening Balance</asp:HyperLink>
+                                                    <%--  <asp:HyperLink ID="HyperLink2" visible="true" runat="server" Width="200px" NavigateUrl="~/IssueCenterLevel/Storage/InOpeningStackGodwn_Info.aspx">Opening Godown and Stack </asp:HyperLink>--%>
+                                                    <asp:HyperLink ID="hlnkeditopening" Visible="false" runat="server" Width="200px" NavigateUrl="~/IssueCenterLevel/Storage/EditOpeningbalance.aspx">Edit Opening Balance</asp:HyperLink>
+                                                </div>
+                                                <div id="divMasters" runat="server" visible="true" style="width: 200px">
+                                                    <span id="spanMasters" visible="true" runat="server">Masters</span>
+                                                    <asp:HyperLink ID="HyperLink44" Visible="true" runat="server" Width="200px" NavigateUrl="~/WarehouseLevel/Godown_Compalint.aspx">Complaint</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink29" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/Account_Detail_Verification_GO.aspx"
+                                                        Width="200px">Accounts Detail Verification</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink25" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/Account_No_Verification_GO.aspx"
+                                                        Width="200px">Accounts Verification</asp:HyperLink>
+                                                    <asp:HyperLink ID="hypGodownMaster" Visible="false" runat="server" NavigateUrl="~/WarehouseLevel/Account_No_Verification_GO.aspx"
+                                                        Width="200px">Godown Master</asp:HyperLink>
+                                                    <asp:HyperLink ID="hypStackMaster" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/NewStackMaster_W.aspx"
+                                                        Width="200px">Stack Master</asp:HyperLink>
+                                                    <asp:HyperLink ID="hypTransporterMaster" Visible="false" runat="server" NavigateUrl="~/Masters/TransporterMaster.aspx"
+                                                        Width="200px">Transporter Master</asp:HyperLink>
+                                                    <asp:HyperLink ID="hypDepositorMaster" Visible="false" runat="server" Width="200px"
+                                                        NavigateUrl="~/Masters/DepositorMaster.aspx">Depositor Master</asp:HyperLink>
+                                                    <asp:HyperLink ID="hypMillerMaster" Visible="false" runat="server" NavigateUrl="~/Masters/MillerMaster.aspx"
+                                                        Width="200px">Miller Master</asp:HyperLink>
+                                                    <asp:HyperLink ID="hypDepotProfile" Visible="true" runat="server" Width="200px" NavigateUrl="~/WarehouseLevel/PvtGodownProfile.aspx">Godown Profile</asp:HyperLink>
+                                                    <asp:HyperLink ID="hypCommodityMaster" Visible="false" runat="server" Width="200px"
+                                                        NavigateUrl="~/Masters/Commoditymaster.aspx">Commodity Master</asp:HyperLink>
+                                                </div>
+                                                <div id="div3" runat="server" visible="true" style="width: 200px">
+                                                    <span id="span4" visible="true" runat="server">Rent Billing</span>
+                                                    <asp:HyperLink ID="HyperLink30" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/Rent_Bill/Godown_Rent_Bill.aspx"
+                                                        Width="200px">Generate Rent Bill</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink50" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/Rent_Bill/Godown_Rent_Bill_For_Nafed.aspx"
+                                                        Width="200px">Generate Rent Bill For NAFED</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink52" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/Rent_Bill/Godown_Rent_Bill_For_NCCF.aspx"
+                                                        Width="200px">Generate Rent Bill For NCCF</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink54" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/Rent_Bill/Godown_Rent_Bill_For_DMO_Markfed.aspx"
+                                                        Width="200px">Generate Rent Bill For DMO-Markfed</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink31" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/PvtGReports/GO_PrintGeneratedBill_DSC.aspx"
+                                                        Width="200px">Print Generate Rent Bill</asp:HyperLink>
+                                                </div>
+                                                <div id="div7" runat="server" visible="true" style="width: 200px">
+                                                    <span id="span9" visible="true" runat="server">Print Bill</span>
+                                                    <asp:HyperLink ID="HyperLink53" Visible="true" runat="server" NavigateUrl="~/Rent_Bill/Print_Nafed_Rent_Bill.aspx"
+                                                        Width="200px">Print Nafed Rent Bill</asp:HyperLink>
+                                                </div>
+                                                <div id="div5" runat="server" visible="true" style="width: 200px">
+                                                    <span id="span7" visible="true" runat="server">Rent Billing For PMS</span>
+                                                    <asp:HyperLink ID="HyperLink47" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/PMS/PMS_Godown_Rent_Bill.aspx"
+                                                        Width="200px">Generate Rent Bill</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink48" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/PMS/GO_PrintGeneratedBill_DSC.aspx"
+                                                        Width="200px">Print Generate Rent Bill</asp:HyperLink>
+                                                </div>
+                                                <div id="div8" runat="server" visible="true" style="width: 200px">
+                                                    <span id="span10" visible="true" runat="server">Create WHR For NAFED/NCCF ANB</span>
+                                                    <asp:HyperLink ID="HyperLink56" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/WLC_Procurement/GWLC_ProcReceipt_S2026_27_For_ANB.aspx"
+                                                        Width="200px">Create WHR For NAFED/NCCF ANB </asp:HyperLink>
+                                                </div>
+                                                <div id="div9" runat="server" visible="true" style="width: 200px">
+                                                    <span id="span11" visible="true" runat="server">Generate FCI WHR </span>
+                                                    <asp:HyperLink ID="HyperLink57" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/WLC_Procurement/GWLC_ProcReceipt_S2024_25_For_FCI.aspx"
+                                                        Width="200px">Truck Wise Generate FCi WHR </asp:HyperLink>
+                                                </div>
+                                                <div id="div6" runat="server" visible="true" style="width: 200px">
+                                                    <span id="span8" visible="true" runat="server">Rabi Procurement</span>
+                                                    <%--  <asp:HyperLink ID="HyperLink42" Visible="false" runat="server" NavigateUrl="~/WarehouseLevel/WLC_Procurement/E_WHR_W.aspx"
+                                                        Width="200px">E-WHR </asp:HyperLink>--%>
+                                                    <asp:HyperLink ID="HyperLink55" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/WLC_Procurement/GWLC_ProcReceipt_S2026_27.aspx"
+                                                        Width="200px">Receipt Detail 2026-27 </asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink51" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/WLC_Procurement/GWLC_ProcReceipt_S2025_26.aspx"
+                                                        Width="200px">Receipt Detail 2025-26 </asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink49" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/WLC_Procurement/GWLC_ProcReceipt_S2024_25.aspx"
+                                                        Width="200px">Receipt Detail 2024-25 </asp:HyperLink>
+
+
+                                                    <%--<asp:HyperLink ID="HyperLink50" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/WLC_Procurement/GWLC_ProcReceipt_S2022_23.aspx"
+                                                        Width="200px">Truck wise Receipt Detail </asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink51" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/WLC_Procurement/GWLC_ProcReceipt_S2021_22.aspx"
+                                                        Width="200px">Receipt Detail </asp:HyperLink>
+                                                 
+                                                    <asp:HyperLink ID="HyperLink52" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/WLC_FRM_01_02_03_Receipt_HAFED.aspx"
+                                                        Width="200px">HAFED WHR Receipt </asp:HyperLink>--%>
+                                                </div>
+
+                                                <div id="div4" runat="server" visible="true" style="width: 200px">
+                                                    <span id="span6" visible="true" runat="server">Procurement 2023-24 ,2022-23 </span>
+                                                    <%--  <asp:HyperLink ID="HyperLink42" Visible="false" runat="server" NavigateUrl="~/WarehouseLevel/WLC_Procurement/E_WHR_W.aspx"
+                                                        Width="200px">E-WHR </asp:HyperLink>--%>
+                                                    <asp:HyperLink ID="HyperLink46" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/WLC_Procurement/GWLC_ProcReceipt_S2023_24.aspx"
+                                                        Width="200px">Receipt Detail 2023-24 </asp:HyperLink>
+
+                                                    <asp:HyperLink ID="HyperLink42" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/WLC_Procurement/GWLC_ProcReceipt_S2022_23.aspx"
+                                                        Width="200px">Truck wise Receipt Detail </asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink43" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/WLC_Procurement/GWLC_ProcReceipt_S2021_22.aspx"
+                                                        Width="200px">Receipt Detail </asp:HyperLink>
+                                                    <%--      <asp:HyperLink ID="HyperLink44" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/WLC_Procurement/GWLC_PrintEWHR_S2020_21.aspx"
+                                                        Width="200px">Print WHR</asp:HyperLink>--%>
+                                                    <asp:HyperLink ID="HyperLink45" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/WLC_FRM_01_02_03_Receipt_HAFED.aspx"
+                                                        Width="200px">HAFED WHR Receipt </asp:HyperLink>
+
+                                                </div>
+                                                <div id="div1" runat="server" visible="true" style="width: 200px">
+                                                    <span id="span2" visible="true" runat="server">Procurement 2021-22 & 2020-21</span>
+                                                    <asp:HyperLink ID="HyperLink26" Visible="false" runat="server" NavigateUrl="~/WarehouseLevel/WLC_Procurement/E_WHR_W.aspx"
+                                                        Width="200px">E-WHR </asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink27" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/WLC_Procurement/GWLC_ProcReceipt_S2020_21.aspx"
+                                                        Width="200px">Receipt Detail </asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink28" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/WLC_Procurement/GWLC_PrintEWHR_S2020_21.aspx"
+                                                        Width="200px">Print WHR</asp:HyperLink>
+
+                                                </div>
+
+                                                <div id="div2" runat="server" visible="true" style="width: 200px">
+                                                    <span id="span3" visible="true" runat="server">Rabi/Kharif Procurement</span>
+                                                    <asp:HyperLink ID="HyperLink24" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/WLC_Procurement/E_WHR_W.aspx"
+                                                        Width="200px">E-WHR </asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink32" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/WLC_Procurement/GWLC_ProcurementReceipt.aspx"
+                                                        Width="200px">Receipt Detail </asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink33" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/WLC_Procurement/GWLC_PrintWhrReceipt.aspx"
+                                                        Width="200px">Print WHR</asp:HyperLink>
+
+                                                </div>
+                                                <div id="Div_Received" runat="server" visible="true" style="width: 200px">
+                                                    <span id="span_Rcpt_Details" visible="true" runat="server">Received Operations</span>
+                                                    <asp:HyperLink ID="HyperLink23" Visible="false" runat="server" Width="200px"
+                                                        NavigateUrl="~/IssueCenterLevel/Storage/Receiving_New.aspx"> Reciept Details New</asp:HyperLink>
+                                                    <asp:HyperLink ID="hypRecieptDetails" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/WarehouseLevel/WLC_Deposit_From_W.aspx"> Reciept Details</asp:HyperLink>
+                                                    <asp:HyperLink ID="hypEditRecieptDetails" Visible="false" runat="server" Width="200px"
+                                                        NavigateUrl="~/IssueCenterLevel/Storage/Edit_WLC_Deposit_From.aspx">Edit Reciept Details</asp:HyperLink>
+                                                    <asp:HyperLink ID="hypDepositorForm" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/WarehouseLevel/DepositorForm_W.aspx">Depositor Form(WHR)</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink11" Visible="false" runat="server" Width="200px"
+                                                        NavigateUrl="~/IssueCenterLevel/Storage/MenualWhr.aspx">Menual WHR</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink19" Visible="false" runat="server" Width="200px"
+                                                        NavigateUrl="~/BranchPages/MRecivingDtl.aspx">Mobile Receiving</asp:HyperLink>
+                                                </div>
+                                                <div id="divIssued" runat="server" visible="true" style="width: 200px">
+                                                    <span id="spanIssued" visible="true" runat="server">Issued Operations</span>
+                                                    <%--<asp:HyperLink ID="hypDeliveryGatePass" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/WarehouseLevel/WLC_FRM_05_Delivery_GatePass_Details_PvtW.aspx">Delivery GatePass</asp:HyperLink>--%>
+
+                                                    <%--=================savan comment Delivery GatePass link=====================--%>
+                                                    <asp:HyperLink ID="HyperLink22" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/WarehouseLevel/DeliveryGatePassByWLC2_W.aspx">Delivery GatePass(Secondary)</asp:HyperLink>
+                                                    <%--================================Joshi==========================================--%>
+                                                    <asp:HyperLink ID="HyperLink74" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/WarehouseLevel/Delivery_GatePass_By_TruckChit.aspx">Gatepass Truck Chit(AePDS)</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink75" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/BranchPages/Delivery_GatePass_By_Paddy_Chalan.aspx">MPSCSC Paddy Challan and Other Gatepass</asp:HyperLink>
+
+                                                    <%-- <asp:HyperLink ID="HyperLink24" Visible="false" runat="server" Width="200px"
+                                                        NavigateUrl="~/IssueCenterLevel/Storage/Delivery_Gatepass.aspx">GatePass(Direct Delivery)</asp:HyperLink>--%>
+                                                    <%--<asp:HyperLink ID="HyperLink6" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/IssueCenterLevel/Storage/Private_Gatepass.aspx">Private Commodity GatePass</asp:HyperLink>--%>
+                                                    <asp:HyperLink ID="hypPendingDeliveryGatePass" Visible="false" runat="server" Width="200px"
+                                                        NavigateUrl="~/IssueCenterLevel/Storage/WLCPendingGatePassOfDelivery.aspx">Pending GatePass of Delivery</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink13" Visible="false" runat="server" Width="200px"
+                                                        NavigateUrl="~/IssueCenterLevel/Storage/GatepassFromMnlWHr.aspx">Gatepass From Manual WHR</asp:HyperLink>
+
+                                                    <asp:HyperLink ID="hypDeliveryOrder" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/WarehouseLevel/DeliveryOrderCSC_PvtW.aspx">Delivery Order</asp:HyperLink>
+                                                </div>
+                                                <div id="divWarehouseOpr" runat="server" visible="true" style="width: 200px">
+                                                    <span id="spanWarehouseOperations" visible="true" runat="server">Warehouse Operations</span>
+                                                    <asp:HyperLink ID="hypQualityControl" Visible="false" runat="server" Width="200px"
+                                                        NavigateUrl="~/IssueCenterLevel/Storage/QualityControl.aspx">Quality Control Report</asp:HyperLink>
+                                                    <asp:HyperLink ID="hypMadeUpBags" Visible="true" runat="server" Width="200px" NavigateUrl="~/WarehouseLevel/madeupbags_PvtW.aspx">Made Up Bags</asp:HyperLink>
+                                                    <asp:HyperLink ID="Hlnkprintwhr" runat="server" Width="200px" NavigateUrl="~/WarehouseLevel/PrintWhrReceiptNew_PvtW.aspx">Print(WHR) Receipt</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink18" runat="server" Width="200px" NavigateUrl="~/WarehouseLevel/WHRInstructions_PvtW.aspx">Print(WHR) Instructions</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink4" Visible="false" runat="server" Width="200px" NavigateUrl="~/IssueCenterLevel/Storage/PrintDepositor_Acknowledgement.aspx">Print Depositor Acknowledgement</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink7" Visible="true" runat="server" Width="200px" NavigateUrl="~/WarehouseLevel/Print_DepositerForm_PvtW.aspx">Print Depositor Form</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink2" Visible="false" runat="server" Width="200px" NavigateUrl="~/IssueCenterLevel/Storage/madeupbags_loss_Gain.aspx">Loss Gain</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink3" Visible="true" runat="server" Width="200px" NavigateUrl="~/WarehouseLevel/WHRStatus_PvtW.aspx">WHR Status</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink5" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/DeleteRequestform_PvtW.aspx">Delete Request</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink12" Visible="false" runat="server" NavigateUrl="~/IssueCenterLevel/Storage/WHRPrintReset.aspx">WHR Print Reset Request</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink16" Visible="false" runat="server" NavigateUrl="~/BranchPages/ReceiptDeleteBranch.aspx">Receipt Delete</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink17" Visible="false" runat="server" NavigateUrl="~/BranchPages/DeleteGatepassBranch.aspx">Gatepass Delete</asp:HyperLink>
+
+                                                </div>
+                                                <div id="divRole" runat="server" visible="true" style="width: 200px">
+                                                    <span id="spanRoleManagement" visible="false" runat="server">Role Management</span>
+                                                    <asp:HyperLink ID="hypAssignPage" Visible="false" runat="server" Width="150px" NavigateUrl="~/RoleManagement/AssignPages.aspx">Assign Pages To role</asp:HyperLink>
+                                                </div>
+                                                <div id="divReports" runat="server" visible="true" style="width: 200px">
+                                                    <span id="spanReports" visible="true" runat="server">Reports</span>
+                                                    <asp:HyperLink ID="hypDepotReports" Visible="true" runat="server" Width="200px" NavigateUrl="~/WarehouseLevel/PvtGReports/PvtGodownReports.aspx">Godown Reports</asp:HyperLink>
+                                                    <asp:HyperLink ID="hypRegionReports" Visible="false" runat="server" Width="200px"
+                                                        NavigateUrl="~/IssueCenterLevel/Storage/Reports_District.aspx">Region Reports</asp:HyperLink>
+                                                    <asp:HyperLink ID="hypStateReports" Visible="false" runat="server" Width="200px"
+                                                        NavigateUrl="~/IssueCenterLevel/Storage/Report_Region.aspx">State Reports</asp:HyperLink>
+                                                </div>
+
+                                                <div id="divAcc" runat="server" visible="false" style="width: 200px">
+                                                    <span id="span1" visible="true" runat="server">Account Operations</span>
+                                                    <asp:HyperLink ID="HyperLink6" Visible="false" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounting/frmDR_Entry.aspx">Godown Reservation</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink8" Visible="false" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounting/frm_Edit_Reservation.aspx">Edit Godown Reservation</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink9" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounting/frm_Godown_Rent_Bill.aspx">Godown Rent Bill</asp:HyperLink>
+                                                    <asp:HyperLink ID="hypBill" Visible="false" runat="server" NavigateUrl="~/Accounting/frm_Storage_Rent.aspx"
+                                                        Width="200px">Storage Billing</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink10" Visible="true" runat="server" NavigateUrl="~/Accounting/frm_Storage_Charges_Bill.aspx"
+                                                        Width="200px">Storage Charges Bill</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink14" Visible="true" runat="server" NavigateUrl="~/Accounting/frm_View_Bill_Detail.aspx"
+                                                        Width="200px">Old Bill Details</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink15" Visible="true" runat="server" NavigateUrl="~/Accounting/frm_Registers.aspx"
+                                                        Width="200px">Registers</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink20" Visible="true" runat="server" NavigateUrl="~/Accounting/frm_CashReceipt.aspx"
+                                                        Width="200px">Cash Receipt</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink21" Visible="true" runat="server" NavigateUrl="~/Accounting/frm_PrintBills.aspx"
+                                                        Width="200px">Print Bill</asp:HyperLink>
+
+
+                                                </div>
+                                                <div id="divSS" runat="server" visible="true" style="width: 200px">
+                                                    <span id="span5" visible="true" runat="server">Steel Silo Rent Bill</span>
+                                                    <asp:HyperLink ID="HyperLink34" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/WarehouseLevel/Rent_Bill/SteelSilo/Field_Godown_Rent_Bill.aspx">Filled Godown</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink35" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/WarehouseLevel/Rent_Bill/SteelSilo/Vacant_Godown_Rent_Bill.aspx">Vacant Godown</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink36" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/WarehouseLevel/Rent_Bill/SteelSilo/Service_Charges_Godown_Rent_Bill.aspx">Service Charges</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink37" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/Rent_Bill/SteelSilo/Procurment_Vacant_Godown_Rent_Bill.aspx"
+                                                        Width="200px">Procurement </asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink38" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/Rent_Bill/SteelSilo/Variable_Procurment_Vacant_Godown_Rent_Bill.aspx"
+                                                        Width="200px">Variable</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink40" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/Rent_Bill/SteelSilo/MPSCSC_Filled_Godown_Storage_Charges_Bill.aspx"
+                                                        Width="200px">MPSCSC Filled Godown</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink41" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/Rent_Bill/SteelSilo/MPSCSC_Vacant_Capacity_Godown_Storage_Charges_Bill.aspx"
+                                                        Width="200px">MPSCSC Vacant Godown</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink39" Visible="true" runat="server" NavigateUrl="~/WarehouseLevel/Rent_Bill/SteelSilo/Steel_Silo_Bill_Details.aspx"
+                                                        Width="200px">View/ Print Bill</asp:HyperLink>
+
+                                                </div>
+                                            </div>
+                                        </asp:Panel>
+                                    </td>
+                                    <td valign="top" colspan="2" align="left">
+                                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                                        </asp:ContentPlaceHolder>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 200px" rowspan="2">
+                        <asp:Image ID="Image1" runat="server" ImageUrl="~/images/niclogo.gif" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+    <%--changes On 12-05-2026--%>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+        // Dropdown fix ke liye naya logic
+        $(window).load(function () {
+            // Jab dropdown change ho, toh hum check karenge
+            $('.goog-te-combo').on('change', function () {
+                var lang = $(this).val();
+                // Agar language Hindi select hui hai toh ensure karein ki wo dikhe
+                if (lang === 'hi') {
+                    console.log("Hindi Selected");
+                }
+            });
+
+            // Interval check: Kabhi-kabhi Google Translate der se load hota hai
+            var checkInterval = setInterval(function () {
+                var combo = document.querySelector('.goog-te-combo');
+                if (combo) {
+                    // Agar cookie mein Hindi saved hai par dropdown me nahi dikh raha
+                    var langCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+                    if (langCookie && langCookie.includes('/en/hi')) {
+                        combo.value = 'en';
+                    }
+                    clearInterval(checkInterval);
+                }
+            }, 500);
+        });
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <%--END--%>
+</body>
+</html>

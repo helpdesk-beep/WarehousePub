@@ -1,0 +1,293 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Drawing;
+using System.Globalization;
+
+public partial class StatePages_Rpt_Procurement_Gram_Sarso_Masur_2026_E_WHR : System.Web.UI.Page
+{
+
+
+    decimal qtyTotal1 = 0;
+    decimal qtyTotal2 = 0;
+    decimal qtyTotal3 = 0;
+    decimal qtyTotal4 = 0;
+    decimal qtyTotal5 = 0;
+    decimal qtyTotal6 = 0;
+    decimal qtyTotal7 = 0;
+
+    decimal grQtyTotal1 = 0;
+    decimal grQtyTotal2 = 0;
+    decimal grQtyTotal3 = 0;
+    decimal grQtyTotal4 = 0;
+    decimal grQtyTotal5 = 0;
+    decimal grQtyTotal6 = 0;
+    decimal grQtyTotal7 = 0;
+
+    long storid = 0;
+    int rowIndex = 1;
+
+
+    string constr = ConfigurationManager.ConnectionStrings["FCIConnectionString"].ConnectionString;
+    SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["FCIConnectionString"].ConnectionString);
+    SqlCommand cmd;
+    DataTable dt = new DataTable();
+    SqlDataAdapter da = new SqlDataAdapter();
+    int StatusID;
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+        if (Session["UserName"].ToString() == "MPSWLC"||Session["UserName"].ToString() == "Markfed"||Session["UserName"].ToString() == "NAFED")
+        {
+            if (!IsPostBack)
+            {
+                labelName.Text = DateTime.Now.ToString();
+                //fillgrid();
+            }
+        }
+     
+    }
+
+    protected void fillgrid()
+    {
+        Decimal opcloavg = 0;
+        string constr = ConfigurationManager.ConnectionStrings["FCIConnectionString"].ConnectionString;
+        using (SqlConnection con = new SqlConnection(constr))
+        {
+            using (SqlCommand cmd = new SqlCommand("Get_WHR_Status_Report_For_Chana_Masoor_Sarson_2026", con))
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@CommodityID", ddlcommodity.SelectedValue);
+                //cmd.Parameters.AddWithValue("@Type", "1");
+                using (SqlDataAdapter sda = new SqlDataAdapter())
+                {
+                    cmd.Connection = con;
+                    sda.SelectCommand = cmd;
+                    using (DataTable dt = new DataTable())
+                    {
+                        sda.Fill(dt);
+                        if (dt.Rows.Count > 0)
+                        {
+                            GridView1.DataSource = dt;
+                            GridView1.DataBind();
+                            GridView1.Caption = @"<b style=""font-weight: bold; text-align:center;""> M.P. WAREHOUSING & LOGISTICS CORPORATION" + "</br> " + "Chana,Masoor,Sarson WHR Status Procurement 2026-27";//+ "</br> " + "Region Name" + "  -   " + dt.Rows[0]["Region"].ToString()
+                            GridView1.Columns[1].Visible = false;
+                            // GridView1.columns.RemoveAt(1);
+                            GridView1.FooterRow.Style.Add("text-align;font-weight: bold;text-align:right;", "right");
+                            GridView1.FooterRow.Cells[3].Text = "Total";
+                            GridView1.FooterRow.Cells[4].Text = dt.AsEnumerable().Sum(row => row.Field<decimal>("AcceptQty")).ToString();
+                            GridView1.FooterRow.Cells[5].Text = dt.AsEnumerable().Sum(row => row.Field<int>("totalwhr")).ToString();
+                            GridView1.FooterRow.Cells[6].Text = dt.AsEnumerable().Sum(row => row.Field<decimal>("TotalQty")).ToString();
+                            GridView1.FooterRow.Cells[7].Text = dt.AsEnumerable().Sum(row => row.Field<int>("NoOfWHR_Submission")).ToString();
+                            GridView1.FooterRow.Cells[8].Text = dt.AsEnumerable().Sum(row => row.Field<decimal>("Qty_Submission")).ToString();
+                            GridView1.FooterRow.Cells[9].Text = dt.AsEnumerable().Sum(row => row.Field<int>("NoOfWHR_Print")).ToString();
+                            GridView1.FooterRow.Cells[10].Text = dt.AsEnumerable().Sum(row => row.Field<decimal>("Qty_Print")).ToString();
+                            // GridView1.FooterRow.Cells[5].Text = dt.AsEnumerable().Sum(row => row.Field<decimal>("Averg")).ToString();
+                            //opcloavg = (Convert.ToDecimal(dt.AsEnumerable().Sum(row => row.Field<decimal>("AcceptQty")).ToString()) * 100) / Convert.ToDecimal(dt.AsEnumerable().Sum(row => row.Field<decimal>("TotalQty")).ToString());
+                            //GridView1.FooterRow.Cells[6].Text = Math.Round(opcloavg, 2).ToString();
+                            ShowingGroupingDataInGridView(GridView1.Rows, 0, 10);
+
+                        }
+                        else
+                        {
+                            // btnUpdate.Visible = false;
+                            GridView1.DataSource = null;
+                            GridView1.DataBind();
+                        }
+                    }
+                }
+            }
+        }
+    }
+    protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            storid = Convert.ToInt64(DataBinder.Eval(e.Row.DataItem, "Region_ID").ToString());
+            decimal tmpTotal1 = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "AcceptQty").ToString());
+            decimal tmpTotal2 = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "totalwhr").ToString());
+            decimal tmpTotal3 = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "TotalQty").ToString());
+            decimal tmpTotal4 = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "NoOfWHR_Submission").ToString());
+            decimal tmpTotal5 = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Qty_Submission").ToString());
+            decimal tmpTotal6 = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "NoOfWHR_Print").ToString());
+            decimal tmpTotal7 = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Qty_Print").ToString());
+            //decimal tmpTotal3 = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Averg").ToString());
+            //decimal tmpTotal3 = Convert.ToDecimal(tmpTotal1.ToString())*100/ Convert.ToDecimal(tmpTotal2.ToString());
+
+
+            qtyTotal1 += tmpTotal1;
+            qtyTotal2 += tmpTotal2;
+            qtyTotal3 += tmpTotal3;
+            qtyTotal4 += tmpTotal4;
+            qtyTotal5 += tmpTotal5;
+            qtyTotal6 += tmpTotal6;
+            qtyTotal7 += tmpTotal7;
+
+            grQtyTotal1 += tmpTotal1;
+            grQtyTotal2 += tmpTotal2;
+            grQtyTotal3 += tmpTotal3;
+            grQtyTotal4 += tmpTotal4;
+            grQtyTotal5 += tmpTotal5;
+            grQtyTotal6 += tmpTotal6;
+            grQtyTotal7 += tmpTotal7;
+        }
+        //if (qtyTotal1 != 0)
+        //    qtyTotal3 = Math.Round(qtyTotal2 * 100 / qtyTotal1, 2);
+        //else
+        //    qtyTotal3 = 0;
+
+    }
+    void ShowingGroupingDataInGridView(GridViewRowCollection gridViewRows, int startIndex, int totalColumns)
+    {
+        if (totalColumns == 0) return;
+        int i, count = 1;
+        ArrayList lst = new ArrayList();
+        lst.Add(gridViewRows[0]);
+        var ctrl = gridViewRows[0].Cells[startIndex];
+        for (i = 1; i < gridViewRows.Count; i++)
+        {
+            TableCell nextTbCell = gridViewRows[i].Cells[startIndex];
+            if (ctrl.Text == nextTbCell.Text)
+            {
+                count++;
+                nextTbCell.Visible = false;
+                lst.Add(gridViewRows[i]);
+            }
+            else
+            {
+                if (count > 1)
+                {
+                    ctrl.RowSpan = count;
+                    ShowingGroupingDataInGridView(new GridViewRowCollection(lst), startIndex + 1, totalColumns - 1);
+                }
+                count = 1;
+                lst.Clear();
+                ctrl = gridViewRows[i].Cells[startIndex];
+                lst.Add(gridViewRows[i]);
+            }
+        }
+        if (count > 1)
+        {
+            ctrl.RowSpan = count;
+            ShowingGroupingDataInGridView(new GridViewRowCollection(lst), startIndex + 1, totalColumns - 1);
+        }
+        count = 1;
+        lst.Clear();
+    }
+    protected void OnDataBound(object sender, EventArgs e)
+    {
+        GridViewRow row = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Normal);
+        TableHeaderCell cell = new TableHeaderCell();
+        cell.Text = "";
+        cell.ColumnSpan = 5;
+        row.Controls.Add(cell);
+
+        row.BackColor = ColorTranslator.FromHtml("#3AC0F2");
+        GridView1.HeaderRow.Parent.Controls.AddAt(0, row);
+    }
+    protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
+    {
+
+        bool newRow = false;
+
+        if ((storid > 0) && (DataBinder.Eval(e.Row.DataItem, "Region_ID") != null))
+        {
+            if (storid != Convert.ToInt64(DataBinder.Eval(e.Row.DataItem, "Region_ID").ToString()))
+                newRow = true;
+        }
+        if ((storid > 0) && (DataBinder.Eval(e.Row.DataItem, "Region_ID") == null))
+        {
+            newRow = true;
+            rowIndex = 0;
+        }
+        if (newRow)
+        {
+            GridView GridView1 = (GridView)sender;
+            GridViewRow NewTotalRow = new GridViewRow(0, 0, DataControlRowType.DataRow, DataControlRowState.Insert);
+            NewTotalRow.Font.Bold = true;
+            // NewTotalRow.BackColor = System.Drawing.Color.Gray;
+            NewTotalRow.ForeColor = System.Drawing.Color.Black;
+            TableCell HeaderCell = new TableCell();
+            HeaderCell.Text = "Sub Total";
+            HeaderCell.HorizontalAlign = HorizontalAlign.Right;
+            HeaderCell.ColumnSpan = 3;
+
+            //HeaderCell.HorizontalAlign = HorizontalAlign.Left;
+            //HeaderCell.ColumnSpan = 3;
+            NewTotalRow.Cells.Add(HeaderCell);
+            HeaderCell = new TableCell();
+            HeaderCell.HorizontalAlign = HorizontalAlign.Right;
+            HeaderCell.Text = qtyTotal1.ToString();
+            NewTotalRow.Cells.Add(HeaderCell);
+
+            // HeaderCell.HorizontalAlign = HorizontalAlign.Left;
+            //HeaderCell.ColumnSpan = 4;
+            NewTotalRow.Cells.Add(HeaderCell);
+            HeaderCell = new TableCell();
+            HeaderCell.HorizontalAlign = HorizontalAlign.Right;
+            HeaderCell.Text = qtyTotal2.ToString();
+            NewTotalRow.Cells.Add(HeaderCell);
+
+            NewTotalRow.Cells.Add(HeaderCell);
+            HeaderCell = new TableCell();
+            HeaderCell.HorizontalAlign = HorizontalAlign.Right;
+            HeaderCell.Text = qtyTotal3.ToString();
+            NewTotalRow.Cells.Add(HeaderCell);
+
+            NewTotalRow.Cells.Add(HeaderCell);
+            HeaderCell = new TableCell();
+            HeaderCell.HorizontalAlign = HorizontalAlign.Right;
+            HeaderCell.Text = qtyTotal4.ToString();
+            NewTotalRow.Cells.Add(HeaderCell);
+
+            NewTotalRow.Cells.Add(HeaderCell);
+            HeaderCell = new TableCell();
+            HeaderCell.HorizontalAlign = HorizontalAlign.Right;
+            HeaderCell.Text = qtyTotal5.ToString();
+            NewTotalRow.Cells.Add(HeaderCell);
+
+            NewTotalRow.Cells.Add(HeaderCell);
+            HeaderCell = new TableCell();
+            HeaderCell.HorizontalAlign = HorizontalAlign.Right;
+            HeaderCell.Text = qtyTotal6.ToString();
+            NewTotalRow.Cells.Add(HeaderCell);
+
+            NewTotalRow.Cells.Add(HeaderCell);
+            HeaderCell = new TableCell();
+            HeaderCell.HorizontalAlign = HorizontalAlign.Right;
+            HeaderCell.Text = qtyTotal7.ToString();
+            NewTotalRow.Cells.Add(HeaderCell);
+
+
+            GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, NewTotalRow);
+            rowIndex++;
+            qtyTotal1 = 0;
+            qtyTotal2 = 0;
+            qtyTotal3 = 0;
+            qtyTotal4 = 0;
+            qtyTotal5 = 0;
+            qtyTotal6 = 0;
+            qtyTotal7 = 0;
+
+        }
+
+
+    }
+    protected void btnback_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Welcome.aspx");
+    }
+
+
+    protected void ddlcommodity_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        fillgrid();
+    }
+}

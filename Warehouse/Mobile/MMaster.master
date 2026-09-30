@@ -1,0 +1,65 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MMaster.master.cs" Inherits="Mobile_MMaster" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>MPWLC Storage Module</title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+          
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+     <meta charset="urf-8" />
+    <meta name="viewport" content="width=device-width" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link href="assets/css/bootstrap.css" rel="stylesheet"/>
+<link href="assets/css/bootstrap-responsive.css" rel="stylesheet"/>
+    <form id="form1" runat="server">
+          <div class="navbar navbar-fixed-top">
+<div class="navbar-inner">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+ <span class="icon-bar"></span>
+</a>
+
+
+<a class="brand" href="#"><img src="../images/MpwlcM.PNG" height="20" width="20" /> MPWLC Storage Module</a>
+<div class="nav-collapse">
+<ul class="nav">
+<li class="active"><a href="Home.aspx">Home</a></li>
+<li><a href="MReceivning.aspx">Recieving/रिसीविंग</a></li>
+<li><a href="MDelevery.aspx">Delevery/डेलेवेरी</a></li>  
+    <li><a href="GodwonCordinates.aspx">Godown Coordinates</a></li>  
+ <li><a href="MLogin.aspx">Logout</a></li>           
+</ul>           
+</div>
+
+
+</div>
+</div>
+ <div>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+
+    
+    </form>
+    <script src="assets/js/jquery.js"></script>
+<script src="assets/js/bootstrap-transition.js"></script>
+<script src="assets/js/bootstrap-alert.js"></script>
+<script src="assets/js/bootstrap-modal.js"></script>
+<script src="assets/js/bootstrap-dropdown.js"></script>
+<script src="assets/js/bootstrap-scrollspy.js"></script>
+<script src="assets/js/bootstrap-tab.js"></script>
+<script src="assets/js/bootstrap-tooltip.js"></script>
+<script src="assets/js/bootstrap-popover.js"></script>
+<script src="assets/js/bootstrap-button.js"></script>
+<script src="assets/js/bootstrap-collapse.js"></script>
+<script src="assets/js/bootstrap-carousel.js"></script>
+<script src="assets/js/bootstrap-typeahead.js"></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+﻿using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+using System.Data.SqlClient;
+using System.Xml;
+using System.Text;
+
+public partial class Accounting_frm_Deleted_Final_Bill : System.Web.UI.Page
+{
+    public SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["FCIConnectionString"].ToString());
+    string qry = "";
+    SqlCommand cmd = null;
+    DataSet ds = null;
+    SqlDataAdapter da = null;
+    SqlTransaction sqltran;
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (Session["UserName"] != null)
+        {
+            //string region = Session["Region_ID"].ToString();
+            if (Session["UserName"].ToString() == "MPSWLC" || Session["Region_ID"].ToString() != null)
+            {
+                try
+                {
+                    if (!IsPostBack)
+                    {
+                        fillDistrict();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Page.RegisterClientScriptBlock("mymsg2", "<script language=javascript> alert('Some error has occured, try again'); </script> ");
+                }
+            }
+            else
+            {
+                Response.Redirect("~/SessionExpired.htm");
+            }
+        }
+    }
+    private void fillDistrict()
+    {
+        try
+        {
+            string region = "";
+            if (Session["UserName"].ToString() != "MPSWLC")
+            {
+
+                if (Session["Region_ID"].ToString() != null)
+                {
+                    region = Session["Region_ID"].ToString();
+
+                }
+            }
+            string query = "";
+            if (Session["UserName"].ToString() == "MPSWLC")
+            {
+                query = "SELECT [District_Id],[District_Name] FROM [tbl_MetaData_DISTRICT] order by District_Name asc";
+            }
+            else
+            {
+                query = "SELECT [District_Id],[District_Name] FROM [tbl_MetaData_DISTRICT] where Region_ID='" + region + "' order by District_Name asc";
+            }
+            cmd = new SqlCommand(query, con);
+            da = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                ddlDistrict.Items.Clear();
+                ddlDistrict.DataSource = ds.Tables[0];
+                ddlDistrict.DataTextField = "District_Name";
+                ddlDistrict.DataValueField = "District_Id";
+                ddlDistrict.DataBind();
+                ddlDistrict.Items.Insert(0, "---Select---");
+                gv.DataSource = null;
+                gv.DataBind();
+            }
+            else
+            {
+                ////
+            }
+        }
+        catch (Exception)
+        {
+            //////
+        }
+    }
+    protected void ddlDistrict_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (ddlDistrict.SelectedIndex != 0)
+        {
+            getDepot(ddlDistrict.SelectedValue.ToString());
+        }
+        else
+        {
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Please Select District')", true);
+        }
+    }
+    private void getDepot(string distId)
+    {
+        try
+        {
+            string query = "select depo.BranchId,depo.DepotName from tbl_MetaData_DEPOT as depo inner join tbl_MetaData_DISTRICT as dis on depo.DistrictId=dis.District_Id where depo.DistrictId='" + ddlDistrict.SelectedValue.ToString() + "' order by DepotName asc";
+            cmd = new SqlCommand(query, con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                ddlDepotList.DataSource = ds.Tables[0];
+                ddlDepotList.DataTextField = "DepotName";
+                ddlDepotList.DataValueField = "BranchId";
+                ddlDepotList.DataBind();
+                ddlDepotList.Items.Insert(0, "---Select---");
+                //ddlGodown.DataSource = null;
+                //ddlGodown.DataBind();
+                gv.DataSource = null;
+                gv.DataBind();
+            }
+            else
+            {
+                ddlDepotList.Items.Insert(0, "---Select---");
+            }
+        }
+        catch (Exception)
+        {
+            ///////
+        }
+    }
+    public void FillGrid()
+    {
+        //string query = "select SB.Bill_Number,case when SB.Bill_Type='AD' then 'Daily Storage Charges Bill' when SB.Bill_Type='AU' then 'Accrued Storage Charges Bill' when SB.Bill_Type='OD' then 'Daily Over & Above Storage Charges Bill' when SB.Bill_Type='HG' then 'Godown(Hired) Rent Bill' when SB.Bill_Type='GR' then 'Godown(JVS) Rent Bill' when SB.Bill_Type='OU' then 'Accrued Over & Above Storage Charges Bill' when SB.Bill_Type='RB' then 'Reservation Bill' else '' end as Bill_Name,Bill_Type,(select Depositor_Name from tbl_MetaData_DEPOSITOR as MD where MD.Depositor_ID=SB.Depositor_Id) as Depositor_Name,CONVERT(varchar(10),SB.Created_Date,103) as DateOfBill,SB.Net_Amount from tbl_Storage_Bill_Details as SB where SB.Branch_Id='" + ddlDepotList.SelectedValue.ToString() + "'";
+        //string query = "select SB.Bill_Number,SB.Branch_Id,SB.District_Id,case when SB.Bill_Type = '1' then 'Daily Storage Charges Bill' when SB.Bill_Type = '2' then 'Accrued Storage Charges Bill' when SB.Bill_Type = '3' then 'Daily Over & Above Storage Charges Bill' when SB.Bill_Type = '4' then 'Godown(Hired) Rent Bill' when SB.Bill_Type = '5' then 'Godown(JVS) Rent Bill' when SB.Bill_Type = '6' then 'Accrued Over & Above Storage Charges Bill' when SB.Bill_Type = '7' then 'Reservation Bill' else '' end as Bill_Name, Bill_Type, (select Depositor_Name from tbl_MetaData_DEPOSITOR as MD where MD.Depositor_ID = SB.Depositor_Id) as Depositor_Name, CONVERT(varchar(10), SB.Created_Date, 103) as DateOfBill,SB.Net_Amount from[tbl_Institution_Storage_Bill_Summary] as SB  where SB.Branch_Id = '" + ddlDepotList.SelectedValue.ToString() + "'";
+        cmd = new SqlCommand("dbo.Get_Deleted_Final_Bill", con, sqltran);
+        cmd.CommandType = CommandType.StoredProcedure;
+        cmd.Parameters.AddWithValue("@BranchId", ddlDepotList.SelectedValue);
+        da = new SqlDataAdapter(cmd);
+        DataSet ds = new DataSet();
+        da.Fill(ds);
+        Session["ds_GridInfo"] = ds;
+        if (ds.Tables[0].Rows.Count > 0)
+        {
+            gv.DataSource = ds;
+            gv.DataBind();
+            lblRowCount.Text = "";
+            lblRowCount.Text = "Total No. Of records are : " + ds.Tables[0].Rows.Count.ToString();
+        }
+        else
+        {
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('No Bill Data Found...')", true);
+            lblRowCount.Text = "Total No. Of records are : " + ds.Tables[0].Rows.Count.ToString();
+            gv.DataSource = null;
+            gv.DataBind();
+        }
+    }
+    protected void ddlDepotList_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        FillGrid();
+    }
+    protected void btn_Close_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Branch_Welcome.aspx");
+    }
+}

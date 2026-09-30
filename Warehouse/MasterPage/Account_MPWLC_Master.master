@@ -1,0 +1,315 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Account_MPWLC_Master.master.cs"
+    Inherits="MasterPage_Account_MPWLC_Master" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <link rel="shortcut icon" href="../images/favicon.ico" />
+    <link href="../css/style_new.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../sdmenu/sdmenu.css" />
+
+    <script src="../sdmenu/sdmenu.js" type="text/javascript"></script>
+
+    <title>Welcome to Warehouse Application::</title>
+
+    <script src="../js/allFormValidations.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="../js/chksql.js"></script>
+
+    <script type="text/javascript" src="../js/MD5.js"></script>
+
+    <script type="text/javascript">
+        window.history.forward(0);
+    </script>
+    <%--Changes on 12-05-2026--%>
+    <style>
+        /* 1. Hide the top Google Translate frame/banner */
+        .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon {
+            display: none !important;
+        }
+
+        body {
+            top: 0px !important;
+        }
+
+        /* 2. Hide the Google logo and branding in the dropdown */
+        .goog-te-gadget {
+            font-family: 'Arial', sans-serif !important;
+            color: transparent !important; /* Hides the "Powered by" text */
+        }
+
+            .goog-te-gadget .goog-te-combo {
+                color: #333 !important; /* Keeps the dropdown text visible */
+                padding: 8px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                background-color: #fff;
+            }
+
+        /* 3. Remove the tooltip popups when hovering over translated text */
+        #goog-gt-tt, .goog-te-balloon-frame {
+            display: none !important;
+        }
+
+        .goog-text-highlight {
+            background: none !important;
+            box-shadow: none !important;
+        }
+    </style>
+    <style>
+        /* Dropdown ke andar ke text ko hamesha readable rakhne ke liye */
+        .goog-te-combo {
+            text-transform: none !important;
+        }
+        /* Targeted fix for the iframe class you mentioned */
+        .VIpgJd-ZVi9od-ORHb-OEVmcd,
+        .goog-te-banner-frame,
+        #goog-gt-tt,
+        .goog-te-balloon-frame,
+        #\:2\.container {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+        /* Prevent the page from shifting down */
+        body {
+            top: 0px !important;
+        }
+
+        /* Remove the hover highlight effect */
+        .goog-text-highlight {
+            background: none !important;
+            box-shadow: none !important;
+        }
+    </style>
+    <%--END--%>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+        <script language="JavaScript1.2">
+        </script>
+    </asp:ContentPlaceHolder>
+
+</head>
+<body>
+    <form id="form1" runat="server">
+        <%--    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>--%>
+        <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
+        </asp:ToolkitScriptManager>
+
+        <div>
+            <table width="98%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td align="center" valign="middle" colspan="3">
+                        <div class="header-cont" style="box-shadow: 1px 1px 20px">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td align="center" valign="middle" rowspan="5" style="width: 200px">
+                                        <img src="../../images/mp_logo.gif" width="100px" height="80px" alt="" />
+                                    </td>
+                                    <td align="center" colspan="2">
+                                        <span style="font-size: 15pt; font-weight: bolder; color: Navy">Integrated Information
+                                        System for Foodgrains Management</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="height: 5px" colspan="3"></td>
+                                </tr>
+                                <tr>
+                                    <td align="center" colspan="2">
+                                        <span style="font-size: 15pt; font-weight: bolder; color: IndianRed">MPWLC STORAGE MODULE</span>
+                                    </td>
+                                    <td class="col-md-3 col-sm-6 text-center">
+                                        <div id="google_translate_element"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="height: 5px" colspan="3"></td>
+                                </tr>
+                                <tr>
+                                    <td align="center" colspan="2">
+                                        <span style="font-size: 10pt; font-weight: bolder; color: Navy; font-style: italic">Welcome,</span>&nbsp;
+                                    <asp:Label ID="UxUserName" runat="server" Text="User Name" Font-Bold="true" ForeColor="Navy"
+                                        Font-Size="10pt">
+                                    </asp:Label>
+                                    </td>
+                                    <td align="right" style="width: 150px">
+                                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Default2.aspx" Font-Bold="true"
+                                            ForeColor="Navy" Font-Size="10pt">Sign Out</asp:HyperLink>&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" align="left" valign="top">
+                        <center>
+                            <fieldset style="width: 100%; border: 0px solid navy; margin-top: 90px">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-left: 0px">
+                                    <tr>
+                                        <td align="left" valign="top" style="width: 205px">
+                                            <div id="my_menu" class="sdmenu" style="box-shadow: 1px 1px 20px">
+                                                <div id="divHome" runat="server" style="width: 200px">
+                                                    <span id="spanHome" runat="server">Home</span>
+                                                    <asp:HyperLink ID="hypHome" runat="server" Width="200px" NavigateUrl="~/Accounts/AccountDefault.aspx">Home</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink35" runat="server" Width="200px" NavigateUrl="~/Accounts/MPWLC/Welcome_DashBoard.aspx">Stock Position Dashboard</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink2" runat="server" Width="200px" NavigateUrl="~/Accounts/MPWLC/Welcome_Crop_Year_Wise_DashBoard.aspx">Stock Position/Bill Dashboard</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink36" runat="server" Width="200px" NavigateUrl="~/Accounts/MPWLC/Rpt_Get_Recived_Payment_Region_Date_Wise_From_MPSCSC.aspx">Region Wise Recived Payment From MPSCSC</asp:HyperLink>
+                                                </div>
+                                                <div id="divBillAcc" runat="server" visible="false" style="width: 200px">
+                                                    <span id="span3" visible="true" runat="server">Storage Payment</span>
+                                                    <asp:HyperLink ID="HyperLink27" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounts/MPWLC/Mark_Updated_RO_EPF_Status.aspx">Mark Uploaded File</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink28" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounts/MPWLC/Update_Updated_RO_EPF_Status.aspx">Update Payment Done Status</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink14" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounts/MPWLC/Download_RO_EPF.aspx">View/Download/Delete EPF</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink3" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounts/MPWLC/Download_RO_EPF_Date_Wise.aspx">Date Wise View/Download/Delete EPF</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink15" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounts/MPWLC/Repush_File_Status.aspx">Mark Bill for Failed Payment</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink18" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounts/MPWLC/RO_Generate_EPF.aspx">Generate NEFT File for Failed Payment</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink17" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounts/MPWLC/Generate_Beneficiary.aspx">Generate Benificiary</asp:HyperLink>
+
+                                                    <asp:HyperLink ID="HyperLink38" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounts/MPWLC/Generate_Beneficiary_For_Hired_Godown.aspx">Generate Benificiary For Hired</asp:HyperLink>
+
+                                                    <asp:HyperLink ID="HyperLink16" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounts/MPWLC/Generate_Beneficiary_By_Branch.aspx">Delete Wrong Benificiary</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink19" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounts/MPWLC/Delete_RO_DSC.aspx">Delete RM/Mgr Account DSC</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink7" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounts/MPWLC/DeletePassingOrder.aspx">Delete Passing order</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink20" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounts/MPWLC/Invalid_Account_RO_Generate_EPF_.aspx">Re-Generate EPF for Failed Payment(Invalid Accounts)</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink4" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounts/MPWLC/FailedPaymentRepushbyAccountSection.aspx">Unmerge Failed Payment File</asp:HyperLink>
+                                                </div>
+
+                                                <div id="divNafed" runat="server" visible="false" style="width: 200px">
+                                                    <span id="span1" visible="true" runat="server">NAFED Operation</span>
+                                                    <asp:HyperLink ID="HyperLink5" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounts/MPWLC/Download_RO_EPF_For_NAFED.aspx">View/Download/Delete EPF For NAFED</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink6" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounts/MPWLC/FailedPaymentRepushbyAccountSection_NAFED.aspx">Unmerge Failed Payment File For NAFED</asp:HyperLink>
+
+                                                </div>
+                                                <div id="divNCCF" runat="server" visible="false" style="width: 200px">
+                                                    <span id="span4" visible="true" runat="server">NCCF Operation</span>
+                                                    <%-- <asp:HyperLink ID="HyperLink10" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounts/MPWLC/Download_RO_EPF_For_NAFED.aspx">View/Download/Delete EPF For NAFED</asp:HyperLink>--%>
+                                                    <asp:HyperLink ID="HyperLink11" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounts/MPWLC/FailedPaymentRepushbyAccountSection_NCCF.aspx">Unmerge Failed Payment File For NCCF</asp:HyperLink>
+
+                                                </div>
+                                                <div id="divVacant" runat="server" visible="false" style="width: 200px">
+                                                    <span id="span2" visible="true" runat="server">Vacant Operation</span>
+                                                    <asp:HyperLink ID="HyperLink8" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounts/MPWLC/Download_RO_EPF_For_Vacant.aspx">View/Download/Delete EPF For Vacant</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink9" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounts/MPWLC/FailedPaymentRepushbyAccountSection_For_Vacant.aspx">Unmerge Failed Payment File For Vacant</asp:HyperLink>
+
+                                                </div>
+
+                                                <div id="divReports" runat="server" visible="false" style="width: 200px">
+                                                    <span id="spanReports" visible="true" runat="server">Reports</span>
+                                                    <asp:HyperLink ID="hypStateReports" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounts/AccountDefault.aspx">Payments Reports</asp:HyperLink>
+
+                                                </div>
+
+                                            </div>
+                                        </td>
+                                        <td valign="top" colspan="2" align="left">
+                                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                                            </asp:ContentPlaceHolder>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </fieldset>
+                        </center>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <fieldset style="width: 100%; border: 1px solid navy;">
+                            <div style="box-shadow: 1px 2px 10px">
+                                <table style="width: 100%; height: 50px">
+                                    <tr>
+                                        <td style="width: 20%" align="center">
+                                            <a href="http://www.mp.nic.in/">
+                                                <%--<img src="../../images/NIC-logo.png" width="200px" height="50px" alt="" />--%>
+                                            </a>
+                                        </td>
+                                        <td style="width: 1%" align="center">
+                                            <img id="Img1" src="../../images/Linevertical.png" style="width: 20px; height: 50px"
+                                                alt="" />
+                                        </td>
+                                        <td style="color: Navy; font-size: 8pt; width: 58%;" align="center">
+                                            <b>© 2022 &nbsp;Madhya Pradesh Warehousing And Logistics Corporation (MPWLC)
+                                            <br />
+                                                Developed By : Madhya Pradesh Warehousing And Logistics Corporation (MPWLC)
+                                            <br />
+                                                Madhya Pradesh, Ministry of Food Department</b>
+                                        </td>
+                                        <td style="width: 1%" align="center">
+                                            <img id="Logo" src="../../images/Linevertical.png" style="width: 20px; height: 50px"
+                                                alt="" />
+                                        </td>
+                                        <td style="width: 20%" align="center">
+                                            <a href="http://india.gov.in/">
+                                                <img src="../../images/logo_en.png" width="200px" height="50px" alt="" />
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </fieldset>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+    <%--changes On 12-05-2026--%>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+        // Dropdown fix ke liye naya logic
+        $(window).load(function () {
+            // Jab dropdown change ho, toh hum check karenge
+            $('.goog-te-combo').on('change', function () {
+                var lang = $(this).val();
+                // Agar language Hindi select hui hai toh ensure karein ki wo dikhe
+                if (lang === 'hi') {
+                    console.log("Hindi Selected");
+                }
+            });
+
+            // Interval check: Kabhi-kabhi Google Translate der se load hota hai
+            var checkInterval = setInterval(function () {
+                var combo = document.querySelector('.goog-te-combo');
+                if (combo) {
+                    // Agar cookie mein Hindi saved hai par dropdown me nahi dikh raha
+                    var langCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+                    if (langCookie && langCookie.includes('/en/hi')) {
+                        combo.value = 'en';
+                    }
+                    clearInterval(checkInterval);
+                }
+            }, 500);
+        });
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <%--END--%>
+</body>
+</html>

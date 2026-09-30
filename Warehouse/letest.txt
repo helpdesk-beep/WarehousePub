@@ -1,0 +1,36 @@
+USE [Intergrated_MP_STORAGE]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_All_Sync_Procedure_Exce]    Script Date: 4/20/2022 5:57:35 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[SP_All_Sync_Procedure_Exce]
+
+AS
+BEGIN
+                exec [dbo].[Insert_WHR_Pendency_Duration_of_StockPosition]
+	exec [dbo].[Sync_Get_Pandancy_at_Varius_Level_after_recieved_payment]
+	exec Update_Stock_Position
+	exec [dbo].[SP_Godown_Wise_Stock_Positions_New]
+	exec [dbo].[SP_Sync_CropYear_Commodity_Wise_Stock_Position]
+	exec [dbo].[Sync_Get_Bill_Detail_After_August_With_Amount]
+	exec [dbo].[Sync_Get_Pendancy_After_DM_Payment_at_RM]
+	exec [dbo].[Sync_After_Aug_With_Amount_Pendancy_at_Verius_Level_Pro]
+	Exec [dbo].[Sync_Get_Bill_Detail_Pendancy_After_August_With_Amount]
+	Exec [dbo].[Update_Pending_Months]
+	Exec [dbo].[Sync_Get_Bill_Detail_After_August]
+	Exec [dbo].[Sync_Get_Bill_Detail_After_August_With_Amount_For_Pandancy]
+
+	Exec [dbo].[Sync_District_Wise_Qty_Avarage]
+	Exec [dbo].[Sync_District_Wise_Qty_Avarage_2]
+	Exec Sync_Get_Stock_Position_Last_10_Year
+	--Exec [dbo].[Sync_Get_Loss_Gain_Godown_Hired_Type]
+	-- Jab Loass Gain ki Reports Nikalna Tab Is procedure ko chalana h
+	exec [dbo].[Sync_Get_Loss_Gain_Godown_Hired_Type] '01/04/2016','03/31/2017'
+	exec [dbo].[Sync_Get_Loss_Gain_Godown_Hired_Type] '01/04/2017','03/31/2018'
+	exec [dbo].[Sync_Get_Loss_Gain_Godown_Hired_Type] '04/01/2018','03/31/2019'
+	exec [dbo].[Sync_Get_Loss_Gain_Godown_Hired_Type] '04/01/2019','03/31/2020'
+	exec [dbo].[Sync_Get_Loss_Gain_Godown_Hired_Type] '04/01/2020','03/31/2021'
+	exec [dbo].[Sync_Get_Loss_Gain_Godown_Hired_Type] '04/01/2021','03/31/2022'
+END

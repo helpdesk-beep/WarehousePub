@@ -1,0 +1,420 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Region_Master.master.cs" Inherits="MasterPage_MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <link href="../css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../sdmenu/sdmenu.css" />
+    <%--<style type="text/css">
+ body
+ {
+  background-image: url(images/Mainbg.jpg);
+  background-repeat:repeat;
+ }
+ .BTNBLUE
+{
+border:1px solid #7eb9d0; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-size:12px;font-family:arial, helvetica, sans-serif; padding: 10px 10px 10px 10px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
+ background-color: #a7cfdf; background-image: linear-gradient(to bottom, #a7cfdf, #23538a);
+ }
+
+.BTNBLUE:hover{
+ border:1px solid #5ca6c4;
+ background-color: #82bbd1; background-image: linear-gradient(to bottom, #82bbd1, #193b61);
+ }
+ 
+ </style>--%>
+
+    <%--   <script type="text/javascript" src="../../JS/popcalendar.js"></script>
+
+    <script type="text/javascript" src="../../JS/ShowCalender.js"></script>
+
+    <script type="text/javascript" src="../../JS/allFormValidations.js"></script>
+
+    <script type="text/javascript" src="../JS/allFormValidations.js"></script>
+
+    <script type="text/javascript" src="../JS/chksql.js"></script>
+
+    <script type="text/javascript" src="../JS/MD5.js"></script>
+
+    <script type="text/javascript" src="../../JS/calendar_eu.js"></script>--%>
+    <%--Changes on 12-05-2026--%>
+    <style>
+        /* 1. Hide the top Google Translate frame/banner */
+        .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon {
+            display: none !important;
+        }
+
+        body {
+            top: 0px !important;
+        }
+
+        /* 2. Hide the Google logo and branding in the dropdown */
+        .goog-te-gadget {
+            font-family: 'Arial', sans-serif !important;
+            color: transparent !important; /* Hides the "Powered by" text */
+        }
+
+            .goog-te-gadget .goog-te-combo {
+                color: #333 !important; /* Keeps the dropdown text visible */
+                padding: 8px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                background-color: #fff;
+            }
+
+        /* 3. Remove the tooltip popups when hovering over translated text */
+        #goog-gt-tt, .goog-te-balloon-frame {
+            display: none !important;
+        }
+
+        .goog-text-highlight {
+            background: none !important;
+            box-shadow: none !important;
+        }
+    </style>
+    <style>
+        /* Dropdown ke andar ke text ko hamesha readable rakhne ke liye */
+        .goog-te-combo {
+            text-transform: none !important;
+        }
+        /* Targeted fix for the iframe class you mentioned */
+        .VIpgJd-ZVi9od-ORHb-OEVmcd,
+        .goog-te-banner-frame,
+        #goog-gt-tt,
+        .goog-te-balloon-frame,
+        #\:2\.container {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+        /* Prevent the page from shifting down */
+        body {
+            top: 0px !important;
+        }
+
+        /* Remove the hover highlight effect */
+        .goog-text-highlight {
+            background: none !important;
+            box-shadow: none !important;
+        }
+    </style>
+    <%--END--%>
+
+    <script type="text/javascript">
+        window.history.forward(0);
+    </script>
+    <title>Warehouse</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <cc1:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></cc1:ToolkitScriptManager>
+        <div>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr class="inner-top" style="height: 80px">
+                    <td style="width: 500px;" align="center" class="whiteTxtBold">Integrated Information System for Foodgrains Management
+                    </BR></td>
+                    <td align="center" valign="middle">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td style="height: 30px; width: 16px;">
+                                    <img src="images/welcome-left-cut.jpg" height="30" style="width: 35px" alt="" /></td>
+                                <td align="center" class="welcomeBg" style="height: 30px; width: 222px;">Welcome,&nbsp;
+                                    <asp:Label ID="UxUserName" runat="server" Text="User Name" Width="68px" Font-Bold="true"></asp:Label><span
+                                        class="blackTxt">&nbsp;&nbsp;|&nbsp;&nbsp;</span></br>
+                                    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Default2.aspx">Sign Out</asp:HyperLink>
+                                </td>
+                                <td style="height: 30px">
+                                    <img src="images/welcome-right-cut.jpg" height="30" style="width: 34px" alt="" /></td>
+                                <%--Changes on 12-05-2026--%>
+                                <td class="col-md-3 col-sm-6 text-center">
+                                    <div id="google_translate_element"></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td align="center" class="whiteTxtBold" style="width: 400px">MPWLC STORAGE MODULE</br>
+                        </BR>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" align="left" valign="top">
+                        <div>
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td align="left" valign="top" style="width: 220px">
+                                        <asp:Panel ID="Panel1" runat="server" ScrollBars="Vertical" Height="600px" Width="220px">
+                                            <div id="my_menu" class="sdmenu">
+                                                <div id="divHome" runat="server" visible="true" style="width: 200px">
+                                                    <span id="spanHome" visible="true" runat="server">Home</span>
+                                                    <asp:HyperLink ID="hypHome" Visible="true" runat="server" Width="200px" NavigateUrl="~/Welcome.aspx">Home</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink30" Visible="true" runat="server" Width="200px" NavigateUrl="~/Masters/Region_Wise_Warehouse_Details.aspx">Region District Branch Wise Warehouse Details</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink47" Visible="true" runat="server" Width="200px" NavigateUrl="~/Region/Regionwise_Report_Updated_IssueCenterLatLong.aspx">Update Issue Center Lat Long</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink48" Visible="true" runat="server" Width="200px" NavigateUrl="~/Region/Update_Branch_Wise_Lat_Long.aspx">Update Branch Lat Long</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink120" Visible="true" runat="server" Width="200px" NavigateUrl="~/Region/Region_CheckGodownDtls.aspx">Search Godown</asp:HyperLink>
+                                                </div>
+                                                <div id="divBlacklist" runat="server" visible="true" style="width: 200px">
+                                                    <span id="span7" visible="true" runat="server">Black List Godown</span>
+                                                    <asp:HyperLink ID="HyperLink42" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/RM_BlackListGodown_EntryForm.aspx">Entry Black List Godown</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink43" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/Reports/Black_Listed_Godown_Report.aspx">Black List Godown Report</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink44" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/Reports/RPT_Update_Godown_Maintain_By_New.aspx">Registration id Update Details</asp:HyperLink>
+                                                </div>
+                                                <div id="divDSC" runat="server" visible="true" style="width: 200px">
+                                                    <span id="span2" visible="true" runat="server">Digital Signature</span>
+                                                    <asp:HyperLink ID="HyperLink6" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/DSCUser_Verification_RO.aspx">DSC User Verification</asp:HyperLink>
+                                                </div>
+                                                <div id="div5" runat="server" visible="true" style="width: 200px">
+                                                    <span id="span8" visible="true" runat="server">NAFED Online Billing</span>
+                                                    <asp:HyperLink ID="HyperLink49" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounting/RO_Nafed_Bill_Approval.aspx">Submit NAFED Storage Charges</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink51" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/Region_Wise_Nafed_Print_bill.aspx">NAFED Print Bill</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink52" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/Nafed_Rent_RM_Approval_Status.aspx">NAFED Bill Approve For Passing Order</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink53" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/RM_Generate_Passing_Order_For_NAFED.aspx">Passing Order For NAFED</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink54" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounting/RO_Generate_EPF_For_NAFED.aspx">Generate EPF For NAFED(NEFT Payment File)</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink70" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounting/RO_Generate_EPF_For_NAFED_For_BOT.aspx">Generate BOT EPF For NAFED(NEFT Payment File)</asp:HyperLink>
+                                                </div>
+                                                <div id="div7" runat="server" visible="true" style="width: 200px">
+                                                    <span id="span10" visible="true" runat="server">NCCF Online Billing</span>
+                                                    <asp:HyperLink ID="HyperLink65" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounting/RO_NCCF_Bill_Approval.aspx">Submit NCCF Storage Charges</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink27" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/NCCF_Rent_RM_Approval_Status.aspx">NCCF Bill Approve For Passing Order</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink68" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/RM_Generate_Passing_Order_For_NCCF.aspx">Passing Order For NCCF</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink69" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounting/RO_Generate_EPF_For_NCCF.aspx">Generate EPF For NCCF(NEFT Payment File)</asp:HyperLink>
+                                                </div>
+                                                <div id="div6" runat="server" visible="true" style="width: 200px">
+                                                    <span id="span9" visible="true" runat="server">BOT/PEG Online Billing</span>
+                                                    <asp:HyperLink ID="HyperLink57" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounting/RO_Generate_EPF_For_BOT.aspx">Generate EPF For BOT Godown(NEFT Payment File For Field Capcity)</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink58" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounting/RO_Generate_EPF_IB_BOT.aspx">Generate EPF For BOT Godown(NEFT Payment File)</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink61" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Reports/Region/BOT_Godown_Approved_by_Account_Manager.aspx">Account Manager Bill Approval For Vaccant</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink60" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Reports/Region/Rpt_Bot_Godown_Bill_Details_For_Region.aspx">RM Bill Approval For Vaccant</asp:HyperLink>
+
+                                                    <asp:HyperLink ID="HyperLink63" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Reports/Region/PEG_Godown_Approved_by_Account_Manager.aspx">PEG Account Manager Bill Approval For Vaccant</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink64" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Reports/Region/Rpt_PEG_Godown_Bill_Details_For_Region.aspx">PEG RM Bill Approval For Vaccant</asp:HyperLink>
+
+                                                    <asp:HyperLink ID="HyperLink59" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounting/RO_Generate_EPF_For_Vaccant.aspx">Generate EPF For Vaccant Capacity Godown(NEFT Payment File)</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink62" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounting/RO_Generate_EPF_For_Vaccant_IB.aspx">Generate EPF For Vaccant Capacity Godown(NEFT Payment File For ICICI)</asp:HyperLink>
+                                                </div>
+
+                                                <div id="div2" runat="server" visible="true" style="width: 200px">
+                                                    <span id="span3" visible="true" runat="server">Online Billing</span>
+                                                    <asp:HyperLink ID="HyperLink13" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/RM_Generate_Passing_Order.aspx">New Bill Passing Order</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink32" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/RM_Generate_Passing_Order_Bill_Wise.aspx">Bill Wise Passing Order</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink15" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounting/RO_Generate_EPF.aspx">Generate EPF(NEFT Payment File)</asp:HyperLink>
+                                                    <%--For ICICI Bank Generate Payment File New Link Added--%>
+                                                    <asp:HyperLink ID="HyperLink45" Visible="false" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounting/RO_Generate_EPF_IB.aspx">Generate EPF(NEFT Payment File)</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink46" Visible="false" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounting/Update_Upload_RO_EPF_IB.aspx">Update Payment File(NEFT) Status</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink39" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounting/RO_Generate_EPF_IB_For_Tribal_New.aspx">Generate EPF For Tribal Godown(NEFT Payment File)</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink55" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounting/RO_Generate_EPF_For_tribal.aspx">Generate EPF For Tribal Godown(NEFT Payment File)</asp:HyperLink>
+
+
+                                                    <%-- <asp:HyperLink ID="HyperLink15" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="#">Generate EPF(NEFT Payment File)</asp:HyperLink>--%>
+                                                    <asp:HyperLink ID="HyperLink10" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/Gdwn_GeneratedBill_Detuction.aspx">Old Bill Passing Order</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink14" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/Pending Account_Verification.aspx">Pending Godown Owners Accounts Verification</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink9" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/Account_No_Verification_RO.aspx">Godown Owners Accounts Verification</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink12" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/Update_Gdwn_Acc_No_ForPayment.aspx">Update Godown Owners Account Information</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink11" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounting/RO_Print_StorageChargesgBill.aspx">Print Bill</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink16" Visible="false" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounting/RO_Download_EPF.aspx">View/Download Generated EPF</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink24" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounting/Update_Upload_RO_EPF.aspx">Update Payment File(NEFT) Status</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink17" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Accounting/BankActTransaction_FileUpload.aspx">Upload Payment Reverse File</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink25" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/Account_Detail_Verification_RO.aspx">Hired Godown Benificiary Accounts Verification</asp:HyperLink>
+                                                </div>
+                                                <div id="divReports" runat="server" visible="true" style="width: 200px">
+                                                    <span id="spanReports" visible="true" runat="server">Reports</span>
+                                                    <asp:HyperLink ID="hypDepotReports" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/IssueCenterLevel/Storage/Branch_Report.aspx">Branch  Reports</asp:HyperLink>
+                                                    <asp:HyperLink ID="hypRegionReports" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/Reports_District.aspx">Region Reports</asp:HyperLink>
+                                                    <asp:HyperLink ID="hypnewrpt" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/Region_New_Reports.aspx">Region New Reports</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink29" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Reports//Region/GodownCapForRegion.aspx">View All Godown Capacity</asp:HyperLink>
+                                                </div>
+                                                <div id="div3" runat="server" visible="true" style="width: 200px">
+                                                    <span id="span5" visible="true" runat="server">Operations</span>
+                                                    <asp:HyperLink ID="HyperLink35" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/UpdateGodownEntryinAgrrement.aspx">Update Godown For Mapping Kharif 2022-23</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink34" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Reports/Region/Black_List_Godown_in_FIFO.aspx">Issue Notice For Blacklisting Of Godown</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink36" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Reports/Region/Delete_Black_List_Godown_in_FIFO.aspx">Blacklist Godown to UnBlacklist</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink33" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Reports/Region/Delete_Update_Category_For_FIFO.aspx">Delete Update Category For FIFO</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink31" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Reports/States/Region_Insurance_Details_Delete.aspx">Delete Insurance Details</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink18" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/frm_DelStorage_Charges_Bill.aspx">Delete Storage/Rent Bill</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink26" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/frm_DelStorage_Charges_Bill_Number.aspx">Delete Storage/Rent Bill by Bill No</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink67" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/Delete_NCCF_Bill.aspx">Delete NCCF Bill by Bill No</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink19" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/Delete_Bill_DSign.aspx">Delete Bill DSC</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink20" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/DeleteFinalBill.aspx">Delete Final Bill</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink21" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/DeleteDO.aspx">Delete DO</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink41" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/Delete_Bill_DSign_For_Steel_Silo.aspx">Delete Steel Silo Bill</asp:HyperLink>
+
+                                                    <asp:HyperLink ID="HyperLink22" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/UpdateCropYear.aspx">Update Crop Year</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink23" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/WHRReset.aspx">WHR Reset</asp:HyperLink>
+
+                                                    <asp:HyperLink ID="HyperLink28" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Reports/Region/UpdateShowGodownvarificationcap.aspx">Correction in Selected Godown For Mapping  </asp:HyperLink>
+
+                                                    <asp:HyperLink ID="HyperLink38" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/Delete_WHR_For_RM.aspx">Delete WHR Only Jabalpur District</asp:HyperLink>
+
+                                                    <asp:HyperLink ID="HyperLink50" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/frm_DelStorage_Charges_Bill_NAFED.aspx">Delete NAFED Bill</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink56" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/frm_Delete_Rent_Bill_NAFED.aspx">Delete NAFED Rent Bill</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink66" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/Delete_DMO_Markfed_Bills.aspx">Delete DMO-Markfed Storage Bill</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink40" runat="server" Width="200px" NavigateUrl="~/Masters/Rpt_Premices_Details_Count_For_RM.aspx">Premicess Report</asp:HyperLink>
+                                                    <%--  <asp:HyperLink ID="HyperLink30" visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Reports/Region/UpdateSelecttionjvs.aspx">Correction in Selection JVS For Offer (श्रेणी)  </asp:HyperLink>--%>
+                                                </div>
+                                                <div id="divvacmt" runat="server" visible="true" style="width: 200px; background-color: #4c4545">
+                                                    <span id="span4" visible="true" runat="server">Vacant Storage Capacity Reports</span>
+
+                                                    <asp:HyperLink ID="Hypvacrpt" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/ReportViewer_Region_Vacant_Storage_Capacity.aspx">Vacant Storage Capacity Report</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink37" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Reports/Region/View_Godown_Compalint_Region_Report.aspx">View Private Godown Complaint</asp:HyperLink>
+                                                    <asp:HyperLink ID="Hypvacmt" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/ReportViewer_Region_VacStorage_Morethan_1_Lac_mt.aspx">Vacant Storage Capacity More than 1 LacMT</asp:HyperLink>
+                                                </div>
+                                                <div id="div_Delete" runat="server" visible="true" style="width: 200px">
+                                                    <span id="spn_delte" visible="true" runat="server">Delete Operations</span>
+                                                    <asp:HyperLink ID="HyperLink7" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/UpdateJVSGodownLicNoExpDate.aspx"> Update Licence</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink8" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/UpdateJVSRegID_WHMSLogin.aspx"> Update JVS Registration ID</asp:HyperLink>
+                                                    <asp:HyperLink ID="hlnkDeleteOprtrWhr" Visible="false" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/DelBranchWHR.aspx"> Delete WHR</asp:HyperLink>
+                                                    <asp:HyperLink ID="hlnk_Delete_Open_Balance" Visible="False" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/Delete_Opening_Balance.aspx">Delete Opening Balance</asp:HyperLink>
+                                                    <asp:HyperLink ID="hlnk_DeleteDO" runat="server" Width="200px" NavigateUrl="~/Region/DeleteDeliveryOrder.aspx"
+                                                        Visible="False">Delete Delivery Order</asp:HyperLink>
+                                                    <asp:HyperLink ID="hlnk_Delete_GP" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/Delete_Delivery_Gatepass.aspx" Visible="False">Delete Delivery GatePass</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink2" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/Delete_Receipt_Details.aspx" Visible="False">Delete Receiving</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink3" runat="server"
+                                                        NavigateUrl="~/StatePages/DeleteRequests.aspx">Delete Request</asp:HyperLink>
+                                                    <%--<asp:HyperLink ID="HyperLink6" runat="server" 
+                                                          NavigateUrl="~/Region/DeleteVerifyGodownEntry.aspx">Delete Verify Godown</asp:HyperLink>--%>
+                                                </div>
+                                                <div id="div1" runat="server" visible="true" style="width: 200px">
+                                                    <span id="Span1" visible="true" runat="server">लंबित शुल्क Detail</span>
+                                                    <asp:HyperLink ID="HyperLink4" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Region/Total_Sulk_Opening.aspx">Fill Details</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink5" Visible="true" runat="server" Width="200px"
+                                                        NavigateUrl="~/Reports/Region/RegionBandaranSulkDate.aspx">लंबित शुल्क विवरण</asp:HyperLink>
+
+
+
+                                                </div>
+                                            </div>
+                                        </asp:Panel>
+                                    </td>
+                                    <td valign="top" colspan="2" align="left">
+                                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                                        </asp:ContentPlaceHolder>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 200px" rowspan="2">
+                        <asp:Image ID="Image1" runat="server" ImageUrl="~/images/niclogo.gif" /></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+    <%--changes On 12-05-2026--%>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+        // Dropdown fix ke liye naya logic
+        $(window).load(function () {
+            // Jab dropdown change ho, toh hum check karenge
+            $('.goog-te-combo').on('change', function () {
+                var lang = $(this).val();
+                // Agar language Hindi select hui hai toh ensure karein ki wo dikhe
+                if (lang === 'hi') {
+                    console.log("Hindi Selected");
+                }
+            });
+
+            // Interval check: Kabhi-kabhi Google Translate der se load hota hai
+            var checkInterval = setInterval(function () {
+                var combo = document.querySelector('.goog-te-combo');
+                if (combo) {
+                    // Agar cookie mein Hindi saved hai par dropdown me nahi dikh raha
+                    var langCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+                    if (langCookie && langCookie.includes('/en/hi')) {
+                        combo.value = 'en';
+                    }
+                    clearInterval(checkInterval);
+                }
+            }, 500);
+        });
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <%--END--%>
+</body>
+</html>

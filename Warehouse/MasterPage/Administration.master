@@ -1,0 +1,405 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Administration.master.cs" Inherits="MasterPage_Administration" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>M.P. Warehousing & Logistics Corporarion </title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="../Administration/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="../Administration/assets/css/font-awesome.min.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="../Administration/assets/css/tabs.css" />
+    <link rel="stylesheet" href="../Administration/assets/css/flexslider.css" type="text/css" media="screen" />
+    <link href="../Administration/assets/css/Theme.css" rel="stylesheet">
+    <link href="../Administration/assets/Resources/js/Notification/animate.css" rel="stylesheet" type="text/css" />
+    <link href="../Administration/assets/Resources/Validation/Validation.css" rel="stylesheet" type="text/css" />
+    <link href="../Administration/Assets/css/StyleEU.css" rel="stylesheet" type="text/css" />
+    <link href="../Administration/Assets/css/Table-MultiDesigns.css" rel="stylesheet" type="text/css" />
+    <script src="../Administration/assets/Resources/js/Alerts/sweetalert-dev.js" type="text/javascript"></script>
+    <link href="../Administration/assets/Resources/js/Alerts/sweetalert.css" rel="stylesheet" type="text/css" />
+    <script src="../Administration/assets/Resources/js/Highcharts/code/highcharts.js" type="text/javascript"></script>
+    <script src="../Administration/assets/Resources/js/Highcharts/code/highcharts-more.js" type="text/javascript"></script>
+    <style type="text/css">
+        .modal {
+            display: none;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            background-color: black;
+            z-index: 100;
+            opacity: 0.8;
+            filter: alpha(opacity=60);
+            -moz-opacity: 0.8;
+            min-height: 100%;
+        }
+
+        #divImage {
+            display: none;
+            z-index: 1000;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: White;
+            height: 550px;
+            width: 610px;
+            padding: 3px;
+            border: solid 1px black;
+        }
+
+        .dlTable {
+            border: double 1px #D9D9D9;
+            width: 200px;
+            text-align: left;
+        }
+
+        /* div.sdmenu div span {
+            display: block;
+            padding: 5px 25px;
+            font-weight: bold;
+            color: white;
+            background: url(expanded.gif) no-repeat 10px center;
+            cursor: default;
+            border-bottom: 1px solid #ddd;
+        }
+
+        div.sdmenu {
+            width: 155px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            padding-bottom: 10px;
+            background: url(bottom.gif) no-repeat right bottom;
+            color: #9BB849;
+        }
+
+            div.sdmenu div:first-child {
+                background: url(toptitle.gif) no-repeat;
+            }
+
+            div.sdmenu div {
+                background: url(title.gif) repeat-x;
+                overflow: hidden;
+            }*/
+    </style>
+    <%--Changes on 12-05-2026--%>
+    <style>
+        /* 1. Hide the top Google Translate frame/banner */
+        .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon {
+            display: none !important;
+        }
+
+        body {
+            top: 0px !important;
+        }
+
+        /* 2. Hide the Google logo and branding in the dropdown */
+        .goog-te-gadget {
+            font-family: 'Arial', sans-serif !important;
+            color: transparent !important; /* Hides the "Powered by" text */
+        }
+
+            .goog-te-gadget .goog-te-combo {
+                color: #333 !important; /* Keeps the dropdown text visible */
+                padding: 8px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                background-color: #fff;
+            }
+
+        /* 3. Remove the tooltip popups when hovering over translated text */
+        #goog-gt-tt, .goog-te-balloon-frame {
+            display: none !important;
+        }
+
+        .goog-text-highlight {
+            background: none !important;
+            box-shadow: none !important;
+        }
+    </style>
+    <style>
+        /* Dropdown ke andar ke text ko hamesha readable rakhne ke liye */
+        .goog-te-combo {
+            text-transform: none !important;
+        }
+        /* Targeted fix for the iframe class you mentioned */
+        .VIpgJd-ZVi9od-ORHb-OEVmcd,
+        .goog-te-banner-frame,
+        #goog-gt-tt,
+        .goog-te-balloon-frame,
+        #\:2\.container {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+        /* Prevent the page from shifting down */
+        body {
+            top: 0px !important;
+        }
+
+        /* Remove the hover highlight effect */
+        .goog-text-highlight {
+            background: none !important;
+            box-shadow: none !important;
+        }
+    </style>
+    <%--END--%>
+    <script src="../Administration/assets/jQuery%20Package/jquery-1.10.2/jquery-1.10.2.js" type="text/javascript"></script>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="container" style="position: fixed; right: -10%; bottom: 0; opacity: 0.50; z-index: 9999999999;">
+        </div>
+        <div id="fb-root">
+        </div>
+        <script>        (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=169989006502039";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+        <header>
+            <div class="row">
+                <div class="logo_bar">
+                    <div class="">
+                        <img src="../images/insp.jpg" style="width: 100%" alt="" height="140" />
+                    </div>
+                </div>
+                <%--<div class="header-right">
+                        <div class="clearfix">
+                            <ul class="top-links">
+                            </ul>
+                            <div style="float: right; margin: 0% 0% 0 0">
+                                <asp:LinkButton ID="lblUserName" CssClass="ui-widget" EnableTheming="false" OnClientClick='javascript: return false;'
+                                    runat="server"></asp:LinkButton>
+                                <asp:LoginStatus ID="LoginStatus2" CssClass="ui-widget btn btn-large btn-info" EnableTheming="false" runat="server"
+                                    LogoutAction="Redirect" LogoutPageUrl="~/Login/Public/SignOut.aspx" />
+                            </div>
+                        </div>
+
+                    </div>--%>
+            </div>
+            <div class="navigation-con">
+                <div class="container">
+                    <nav class="navbar navbar-default" role="navigation">
+                        <div class="navbar-header">
+                            <div class="col-md-3 col-sm-6 text-center">
+                                <div id="google_translate_element"></div>
+                            </div>
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
+                                    class="icon-bar"></span><span class="icon-bar"></span>
+
+                            </button>
+
+                        </div>
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav" id="MenuSiteMaps">
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <div class="news-update">
+        </div>
+        <section class="section-padd sssm-sec">
+            <div class="row">
+                <div class="col-xs-2 col-sm-2 col-md-2 inn-content" style="overflow: scroll; max-height: 880px;">
+                    <center>
+                        <fieldset style="width: 100%; border: 0px solid navy;">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-left: 0px">
+                                <tr>
+                                    <td align="left" valign="top" style="width: 205px">
+                                        <div id="my_menu" class="sdmenu" style="box-shadow: 1px 1px 20px">
+                                            <div id="divHome" runat="server" style="width: 200px">
+                                                <div id="spanHome" runat="server" class="alert alert-danger">Home</div>
+                                                <asp:HyperLink ID="hypHome" runat="server" Width="200px" NavigateUrl="~/Administration/Default.aspx">Home</asp:HyperLink>
+                                                <asp:HyperLink ID="hlnkgmap" Visible="true" runat="server" Width="200px" NavigateUrl="~/StockPosition_Depot.aspx" Target="_blank">GMap Location Branch</asp:HyperLink>
+                                                <asp:HyperLink ID="HyperLink8" Visible="true" runat="server" Width="200px" NavigateUrl="~/GioStock_Godown.aspx" Target="_blank">GMap Location godown</asp:HyperLink>
+                                                <asp:HyperLink ID="HyperLink9" Visible="true" runat="server" Width="200px" NavigateUrl="~/Geo_Stock_with_Branch.aspx" Target="_blank">GMap Location godown with branch</asp:HyperLink>
+                                                <asp:HyperLink ID="HyperLink10" Visible="true" runat="server" Width="200px" NavigateUrl="~/State_Godown_dtl.aspx" Target="_blank">GMap Location godown Current stock</asp:HyperLink>
+                                            </div>
+                                            <div id="Div1">&nbsp;</div>
+
+                                            <div id="divvac1lacmt" runat="server" visible="true" style="width: 200px;">
+                                                <div id="span2" runat="server" class="alert alert-danger">Reports</div>
+                                                <asp:HyperLink ID="Hypvacrpt" runat="server" Width="200px" NavigateUrl="~/Administration/Report_Region.aspx">View Reports</asp:HyperLink>
+                                            </div>
+
+                                            <div id="D">&nbsp;</div>
+                                            <div id="divMasters" runat="server" visible="true" style="width: 200px">
+                                                <div id="spanMasters" visible="false" runat="server" class="alert alert-danger">Masters</div>
+                                                <asp:HyperLink ID="hypCommodityMaster" Visible="False" runat="server" Width="200px"
+                                                    NavigateUrl="~/Masters/Commoditymaster.aspx">Commodity Master</asp:HyperLink>
+                                                <asp:HyperLink ID="hlnkratemaster" Visible="False" runat="server" Width="200px" NavigateUrl="~/Masters/RateMaster.aspx">Rate Master</asp:HyperLink>
+                                                <asp:HyperLink ID="hlnktaxmaster" Visible="False" runat="server" Width="200px" NavigateUrl="~/Masters/TaxMaster.aspx">GST Master</asp:HyperLink>
+                                                <asp:HyperLink ID="hlnbranchmaster" Visible="False" runat="server" Width="200px" NavigateUrl="~/StatePages/AddBranch.aspx">Branch Master</asp:HyperLink>
+                                                <asp:HyperLink ID="HyperLink2" Visible="False" runat="server" Width="200px" NavigateUrl="~/Accounting/frmStorage_Rate.aspx">Rate Master</asp:HyperLink>
+                                                <asp:HyperLink ID="HyperLink4" Visible="False" runat="server" Width="200px" NavigateUrl="~/StatePages/AddGodown.aspx">Godown Master</asp:HyperLink>
+                                                <asp:HyperLink ID="HyperLink7" Visible="False" runat="server" Width="200px" NavigateUrl="~/StatePages/PurchaseRateMaster.aspx">Purchase Rate Master</asp:HyperLink>
+
+                                                <asp:HyperLink ID="HyperLink3" Visible="False" runat="server" Width="200px" NavigateUrl="~/Accounting/frm_Edit_Storage_Rate.aspx">Edit Rate Master</asp:HyperLink>
+                                                <asp:HyperLink ID="hlwhrreset" Visible="False" runat="server" Width="200px" NavigateUrl="~/StatePages/WHRReset.aspx">Whr Print Reset</asp:HyperLink>
+                                                <asp:HyperLink ID="HyperLink6" Visible="False" runat="server" Width="200px" NavigateUrl="~/Reports/States/Geolocationwisecapacity.aspx">Set Geolocation</asp:HyperLink>
+                                                <%--<asp:HyperLink ID="hlngodownmaster" Visible="False" runat="server" Width="200px" NavigateUrl="~/StatePages/AddGodown.aspx">Godown Master</asp:HyperLink>--%>
+                                                <asp:HyperLink ID="HlnPvtLogin" Visible="False" runat="server" Width="200px" NavigateUrl="~/StatePages/CreatePvtGodownLogin.aspx">Create Pvt Godown Login</asp:HyperLink>
+                                                <asp:HyperLink ID="Prmhrplink" Visible="False" runat="server" Width="200px" NavigateUrl="~/StatePages/UpdatePremisesGdwn.aspx">Premises Godown Master </asp:HyperLink>
+                                            </div>
+
+                                            <div id="div_Update" runat="server" visible="false" style="width: 200px">
+                                                <div id="Span4" visible="false" runat="server" class="alert alert-danger">Update Operations</div>
+                                                <asp:HyperLink ID="HyperLink13" Visible="false" runat="server" Width="200px"
+                                                    NavigateUrl="~/StatePages/UpdateCropYear.aspx"> Update Crop Year</asp:HyperLink>
+                                            </div>
+                                            <div id="D2">&nbsp;</div>
+                                            <div id="divEWHR" runat="server" visible="false" style="width: 200px">
+                                                <div id="Span1" visible="false" runat="server" class="alert alert-danger">E WHR</div>
+                                                <asp:HyperLink ID="hplDelDSC" Visible="false" runat="server" Width="200px"
+                                                    NavigateUrl="~/E_WHR/Delete_Uploaded_DSC.aspx"> Delete Uploaded DSC</asp:HyperLink>
+                                            </div>
+                                            <div id="D3">&nbsp;</div>
+                                            <div id="div_Delete" runat="server" visible="false" style="width: 200px">
+                                                <div id="spn_delte" visible="false" runat="server" class="alert alert-danger">Delete Operations</div>
+                                                <asp:HyperLink ID="hlnkDeleteOprtrWhr" Visible="false" runat="server" Width="200px"
+                                                    NavigateUrl="~/Region/DelBranchWHR.aspx"> Delete WHR</asp:HyperLink>
+                                                <asp:HyperLink ID="hlnk_Delete_Open_Balance" Visible="false" runat="server" Width="200px"
+                                                    NavigateUrl="~/Region/Delete_Opening_Balance.aspx">Delete Opening Balance</asp:HyperLink>
+                                                <asp:HyperLink ID="hlnkdeletereceipt" runat="server" Width="200px" NavigateUrl="~/Region/Delete_Receipt_Details.aspx"
+                                                    Visible="false">Delete Receipt Details</asp:HyperLink>
+                                                <asp:HyperLink ID="hlnk_DeleteDO" runat="server" Width="200px" NavigateUrl="~/Region/DeleteDeliveryOrder.aspx"
+                                                    Visible="false">Delete Delivery Order</asp:HyperLink>
+                                                <asp:HyperLink ID="hlnk_Delete_GP" runat="server" Width="200px" NavigateUrl="~/Region/Delete_Delivery_Gatepass.aspx"
+                                                    Visible="false">Delete Delivery GatePass</asp:HyperLink>
+                                                <asp:HyperLink ID="hlnkupgatepass" runat="server" Width="200px" NavigateUrl="~/Region/UpdateGatepass.aspx"
+                                                    Visible="false">Update GatePass</asp:HyperLink>
+                                                <asp:HyperLink ID="hlnkserchdo" runat="server" Width="200px" NavigateUrl="~/Region/Search_do.aspx"
+                                                    Visible="false">Search DO</asp:HyperLink>
+                                                <asp:HyperLink ID="hldeletereq" runat="server" Width="200px" NavigateUrl="~/StatePages/DeleteRequests.aspx"
+                                                    Visible="false">Delete Requests</asp:HyperLink>
+                                                <asp:HyperLink ID="HyperLink5" runat="server" Width="200px" NavigateUrl="~/Accounting/frm_DelStorage_Charges_Bill.aspx"
+                                                    Visible="false">Delete Bill Details</asp:HyperLink>
+                                                <asp:HyperLink ID="HyperLink12" runat="server" Width="200px" NavigateUrl="~/Accounting/DeleteCommodityLossDetail.aspx"
+                                                    Visible="true">Delete Commodity Loss</asp:HyperLink>
+                                            </div>
+                                            <div id="D4">&nbsp;</div>
+                                            <div id="divReports" runat="server" visible="false" style="width: 200px">
+                                                <div id="spanReports" visible="false" runat="server" class="alert alert-danger">Reports</div>
+                                                <asp:HyperLink ID="hypDepotReports" Visible="False" runat="server" Width="200px"
+                                                    NavigateUrl="~/StatePages/Reports.aspx">Branch Reports</asp:HyperLink>
+                                                <asp:HyperLink ID="hypRegionReports" Visible="false" runat="server" Width="200px"
+                                                    NavigateUrl="~/StatePages/Reports_District.aspx">Region Reports</asp:HyperLink>
+                                                <asp:HyperLink ID="hypStateReports" Visible="false" runat="server" Width="200px"
+                                                    NavigateUrl="~/IssueCenterLevel/Storage/Report_Region.aspx">State Reports</asp:HyperLink>
+                                            </div>
+                                            <div id="D5">&nbsp;</div>
+                                            <div id="divPass" runat="server" visible="false" style="width: 200px">
+                                                <div id="spanChangePassword" visible="false" runat="server" class="alert alert-danger">Change Password</div>
+                                                <asp:HyperLink ID="hypChangePassword" Visible="false" runat="server" Width="200px"
+                                                    NavigateUrl="~/IssueCenterLevel/Change_Password.aspx">Change Password</asp:HyperLink>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </fieldset>
+                    </center>
+                </div>
+                <div id="MainContainer" class="col-xs-10 col-sm-10 col-md-10 inn-content">
+                    <asp:ContentPlaceHolder ID="cph" runat="server">
+                    </asp:ContentPlaceHolder>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div class="footerbottom">
+                MP Warehousing and Logistics Corporation
+            </div>
+        </footer>
+        <asp:HiddenField ID="lang" runat="server" Value="0" />
+        <asp:HiddenField ID="UserName" runat="server" Value="0" />
+        <asp:HiddenField ID="RoleId" runat="server" Value="0" />
+        <script src="../Administration/assets/js/bootstrap.min.js"></script>
+        <script src="../Administration/assets/js/tabs.js" type="text/javascript"></script>
+        <script defer src="../Administration/assets/js/jquery.flexslider.js"></script>
+        <script src="../Administration/assets/js/scripts.js"></script>
+        <script>
+            var __SiteMapContainer;
+            $(document).ready(function () {
+                $(".PerformClick").click(function () {
+                    if ($("form").valid()) {
+                        $(".PerformClick").hide();
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                });
+            });
+        </script>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-71602944-2', 'auto');
+            ga('send', 'pageview');
+            $("#MainContainer").css("min-height", $(window).height() - 350);
+        </script>
+        <script src="../Administration/assets/Resources/Validation/jquery.validate.js" type="text/javascript"></script>
+        <script src="../Administration/assets/Resources/Validation/Validations.js" type="text/javascript"></script>
+        <script src="../Administration/assets/Resources/Validation/ValidationClasses.js" type="text/javascript"></script>
+
+
+        <link href="../Administration/assets/Responsivegrid/footable.min.css" rel="stylesheet" type="text/css" />
+
+        <script src="../Administration/assets/Responsivegrid/footable.min.js" type="text/javascript"></script>
+
+    </form>
+    <%--changes On 12-05-2026--%>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+        // Dropdown fix ke liye naya logic
+        $(window).load(function () {
+            // Jab dropdown change ho, toh hum check karenge
+            $('.goog-te-combo').on('change', function () {
+                var lang = $(this).val();
+                // Agar language Hindi select hui hai toh ensure karein ki wo dikhe
+                if (lang === 'hi') {
+                    console.log("Hindi Selected");
+                }
+            });
+
+            // Interval check: Kabhi-kabhi Google Translate der se load hota hai
+            var checkInterval = setInterval(function () {
+                var combo = document.querySelector('.goog-te-combo');
+                if (combo) {
+                    // Agar cookie mein Hindi saved hai par dropdown me nahi dikh raha
+                    var langCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+                    if (langCookie && langCookie.includes('/en/hi')) {
+                        combo.value = 'en';
+                    }
+                    clearInterval(checkInterval);
+                }
+            }, 500);
+        });
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <%--END--%>
+</body>
+</html>

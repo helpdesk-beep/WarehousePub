@@ -1,0 +1,509 @@
+﻿using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+using System.Data.SqlClient;
+using System.Globalization;
+
+public partial class WarehouseLevel_PvtGReports_GO_PrintGeneratedBill_DSC : System.Web.UI.Page
+{
+    public SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["FCIConnectionString"].ToString());
+    SqlTransaction sqltrans;
+    string qry;
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (Session["UserName"].ToString() != null)
+        {
+            if (!IsPostBack)
+            {
+                lblP_regionnm.Text = Session["UserName"].ToString();
+                lbld_rmname.Text = Session["UserName"].ToString();
+                lbld_branch.Text = Session["UserName"].ToString();
+                lblbranch.Text = Session["UserName"].ToString();
+                //Label12.Text = Session["UserName"].ToString();
+                //lblAcBranch.Text = Session["UserName"].ToString();
+                GetBillGdwn();
+                fillFinancialYear();
+            }
+        }
+        else
+        {
+            Response.Redirect("~/SessionExpired.htm");
+        }
+    }
+    protected void fillFinancialYear()
+    {
+
+        ddlFyear.Items.Add((DateTime.Now.Year) + "-" + (DateTime.Now.Year + 1).ToString().Substring(2, 2));
+        ddlFyear.Items.Add((DateTime.Now.Year - 1) + "-" + DateTime.Now.Year.ToString().Substring(2, 2));
+        ddlFyear.Items.Add((DateTime.Now.Year - 2) + "-" + (DateTime.Now.Year - 1).ToString().Substring(2, 2));
+        ddlFyear.Items.Add((DateTime.Now.Year - 3) + "-" + (DateTime.Now.Year - 2).ToString().Substring(2, 2));
+        ddlFyear.Items.Add((DateTime.Now.Year - 4) + "-" + (DateTime.Now.Year - 3).ToString().Substring(2, 2));
+        //ddlFyear.Items.Add((DateTime.Now.Year - 5) + "-" + (DateTime.Now.Year - 4).ToString().Substring(2, 2));
+    }
+    public string NineCrop(string INCROPS)
+    {
+        string InCrop = INCROPS;
+        string OutCrop = "";
+        if (InCrop == "2015-16")
+        {
+            OutCrop = "2015-2016";
+        }
+        else if (InCrop == "2016-17")
+        {
+            OutCrop = "2016-2017";
+        }
+        else if (InCrop == "2017-18")
+        {
+            OutCrop = "2017-2018";
+        }
+        else if (InCrop == "2018-19")
+        {
+            OutCrop = "2018-2019";
+        }
+        else if (InCrop == "2019-20")
+        {
+            OutCrop = "2019-2020";
+        }
+        else if (InCrop == "2020-21")
+        {
+            OutCrop = "2020-2021";
+        }
+        else if (InCrop == "2021-22")
+        {
+            OutCrop = "2021-2022";
+        }
+        else if (InCrop == "2022-23")
+        {
+            OutCrop = "2022-2023";
+        }
+        else if (InCrop == "2023-24")
+        {
+            OutCrop = "2023-2024";
+        }
+        return OutCrop;
+    }
+    public void GetBillGdwn()
+    {
+        string qry = "";
+        //qry = "select Godown_name + ' ('+ Godown_ID +')' as Godown_name ,Godown_ID from tbl_metadata_godown_2018 where BranchID='" + Session["BranchId"].ToString() + "'";
+        qry = "select Godown_name + ' ('+ Godown_ID +')' as Godown_name ,Godown_ID from tbl_metadata_godown_2018 where BranchID='" + Session["G_BranchID"].ToString() + "' and Godown_ID='" + Session["GodownID_New"].ToString() + "'";
+
+        SqlCommand cmd = new SqlCommand(qry, con);
+        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        DataSet ds = new DataSet();
+        da.Fill(ds);
+        if (ds.Tables[0].Rows.Count > 0)
+        {
+            ddlgdwn.DataSource = ds.Tables[0];
+            ddlgdwn.DataTextField = "Godown_name";
+            ddlgdwn.DataValueField = "Godown_ID";
+            ddlgdwn.DataBind();
+            ddlgdwn.Items.Insert(0, "--Select--");
+
+            ddlgdwn.SelectedValue = Session["GodownID_New"].ToString();
+            //GetActualBilNo();
+        }
+        else
+        {
+
+        }
+    }
+    public void GetBillData()
+    {
+        //  qry = " SELECT convert(varchar(10),BDSC.Dates,103) as Date,Convert(decimal(18,2),BDSC.Opening_Weight) as Opening_Weight,Convert(decimal(18,2),BDSC.Receive_Weight) as Receive_Weight,Convert(decimal(18,2), BDSC.Issue_Weight) as Issue_Weight,Convert(decimal(18,2),BDSC.Closing_Weight) as Closing_Weight,Convert(decimal(18,2),BDSC.Per_Day_Rate) as Per_Day_Rate,Convert(decimal(18,2),BDSC.Total_Charges) as Total_Charges FROM tbl_Bill_Godown_JVS_Daily_Rent as BDSC WHERE BDSC.Bill_Number='" + ddlbillno.SelectedValue.ToString() + "'";
+
+        decimal sumFooterValue = 0;
+
+        qry = "SELECT convert(varchar(10),BDSC.Dates,103) as Date,BDSC.Opening_Weight as Opening_Weight,BDSC.Receive_Weight as Receive_Weight,BDSC.Issue_Weight as Issue_Weight,BDSC.Closing_Weight as Closing_Weight,BDSC.Per_Day_Rate as Per_Day_Rate,BDSC.Total_Charges as Total_Charges FROM tbl_Bill_PVT_Godown_Daily_Rent as BDSC WHERE BDSC.Bill_Number='" + ddlbillno.SelectedValue.ToString() + "'";
+        SqlCommand cmd = new SqlCommand(qry, con);
+        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        DataTable dt = new DataTable();
+        da.Fill(dt);
+        if (dt.Rows.Count > 0)
+        {
+            GD1.DataSource = dt;
+            GD1.DataBind();
+
+            //GD1.FooterRow.Cells[2].Text = "महायोग";
+            //GD1.FooterRow.Cells[3].Text = dt.AsEnumerable().Sum(row => row.Field<decimal>("Total_Charges")).ToString();
+
+            GD1.FooterRow.Cells[1].Text = "महायोग";
+
+            decimal total1 = dt.AsEnumerable().Sum(row => row.Field<Decimal>("Total_Charges"));
+            GD1.FooterRow.Cells[7].Text = total1.ToString("N1");
+        }
+        else
+        {
+            GD1.DataSource = "";
+            GD1.DataBind();
+        }
+    }
+
+    public void GetBillOtherData()
+    {
+        qry = " select (CONVERT(varchar(10),b.BId)+'/'+CONVERT(varchar(10),b.Created_Date,105)) as ReceiptNo,b.Bill_Number,b.District_Id,b.Branch_Id,mg.Godown_ID,GodownNum as Godown_No,mg.Godown_APN as Godown_Owner,mg.Godown_Name,cast((mg.Godown_Scientific_Capacity/10) as int) as Godown_Scientific_Capacity,mg.Hired_Type,b.Commodity_Id,(select a.Commodity_Name from tbl_MetaData_STORAGE_COMMODITY as a where a.Commodity_Id=b.Commodity_Id) as Commodity_Name, (SELECT DateName(mm,DATEADD(mm,b.Month,-1)) as [MonthName]) as Month,CONVERT(varchar(10),b.From_Date,103) as FromDate,CONVERT(varchar(10),b.To_Date,103) as ToDate,b.Financial_Year,b.Commodity_Rate,b.Net_Amount,b.Sub_Amount,b.Service_Tax_Perc,b.Service_Tax_Amt,b.Rebate_Perc,b.Rebate_Amt,b.Per_Day_Rate,b.Crop_Year from tbl_Institution_Storage_Bill_Details as b inner join tbl_MetaData_GODOWN_2018 as mg on mg.Godown_ID=b.Godown_Id  where b.Bill_Number='" + ddlbillno.SelectedValue.ToString() + "'  ";
+        SqlCommand cmd = new SqlCommand(qry, con);
+        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        DataTable dt = new DataTable();
+        da.Fill(dt);
+        if (dt.Rows.Count > 0)
+        {
+            lblgdwnname.Text = dt.Rows[0]["Godown_Name"].ToString();
+            lblcmd.Text = dt.Rows[0]["Commodity_Name"].ToString() + "  " + dt.Rows[0]["Crop_Year"].ToString();
+            lblbillmonth.Text = dt.Rows[0]["Month"].ToString();
+            lblbillno.Text = dt.Rows[0]["Bill_Number"].ToString();
+            lblGdnum.Text = dt.Rows[0]["Godown_No"].ToString();
+            //  lblbranch.Text = ddlBranch.SelectedItem.Text.Trim();
+
+            lbld_warehousename.Text = dt.Rows[0]["Godown_Name"].ToString();
+            lbld_commodity.Text = dt.Rows[0]["Commodity_Name"].ToString() + "  " + dt.Rows[0]["Crop_Year"].ToString();
+            lbld_month.Text = dt.Rows[0]["Month"].ToString();
+            lbld_billno.Text = dt.Rows[0]["Bill_Number"].ToString();
+            lbld_gdno.Text = dt.Rows[0]["Godown_No"].ToString();
+
+            lblcmdRate.Text = dt.Rows[0]["Commodity_Rate"].ToString();
+            //   lbld_branch.Text = ddlBranch.SelectedItem.Text.Trim();
+
+            lblRentMonth.Text = dt.Rows[0]["Month"].ToString();
+            lblRentCmd.Text = dt.Rows[0]["Commodity_Name"].ToString();
+            // txtBillAmt.Text = dt.Rows[0]["Sub_Amount"].ToString();
+            lblRentFromDate.Text = dt.Rows[0]["FromDate"].ToString();
+            lblRentToDate.Text = dt.Rows[0]["ToDate"].ToString();
+            lblRentF_Year.Text = dt.Rows[0]["Financial_Year"].ToString();
+            lblRentCropYear.Text = dt.Rows[0]["Crop_Year"].ToString();
+            lblrentrs.Text = dt.Rows[0]["Commodity_Rate"].ToString();
+        }
+
+        else
+        {
+            lblgdwnname.Text = "";
+            lblcmd.Text = "";
+            lblbillmonth.Text = "";
+            lblbillno.Text = "";
+            lblGdnum.Text = "";
+            //  lblbranch.Text = ddlBranch.SelectedItem.Text.Trim();
+
+            lbld_warehousename.Text = "";
+            lbld_commodity.Text = "";
+            lbld_month.Text = "";
+            lbld_billno.Text = "";
+            lbld_gdno.Text = "";
+            //   lbld_branch.Text = ddlBranch.SelectedItem.Text.Trim();
+
+            lblRentMonth.Text = "";
+            lblRentCmd.Text = "";
+            // txtBillAmt.Text = dt.Rows[0]["Sub_Amount"].ToString();
+            lblRentFromDate.Text = "";
+            lblRentToDate.Text = "";
+            lblRentF_Year.Text = "";
+            lblRentCropYear.Text = "";
+
+            lblcmdRate.Text = "";
+            lblrentrs.Text = "";
+        }
+    }
+
+    public void GetBillDetuctionData()
+    {
+        //qry = "select VIV.Res_ID,(select MDR.Res_Det_Vivran from tbl_metadata_RecDetuction as MDR where MDR.Rec_ID=VIV.Res_ID) as Res_Det_Vivran ,Res_Det_Karan,Deduction_Amt,Res_Det_Remark from tbl_Godown_Rent_Deduction_Vivran as VIV where Bill_No='" + ddlbillno.SelectedValue.ToString() + "'";
+        SqlCommand cmd = new SqlCommand("GetBillDetuctionData", con);
+        cmd.CommandType = CommandType.StoredProcedure;
+        cmd.Parameters.AddWithValue("@BillNumber", ddlbillno.SelectedValue);
+        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        DataTable dt = new DataTable();
+        da.Fill(dt);
+        if (dt.Rows.Count > 0)
+        {
+            GD_Detuc.DataSource = dt;
+            GD_Detuc.DataBind();
+
+            GD_Detuc.FooterRow.Cells[0].Text = "महायोग :-";
+
+            decimal total1 = dt.AsEnumerable().Sum(row => row.Field<Decimal>("Deduction_Amt"));
+
+            GD_Detuc.FooterRow.Cells[3].Text = total1.ToString("N2");
+        }
+        else
+        {
+            GD_Detuc.DataSource = "";
+            DataBind();
+        }
+    }
+
+    protected void ddlgdwn_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        //GetActualBilNo();
+    }
+    protected void ddlbillno_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        trdet.Visible = true;
+        GetBillData();
+        GetBillOtherData();
+        GetBillDetuctionData();
+        DSCSignJVS();
+    }
+
+    //public void GetActual_BillData()
+    //{
+    //    //  qry = " SELECT convert(varchar(10),BDSC.Dates,103) as Date,Convert(decimal(18,2),BDSC.Opening_Weight) as Opening_Weight,Convert(decimal(18,2),BDSC.Receive_Weight) as Receive_Weight,Convert(decimal(18,2), BDSC.Issue_Weight) as Issue_Weight,Convert(decimal(18,2),BDSC.Closing_Weight) as Closing_Weight,Convert(decimal(18,2),BDSC.Per_Day_Rate) as Per_Day_Rate,Convert(decimal(18,2),BDSC.Total_Charges) as Total_Charges FROM tbl_Bill_Godown_JVS_Daily_Rent as BDSC WHERE BDSC.Bill_Number='" + ddlbillno.SelectedValue.ToString() + "'";
+    //    //qry = " SELECT convert(varchar(10),BDSC.Dates,103) as Date,BDSC.Opening_Weight as Opening_Weight,BDSC.Receive_Weight as Receive_Weight,BDSC.Issue_Weight as Issue_Weight,BDSC.Closing_Weight as Closing_Weight,BDSC.Per_Day_Rate as Per_Day_Rate,BDSC.Total_Charges as Total_Charges FROM tbl_Bill_Institution_Daily_Charges as BDSC  WHERE BDSC.Bill_Number='" + ddlactualbillno.SelectedValue.ToString() + "'";
+    //    // qry = " SELECT convert(varchar(10),BDSC.Dates,103) as Date,BDSC.Opening_Weight as Opening_Weight,BDSC.Receive_Weight as Receive_Weight,BDSC.Issue_Weight as Issue_Weight,BDSC.Closing_Weight as Closing_Weight,BDSC.Per_Day_Rate as Per_Day_Rate,BDSC.Total_Charges as Total_Charges FROM tbl_Bill_Institution_Daily_Charges as BDSC  WHERE BDSC.Bill_Number='" + ddlactualbillno.SelectedValue.ToString() + "' order by convert(varchar(10),BDSC.Dates,103)";
+
+    //    SqlCommand cmd = new SqlCommand("GetActual_BillData", con);
+    //    cmd.CommandType = CommandType.StoredProcedure;
+    //    cmd.Parameters.AddWithValue("@BillNumber", ddlactualbillno.SelectedValue);
+    //    SqlDataAdapter da = new SqlDataAdapter(cmd);
+    //    DataTable dt = new DataTable();
+    //    da.Fill(dt);
+    //    if (dt.Rows.Count > 0)
+    //    {
+    //        // tr_printdiv.Visible = true;
+    //        GD2.DataSource = dt;
+    //        GD2.DataBind();
+
+    //        //  DataTable dt = ds.Tables[0];
+    //        //  decimal total = dt.AsEnumerable().Sum(row => row.Field<Decimal>("Closing_Weight"));
+    //        GD2.FooterRow.Cells[1].Text = "महायोग :-";
+    //        //    GD2.FooterRow.Cells[5].Text = total.ToString("N2");
+
+    //        decimal total1 = dt.AsEnumerable().Sum(row => row.Field<Decimal>("Total_Charges"));
+    //        GD2.FooterRow.Cells[7].Text = total1.ToString("N2");
+    //    }
+
+    //    else
+    //    {
+    //        GD2.DataSource = "";
+    //        GD2.DataBind();
+    //    }
+    //}
+    //protected void ddlactualbillno_SelectedIndexChanged(object sender, EventArgs e)
+    //{
+    //    trdet.Visible = true;
+    //    GetBillOtherDataActual();
+    //    GetActual_BillData();
+    //    //getActualBillAmount();
+    //    DSCSign();
+
+    //    if (ddlactualbillno.DataSource != null || ddlactualbillno.DataSource != "")
+    //    {
+    //        string qry = "";
+    //        //  qry = " select distinct Bill_Number from tbl_Institution_Storage_Bill_Details where Bill_Number not like ('1%') and Godown_Id='" + ddlgdwn.SelectedValue.ToString() + "' and  order by Bill_Number";
+    //        qry = " select distinct Bill_Number from tbl_Institution_Storage_Bill_Details where Bill_Number not like ('1%')  and Godown_Id='" + ddlgdwn.SelectedValue.ToString() + "' and Bill_Number in (select Bill_No from tbl_Godown_Rent_Deduction_Amount where Ref_Bill_No='" + ddlactualbillno.SelectedValue + "')  order by Bill_Number";
+    //        SqlCommand cmd = new SqlCommand(qry, con);
+    //        SqlDataAdapter da = new SqlDataAdapter(cmd);
+    //        DataSet ds = new DataSet();
+    //        da.Fill(ds);
+    //        if (ds.Tables[0].Rows.Count > 0)
+    //        {
+    //            trdet.Visible = true;
+    //            ddlbillno.DataSource = ds.Tables[0];
+    //            ddlbillno.DataTextField = "Bill_Number";
+    //            ddlbillno.DataValueField = "Bill_Number";
+    //            ddlbillno.DataBind();
+    //            ddlbillno.SelectedValue = ds.Tables[0].Rows[0][0].ToString();
+    //            ddlbillno_SelectedIndexChanged(null, null);
+    //        }
+    //        else
+    //        {
+    //            ddlbillno.DataSource = "";
+    //            ddlbillno.DataBind();
+    //            ddlbillno_SelectedIndexChanged(null, null);
+    //        }
+    //    }
+    //}
+
+    
+    //public void DSCSign()
+    //{
+    //    qry = " select DSC_Serial_No,DSC_Holder_Name,Client_Ip,Convert(varchar(10),CreatedDate,103) as CreatedDate from tbl_Digitally_Signed_Bill_Details where Ref_Bill_No='" + ddlactualbillno.SelectedValue.ToString() + "'  and DSC_User_Type='B'";
+    //    SqlCommand cmd = new SqlCommand(qry, con);
+    //    SqlDataAdapter da = new SqlDataAdapter(cmd);
+    //    DataTable dt = new DataTable();
+    //    da.Fill(dt);
+    //    if (dt.Rows.Count > 0)
+    //    {
+    //        Image1.Visible = true;
+    //        lblBSerialNo.Text = "DSC Serial No : " + dt.Rows[0]["DSC_Serial_No"].ToString();
+    //        lblBIP.Text = "Client IP : " + dt.Rows[0]["Client_Ip"].ToString();
+    //        lblBHolderName.Text = "DSC Holder Name : " + dt.Rows[0]["DSC_Holder_Name"].ToString();
+    //        lblBCreatedDate.Text = "DSC Sign Date : " + dt.Rows[0]["CreatedDate"].ToString();
+    //    }
+    //    else
+    //    {
+    //        Image1.Visible = false;
+    //        lblBSerialNo.Text = "";
+    //        lblBIP.Text = "";
+    //        lblBHolderName.Text = "";
+    //        lblBCreatedDate.Text = "";
+    //    }
+
+    //    qry = "SELECT 'eSing'as UserName,'eSing@$data#$!Verification'as Pwd,d.Bill_Number,d.District_Id,d.Branch_Id,d.Depositor_Id,d.Commodity_Id,d.Financial_Year,d.Per_Month_Rate,d.Per_Day_Rate,d.Net_Amount,d.Sub_Amount,d.GST_Perc,d.GST_Amt,d.Created_Date_Bill,d.Created_By_Bill,d.Month_No,d.Godown_Id,d.Crop_Year, d.Account_No,d.IFSC_Code,d.WHR_Check_Sum,d.CreatedDate,STUFF(STUFF(CONVERT(CHAR(20), CreatedDate, 113),3,1, '-'),7,1,'-')CreatedDate1,d.CreatedBy,d.DSC_Serial_No,d.DSC_Holder_Name,d.Client_Ip,d.DSC_User_Type,d.csms_DSC_H_Name,d.csms_DSC_Serial_No,d.csms_DSC_User_Type ,d.csms_CreatedBy,d.csms_Check_Sum ,d.csms_CreatedDate,d.csms_Client_Ip,(select distinct c.Commodity_Name from tbl_MetaData_STORAGE_COMMODITY c where c.Commodity_Id=d.Commodity_Id)CommodityName,(select distinct  i.BranchName from Intergrated_MP_STORAGE.dbo.MetaDataBranchWithIssueCenter i where i.BranchID=Branch_Id)BranchName,(select distinct  g.Godown_Name from  Intergrated_MP_STORAGE.dbo.tbl_MetaData_GODOWN_2018 g where g.Godown_ID=d.Godown_Id)GodownName,(select distinct  i.IssueCenterName from Intergrated_MP_STORAGE.dbo.MetaDataBranchWithIssueCenter i where i.IssueCenterId=d.csms_CreatedBy)IssueCenterName,STUFF(STUFF(CONVERT(CHAR(20), csms_CreatedDate, 113),3,1, '-'),7,1,'-')csms_CreatedDate1,(select REPLACE(CONVERT(VARCHAR(11),min(csms_Dates),106), ' ','-') from MPSCSC.dbo.StorageBillVerification2019 s where d.Bill_Number='" + ddlactualbillno.SelectedValue.ToString() + "')FromDate,(select REPLACE(CONVERT(VARCHAR(11),Max(csms_Dates),106), ' ','-') from MPSCSC.dbo.StorageBillVerification2019 s where d.Bill_Number='" + ddlactualbillno.SelectedValue.ToString() + "')ToDate from MPSCSC.dbo.Digitally_Sign_StorageBill_IC d where d.Bill_Number='" + ddlactualbillno.SelectedValue.ToString() + "'";
+    //    SqlCommand cmd2 = new SqlCommand(qry, con);
+    //    SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
+    //    DataTable dt2 = new DataTable();
+    //    da2.Fill(dt2);
+    //    if (dt2.Rows.Count > 0)
+    //    {
+    //        Image2.Visible = true;
+    //        lblICSerialNo.Text = "DSC Serial No : " + dt2.Rows[0]["csms_DSC_Serial_No"].ToString();
+    //        lblICIp.Text = "Client IP : " + dt2.Rows[0]["csms_Client_Ip"].ToString();
+    //        lblICHoldername.Text = "DSC Holder Name : " + dt2.Rows[0]["csms_DSC_H_Name"].ToString();
+    //        lblICCreatedDate.Text = "DSC Sign Date : " + dt2.Rows[0]["csms_CreatedDate1"].ToString();
+    //    }
+    //    else
+    //    {
+    //        Image2.Visible = false;
+    //        lblICSerialNo.Text = "";
+    //        lblICIp.Text = "";
+    //        lblICHoldername.Text = "";
+    //        lblICCreatedDate.Text = "";
+    //    }
+    //}
+
+    public void DSCSignJVS()
+    {
+        Get_GST_No();
+        qry = " select DSC_Serial_No,DSC_Holder_Name,Client_Ip,Convert(varchar(10),CreatedDate,103) as CreatedDate from tbl_Digitally_Signed_Bill_PVT where Bill_Number='" + ddlbillno.SelectedValue.ToString() + "'  and DSC_User_Type='B'";
+        SqlCommand cmd = new SqlCommand(qry, con);
+        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        DataTable dt = new DataTable();
+        da.Fill(dt);
+        if (dt.Rows.Count > 0)
+        {
+            Image5B.Visible = true;
+            lbldscTB.Text = "DSC Serial No : " + dt.Rows[0]["DSC_Serial_No"].ToString();
+            lblIpAddB.Text = "Client IP : " + dt.Rows[0]["Client_Ip"].ToString();
+            lblDSC_HolderB.Text = "DSC Holder Name : " + dt.Rows[0]["DSC_Holder_Name"].ToString();
+            lblSigningDateB.Text = "DSC Sign Date : " + dt.Rows[0]["CreatedDate"].ToString();
+
+            if (GD_Detuc.Rows.Count > 0)
+            {
+                Image4.Visible = true;
+                lblDSNo.Text = "DSC Serial No : " + dt.Rows[0]["DSC_Serial_No"].ToString();
+                lblDIP.Text = "Client IP : " + dt.Rows[0]["Client_Ip"].ToString();
+                lblDHolderNm.Text = "DSC Holder Name : " + dt.Rows[0]["DSC_Holder_Name"].ToString();
+                lblDSignDate.Text = "DSC Sign Date : " + dt.Rows[0]["CreatedDate"].ToString();
+            }
+        }
+
+        else
+        {
+            Image5B.Visible = false;
+            lbldscTB.Text = "";
+            lblIpAddB.Text = "";
+            lblDSC_HolderB.Text = "";
+            lblSigningDateB.Text = "";
+
+            if (GD_Detuc.Rows.Count == 0)
+            {
+                Image4.Visible = false;
+                lblDSNo.Text = "";
+                lblDIP.Text = "";
+                lblDHolderNm.Text = "";
+                lblDSignDate.Text = "";
+            }
+        }
+
+        qry = " select DSC_Serial_No,DSC_Holder_Name,Client_Ip,Convert(varchar(10),CreatedDate,103) as CreatedDate from tbl_Digitally_Signed_Bill_PVT where Bill_Number='" + ddlbillno.SelectedValue.ToString() + "'  and DSC_User_Type='G'";
+        SqlCommand cmd2 = new SqlCommand(qry, con);
+        SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
+        DataTable dt2 = new DataTable();
+        da2.Fill(dt2);
+        if (dt2.Rows.Count > 0)
+        {
+            Image5.Visible = true;
+            lbldscT.Text = "DSC Serial No : " + dt2.Rows[0]["DSC_Serial_No"].ToString();
+            lblIpAdd.Text = "Client IP : " + dt2.Rows[0]["Client_Ip"].ToString();
+            lblDSC_Holder.Text = "DSC Holder Name : " + dt2.Rows[0]["DSC_Holder_Name"].ToString();
+            lblSigningDate.Text = "DSC Sign Date : " + dt2.Rows[0]["CreatedDate"].ToString();
+        }
+
+        else
+        {
+            Image5.Visible = false;
+            lbldscT.Text = "";
+            lblIpAdd.Text = "";
+            lblDSC_Holder.Text = "";
+            lblSigningDate.Text = "";
+        }
+    }
+    public static string Base64Encode(string plainText)
+    {
+        var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+        return System.Convert.ToBase64String(plainTextBytes);
+    }
+    //protected void btnPrint_Click(object sender, EventArgs e)
+    //{
+    //    string url = "Print_BM_Generated_Bill.aspx?BN=" + Base64Encode(ddlactualbillno.SelectedValue);
+    //    string s = "window.open('" + url + "', 'popup_window', 'width=600,height=600,left=100,top=100,resizable=yes');";
+    //    ClientScript.RegisterStartupScript(this.GetType(), "script", s, true);
+    //}
+    public void Get_GST_No()
+    {
+        //qry = " select DSC_Serial_No,DSC_Holder_Name,Client_Ip,Convert(varchar(10),CreatedDate,103) as CreatedDate from tbl_Digitally_Signed_Bill_Details where Ref_Bill_No='" + Base64Decode(Request.QueryString["BN"].ToString()) + "'  and DSC_User_Type='B'";
+        qry = "select B.GST,B.PAN from tbl_Godown_Owner_Account_Details as G inner join tbl_Beneficiary_Account_Details as B on B.Account_No = G.Account_No where G.Godown_Id = '" + Session["GodownID_New"].ToString() + "'";
+        SqlCommand cmd = new SqlCommand(qry, con);
+        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        DataTable dt = new DataTable();
+        da.Fill(dt);
+        if (dt.Rows.Count > 0)
+        {
+            //Image1.Visible = true;
+            lblGST.Text = "GST Number : " + dt.Rows[0]["GST"].ToString();
+            lblPAN.Text = "PAN Number : " + dt.Rows[0]["PAN"].ToString();
+            //lblBHolderName.Text = "DSC Holder Name : " + dt.Rows[0]["DSC_Holder_Name"].ToString();
+            //lblBCreatedDate.Text = "DSC Sign Date : " + dt.Rows[0]["CreatedDate"].ToString();
+        }
+        else
+        {
+            //Image1.Visible = false;
+            //lblBSerialNo.Text = "";
+            //lblBIP.Text = "";
+            //lblBHolderName.Text = "";
+            //lblBCreatedDate.Text = "";
+        }
+    }
+
+    protected void ddlFyear_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        trdet.Visible = true;
+        //GetActual_BillData();
+        //getActualBillAmount();
+        //DSCSign();
+
+        string FinYear = NineCrop(ddlFyear.SelectedValue);
+        string qry = "";
+            //  qry = " select distinct Bill_Number from tbl_Institution_Storage_Bill_Details where Bill_Number not like ('1%') and Godown_Id='" + ddlgdwn.SelectedValue.ToString() + "' and  order by Bill_Number";
+            qry = " select distinct Bill_Number from tbl_Institution_Storage_Bill_Details where Bill_Number not like ('1%')  and Godown_Id='" + ddlgdwn.SelectedValue.ToString() + "'  AND Financial_Year='"+ FinYear + "'  order by Bill_Number";
+            SqlCommand cmd = new SqlCommand(qry, con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                trdet.Visible = true;
+                ddlbillno.DataSource = ds.Tables[0];
+                ddlbillno.DataTextField = "Bill_Number";
+                ddlbillno.DataValueField = "Bill_Number";
+                ddlbillno.DataBind();
+                ddlbillno.SelectedValue = ds.Tables[0].Rows[0][0].ToString();
+                ddlbillno_SelectedIndexChanged(null, null);
+            }
+            else
+            {
+                ddlbillno.DataSource = "";
+                ddlbillno.DataBind();
+                ddlbillno_SelectedIndexChanged(null, null);
+            }
+        
+    }
+}

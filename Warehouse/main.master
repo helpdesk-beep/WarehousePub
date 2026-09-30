@@ -1,0 +1,456 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="main.master.cs" Inherits="main" %>
+
+
+<!DOCTYPE HTML>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8 ie7"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>MP Warehousing</title>
+
+    <style type="text/css">
+        header, nav, section, article, aside, footer {
+            display: block;
+        }
+    </style>
+    <style type="text/css">
+        .modal-dialog {
+            width: 1000px;
+            margin: 30px auto;
+        }
+
+        .btn-info {
+            color: #fff;
+            background-color: #5bc0de;
+            border-color: #46b8da;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .btn-info:hover {
+            color: black;
+            background-color: #31b0d5;
+            border-color: #269abc;
+        }
+
+        .btn.active, .btn:active {
+            background-image: none;
+            outline: 0;
+            -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+            box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+        }
+    </style>
+    <style type="text/css">
+        #popupwin {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 90%;
+            height: 90%;
+            background-color: #000;
+            filter: alpha(opacity=65);
+            -moz-opacity: 0.7;
+            display: none;
+            opacity: 0.7;
+            z-index: 100;
+        }
+
+        .pop a {
+            text-decoration: none;
+        }
+
+        .popup {
+            width: 100%;
+            height: 98%;
+            margin: 0 auto;
+            position: fixed;
+            z-index: 101;
+        }
+
+        .pop {
+            /*min-width: 900px;*/
+            width: 80%;
+            min-height: 150px;
+            margin: 0px auto;
+            background: #FFFFFF;
+            position: relative;
+            z-index: 103;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 5px 10px #000;
+            /*margin-top:200px;*/
+        }
+
+            .pop p {
+                color: #555555;
+                text-align: justify;
+                font-size: medium;
+            }
+
+                .pop p a {
+                    color: #d91900;
+                }
+
+            .pop .x {
+                float: right;
+                height: 35px;
+                left: 22px;
+                position: relative;
+                top: -20px;
+                width: 35px;
+            }
+    </style>
+
+    <!--[if lt IE 9]>
+   <script>
+      document.createElement('header');
+      document.createElement('nav');
+      document.createElement('section');
+      document.createElement('article');
+      document.createElement('aside');
+      document.createElement('footer');
+   </script>
+<![endif]-->
+
+    <!-- Bootstrap core CSS -->
+    <link href='<%= Page.ResolveUrl("~/assets/New/css/bootstrap.css")%>' rel="stylesheet" type="text/css">
+    <link href='<%= Page.ResolveUrl("~/assets/New/css/bootstrap-theme.css")%>' rel="stylesheet" type="text/css">
+
+    <!-- font awesome -->
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href='<%= Page.ResolveUrl("~/assets/New/css/style.css")%>' rel="stylesheet" type="text/css">
+    <link href='<%= Page.ResolveUrl("~/assets/New/css/custome.css")%>' rel="stylesheet" type="text/css">
+
+
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+        <header>
+            <div class="top_bar">
+                <div class="container">
+                    <span class="pull-left">
+                        <asp:Repeater ID="rptMarquee" runat="server">
+                            <HeaderTemplate>
+                                <marquee direction="left" scrollamount="3" onmouseover="this.stop();" onmouseout="this.start();">
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <a href='<%#Eval("Link")%>' target="_blank" class="red"><%#Eval("Title") %></a> | 
+                            </ItemTemplate>
+                            <FooterTemplate>
+                                </marquee>
+                            </FooterTemplate>
+                        </asp:Repeater>
+
+                    </span>
+
+                    <span class="pull-right">
+                        <asp:Label ID="lblVCount" class="label label-danger" runat="server"></asp:Label>
+                        |
+                <a><strong><i class="fa fa-calendar"></i><%= DateTime.Now.ToString("dd MMMM yyyy")%> |&nbsp;<i class="fa fa-clock-o"></i>&nbsp;<label id="lblTime"></label></strong></a>
+                    </span>
+
+                </div>
+            </div>
+
+            <div class="mdsliding">
+                <div class="row-fluid">
+                    <div class="col-md-4 ">
+                        <div class="mdbox">
+                            <a href="http://mpwarehousing.in/warehousenew/login.aspx">
+                                <span class="mdicon">
+                                    <img src='<%= Page.ResolveUrl("~/assets/New/img/icons/logo.png")%>' />
+                                    <h5>WHMS</h5>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mdbox">
+                            <a href="http://mpsc.mp.nic.in/Warehouse/JointVentureScheme/JointVentureSchemeApp.aspx">
+                                <span class="mdicon">
+                                    <img src='<%= Page.ResolveUrl("~/assets/New/img/icons/jvs.png")%>' />
+                                    <h5>JVS</h5>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mdbox">
+                            <a href="http://mpsc.mp.nic.in/Warehouse/TribalGodown/Tribalgodownapp.aspx">
+                                <span class="mdicon">
+                                    <img src='<%= Page.ResolveUrl("~/assets/New/img/icons/godown.png")%>' />
+                                    <h5>Tribal Godown</h5>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row-fluid">
+                    <div class="col-md-4">
+                        <div class="mdbox">
+                            <a href="http://mpsc.mp.nic.in/Warehouse/Inspections/">
+
+                                <span class="mdicon">
+                                    <img src='<%= Page.ResolveUrl("~/assets/New/img/icons/inspection.png")%>' />
+                                    <h5>Inspection</h5>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="mdbox">
+                            <a href="http://mpwarehousing.com/useful_file/MPWLC D-Sign V 3.8.exe">
+                                <span class="mdicon">
+                                    <img src='<%= Page.ResolveUrl("~/assets/New/img/icons/signature.png")%>' />
+                                    <h5>Digital Sign</h5>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mdbox">
+                            <a href="#">
+                                <span class="mdicon">
+                                    <img src='<%= Page.ResolveUrl("~/assets/New/img/icons/audit.png")%>' />
+                                    <h5>Audit List</h5>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 text-center">
+                    <br />
+                    <a href="EmpCorner.aspx" class="btn btn-default thumbnail  col-md-6 center-block">More...</a><br>
+                </div>
+            </div>
+            <a href="#" class="trigger"><i class="fa fa-plus-circle"></i>Employee Corner</a>
+
+
+            <div class="logo_bar">
+                <div class="container">
+                    <div class="pull-left">
+                        <%--     <img src="assets/img/logo1.png" style="width:100px;height: 100px;border-right:1px solid #ddd">
+          <img src="assets/img/logo_text.png" style="width:230px;">--%>
+                        <a href="Default.aspx">
+                            <img src='<%= Page.ResolveUrl("~/assets/New/img/logo_with_text.png")%>' class="img-responsive logo" /></a>
+                    </div>
+                    <nav class="pull-right">
+                        <ul class="list-unstyled icon_bar">
+                            <li>
+                                <%--<a href="Login.aspx" target="_blank" OnClick="Display">--%>
+                                <asp:LinkButton ID="LinkButton1" runat="server">
+                                    <span class="icon">
+                                        <img src='<%= Page.ResolveUrl("~/assets/New/img/profile.png")%>'>
+                                    </span>
+                                    <p>Storage Login</p>
+                                </asp:LinkButton>
+                                <%--</a>--%>
+                            </li>
+                            <li>
+                                <a href="/JointVentureScheme/JointVentureSchemeApp.aspx" target="_blank">
+                                    <span class="icon">
+                                        <img src='<%= Page.ResolveUrl("~/assets/New/img/icons/network.png")%>'>
+                                    </span>
+                                    <p>JVS Login</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/inspections/default.aspx" target="_blank">
+                                    <span class="icon">
+                                        <img src='<%= Page.ResolveUrl("~/assets/New/img/icons/services.png")%>'>
+                                    </span>
+                                    <p>Inspection Login</p>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/TribalGodown/TribalGodownApp.aspx" target="_blank">
+                                    <span class="icon">
+                                        <img src='<%= Page.ResolveUrl("~/assets/New/img/icons/Business.png")%>'>
+                                    </span>
+                                    <p>Tribal Area's</p>
+                                </a>
+                            </li>
+                            <%-- <li>
+                                <a href="Quality.aspx">
+                                    <span class="icon">
+                                        <img src='<%= Page.ResolveUrl("~/assets/New/img/icons/quality.png")%>'>
+                                    </span>
+                                    <p>Quality</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="Tariff.aspx">
+                                    <span class="icon">
+                                        <img src='<%= Page.ResolveUrl("~/assets/New/img/icons/tariff.png")%>'>
+                                    </span>
+                                    <p>Tariff</p>
+                                </a>
+                            </li>--%>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- <a class="navbar-brand" href="#">Brand -->
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="Default.aspx">Home <span class="sr-only">(current)</span></a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="#">Gallery</a></li>
+                        <li><a href="#">New Updates</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="Login.aspx">Login</a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+
+        <asp:ContentPlaceHolder ID="banner" runat="server">
+        </asp:ContentPlaceHolder>
+
+
+        <asp:ContentPlaceHolder ID="body" runat="server">
+        </asp:ContentPlaceHolder>
+
+
+        <asp:ContentPlaceHolder ID="widget" runat="server">
+        </asp:ContentPlaceHolder>
+
+
+        <footer>
+            <%-- <ul class="list-inline">
+                <li><a href="Default.aspx">Home</a></li>
+                |
+          <li><a href="#">Network</a></li>
+                |
+          <li><a href="#">Profile</a></li>
+                |
+          <li><a href="#">Business</a></li>
+                |
+          <li><a href="#">News</a></li>
+                |
+          <li><a href="#">Future Plan</a></li>
+                |
+          <li><a href="#">Services</a></li>
+                |
+          <li><a href="#">Tender</a></li>
+                |
+          <li><a href="#">Feedback</a></li>
+                |
+          <li><a href="#">Quality</a></li>
+                |
+          <li><a href="#">Tariff</a></li>
+                |
+          <li><a href="#">FAQ's</a></li>
+                |
+          <li><a href="#">Contact</a></li>
+            </ul>--%>
+            <%--<hr class="line-white-center" />--%>
+            <small>Copyright &copy; 2020 MPWLC - All Rights Reserved | Madhya Pradesh Warehousing and Logistics Corporation </small>
+        </footer>
+
+
+
+
+
+        <!--Java Script -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+        <!--[if IE]>
+
+    <link href="assets/css/custom-ie-lt-8.css" rel="stylesheet" />
+
+<![endif]-->
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+  <script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
+<![endif]-->
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                ShowTime();
+            });
+            function ShowTime() {
+                var dt = new Date();
+                document.getElementById("lblTime").innerHTML = dt.toLocaleTimeString();
+                window.setTimeout("ShowTime()", 1000); // Here 1000(milliseconds) means one 1 Sec  
+            }
+            $(document).ready(function () {
+                $(".trigger").click(function () {
+                    $(".mdsliding").toggle("fast");
+                    $(this).toggleClass("active");
+                    return false;
+                });
+            });
+
+        </script>
+
+        <asp:ContentPlaceHolder ID="script" runat="server">
+        </asp:ContentPlaceHolder>
+    </form>
+
+</body>
+</html>

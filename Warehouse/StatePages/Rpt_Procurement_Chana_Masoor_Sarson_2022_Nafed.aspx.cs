@@ -1,0 +1,273 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Drawing;
+using System.Globalization;
+
+public partial class StatePages_Rpt_Procurement_Chana_Masoor_Sarson_2022_Nafed : System.Web.UI.Page
+{
+
+
+    decimal qtyTotal1 = 0;
+    decimal qtyTotal2 = 0;
+    decimal qtyTotal3 = 0;
+
+    decimal grQtyTotal1 = 0;
+    decimal grQtyTotal2 = 0;
+    decimal grQtyTotal3 = 0;
+
+    long storid = 0;
+    int rowIndex = 1;
+
+
+    string constr = ConfigurationManager.ConnectionStrings["FCIConnectionString"].ConnectionString;
+    SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["FCIConnectionString"].ConnectionString);
+    SqlCommand cmd;
+    DataTable dt = new DataTable();
+    SqlDataAdapter da = new SqlDataAdapter();
+    int StatusID;
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+        if (Session["UserName"].ToString() == "MPSWLC"||Session["UserName"].ToString() == "Markfed"||Session["UserName"].ToString() == "NAFED")
+        {
+            if (!IsPostBack)
+            {
+                labelName.Text = DateTime.Now.ToString();
+                fillRegion();
+                //fillgrid();
+            }
+        }
+     
+    }
+
+    private void fillRegion()
+    {
+        try
+        {
+            string query = "SELECT [Region_Id],[region] FROM [tbl_MetaData_Region] order by region asc";
+            cmd = new SqlCommand(query, con);
+            da = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                ddlRegion.Items.Clear();
+                ddlRegion.DataSource = ds.Tables[0];
+                ddlRegion.DataTextField = "region";
+                ddlRegion.DataValueField = "Region_Id";
+                ddlRegion.DataBind();
+                ddlRegion.Items.Insert(0, "---Select---");
+            }
+            else
+            {
+            }
+        }
+        catch (Exception)
+        {
+        }
+    }
+
+    protected void fillgrid()
+    {
+        //Decimal opcloavg = 0;
+        string constr = ConfigurationManager.ConnectionStrings["FCIConnectionString"].ConnectionString;
+        using (SqlConnection con = new SqlConnection(constr))
+        {
+            using (SqlCommand cmd = new SqlCommand("Procurement_Dalhan_2022_nafed", con))
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Region_Id", ddlRegion.SelectedValue);
+                //cmd.Parameters.AddWithValue("@RegionID", "0");
+                //cmd.Parameters.AddWithValue("@Type", "1");
+                using (SqlDataAdapter sda = new SqlDataAdapter())
+                {
+                    cmd.Connection = con;
+                    sda.SelectCommand = cmd;
+                    using (DataTable dt = new DataTable())
+                    {
+                        sda.Fill(dt);
+                        if (dt.Rows.Count > 0)
+                        {
+                            GridView1.DataSource = dt;
+                            GridView1.DataBind();
+                            GridView1.Caption = @"<b style=""font-weight: bold; text-align:center;""> M.P. WAREHOUSING & LOGISTICS CORPORATION" + "</br> " + "Chana,Masoor,Sarson WHR Status Procurement 2022-23";//+ "</br> " + "Region Name" + "  -   " + dt.Rows[0]["Region"].ToString()
+                            GridView1.Columns[1].Visible = false;
+                            // GridView1.columns.RemoveAt(1);
+                            GridView1.FooterRow.Style.Add("text-align;font-weight: bold;text-align:right;", "right");
+                            GridView1.FooterRow.Cells[7].Text = "Total";
+                            GridView1.FooterRow.Cells[8].Text = dt.AsEnumerable().Sum(row => row.Field<int>("Bags")).ToString();
+                            GridView1.FooterRow.Cells[9].Text = dt.AsEnumerable().Sum(row => row.Field<decimal>("Qty")).ToString();
+                            // GridView1.FooterRow.Cells[5].Text = dt.AsEnumerable().Sum(row => row.Field<decimal>("Averg")).ToString();
+                            //opcloavg = (Convert.ToDecimal(dt.AsEnumerable().Sum(row => row.Field<decimal>("AcceptQty")).ToString()) * 100) / Convert.ToDecimal(dt.AsEnumerable().Sum(row => row.Field<decimal>("TotalQty")).ToString());
+                            //GridView1.FooterRow.Cells[6].Text = Math.Round(opcloavg, 2).ToString();
+                            //ShowingGroupingDataInGridView(GridView1.Rows, 0, 10);
+
+                        }
+                        else
+                        {
+                            // btnUpdate.Visible = false;
+                            GridView1.DataSource = null;
+                            GridView1.DataBind();
+                        }
+                    }
+                }
+            }
+        }
+    }
+    protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            //storid = Convert.ToInt64(DataBinder.Eval(e.Row.DataItem, "Region_ID").ToString());
+            decimal tmpTotal1 = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Bags").ToString());
+            decimal tmpTotal2 = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Qty").ToString());
+            //decimal tmpTotal3 = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "Averg").ToString());
+            //decimal tmpTotal3 = Convert.ToDecimal(tmpTotal1.ToString())*100/ Convert.ToDecimal(tmpTotal2.ToString());
+
+
+            qtyTotal1 += tmpTotal1;
+            qtyTotal2 += tmpTotal2;
+            qtyTotal3 += 0;
+
+            grQtyTotal1 += tmpTotal1;
+            grQtyTotal2 += tmpTotal2;
+            grQtyTotal3 += 0;
+        }
+        if (qtyTotal1 != 0)
+            qtyTotal3 = Math.Round(qtyTotal2 * 100 / qtyTotal1, 2);
+        else
+            qtyTotal3 = 0;
+
+    }
+    void ShowingGroupingDataInGridView(GridViewRowCollection gridViewRows, int startIndex, int totalColumns)
+    {
+        if (totalColumns == 0) return;
+        int i, count = 1;
+        ArrayList lst = new ArrayList();
+        lst.Add(gridViewRows[0]);
+        var ctrl = gridViewRows[0].Cells[startIndex];
+        for (i = 1; i < gridViewRows.Count; i++)
+        {
+            TableCell nextTbCell = gridViewRows[i].Cells[startIndex];
+            if (ctrl.Text == nextTbCell.Text)
+            {
+                count++;
+                nextTbCell.Visible = false;
+                lst.Add(gridViewRows[i]);
+            }
+            else
+            {
+                if (count > 1)
+                {
+                    ctrl.RowSpan = count;
+                    ShowingGroupingDataInGridView(new GridViewRowCollection(lst), startIndex + 1, totalColumns - 1);
+                }
+                count = 1;
+                lst.Clear();
+                ctrl = gridViewRows[i].Cells[startIndex];
+                lst.Add(gridViewRows[i]);
+            }
+        }
+        if (count > 1)
+        {
+            ctrl.RowSpan = count;
+            ShowingGroupingDataInGridView(new GridViewRowCollection(lst), startIndex + 1, totalColumns - 1);
+        }
+        count = 1;
+        lst.Clear();
+    }
+    protected void OnDataBound(object sender, EventArgs e)
+    {
+        GridViewRow row = new GridViewRow(0, 0, DataControlRowType.Header, DataControlRowState.Normal);
+        TableHeaderCell cell = new TableHeaderCell();
+        cell.Text = "";
+        cell.ColumnSpan = 5;
+        row.Controls.Add(cell);
+
+        row.BackColor = ColorTranslator.FromHtml("#3AC0F2");
+        //GridView1.HeaderRow.Parent.Controls.AddAt(0, row);
+    }
+    protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
+    {
+
+        bool newRow = false;
+
+        //if ((storid > 0) && (DataBinder.Eval(e.Row.DataItem, "District_Id") != null))
+        //{
+        //    if (storid != Convert.ToInt64(DataBinder.Eval(e.Row.DataItem, "District_Id").ToString()))
+        //        newRow = true;
+        //}
+        //if ((storid > 0) && (DataBinder.Eval(e.Row.DataItem, "District_Id") == null))
+        //{
+        //    newRow = true;
+        //    rowIndex = 0;
+        //}
+        //if (newRow)
+        //{
+            GridView GridView1 = (GridView)sender;
+            GridViewRow NewTotalRow = new GridViewRow(0, 0, DataControlRowType.DataRow, DataControlRowState.Insert);
+            NewTotalRow.Font.Bold = true;
+            // NewTotalRow.BackColor = System.Drawing.Color.Gray;
+            NewTotalRow.ForeColor = System.Drawing.Color.Black;
+            TableCell HeaderCell = new TableCell();
+            //HeaderCell.Text = "Sub Total";
+            //HeaderCell.HorizontalAlign = HorizontalAlign.Right;
+            //HeaderCell.ColumnSpan = 3;
+
+            //HeaderCell.HorizontalAlign = HorizontalAlign.Left;
+            //HeaderCell.ColumnSpan = 3;
+            //NewTotalRow.Cells.Add(HeaderCell);
+            //HeaderCell = new TableCell();
+            //HeaderCell.HorizontalAlign = HorizontalAlign.Right;
+            //HeaderCell.Text = qtyTotal1.ToString();
+            //NewTotalRow.Cells.Add(HeaderCell);
+
+            // HeaderCell.HorizontalAlign = HorizontalAlign.Left;
+            //HeaderCell.ColumnSpan = 4;
+            //NewTotalRow.Cells.Add(HeaderCell);
+            //HeaderCell = new TableCell();
+            //HeaderCell.HorizontalAlign = HorizontalAlign.Right;
+            //HeaderCell.Text = qtyTotal2.ToString();
+            //NewTotalRow.Cells.Add(HeaderCell);
+
+            //NewTotalRow.Cells.Add(HeaderCell);
+            //HeaderCell = new TableCell();
+            //HeaderCell.HorizontalAlign = HorizontalAlign.Right;
+            //HeaderCell.Text = qtyTotal3.ToString();
+            //NewTotalRow.Cells.Add(HeaderCell);
+
+
+            //GridView1.Controls[0].Controls.AddAt(e.Row.RowIndex + rowIndex, NewTotalRow);
+            rowIndex++;
+            qtyTotal1 = 0;
+            qtyTotal2 = 0;
+            qtyTotal3 = 0;
+
+        //}
+
+
+    }
+    protected void btnback_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Welcome.aspx");
+    }
+
+
+    //protected void ddlDistrict_SelectedIndexChanged(object sender, EventArgs e)
+    //{
+    //    fillgrid();
+    //}
+
+    protected void ddlRegion_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        fillgrid();
+    }
+}

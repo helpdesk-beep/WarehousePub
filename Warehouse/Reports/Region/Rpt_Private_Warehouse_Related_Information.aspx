@@ -1,0 +1,136 @@
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage/Region_Master.master" AutoEventWireup="true" CodeFile="Rpt_Private_Warehouse_Related_Information.aspx.cs" Inherits="Reports_States_Rpt_Private_Warehouse_Related_Information" Title="Rpt_Private_Warehouse_Related_Information" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <fieldset style="width: 100%; border: 2px solid navy;">
+        <center>
+            <%--  </ContentTemplate>
+            </asp:UpdatePanel>--%>
+                    <div>
+                        <table cellpadding="0" cellspacing="0" style="width: 100%">
+                            <tr>
+                                <td colspan="6" align="center" valign="top">
+                                    <fieldset style="width: 100%; border: 1px solid navy;">
+                                        <center>
+                                            <div>
+                                                <table cellpadding="0" cellspacing="0" style="width: 100%">
+                                                    <tr style="background-color: #0bb6e6; height: 25px">
+                                                        <td colspan="4" align="center">
+                                                            <span style="color: White; font-size: 12pt; font-weight: bold">Private Warehouse Related Information</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="height: 10px" colspan="4">
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td align="left" colspan="4">
+                                                            &nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="height: 10px" colspan="4" align="center">
+                                                            &nbsp;</td>
+                                                    </tr>
+                                                <%--   <tr>
+                            <td style="text-align: right;">
+                                <asp:Label ID="lvlRegion" runat="server" Text="Region:"></asp:Label>
+                            </td>
+                            <td style="text-align: left;">
+                                <asp:DropDownList ID="ddlregion" runat="server" AutoPostBack="true" class="form-control" OnSelectedIndexChanged="ddlregion_SelectedIndexChanged" >
+                                </asp:DropDownList>
+                            </td>
+                            <td style="text-align: right; width: 300px;">
+                                <asp:Label ID="lbldistrict" runat="server" Text="District : "></asp:Label>
+                            </td>
+                            <td style="text-align: left; width: 300px;">
+                                <asp:DropDownList ID="ddldistrict" runat="server" AutoPostBack="true" class="form-control" OnSelectedIndexChanged="ddldistrict_SelectedIndexChanged" >
+                                </asp:DropDownList>
+                            </td>
+                             <td style="text-align: right; width: 300px;">
+                                <asp:Label ID="lblbranch" runat="server" Text="Branch:"></asp:Label>
+                            </td>
+                            <td style="text-align: left; width: 300px;">
+                                <asp:DropDownList ID="ddlbranch" runat="server" AutoPostBack="true" class="form-control" >
+                                </asp:DropDownList>
+                            </td>
+                                                       </tr>--%>
+                                                   <%-- <tr>
+                                               
+                                                        <td style="width:150px; font-size:20px;" align="center" >Insurance Type: &nbsp;&nbsp;
+                                                            <asp:DropDownList ID="ddlFlag" runat="server" Height="25px" Width="155px" AutoPostBack="True" OnSelectedIndexChanged="ddlFlag_SelectedIndexChanged"
+                                                                CssClass="tb6">
+                                                                <asp:ListItem Text="-Select-" Value="0"></asp:ListItem>
+                                                                <asp:ListItem Text="All" Value="0"></asp:ListItem>
+                                                                <asp:ListItem Text="YES" Value="YES" ></asp:ListItem>
+                                                                <asp:ListItem Text="NO" Value="NO"></asp:ListItem>
+
+
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                        </tr>--%>
+                                                  
+                                                    <tr>
+                                                        <td style="height: 10px" colspan="4">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                    <td align="center" valign="top" colspan="4">
+                                                    <asp:GridView ID="godown_GridView" runat="server"  AutoGenerateColumns="False"
+                                                        CellPadding="2" Width="100%" AllowSorting="True" >
+                                                        <Columns>
+                                                            <asp:TemplateField HeaderText="S.N.">
+                                                                <ItemTemplate>
+                                                                    <%#Container.DataItemIndex+1%>
+                                                                </ItemTemplate>
+                                                                <HeaderStyle HorizontalAlign="Center" Width="20px" />
+                                                            </asp:TemplateField>
+                                                            <%--<asp:BoundField DataField="SerialNumber" HeaderText="Serial Number" />--%>
+                                                            <%--<asp:BoundField DataField="Region" ItemStyle-HorizontalAlign="Center"  HeaderText="Region"/>--%>
+                                                            <asp:BoundField DataField="District_Name" ItemStyle-HorizontalAlign="Center"  HeaderText="District"/>
+                                                            <asp:BoundField DataField="Branch_Name" ItemStyle-HorizontalAlign="Center"  HeaderText="Branch Name"/>
+                                                            <asp:BoundField DataField="Godown_Name" ItemStyle-HorizontalAlign="Center"  HeaderText="Warehouse Name"/>
+                                                            <asp:BoundField DataField="Obstruction_BYGO" ItemStyle-HorizontalAlign="Center"  HeaderText="Obstruction"/>
+                                                            <asp:BoundField DataField="Obstruction_Remark" ItemStyle-HorizontalAlign="Center" HeaderText="Obstruction Remark" />
+                                                            <asp:BoundField DataField="Date_Of_Obstruction" ItemStyle-HorizontalAlign="Center" HeaderText="Date Of Obstruction" />
+                                                            <asp:BoundField DataField="Warehouse_Infested_Status" ItemStyle-HorizontalAlign="Center" HeaderText="Warehouse Infested Status" />
+                                                            <asp:BoundField DataField="Infested_Remark" ItemStyle-HorizontalAlign="Center" HeaderText="Infested Remark" />
+                                                             <asp:BoundField DataField="Warehouse_Infested_Date" ItemStyle-HorizontalAlign="Center" HeaderText="Warehouse Infested Date" />                                                        
+                                                        </Columns>
+                                                        <FooterStyle BackColor="#719cb6" ForeColor="White" Font-Bold="True" HorizontalAlign="Center" />
+                                                        <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Center" />
+                                                        <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
+                                                        <HeaderStyle BackColor="#719cb6" Font-Bold="True" ForeColor="White" HorizontalAlign="center"
+                                                            Height="20px" Font-Size="10pt" />
+                                                        <AlternatingRowStyle BackColor="#eeeeee" />
+                                                    </asp:GridView>
+                                                    <asp:Label ID="Label3" runat="server" Font-Size="X-Small" ForeColor="#400040"></asp:Label></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="height: 10px" colspan="4">
+                                                        </td>
+                                                    </tr>
+                          
+                                                    <tr>
+                                                    <td>
+                                                    &nbsp;
+                                                    </td>
+                                                    </tr>
+                                                    <tr>
+                        
+                    </tr>
+                                                </table>
+                                            </div>
+                                        </center>
+                                    </fieldset>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="height: 5px" colspan="4">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+              <%--  </ContentTemplate>
+            </asp:UpdatePanel>--%>
+        </center>
+    </fieldset>
+</asp:Content>

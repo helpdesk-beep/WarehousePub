@@ -1,0 +1,408 @@
+﻿<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <title>Warehouse Receipt - Form III</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            -webkit-print-color-adjust: exact;
+        }
+
+        .receipt-container {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 25px;
+            margin: 20px auto;
+            background: white;
+            border: 2px solid #333;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+            page-break-after: always;
+            position: relative;
+        }
+
+        /* Watermark Styles from source */
+        .original-bg {
+            background-image: url('../../images/origanal.png');
+            background-repeat: repeat;
+        }
+
+        .office-bg {
+            background-image: url('../../images/officecopy.png');
+            background-repeat: repeat;
+        }
+
+        .header {
+            text-align: center;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+            .header h3 {
+                margin: 5px 0;
+                text-decoration: underline;
+            }
+
+            .header h2 {
+                margin: 5px 0;
+                font-size: 22px;
+                color: #0000FF;
+            }
+
+        .section-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .info-left {
+            flex: 1;
+            color: #FF5050;
+        }
+
+        .qr-block {
+            margin-left: 20px;
+            padding: 5px;
+            border: 1px solid #eee;
+        }
+
+        .form-line {
+            border-bottom: 1px dotted #000;
+            font-weight: bold;
+            color: black;
+            padding: 0 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 13px;
+        }
+
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #C0C0C0;
+        }
+
+        .declaration {
+            text-align: justify;
+            margin: 15px 0;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #FF5050;
+        }
+
+        .footer-sig {
+            margin-top: 30px;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .dsc-info {
+            font-size: 11px;
+            color: #333;
+            text-align: right;
+            font-weight: normal;
+            margin-top: 5px;
+        }
+
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+            }
+
+            .receipt-container {
+                border: 2px solid #000;
+                box-shadow: none;
+                margin: 0 auto;
+            }
+        }
+
+        @media print {
+            #qrcode1, #qrcode2 {
+                display: block !important;
+                -webkit-print-color-adjust: exact; /* Forces colors/images to print */
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+  
+</head>
+<body>
+
+    <div class="receipt-container {{Copy1Class}}">
+        <div class="header">
+            <h3>फार्म क्रमांक-3 (Form-III)</h3>
+            <p>(देखिये नियम-14) / (See Rule-14)</p>
+            <h2>माल गोदाम रसीद / WAREHOUSE RECEIPT </h2>  (ORIGNAL COPY)
+
+            <p style="color: #FF5050;">
+                (मध्यप्रदेश कृषि माल गोदाम अधिनियम-1947 के अधीन)<br>
+                (Under the Madhya Pradesh Agriculture Warehouse Act, 1947)
+            </p>
+            <p><strong>{{Copy1Type}}</strong></p>
+            <p><strong>{{Copy1TypeN}}</strong></p>
+        </div>
+
+        <div class="section-flex">
+            <div class="info-left">
+                <p><strong>माल/गोदाम स्थल (Warehouse at):</strong> <span class="form-line">{{DepotName}}</span></p>
+                <p><strong>रुपये के लिए आबद्ध माल गोदाम (Warehouse Bounded for Rs.):</strong>_____________________________</p>
+                <p><strong>WHR No:</strong> <span class="form-line">{{WHRNo}}</span></p>
+            </div>
+            <div class="qr-block">
+                <div id="qrcode1">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+                    <script type="text/javascript">
+                        document.addEventListener("DOMContentLoaded", function () {
+                        var qrText = "{{QRData}}";
+
+                        //// Check if the variable actually has data
+                        //if (!qrText || qrText === "{{QRData}}") {
+                        //console.error("QRData is empty or not being replaced by the server.");
+                        //return;
+                        //}
+
+                        // QR for Original
+                        new QRCode(document.getElementById("qrcode1"), {
+                            text: qrText,
+                            width: 90,
+                            height: 90,
+                            colorDark: "#000000",
+                            colorLight: "#ffffff",
+                            correctLevel: QRCode.CorrectLevel.Q
+                        });
+
+                        // QR for Office Copy
+                        new QRCode(document.getElementById("qrcode2"), {
+                            text: qrText,
+                            width: 90,
+                            height: 90,
+                            colorDark: "#000000",
+                            colorLight: "#ffffff",
+                            correctLevel: QRCode.CorrectLevel.Q
+                        });
+
+                    });
+                    </script>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 20px; color: #FF5050;">
+            <p><strong>व्यक्ति, फर्म, कम्पनी/सरकारी संस्था का नाम:</strong> <span class="form-line">{{DepositorName}}</span></p>
+            <p><strong>पता (Address):</strong> <span class="form-line">{{Address}}</span></p>
+            <p>
+                <strong>लाईसेन्स क्रमांक (License No):</strong> <span class="form-line">{{LicenseNo}}</span>
+                <strong>लाईसेंस समाप्ति दिनांक:</strong> <span class="form-line">{{LicenseExpiry}}</span>
+            </p>
+            <p><strong>Depositor Form No:</strong> <span class="form-line">{{DepositorFormNo}}</span></p>
+        </div>
+
+        <div class="declaration">
+            <p>
+                यह प्रमाणित किया जाता है कि हमें संग्रहण माल गोदाम : <strong>{{GodownName}}</strong> में श्री <strong>{{DepositorName}}</strong> से इसमें दिए गए निबंधनों तथा शर्तों के अध्यधीन नीचे वर्णित सम्पति इसमे दी गई स्थिति को छोड़ _____________________________ को लेखे में उपरी रूप से अच्छी हालत में प्राप्त हुई।यह संपत्ति श्री_________________________________________________ को या उसके द्वारा आदेशित
+                व्यक्ति या धारक को सभी संग्रहण उठाई-धराई और अन्य खर्चो का भुगतान करने तथा समुचित रूप से पृष्ठांकित माल गोदाम रसीद प्रस्तुत करने पर सुपुर्द कर दी जायेगी !
+            </p>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>उपज का विवरण</th>
+                    <th>श्रेणी</th>
+                    <th>बोरों की संख्या</th>
+                    <th>कुल वजन (Qtls)</th>
+                    <th>दर प्रति (Qtls)</th>
+                    <th>कुल कीमत (Rs.)</th>
+                    <th>रिमार्क</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{CommodityRows}}
+            </tbody>
+        </table>
+
+        <div style="font-size: 0.95em; color: #FF5050;">
+            <p><strong>संग्रहण (दर):</strong> _________________ प्रतिमाह कब से (दिनांक): <span class="form-line">{{StorageDateFrom}}</span></p>
+            <p><strong>उठाई-धराइ (खर्च)______________________प्रति (इकाई) __________________________(खर्च) अंदर ले जाने तथा बाहर निकालने का सम्मिलित कर !</strong> </p>
+        </div>
+
+        <div class="footer-sig">
+
+            <div class="dsc-info">
+                <img src="images/dsc1.png" style="height:30px;width:80px;" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <br />{{DSC_Section1}}
+            </div>
+            <p>({{WarehousePalName}})</p>
+            <p>माल गोदामपाल के हस्ताक्षर</p>
+        </div>
+
+        <hr style="border: 1px dashed #999; margin: 20px 0;">
+
+        <div class="header">
+            <h3>सुपुर्दगी विवरण (Delivery Record)</h3>
+        </div>
+        <p>नीचे उल्लेखित माल एतदद्वारा माल गोदाम से सुपुर्दगी के लिए इस रसीद से निकाल दिया गया है/न दिया गया शेष माल,दिए गए माल के भाग पर अदत्त खर्चे तथा अग्रिम के लिए अधिकार के अध्यधीन है :-</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>दिनांक</th>
+                    <th>निकाली गई मात्रा</th>
+                    <th>निकाले गए बोरे</th>
+                    <th>हस्ताक्षर</th>
+                    <th>शेष मात्रा</th>
+                    <th>शेष बोरे</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{DeliveryRows}}
+            </tbody>
+        </table>
+        <p><strong>WHR जारी दिनांक:</strong> <span class="form-line">{{WHRDate}}</span></p>
+    </div>
+
+    <div class="receipt-container {{Copy2Class}}">
+        <div class="header">
+            <h3>फार्म क्रमांक-3 (Form-III)</h3>
+            <p>(देखिये नियम-14) / (See Rule-14)</p>
+            <h2>माल गोदाम रसीद / WAREHOUSE RECEIPT </h2>  (DUPLICATE COPY)
+
+            <p style="color: #FF5050;">
+                (मध्यप्रदेश कृषि माल गोदाम अधिनियम-1947 के अधीन)<br>
+                (Under the Madhya Pradesh Agriculture Warehouse Act, 1947)
+            </p>
+            <p><strong>{{Copy2Type}}</strong></p>
+            <p><strong>{{Copy2TypeN}}</strong></p>
+        </div>
+
+        <div class="section-flex">
+            <div class="info-left">
+                <p><strong>माल/गोदाम स्थल (Warehouse at):</strong> <span class="form-line">{{DepotName}}</span></p>
+                <p><strong>रुपये के लिए आबद्ध माल गोदाम (Warehouse Bounded for Rs.):</strong> </p>
+                <p><strong>WHR No:</strong> <span class="form-line">{{WHRNo}}</span></p>
+            </div>
+            <div class="qr-block">
+                <div id="qrcode2"></div>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 20px; color: #FF5050;">
+            <p><strong>व्यक्ति, फर्म, कम्पनी/सरकारी संस्था का नाम:</strong> <span class="form-line">{{DepositorName}}</span></p>
+            <p><strong>पता (Address):</strong> <span class="form-line">{{Address}}</span></p>
+            <p>
+                <strong>लाईसेन्स क्रमांक (License No):</strong> <span class="form-line">{{LicenseNo}}</span>
+                <strong>लाईसेंस समाप्ति दिनांक:</strong> <span class="form-line">{{LicenseExpiry}}</span>
+            </p>
+            <p><strong>Depositor Form No:</strong> <span class="form-line">{{DepositorFormNo}}</span></p>
+        </div>
+
+        <div class="declaration">
+            <p>
+                यह प्रमाणित किया जाता है कि हमें संग्रहण माल गोदाम : <strong>{{GodownName}}</strong> में श्री <strong>{{DepositorName}}</strong> से इसमें दिए गए निबंधनों तथा शर्तों के अध्यधीन नीचे वर्णित सम्पति इसमे दी गई स्थिति को छोड़ _____________________________ को लेखे में उपरी रूप से अच्छी हालत में प्राप्त हुई।यह संपत्ति श्री_________________________________________________ को या उसके द्वारा आदेशित
+                व्यक्ति या धारक को सभी संग्रहण उठाई-धराई और अन्य खर्चो का भुगतान करने तथा समुचित रूप से पृष्ठांकित माल गोदाम रसीद प्रस्तुत करने पर सुपुर्द कर दी जायेगी !
+            </p>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>उपज का विवरण</th>
+                    <th>श्रेणी</th>
+                    <th>बोरों की संख्या</th>
+                    <th>कुल वजन (Qtls)</th>
+                    <th>दर प्रति (Qtls)</th>
+                    <th>कुल कीमत (Rs.)</th>
+                    <th>रिमार्क</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{CommodityRows}}
+            </tbody>
+        </table>
+
+        <div style="font-size: 0.95em; color: #FF5050;">
+            <p><strong>संग्रहण (दर):</strong> _________________ प्रतिमाह कब से (दिनांक): <span class="form-line">{{StorageDateFrom}}</span></p>
+            <p><strong>उठाई-धराइ (खर्च)______________________प्रति (इकाई) __________________________(खर्च) अंदर ले जाने तथा बाहर निकालने का सम्मिलित कर !</strong> </p>
+        </div>
+
+        <div class="footer-sig">
+
+            <div class="dsc-info">
+                <img src="images/dsc1.png" style="height:30px;width:80px;" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <br />{{DSC_Section2}}
+            </div>
+            <p>({{WarehousePalName}})</p>
+            <p>माल गोदामपाल के हस्ताक्षर</p>
+        </div>
+
+        <hr style="border: 1px dashed #999; margin: 20px 0;">
+
+        <div class="header">
+            <h3>सुपुर्दगी विवरण (Delivery Record)</h3>
+        </div>
+        <p>नीचे उल्लेखित माल एतदद्वारा माल गोदाम से सुपुर्दगी के लिए इस रसीद से निकाल दिया गया है/न दिया गया शेष माल,दिए गए माल के भाग पर अदत्त खर्चे तथा अग्रिम के लिए अधिकार के अध्यधीन है :-</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>दिनांक</th>
+                    <th>निकाली गई मात्रा</th>
+                    <th>निकाले गए बोरे</th>
+                    <th>हस्ताक्षर</th>
+                    <th>शेष मात्रा</th>
+                    <th>शेष बोरे</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{DeliveryRows}}
+            </tbody>
+        </table>
+        <p><strong>WHR जारी दिनांक:</strong> <span class="form-line">{{WHRDate}}</span></p>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            var qrText = "{{QRData}}";
+
+            // Check if the variable actually has data
+            if (!qrText || qrText === "{{QRData}}") {
+                console.error("QRData is empty or not being replaced by the server.");
+                return;
+            }
+
+            // QR for Original
+            new QRCode(document.getElementById("qrcode1"), {
+                text: qrText,
+                width: 90,
+                height: 90,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.Q
+            });
+
+            // QR for Office Copy
+            new QRCode(document.getElementById("qrcode2"), {
+                text: qrText,
+                width: 90,
+                height: 90,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.Q
+            });
+
+        });
+    </script>
+</body>
+</html>

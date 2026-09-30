@@ -1,0 +1,411 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Rpt_DistrictAll_CropYear_Depositorwise_StockPosition_NAFED_Dlahan_Tilhan.aspx.cs" Inherits="Region_State_Rpt_DistrictAll_CropYear_Depositorwise_StockPosition_NAFED_Dlahan_Tilhan" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title style="color: white;">Stock Position</title>
+
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="scripts/jquery-3.3.1.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <link href="Content/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="../../assets/css/style.css" rel="stylesheet" />
+    <script src="scripts/dataTables.bootstrap4.min.js"></script>
+    <script src="scripts/jquery.dataTables.min.js"></script>
+
+
+    <script type="text/javascript">  
+        $(document).ready(function () {
+            $("#EmployeeGridViewList").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
+        });
+    </script>
+    <style>
+        .btnMargin {
+            margin-bottom: 10px !important;
+        }
+    </style>
+    <style>
+        .Grid {
+            background-color: #fff;
+            margin: 5px 0 10px 0;
+            border: solid 1px #525252;
+            border-collapse: collapse;
+            font-family: Calibri;
+            color: #474747;
+            width: 100%;
+        }
+
+            .Grid td {
+                padding: 2px;
+                border: solid 1px #c1c1c1;
+            }
+
+            .Grid th {
+                padding: 4px 2px;
+                color: #fff;
+                background: #00aad2 url(Images/grid-header.png) repeat-x top;
+                border-left: solid 1px #525252;
+                font-size: 15px;
+                text-align: center;
+            }
+
+            .Grid .alt {
+                background: #fcfcfc url(Images/grid-alt.png) repeat-x top;
+            }
+
+            .Grid .pgr {
+                background: #00aad2 url(Images/grid-pgr.png) repeat-x top;
+            }
+
+                .Grid .pgr table {
+                    margin: 3px 0;
+                }
+
+                .Grid .pgr td {
+                    border-width: 0;
+                    padding: 0 6px;
+                    border-left: solid 1px #666;
+                    font-weight: bold;
+                    color: #fff;
+                    line-height: 12px;
+                }
+
+                .Grid .pgr a {
+                    color: Gray;
+                    text-decoration: none;
+                }
+
+                    .Grid .pgr a:hover {
+                        color: #000;
+                        text-decoration: none;
+                    }
+    </style>
+    <%--<script type="text/javascript">
+        function PrintGridData() {
+            var prtGrid = document.getElementById('<%=GridView1.ClientID %>');
+            prtGrid.border = 0;
+            var prtwin = window.open('', 'PrintGridViewData', 'left=100,top=100,width=1000,height=1000,tollbar=0,scrollbars=1,status=0,resizable=1');
+            prtwin.document.write(prtGrid.outerHTML);
+            prtwin.document.close();
+            prtwin.focus();
+            prtwin.print();
+            prtwin.close();
+        }
+    </script>--%>
+    <%--<script type="text/javascript">
+        function printGrid() {
+            var gridData = document.getElementById('<%= GridView1.ClientID %>');
+            var windowUrl = 'about:blank';
+            //set print document name for gridview
+            var uniqueName = new Date();
+            var windowName = 'Print_' + uniqueName.getTime();
+
+            var prtWindow = window.open(windowUrl, windowName,
+                'left=100,top=100,right=100,bottom=100,width=700,height=500');
+            prtWindow.document.write('<html><head></head>');
+            prtWindow.document.write('<body style="background:none !important">');
+            prtWindow.document.write(gridData.outerHTML);
+            prtWindow.document.write('</body></html>');
+            prtWindow.document.close();
+            prtWindow.focus();
+            prtWindow.print();
+            prtWindow.close();
+        }
+    </script>--%>
+    <style type="text/css">
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 0px 0px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 4px 2px;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+            cursor: pointer;
+            Width: 90px;
+            height: 20px;
+        }
+
+        .button1 {
+            background-color: white;
+            color: black;
+            border: 2px solid #4CAF50;
+        }
+
+            .button1:hover {
+                background-color: #4CAF50;
+                color: white;
+            }
+
+        .button2 {
+            background-color: white;
+            color: black;
+            border: 2px solid #008CBA;
+        }
+
+            .button2:hover {
+                background-color: #008CBA;
+                color: white;
+            }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <div style="text-align: center; font-size: large;">
+                <h2 class="header">M.P. WAREHOUSING & LOGISTICS CORPORATION</h2>
+                <h4 class="header">Summary Report for Review of Depositor (DMO MARKFED, NAFED, NCCF), CropYear Wise, Commodity Wise Stock Position (Quantity in MT) </h4>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-sm-8 col-sm-offset-4">
+                        <asp:Label ID="lblmsg" runat="server"></asp:Label>
+                        <asp:HiddenField ID="hfId" Value="0" runat="server" />
+                        <asp:HiddenField ID="hfFileName" Value="0" runat="server" />
+                    </div>
+                </div>
+                <div>
+                    <table style="border: solid 5px #e3e3e8; width: 80%; vertical-align: central; margin-left: 10%;">
+                        <tr>
+                            <td style="text-align: center;"><%--Region:&nbsp;&nbsp;--%>
+                                <%--<asp:DropDownList ID="ddlRegion" runat="server" selectionmode="Multiple" AutoPostBack="true" OnSelectedIndexChanged="ddlRegion_SelectedIndexChanged">
+                    <asp:ListItem Text="Select" Value="0"></asp:ListItem>
+                </asp:DropDownList>--%>
+                                <%--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        District:&nbsp;&nbsp;<asp:DropDownList ID="ddldistrict" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddldistrict_SelectedIndexChanged" selectionmode="Multiple">
+                    <asp:ListItem Text="Select" Value="0"></asp:ListItem>
+                </asp:DropDownList>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--%>
+                                <%-- Branch:&nbsp;&nbsp;<asp:DropDownList ID="ddlbranch" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlbranch_SelectedIndexChanged" selectionmode="Multiple">
+                    <asp:ListItem Text="Select" Value="0"></asp:ListItem>
+                </asp:DropDownList>--%>
+                             
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                         <%--Depositer:&nbsp;&nbsp;<asp:DropDownList ID="ddlDepositor" runat="server" selectionmode="Multiple">
+                    <asp:ListItem Text="Select" Value="0"></asp:ListItem>
+                </asp:DropDownList>--%>
+                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                         Commodity:&nbsp;&nbsp;<asp:DropDownList ID="ddlcommodity" runat="server" selectionmode="Multiple">
+                             <asp:ListItem Text="Select" Value="0"></asp:ListItem>
+                             <asp:ListItem Text="Dlahan" Value="Dlahan"></asp:ListItem>
+                             <asp:ListItem Text="Tilhan" Value="Tilhan"></asp:ListItem>
+                         </asp:DropDownList>
+                                <%-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                         Crop Year:&nbsp;&nbsp;<asp:DropDownList ID="ddlCropYear" runat="server" selectionmode="Multiple">
+                     <asp:ListItem Value="0">--Select--</asp:ListItem>
+                                <asp:ListItem Value="2017-18">2017-18</asp:ListItem>
+                                <asp:ListItem Value="2018-19">2018-19</asp:ListItem>
+                                <asp:ListItem Value="2019-20">2019-20</asp:ListItem>
+                                <asp:ListItem Value="2020-21">2020-21</asp:ListItem>
+                                <asp:ListItem Value="2021-22">2021-22</asp:ListItem>
+                                <asp:ListItem Value="2022-23">2022-23</asp:ListItem>
+                                <asp:ListItem Value="2023-24">2023-24</asp:ListItem>
+                                <asp:ListItem Value="2024-25">2024-25</asp:ListItem>
+                </asp:DropDownList>--%>
+                       
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td colspan="8" style="text-align: center;">
+                                <asp:Button ID="btnSearch" CssClass="btn btn-success btn-sm" ValidationGroup="A"
+                                    runat="server" Text="Search" OnClick="btnSearch_Click" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        </tr>
+                    </table>
+
+
+
+                    <br />
+                    <div class="form-group"></div>
+
+
+                </div>
+                <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                <div class="col-md-12">
+                    <div class="table-responsive">
+
+                        <div style="overflow-x: scroll;">
+                            <asp:GridView ID="GV_StockPositionDetails" runat="server" AutoGenerateColumns="False" Width="100%" BackColor="White"
+                                EnableModelValidation="True"
+                                CellPadding="4" rules="all" ForeColor="#333333" ShowFooter="true"
+                                OnRowDataBound="GV_StockPositionDetails_OnRowDataBound"
+                                OnRowCreated="GV_StockPositionDetails_OnRowCreated">
+                                <RowStyle BackColor="White" CssClass="ADFieldsGridText table-responsive" HorizontalAlign="Left" />
+                                <Columns>
+
+                                    <asp:TemplateField HeaderText="S.No." ItemStyle-Width="3%">
+                                        <ItemTemplate>
+                                            <%# Container.DataItemIndex + 1 %>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <%-- <asp:TemplateField HeaderText="Region">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblRegion" runat="server" Text='<%# Eval("RegionName") %>'>0</asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>--%>
+                                    <%--                                <asp:TemplateField HeaderText="District">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblDistrict" runat="server" Text='<%# Eval("DistrictName") %>'>0</asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>--%>
+                                    <%-- <asp:TemplateField HeaderText="Branch">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblBranch" runat="server" Text='<%# Eval("BranchName") %>'>0</asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>--%>
+                                    <%--<asp:TemplateField HeaderText="Godown">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblGodown" runat="server" Text='<%# Eval("GodownName") %>'>0</asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+
+                                <asp:TemplateField HeaderText="Godown Type">
+                                    <ItemTemplate>
+                                        <asp:Label ID="txtGodownType" runat="server" Text='<%# Eval("GodownType") %>'>0</asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>--%>
+
+                                    <%--<asp:TemplateField HeaderText="Crop Year">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblCropYear" runat="server" Height="21px" Text='<%# Eval("CropYear") %>'> 
+                                        </asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>--%>
+
+                                    <asp:TemplateField HeaderText="Depositor">
+                                        <ItemTemplate>
+                                            <%--                                        <asp:Label ID="lblDepositor" runat="server" Text='<%# Eval("DepositorName") %>'>0</asp:Label>--%>
+                                            <asp:HyperLink ID="lblDepositor" runat="server" Target="_blank" NavigateUrl='<%#"~/Reports/States/Rpt_District_CropYear_Depositorwise_StockPosition_NAFED_NCCF_DMOMARKFED.aspx?DepositorID="+ (Eval("Depositor_ID").ToString())+ "&CommodityID="+ (Eval("Commodity_Id").ToString())%>'
+                                                title="DepositorName" Text=' <%# Eval("DepositorName") %>' ForeColor="Blue"></asp:HyperLink>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+
+                                    <asp:TemplateField HeaderText="Commodity">
+                                        <ItemTemplate>
+                                            <%--                                        <asp:Label ID="lblCommodity" runat="server" Text='<%# Eval("CommodityName") %>'>0</asp:Label>--%>
+                                            <asp:HyperLink ID="lblCommodity" runat="server" Target="_blank" NavigateUrl='<%#"~/Reports/States/Rpt_District_CropYear_Depositorwise_StockPosition_NAFED_NCCF_DMOMARKFED.aspx?CommodityID="+ (Eval("Commodity_Id").ToString())+ "&DepositorID="+ (Eval("Depositor_ID").ToString())%>'
+                                                title="CommodityName" Text=' <%# Eval("CommodityName") %>' ForeColor="Blue"></asp:HyperLink>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Crop Year [2017-18]" ItemStyle-HorizontalAlign="Right">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblCY1" runat="server" Text='<%# Eval("[2017-18]") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Crop Year [2018-19]" ItemStyle-HorizontalAlign="Right">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblCY2" runat="server" Text='<%# Eval("[2018-19]") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Crop Year [2019-20]" ItemStyle-HorizontalAlign="Right">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblCY3" runat="server" Text='<%# Eval("[2019-20]") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Crop Year [2020-21]" ItemStyle-HorizontalAlign="Right">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblCY4" runat="server" Text='<%# Eval("[2020-21]") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+
+                                    <asp:TemplateField HeaderText="Crop Year [2021-22]" ItemStyle-HorizontalAlign="Right">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblCY5" runat="server" Text='<%# Eval("[2021-22]") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Crop Year [2022-23]" ItemStyle-HorizontalAlign="Right">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblCY6" runat="server" Text='<%# Eval("[2022-23]") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Crop Year [2023-24]" ItemStyle-HorizontalAlign="Right">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblCY7" runat="server" Text='<%# Eval("[2023-24]") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Crop Year [2024-25]" ItemStyle-HorizontalAlign="Right">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblCY8" runat="server" Text='<%# Eval("[2024-25]") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Crop Year [2025-26]" ItemStyle-HorizontalAlign="Right">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblCY9" runat="server" Text='<%# Eval("[2025-26]") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Total" ItemStyle-HorizontalAlign="Right">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblTotal" runat="server" Text='<%# Eval("Total") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <%--<asp:TemplateField HeaderText="कुल भण्‍डारित मात्रा" ItemStyle-HorizontalAlign="Right">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblTotal" runat="server" Text='<%# Eval("Total") %>'>0</asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>--%>
+                                </Columns>
+                                <FooterStyle BackColor="#719cb6" ForeColor="White" Font-Bold="True" HorizontalAlign="Center" Font-Size="12pt" />
+                                <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Center" />
+                                <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
+                                <HeaderStyle BackColor="#719cb6" Font-Bold="True" ForeColor="White" HorizontalAlign="center"
+                                    Height="20px" Font-Size="12pt" />
+                                <AlternatingRowStyle BackColor="#eeeeee" />
+                            </asp:GridView>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script src="../../JS/table2excel.js"></script>
+        <script type="text/javascript">
+            $("body").on("click", "#btnExport", function () {
+                $("[id*=GridView1]").table2excel({
+                    filename: "receivedPaymentfromMPSCSCthroughNEFTPaymentSystem.xls"
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                $("[id$=txtfromdate]").datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    changeYear: true,
+                    numberOfMonths: 1,
+                    dateFormat: 'dd/mm/yy',
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                $("[id$=txttodate]").datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    changeYear: true,
+                    numberOfMonths: 1,
+                    dateFormat: 'dd/mm/yy',
+                });
+            });
+        </script>
+    </form>
+    <!--Java Script -->
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+</body>
+</html>

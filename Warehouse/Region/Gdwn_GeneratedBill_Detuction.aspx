@@ -1,0 +1,429 @@
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage/Region_Master.master" AutoEventWireup="true" CodeFile="Gdwn_GeneratedBill_Detuction.aspx.cs" Inherits="Region_Gdwn_GeneratedBill_Detuction" Title="RM Detuction" %>
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+
+<style type="text/css">
+    .modalBackground
+    {
+        background-color: Black;
+        filter: alpha(opacity=60);
+        opacity: 0.6;
+    }
+    .modalPopup
+    {
+        background-color: #FFFFFF;
+        width: 80%;
+        border: 3px solid #0DA9D0;
+        border-radius: 6px;
+        padding:0
+      
+    }
+    .modalPopup .header
+    {
+        background-color: #2FBDF1;
+        height: 30px;
+        color: White;
+        line-height: 30px;
+        text-align: center;
+        font-weight: bold;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+    }
+    .modalPopup .body
+    {
+        min-height: 50px;
+        line-height: 30px;
+        text-align: center;
+        font-weight: bold;
+    }
+    .modalPopup .footer
+    {
+        padding: 6px;
+    }
+    .modalPopup .yes, .modalPopup .no
+    {
+        height: 23px;
+        color: White;
+        line-height: 23px;
+        text-align: center;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    .modalPopup .yes
+    {
+        background-color: #2FBDF1;
+        border: 1px solid #0DA9D0;
+    }
+    .modalPopup .no
+    {
+        background-color: #9F9F9F;
+        border: 1px solid #5C5C5C;
+    }
+</style>    
+
+    <script type="text/javascript">
+        function PrintDiv() {
+            var divContents = document.getElementById("PrintDiv").innerHTML;
+            var printWindow = window.open('', '', 'height=700,width=1000');
+            //   printWindow.document.write('<html><head><title>WHR</title>');
+            printWindow.document.write('</head><body >');
+            printWindow.document.write(divContents);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+            printWindow.close();
+        }
+    </script> 
+    
+    <script type="text/javascript">
+        function PrintDiv_det() {
+            var divContents = document.getElementById("PrintDiv_Det").innerHTML;
+            var printWindow = window.open('', '', 'height=700,width=1000');
+            //   printWindow.document.write('<html><head><title>WHR</title>');
+            printWindow.document.write('</head><body >');
+            printWindow.document.write(divContents);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+            printWindow.close();
+        }
+    </script>     
+
+
+<style type="text/css">
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 0px 0px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    font-weight:bold;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button1 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.button2 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #008CBA;
+}
+
+.button2:hover {
+    background-color: #008CBA;
+    color: white;
+}
+</style>
+
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <fieldset style="width: 800px; border: 2px solid navy; margin-left:5px;">
+        <center>
+        <div>
+      
+<table width="100%">
+<tr style="background-color: #0bb6e6; height: 25px">
+        <td colspan="4" align="center">
+            <asp:Label ID="Label37" runat="server" Font-Bold="True" Font-Size="12pt" ForeColor="WhiteSmoke"
+                                        Text="JVS/RENTAL/PPP etc Mode Godown/Other Generated Bill Passed/ Senction By RO"></asp:Label></td>
+</tr>
+
+<tr>
+<td>
+<table width="100%">
+
+<tr>
+<td style="height: 40px ; font-size:14px" align="left" >
+    Branch
+</td>
+<td align="left">
+    <asp:DropDownList ID="ddlBranch" runat="server" 
+             Height="25px" Width="250px"  AutoPostBack="true"
+        onselectedindexchanged="ddlBranch_SelectedIndexChanged"> </asp:DropDownList>
+</td>
+<td style="height: 40px ; font-size:14px" align="left" >
+    Godown Type
+</td>
+<td align="left">
+     <asp:DropDownList ID="ddlGodownType" runat="server" Width="200px" Height="25px" 
+                AutoPostBack="True" onselectedindexchanged="ddlGodownType_SelectedIndexChanged" 
+                >
+            <asp:ListItem Value="0">--Select--</asp:ListItem>
+            <asp:ListItem Value="2" Selected="True">JVS Godowns</asp:ListItem>
+           <asp:ListItem Value="3">Hired Godowns</asp:ListItem>
+           <asp:ListItem Value="4">Silo Bags</asp:ListItem>
+           <asp:ListItem Value="6">Tribal Scheme</asp:ListItem>
+                
+            </asp:DropDownList>
+</td>
+</tr> 
+<tr>
+
+<td style="height: 40px ; font-size:14px" align="left">
+     Godown 
+</td>
+<td align="left">     
+      <asp:DropDownList ID="ddlgdwn" runat="server" 
+             Height="25px" Width="250px"  AutoPostBack="true"
+         onselectedindexchanged="ddlgdwn_SelectedIndexChanged"> </asp:DropDownList>
+</td>
+</tr> 
+<tr>
+<td style="font-size:14px" align="left" >
+     Storage Charges Bill No. 
+</td>
+<td align="left">     
+     <asp:DropDownList ID="ddlactualbill" runat="server" 
+             Height="25px" Width="250px"  AutoPostBack="true" 
+         onselectedindexchanged="ddlactualbill_SelectedIndexChanged"> </asp:DropDownList>
+</td>
+
+<td style="height: 30px ; font-size:14px" align="left">
+     Rent Bill No.
+</td>
+<td align="left">     
+     <asp:DropDownList ID="ddlbillno" runat="server" 
+             Height="25px" Width="250px"  AutoPostBack="true"
+         onselectedindexchanged="ddlbillno_SelectedIndexChanged"> </asp:DropDownList>
+</td>
+
+</tr>
+
+</table>
+</td>
+</tr>
+
+<tr id="trdet" runat="server" visible="false">
+    <td>
+        <table width="100%">
+                               
+                               
+<tr>
+    <td  align="center" colspan="4">
+                        <div style="width:100%;">
+                        <img id="Img1" src="../Images/line.png" height="15px" width="100%" alt="" />
+                        </div>        
+    </td>
+</tr>
+            <tr>
+                    <td colspan="4" align="center"  style="vertical-align:top;  height:30px" >
+                        <asp:Label ID="Label18" runat="server"  Font-Size="12pt" ForeColor="Blue" 
+                         Text="ब्रांच मैनेजर द्वारा बनाए गए बिल एवम्‌ किये गए कटोत्रा का विवरण Part ('A')"></asp:Label></td>
+            </tr>                               
+                        <tr>
+                            <td  align="right" style="font-size:14px;" >
+                                <asp:Label ID="Label25" runat="server" Text="Month :" ></asp:Label>&nbsp;&nbsp;&nbsp;
+                            </td>
+                            <td  align="left" style="font-size:14px;">
+                                <asp:Label ID="lblrmmonth" runat="server" Text="माह :" ></asp:Label></td>
+                            <td  align="right" style="font-size:14px;" >
+                                <asp:Label ID="Label14" runat="server" Text="Financial Year :" ></asp:Label>&nbsp;&nbsp;&nbsp;
+                            </td>
+                            <td align="left" style="font-size:14px;">                              
+                               <asp:Label ID="lblfinancial" runat="server" Text="माह :" ></asp:Label></td>
+                        </tr>    
+                        <tr>
+                            <td  align="right" style="font-size:14px;">
+                                <asp:Label ID="Label6" runat="server" Text="From Date :" ></asp:Label>&nbsp;&nbsp;&nbsp;
+                            </td>
+                            <td  align="left" style="font-size:14px;">                              
+                               <asp:Label ID="lblfrmdate" runat="server" Text="माह :" ></asp:Label></td>
+                            <td  align="right" style="font-size:14px;">
+                                <asp:Label ID="Label10" runat="server" Text="To Date :"></asp:Label>&nbsp;&nbsp;&nbsp;
+                            </td>
+                            <td align="left" style="font-size:14px;">                                  
+                                <asp:Label ID="lbltodate" runat="server" Text="माह :" ></asp:Label></td>
+                        </tr>
+                        <tr>
+                            <td  align="right" style="font-size:14px;" >                                
+                                <asp:Label ID="Label27" runat="server" Text="Commodity :"></asp:Label>&nbsp;&nbsp;&nbsp;
+                            </td>
+                           <td  align="left" style="font-size:14px;">                               
+                                <asp:Label ID="lblrmcmd" runat="server" Text="माह :" ></asp:Label></td>
+                            <td  align="right" style="font-size:14px;" >                            
+                                <asp:Label ID="Label20" runat="server" Text="Rate :"></asp:Label>&nbsp;&nbsp;&nbsp;
+                            </td>
+                            <td align="left" style="font-size:14px;">                                  
+                                <asp:Label ID="lblCPYear" runat="server" ></asp:Label></td>
+                        </tr>                                                             
+        
+        
+
+
+            <tr>
+                <td style="height:30px; font-size:14px; width:200px" align="right" >Rent Bill Amount :&nbsp;&nbsp;&nbsp;
+                </td>
+                
+                <td >
+            <asp:TextBox runat="server" ID="txtBillAmt" Width="100px" ForeColor="Red" 
+                        Font-Bold="true" Text="0" ReadOnly="True"></asp:TextBox>    
+                </td>
+                
+                <td  style="height:30px; font-size:14px;" align="right">विभिन्न मदो मे कुल कटोत्रा राशि :&nbsp;&nbsp;&nbsp;
+                </td>
+                
+                <td>
+                <%--<asp:Label ID="Label20" runat="server" Font-Size="14px" Font-Bold="true" Text="5258" ForeColor="Red" ></asp:Label>--%>
+            <asp:TextBox runat="server" ID="txtresdetAmt" Width="100px" ForeColor="Red" 
+                        Font-Bold="true" Text="0"
+                        ReadOnly="True"></asp:TextBox>    
+                </td>        
+            </tr>
+            <tr>
+            <td style="height:5px;">
+            
+            </td>
+            </tr>
+<tr>
+    <td  align="center" colspan="4">
+                        <div style="width:100%;">
+                        <img id="Img3" src="../Images/line.png" height="15px" width="100%" alt="" />
+                        </div>        
+    </td>
+</tr> 
+            <tr>
+                    <td colspan="4" align="center" style="height:40px; vertical-align:top;  height:30px ">
+                        <asp:Label ID="Label24" runat="server"  Font-Size="12pt" ForeColor="Blue"
+                         Text="बनाए गए बिल मे RM द्वारा किये जाने वाले कटोत्रा का भाग Part ('B')"></asp:Label></td>
+            </tr>           
+            <tr>
+                <td  style="height:30px; font-size:14px;" align="right" > TDS :&nbsp;&nbsp;&nbsp;
+                </td>
+                
+                <td ><asp:TextBox runat="server" ID="txtTDSAmt" Width="100px" ForeColor="Red" AutoPostBack="true"
+                        Font-Bold="true" Text="0" ontextchanged="txtTDSAmt_TextChanged" 
+                        ToolTip="If Any Change you can enter it other wise by default 10%"></asp:TextBox>
+                </td>
+                
+                <td  style="height:30px; font-size:14px;"  align="right" >गेन / कमी के विरुध रोकी / काटी गई राशि :&nbsp;&nbsp;&nbsp;
+                </td>
+                
+                <td>
+                <asp:TextBox runat="server" ID="txtGainAmt" Width="100px" ForeColor="Red" AutoPostBack="true"
+                        Font-Bold="true" Text="0" ontextchanged="txtGainAmt_TextChanged"></asp:TextBox>
+                </td>        
+            </tr>
+            <tr>
+                <td  style="height:40px; font-size:14px;"  align="right" > सुरक्षा निधि राशि :&nbsp;&nbsp;&nbsp;
+                </td>
+                
+                <td ><asp:TextBox runat="server" ID="txtscrDep" Width="100px" ForeColor="Red" AutoPostBack="true"
+                        Font-Bold="true" Text="0" ontextchanged="txtscrDep_TextChanged"></asp:TextBox>
+                </td>
+                
+                <td  style="height:30px; font-size:14px;" align="right" >कोई अन्य कटोत्रा :&nbsp;&nbsp;&nbsp;
+                </td>
+                
+                <td ><asp:TextBox runat="server" ID="txtotherdetuction" Width="100px" AutoPostBack="true"
+                        ForeColor="Red" Font-Bold="true" Text="0" ontextchanged="txtotherdetuction_TextChanged"></asp:TextBox>
+                </td>                
+
+            </tr>
+            <tr>
+            <td style="height:5px;">
+            
+            </td>
+            </tr>                        
+<tr>
+    <td  align="center" colspan="4">
+                        <div style="width:100%;">
+                        <img id="Img2" src="../Images/line.png" height="15px" width="100%" alt="" />
+                        </div>        
+    </td>
+</tr> 
+            <tr>
+                    <td colspan="4" align="center" style="vertical-align:top; height:30px" >
+                        <asp:Label ID="Label22" runat="server"  Font-Size="12pt" ForeColor="Blue"
+                         Text="बनाए गए बिल की राशि का विवरण"></asp:Label></td>
+            </tr>
+            
+            
+<tr>
+<td colspan="3" align="left" style="height:25px;  font-size:14px;">
+1) MPWLC द्वारा भंडारित स्कंध की जमाकर्ता को प्रस्तुत की जाने वाली राशि : 
+</td>
+<td style="height:25px; font-size:14px;" align="left">
+<asp:Label ID="lblPrastut_netamount" runat="server" Font-Size="14px" Font-Bold="true" ForeColor="Red" Text="0"> </asp:Label>
+</td>
+</tr>            
+
+<tr>
+    <td style="height:25px; font-size:14px;" align="left" colspan="3" >2) Rent Bill Amount मे कुल किये गए कटोत्रा की राशि : 
+    
+    </td>
+<td style="height:25px; font-size:14px;" align="left">
+<asp:Label ID="lbltotDetuc" runat="server" Font-Size="14px" Font-Bold="true" ForeColor="Red" Text="0"></asp:Label>
+</td>    
+</tr> 
+
+<tr>
+    <td style="height:25px; font-size:14px;" align="left" colspan="3" >3) TDS : 
+    
+    </td>
+<td style="height:25px; font-size:14px;" align="left">
+<asp:Label ID="lblFinalTDS" runat="server" Font-Size="14px" Font-Bold="true" ForeColor="Red" Text="0"></asp:Label>
+</td>    
+</tr> 
+
+<tr>
+    <td style="height:25px; font-size:14px;" align="left" colspan="3" >4) गोदाम संचालक को देय शुध राशि  (After Detuction) : 
+    
+    </td>
+<td style="height:25px; font-size:14px;" align="left">
+<asp:Label ID="lblgrandtotal" runat="server" Font-Size="14px" Font-Bold="true" ForeColor="Red" Text="0"></asp:Label>
+</td>    
+</tr> 
+            
+<tr>
+    <td style="height:25px; font-size:14px;" align="left" colspan="3" >5) MPWLC के पार्ट की राशि : 
+    
+    </td>
+<td style="height:25px; font-size:14px;" align="left">
+<asp:Label ID="lblMPWLCPartAmt" runat="server" Font-Size="14px" Font-Bold="true" ForeColor="Red" Text="0"></asp:Label>
+</td>    
+</tr>                     
+        <tr >  
+            <td align="center" colspan="4" style="height:50px;" >          
+               <asp:Button class="button button2" id="btnGenerateBill" style="width:150px" 
+                    runat="server" Text="Submit" Height="29px" onclick="btnGenerateBill_Click" >
+               </asp:Button>
+            </td>      
+        </tr>
+                         <tr>
+                            <td style="color:Red"  align="left">&nbsp;Note :</td>
+                         </tr> 
+                         <tr>
+                            <td colspan="4" align="left" style="color:Red ; font-size:14px;" >
+                            &nbsp;1)  गोदाम संचालक को देय शुध राशि =  JVS Bill Amount - ( विभिन्न मदो मे कुल कतोत्र + TDS + गेन/कमी के विरुध रोकी/<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;काटी गई राशि + सुरक्षा निधि राशि +  कोई अन्य कटोत्रा )                            
+                            </td>
+                        </tr> 
+                         <tr>
+                            <td colspan="4" align="left" style="color:Red ; font-size:14px;" >
+                            &nbsp;2)  MPWLC के पार्ट की राशि =  MPWLC द्वारा भंडारित स्कंध की जमाकर्ता को प्रस्तुत की जाने वाली राशि - JVS Bill Amount                           
+                            </td>
+                        </tr>                                                         
+        </table>
+    </td>
+</tr>
+</table>
+</div>
+</center>
+</fieldset>
+</asp:Content>
+
