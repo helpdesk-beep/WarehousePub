@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="FarmerRegistrationRequestById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FarmerId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FarmerRegistrationRequestByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FarmerRegistrationRequestByIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FarmerRegistrationRequestByFarmerNameselection">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DistId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TehsilId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="villageId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FarmerRegistrationRequestByFarmerNameselectionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FarmerRegistrationRequestByFarmerNameselectionResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FarmerRegistrationRequestByAdharId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AdharId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FarmerRegistrationRequestByAdharIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FarmerRegistrationRequestByAdharIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FarmerRegistrationRequestByMobile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MobileNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FarmerRegistrationRequestByMobileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FarmerRegistrationRequestByMobileResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FarmerLandRecords">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FarmerId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Crop_Code" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FarmerLandRecordsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FarmerLandRecordsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DataSet" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="s:schema" />
+            <s:any />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="FarmerRegistrationRequestByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:FarmerRegistrationRequestById" />
+  </wsdl:message>
+  <wsdl:message name="FarmerRegistrationRequestByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:FarmerRegistrationRequestByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="FarmerRegistrationRequestByFarmerNameselectionSoapIn">
+    <wsdl:part name="parameters" element="tns:FarmerRegistrationRequestByFarmerNameselection" />
+  </wsdl:message>
+  <wsdl:message name="FarmerRegistrationRequestByFarmerNameselectionSoapOut">
+    <wsdl:part name="parameters" element="tns:FarmerRegistrationRequestByFarmerNameselectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="FarmerRegistrationRequestByAdharIdSoapIn">
+    <wsdl:part name="parameters" element="tns:FarmerRegistrationRequestByAdharId" />
+  </wsdl:message>
+  <wsdl:message name="FarmerRegistrationRequestByAdharIdSoapOut">
+    <wsdl:part name="parameters" element="tns:FarmerRegistrationRequestByAdharIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="FarmerRegistrationRequestByMobileSoapIn">
+    <wsdl:part name="parameters" element="tns:FarmerRegistrationRequestByMobile" />
+  </wsdl:message>
+  <wsdl:message name="FarmerRegistrationRequestByMobileSoapOut">
+    <wsdl:part name="parameters" element="tns:FarmerRegistrationRequestByMobileResponse" />
+  </wsdl:message>
+  <wsdl:message name="FarmerLandRecordsSoapIn">
+    <wsdl:part name="parameters" element="tns:FarmerLandRecords" />
+  </wsdl:message>
+  <wsdl:message name="FarmerLandRecordsSoapOut">
+    <wsdl:part name="parameters" element="tns:FarmerLandRecordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="FarmerRegistrationRequestByIdHttpGetIn">
+    <wsdl:part name="FarmerId" type="s:string" />
+    <wsdl:part name="UserName" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FarmerRegistrationRequestByIdHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="FarmerRegistrationRequestByFarmerNameselectionHttpGetIn">
+    <wsdl:part name="UserName" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="DistId" type="s:string" />
+    <wsdl:part name="TehsilId" type="s:string" />
+    <wsdl:part name="villageId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FarmerRegistrationRequestByFarmerNameselectionHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="FarmerRegistrationRequestByAdharIdHttpGetIn">
+    <wsdl:part name="AdharId" type="s:string" />
+    <wsdl:part name="UserName" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FarmerRegistrationRequestByAdharIdHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="FarmerRegistrationRequestByMobileHttpGetIn">
+    <wsdl:part name="MobileNo" type="s:string" />
+    <wsdl:part name="UserName" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FarmerRegistrationRequestByMobileHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="FarmerLandRecordsHttpGetIn">
+    <wsdl:part name="UserName" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="FarmerId" type="s:string" />
+    <wsdl:part name="Crop_Code" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FarmerLandRecordsHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="FarmerRegistrationRequestByIdHttpPostIn">
+    <wsdl:part name="FarmerId" type="s:string" />
+    <wsdl:part name="UserName" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FarmerRegistrationRequestByIdHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="FarmerRegistrationRequestByFarmerNameselectionHttpPostIn">
+    <wsdl:part name="UserName" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="DistId" type="s:string" />
+    <wsdl:part name="TehsilId" type="s:string" />
+    <wsdl:part name="villageId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FarmerRegistrationRequestByFarmerNameselectionHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="FarmerRegistrationRequestByAdharIdHttpPostIn">
+    <wsdl:part name="AdharId" type="s:string" />
+    <wsdl:part name="UserName" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FarmerRegistrationRequestByAdharIdHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="FarmerRegistrationRequestByMobileHttpPostIn">
+    <wsdl:part name="MobileNo" type="s:string" />
+    <wsdl:part name="UserName" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FarmerRegistrationRequestByMobileHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="FarmerLandRecordsHttpPostIn">
+    <wsdl:part name="UserName" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="FarmerId" type="s:string" />
+    <wsdl:part name="Crop_Code" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FarmerLandRecordsHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:portType name="Web_Service_For_EmandiSoap">
+    <wsdl:operation name="FarmerRegistrationRequestById">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For giving data of farmer registration by FramerId</wsdl:documentation>
+      <wsdl:input message="tns:FarmerRegistrationRequestByIdSoapIn" />
+      <wsdl:output message="tns:FarmerRegistrationRequestByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FarmerRegistrationRequestByFarmerNameselection">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For giving data of farmer registration by FarmerName</wsdl:documentation>
+      <wsdl:input message="tns:FarmerRegistrationRequestByFarmerNameselectionSoapIn" />
+      <wsdl:output message="tns:FarmerRegistrationRequestByFarmerNameselectionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FarmerRegistrationRequestByAdharId">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For giving data of farmer registration by AdharId</wsdl:documentation>
+      <wsdl:input message="tns:FarmerRegistrationRequestByAdharIdSoapIn" />
+      <wsdl:output message="tns:FarmerRegistrationRequestByAdharIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FarmerRegistrationRequestByMobile">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For giving data of farmer registration by MobileNo</wsdl:documentation>
+      <wsdl:input message="tns:FarmerRegistrationRequestByMobileSoapIn" />
+      <wsdl:output message="tns:FarmerRegistrationRequestByMobileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FarmerLandRecords">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For giving data of farmer's landrecord by FramerId and cropCode</wsdl:documentation>
+      <wsdl:input message="tns:FarmerLandRecordsSoapIn" />
+      <wsdl:output message="tns:FarmerLandRecordsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="Web_Service_For_EmandiHttpGet">
+    <wsdl:operation name="FarmerRegistrationRequestById">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For giving data of farmer registration by FramerId</wsdl:documentation>
+      <wsdl:input message="tns:FarmerRegistrationRequestByIdHttpGetIn" />
+      <wsdl:output message="tns:FarmerRegistrationRequestByIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FarmerRegistrationRequestByFarmerNameselection">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For giving data of farmer registration by FarmerName</wsdl:documentation>
+      <wsdl:input message="tns:FarmerRegistrationRequestByFarmerNameselectionHttpGetIn" />
+      <wsdl:output message="tns:FarmerRegistrationRequestByFarmerNameselectionHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FarmerRegistrationRequestByAdharId">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For giving data of farmer registration by AdharId</wsdl:documentation>
+      <wsdl:input message="tns:FarmerRegistrationRequestByAdharIdHttpGetIn" />
+      <wsdl:output message="tns:FarmerRegistrationRequestByAdharIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FarmerRegistrationRequestByMobile">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For giving data of farmer registration by MobileNo</wsdl:documentation>
+      <wsdl:input message="tns:FarmerRegistrationRequestByMobileHttpGetIn" />
+      <wsdl:output message="tns:FarmerRegistrationRequestByMobileHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FarmerLandRecords">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For giving data of farmer's landrecord by FramerId and cropCode</wsdl:documentation>
+      <wsdl:input message="tns:FarmerLandRecordsHttpGetIn" />
+      <wsdl:output message="tns:FarmerLandRecordsHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="Web_Service_For_EmandiHttpPost">
+    <wsdl:operation name="FarmerRegistrationRequestById">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For giving data of farmer registration by FramerId</wsdl:documentation>
+      <wsdl:input message="tns:FarmerRegistrationRequestByIdHttpPostIn" />
+      <wsdl:output message="tns:FarmerRegistrationRequestByIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FarmerRegistrationRequestByFarmerNameselection">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For giving data of farmer registration by FarmerName</wsdl:documentation>
+      <wsdl:input message="tns:FarmerRegistrationRequestByFarmerNameselectionHttpPostIn" />
+      <wsdl:output message="tns:FarmerRegistrationRequestByFarmerNameselectionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FarmerRegistrationRequestByAdharId">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For giving data of farmer registration by AdharId</wsdl:documentation>
+      <wsdl:input message="tns:FarmerRegistrationRequestByAdharIdHttpPostIn" />
+      <wsdl:output message="tns:FarmerRegistrationRequestByAdharIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FarmerRegistrationRequestByMobile">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For giving data of farmer registration by MobileNo</wsdl:documentation>
+      <wsdl:input message="tns:FarmerRegistrationRequestByMobileHttpPostIn" />
+      <wsdl:output message="tns:FarmerRegistrationRequestByMobileHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FarmerLandRecords">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For giving data of farmer's landrecord by FramerId and cropCode</wsdl:documentation>
+      <wsdl:input message="tns:FarmerLandRecordsHttpPostIn" />
+      <wsdl:output message="tns:FarmerLandRecordsHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Web_Service_For_EmandiSoap" type="tns:Web_Service_For_EmandiSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FarmerRegistrationRequestById">
+      <soap:operation soapAction="http://tempuri.org/FarmerRegistrationRequestById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FarmerRegistrationRequestByFarmerNameselection">
+      <soap:operation soapAction="http://tempuri.org/FarmerRegistrationRequestByFarmerNameselection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FarmerRegistrationRequestByAdharId">
+      <soap:operation soapAction="http://tempuri.org/FarmerRegistrationRequestByAdharId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FarmerRegistrationRequestByMobile">
+      <soap:operation soapAction="http://tempuri.org/FarmerRegistrationRequestByMobile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FarmerLandRecords">
+      <soap:operation soapAction="http://tempuri.org/FarmerLandRecords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Web_Service_For_EmandiSoap12" type="tns:Web_Service_For_EmandiSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FarmerRegistrationRequestById">
+      <soap12:operation soapAction="http://tempuri.org/FarmerRegistrationRequestById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FarmerRegistrationRequestByFarmerNameselection">
+      <soap12:operation soapAction="http://tempuri.org/FarmerRegistrationRequestByFarmerNameselection" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FarmerRegistrationRequestByAdharId">
+      <soap12:operation soapAction="http://tempuri.org/FarmerRegistrationRequestByAdharId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FarmerRegistrationRequestByMobile">
+      <soap12:operation soapAction="http://tempuri.org/FarmerRegistrationRequestByMobile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FarmerLandRecords">
+      <soap12:operation soapAction="http://tempuri.org/FarmerLandRecords" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Web_Service_For_EmandiHttpGet" type="tns:Web_Service_For_EmandiHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="FarmerRegistrationRequestById">
+      <http:operation location="/FarmerRegistrationRequestById" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FarmerRegistrationRequestByFarmerNameselection">
+      <http:operation location="/FarmerRegistrationRequestByFarmerNameselection" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FarmerRegistrationRequestByAdharId">
+      <http:operation location="/FarmerRegistrationRequestByAdharId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FarmerRegistrationRequestByMobile">
+      <http:operation location="/FarmerRegistrationRequestByMobile" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FarmerLandRecords">
+      <http:operation location="/FarmerLandRecords" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Web_Service_For_EmandiHttpPost" type="tns:Web_Service_For_EmandiHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="FarmerRegistrationRequestById">
+      <http:operation location="/FarmerRegistrationRequestById" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FarmerRegistrationRequestByFarmerNameselection">
+      <http:operation location="/FarmerRegistrationRequestByFarmerNameselection" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FarmerRegistrationRequestByAdharId">
+      <http:operation location="/FarmerRegistrationRequestByAdharId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FarmerRegistrationRequestByMobile">
+      <http:operation location="/FarmerRegistrationRequestByMobile" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FarmerLandRecords">
+      <http:operation location="/FarmerLandRecords" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Web_Service_For_Emandi">
+    <wsdl:port name="Web_Service_For_EmandiSoap" binding="tns:Web_Service_For_EmandiSoap">
+      <soap:address location="http://mpeuparjan.nic.in/Web_Service_For_Emandi.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Web_Service_For_EmandiSoap12" binding="tns:Web_Service_For_EmandiSoap12">
+      <soap12:address location="http://mpeuparjan.nic.in/Web_Service_For_Emandi.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Web_Service_For_EmandiHttpGet" binding="tns:Web_Service_For_EmandiHttpGet">
+      <http:address location="http://mpeuparjan.nic.in/Web_Service_For_Emandi.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Web_Service_For_EmandiHttpPost" binding="tns:Web_Service_For_EmandiHttpPost">
+      <http:address location="http://mpeuparjan.nic.in/Web_Service_For_Emandi.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

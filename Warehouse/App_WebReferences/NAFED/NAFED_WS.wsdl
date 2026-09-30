@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="MasterDataState">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MasterDataStateResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="MasterDataDistrict">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MasterDataDistrictResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="MasterDataWarehouse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MasterDataWarehouseResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="MasterDataCommodity">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MasterDataCommodityResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="MasterDataClientDepositor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MasterDataClientDepositorResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="eWHRDataAPIToJson">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FromDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="ToDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="eWHRDataAPIToJsonResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="eWHRDataAPI">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="FromDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="ToDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="eWHRDataAPIResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="MasterDataStateSoapIn">
+    <wsdl:part name="parameters" element="tns:MasterDataState" />
+  </wsdl:message>
+  <wsdl:message name="MasterDataStateSoapOut">
+    <wsdl:part name="parameters" element="tns:MasterDataStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="MasterDataDistrictSoapIn">
+    <wsdl:part name="parameters" element="tns:MasterDataDistrict" />
+  </wsdl:message>
+  <wsdl:message name="MasterDataDistrictSoapOut">
+    <wsdl:part name="parameters" element="tns:MasterDataDistrictResponse" />
+  </wsdl:message>
+  <wsdl:message name="MasterDataWarehouseSoapIn">
+    <wsdl:part name="parameters" element="tns:MasterDataWarehouse" />
+  </wsdl:message>
+  <wsdl:message name="MasterDataWarehouseSoapOut">
+    <wsdl:part name="parameters" element="tns:MasterDataWarehouseResponse" />
+  </wsdl:message>
+  <wsdl:message name="MasterDataCommoditySoapIn">
+    <wsdl:part name="parameters" element="tns:MasterDataCommodity" />
+  </wsdl:message>
+  <wsdl:message name="MasterDataCommoditySoapOut">
+    <wsdl:part name="parameters" element="tns:MasterDataCommodityResponse" />
+  </wsdl:message>
+  <wsdl:message name="MasterDataClientDepositorSoapIn">
+    <wsdl:part name="parameters" element="tns:MasterDataClientDepositor" />
+  </wsdl:message>
+  <wsdl:message name="MasterDataClientDepositorSoapOut">
+    <wsdl:part name="parameters" element="tns:MasterDataClientDepositorResponse" />
+  </wsdl:message>
+  <wsdl:message name="eWHRDataAPIToJsonSoapIn">
+    <wsdl:part name="parameters" element="tns:eWHRDataAPIToJson" />
+  </wsdl:message>
+  <wsdl:message name="eWHRDataAPIToJsonSoapOut">
+    <wsdl:part name="parameters" element="tns:eWHRDataAPIToJsonResponse" />
+  </wsdl:message>
+  <wsdl:message name="eWHRDataAPISoapIn">
+    <wsdl:part name="parameters" element="tns:eWHRDataAPI" />
+  </wsdl:message>
+  <wsdl:message name="eWHRDataAPISoapOut">
+    <wsdl:part name="parameters" element="tns:eWHRDataAPIResponse" />
+  </wsdl:message>
+  <wsdl:message name="MasterDataStateHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MasterDataStateHttpGetOut" />
+  <wsdl:message name="MasterDataDistrictHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MasterDataDistrictHttpGetOut" />
+  <wsdl:message name="MasterDataWarehouseHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MasterDataWarehouseHttpGetOut" />
+  <wsdl:message name="MasterDataCommodityHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MasterDataCommodityHttpGetOut" />
+  <wsdl:message name="MasterDataClientDepositorHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MasterDataClientDepositorHttpGetOut" />
+  <wsdl:message name="eWHRDataAPIToJsonHttpGetIn">
+    <wsdl:part name="FromDate" type="s:string" />
+    <wsdl:part name="ToDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="eWHRDataAPIToJsonHttpGetOut" />
+  <wsdl:message name="eWHRDataAPIHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="FromDate" type="s:string" />
+    <wsdl:part name="ToDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="eWHRDataAPIHttpGetOut" />
+  <wsdl:message name="MasterDataStateHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MasterDataStateHttpPostOut" />
+  <wsdl:message name="MasterDataDistrictHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MasterDataDistrictHttpPostOut" />
+  <wsdl:message name="MasterDataWarehouseHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MasterDataWarehouseHttpPostOut" />
+  <wsdl:message name="MasterDataCommodityHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MasterDataCommodityHttpPostOut" />
+  <wsdl:message name="MasterDataClientDepositorHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MasterDataClientDepositorHttpPostOut" />
+  <wsdl:message name="eWHRDataAPIToJsonHttpPostIn">
+    <wsdl:part name="FromDate" type="s:string" />
+    <wsdl:part name="ToDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="eWHRDataAPIToJsonHttpPostOut" />
+  <wsdl:message name="eWHRDataAPIHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="FromDate" type="s:string" />
+    <wsdl:part name="ToDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="eWHRDataAPIHttpPostOut" />
+  <wsdl:portType name="NAFED_WSSoap">
+    <wsdl:operation name="MasterDataState">
+      <wsdl:input message="tns:MasterDataStateSoapIn" />
+      <wsdl:output message="tns:MasterDataStateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataDistrict">
+      <wsdl:input message="tns:MasterDataDistrictSoapIn" />
+      <wsdl:output message="tns:MasterDataDistrictSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataWarehouse">
+      <wsdl:input message="tns:MasterDataWarehouseSoapIn" />
+      <wsdl:output message="tns:MasterDataWarehouseSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataCommodity">
+      <wsdl:input message="tns:MasterDataCommoditySoapIn" />
+      <wsdl:output message="tns:MasterDataCommoditySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataClientDepositor">
+      <wsdl:input message="tns:MasterDataClientDepositorSoapIn" />
+      <wsdl:output message="tns:MasterDataClientDepositorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="eWHRDataAPIToJson">
+      <wsdl:input message="tns:eWHRDataAPIToJsonSoapIn" />
+      <wsdl:output message="tns:eWHRDataAPIToJsonSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="eWHRDataAPI">
+      <wsdl:input message="tns:eWHRDataAPISoapIn" />
+      <wsdl:output message="tns:eWHRDataAPISoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="NAFED_WSHttpGet">
+    <wsdl:operation name="MasterDataState">
+      <wsdl:input message="tns:MasterDataStateHttpGetIn" />
+      <wsdl:output message="tns:MasterDataStateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataDistrict">
+      <wsdl:input message="tns:MasterDataDistrictHttpGetIn" />
+      <wsdl:output message="tns:MasterDataDistrictHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataWarehouse">
+      <wsdl:input message="tns:MasterDataWarehouseHttpGetIn" />
+      <wsdl:output message="tns:MasterDataWarehouseHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataCommodity">
+      <wsdl:input message="tns:MasterDataCommodityHttpGetIn" />
+      <wsdl:output message="tns:MasterDataCommodityHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataClientDepositor">
+      <wsdl:input message="tns:MasterDataClientDepositorHttpGetIn" />
+      <wsdl:output message="tns:MasterDataClientDepositorHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="eWHRDataAPIToJson">
+      <wsdl:input message="tns:eWHRDataAPIToJsonHttpGetIn" />
+      <wsdl:output message="tns:eWHRDataAPIToJsonHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="eWHRDataAPI">
+      <wsdl:input message="tns:eWHRDataAPIHttpGetIn" />
+      <wsdl:output message="tns:eWHRDataAPIHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="NAFED_WSHttpPost">
+    <wsdl:operation name="MasterDataState">
+      <wsdl:input message="tns:MasterDataStateHttpPostIn" />
+      <wsdl:output message="tns:MasterDataStateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataDistrict">
+      <wsdl:input message="tns:MasterDataDistrictHttpPostIn" />
+      <wsdl:output message="tns:MasterDataDistrictHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataWarehouse">
+      <wsdl:input message="tns:MasterDataWarehouseHttpPostIn" />
+      <wsdl:output message="tns:MasterDataWarehouseHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataCommodity">
+      <wsdl:input message="tns:MasterDataCommodityHttpPostIn" />
+      <wsdl:output message="tns:MasterDataCommodityHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataClientDepositor">
+      <wsdl:input message="tns:MasterDataClientDepositorHttpPostIn" />
+      <wsdl:output message="tns:MasterDataClientDepositorHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="eWHRDataAPIToJson">
+      <wsdl:input message="tns:eWHRDataAPIToJsonHttpPostIn" />
+      <wsdl:output message="tns:eWHRDataAPIToJsonHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="eWHRDataAPI">
+      <wsdl:input message="tns:eWHRDataAPIHttpPostIn" />
+      <wsdl:output message="tns:eWHRDataAPIHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NAFED_WSSoap" type="tns:NAFED_WSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="MasterDataState">
+      <soap:operation soapAction="http://tempuri.org/MasterDataState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataDistrict">
+      <soap:operation soapAction="http://tempuri.org/MasterDataDistrict" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataWarehouse">
+      <soap:operation soapAction="http://tempuri.org/MasterDataWarehouse" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataCommodity">
+      <soap:operation soapAction="http://tempuri.org/MasterDataCommodity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataClientDepositor">
+      <soap:operation soapAction="http://tempuri.org/MasterDataClientDepositor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="eWHRDataAPIToJson">
+      <soap:operation soapAction="http://tempuri.org/eWHRDataAPIToJson" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="eWHRDataAPI">
+      <soap:operation soapAction="http://tempuri.org/eWHRDataAPI" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NAFED_WSSoap12" type="tns:NAFED_WSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="MasterDataState">
+      <soap12:operation soapAction="http://tempuri.org/MasterDataState" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataDistrict">
+      <soap12:operation soapAction="http://tempuri.org/MasterDataDistrict" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataWarehouse">
+      <soap12:operation soapAction="http://tempuri.org/MasterDataWarehouse" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataCommodity">
+      <soap12:operation soapAction="http://tempuri.org/MasterDataCommodity" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataClientDepositor">
+      <soap12:operation soapAction="http://tempuri.org/MasterDataClientDepositor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="eWHRDataAPIToJson">
+      <soap12:operation soapAction="http://tempuri.org/eWHRDataAPIToJson" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="eWHRDataAPI">
+      <soap12:operation soapAction="http://tempuri.org/eWHRDataAPI" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NAFED_WSHttpGet" type="tns:NAFED_WSHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="MasterDataState">
+      <http:operation location="/MasterDataState" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataDistrict">
+      <http:operation location="/MasterDataDistrict" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataWarehouse">
+      <http:operation location="/MasterDataWarehouse" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataCommodity">
+      <http:operation location="/MasterDataCommodity" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataClientDepositor">
+      <http:operation location="/MasterDataClientDepositor" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="eWHRDataAPIToJson">
+      <http:operation location="/eWHRDataAPIToJson" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="eWHRDataAPI">
+      <http:operation location="/eWHRDataAPI" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NAFED_WSHttpPost" type="tns:NAFED_WSHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="MasterDataState">
+      <http:operation location="/MasterDataState" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataDistrict">
+      <http:operation location="/MasterDataDistrict" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataWarehouse">
+      <http:operation location="/MasterDataWarehouse" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataCommodity">
+      <http:operation location="/MasterDataCommodity" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="MasterDataClientDepositor">
+      <http:operation location="/MasterDataClientDepositor" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="eWHRDataAPIToJson">
+      <http:operation location="/eWHRDataAPIToJson" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="eWHRDataAPI">
+      <http:operation location="/eWHRDataAPI" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="NAFED_WS">
+    <wsdl:port name="NAFED_WSSoap" binding="tns:NAFED_WSSoap">
+      <soap:address location="http://localhost:49771/NAFED_WS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="NAFED_WSSoap12" binding="tns:NAFED_WSSoap12">
+      <soap12:address location="https://mpwarehousing.mp.gov.in/warehouse/NAFED_WS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="NAFED_WSHttpGet" binding="tns:NAFED_WSHttpGet">
+      <http:address location="https://mpwarehousing.mp.gov.in/warehouse/NAFED_WS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="NAFED_WSHttpPost" binding="tns:NAFED_WSHttpPost">
+      <http:address location="https://mpwarehousing.mp.gov.in/warehouse/NAFED_WS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

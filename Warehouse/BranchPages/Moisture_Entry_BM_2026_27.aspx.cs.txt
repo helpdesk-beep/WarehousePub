@@ -1,0 +1,513 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+public partial class Moisture_Entry_BM_2026_27 : System.Web.UI.Page
+{
+    string conStr =
+      ConfigurationManager.ConnectionStrings["WLCGodownGatePass103"]
+      .ConnectionString;
+    string branchid = "";
+    //string branchid = "2308002";
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        try
+        {
+            if (Session["BranchId"] == null)
+            {
+                Response.Redirect("~/Login.aspx");
+                return;
+            }
+
+            branchid = Session["BranchId"].ToString();
+
+            if (!IsPostBack)
+            {
+                txtAvgMoisture.Attributes.Add("type", "number");
+                txtFCIMoisture.Attributes.Add("type", "number");
+
+                txtAvgMoisture.Attributes.Add("step", "0.01");
+                txtFCIMoisture.Attributes.Add("step", "0.01");
+
+                txtAvgMoisture.Attributes.Add("min", "0");
+                txtFCIMoisture.Attributes.Add("min", "0");
+
+                txtAvgMoisture.Attributes.Add("max", "100");
+                txtFCIMoisture.Attributes.Add("max", "100");
+
+                LoadGodown(branchid);
+                LoadGrid();
+            }
+        }
+        catch (Exception ex)
+        {
+            ShowMessage(ex.Message);
+        }
+    }
+    private void LoadGodown(string branchid)
+    {
+        string query = "select Godown_ID as  GodownId, Godown_Name as GodownName from Intergrated_MP_STORAGE.dbo.tbl_MetaData_GODOWN_2018\r\nWHERE BranchID=@BranchID order by Godown_Name";
+        using (SqlConnection conn = new SqlConnection(conStr))
+        using (SqlCommand cmd = new SqlCommand(query, conn))
+        {
+
+            cmd.Parameters.AddWithValue(
+                "@BranchID",
+                branchid);
+
+            DataTable dt = new DataTable();
+            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+            adp.Fill(dt);
+
+            ddlGodown.DataSource = dt;
+            ddlGodown.DataTextField = "GodownName";
+            ddlGodown.DataValueField = "GodownId";
+            ddlGodown.DataBind();
+
+            ddlGodown.Items.Insert(0,
+                new ListItem("--Select--", ""));
+        }
+    }
+    protected void ddlGodown_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        string godownid=ddlGodown.SelectedValue;
+        string query = "SELECT\r\n    TT.Depotid,\r\n    TT.BranchID,\r\n    TT.Godown_Name,\r\n    TT.Godown_Name + ' - ' + TT.Godown_ID AS Godown_Display,\r\n    TT.Godown_ID,\r\n    TT.Stack_ID,\r\n    TT.District_Id,\r\n    TT.Stack_Name,\r\n    TT.Commodity_Id,\r\n    TT.Commodity_Name,\r\n\r\n    SF.Stack_Moisture_Per,\r\n    CONVERT(VARCHAR(10), SF.DM_Record_Date, 103) AS DM_Record_Date,\r\n\r\n    TT.recbags,\r\n    TT.recweght,\r\n    TT.delbags,\r\n    TT.delwght,\r\n\r\n    CONVERT(VARCHAR(10), TT.Stack_Creation_Date, 105) AS Stack_Completion_Date,\r\n\r\n    SF.Bags,\r\n    SF.Weight,\r\n    SF.AVGStack_moisture_per\r\n\r\nFROM\r\n(\r\n    SELECT\r\n        WHR.GodownID AS Godown_ID,\r\n        SSD.Stack_ID,\r\n\r\n        MAX(WHR.Depotid) AS Depotid,\r\n        MAX(WHR.BranchID) AS BranchID,\r\n        MAX(Gdn.Godown_Name) AS Godown_Name,\r\n        MAX(WHR.District_Id) AS District_Id,\r\n        MAX(ST.Stack_Name) AS Stack_Name,\r\n        MAX(C.Commodity_Name) AS Commodity_Name,\r\n        MAX(WHR.Commodity_Id) AS Commodity_Id,\r\n\r\n        SUM(ISNULL(SSD.Bags,0)) AS recbags,\r\n        SUM(ISNULL(SSD.Weight,0)) AS recweght,\r\n\r\n        SUM(ISNULL(delbags.bags,0)) AS delbags,\r\n        SUM(ISNULL(delbags.wet2,0)) AS delwght,\r\n\r\n        MAX(WHR.WHR_Issue_Date) AS Stack_Creation_Date\r\n\r\n    FROM Intergrated_MP_STORAGE.dbo.tbl_storage_Depositor_WHR_Relation WHR\r\n\r\n    INNER JOIN\r\n    (\r\n        SELECT\r\n            WHRId,\r\n            Stack_ID,\r\n            SUM(Bags) AS Bags,\r\n            SUM(Weight) AS Weight\r\n        FROM Intergrated_MP_STORAGE.dbo.tbl_storage_Stacking_Details\r\n        GROUP BY WHRId, Stack_ID\r\n    ) SSD\r\n        ON WHR.Depositor_WHR_Id = SSD.WHRId\r\n\r\n    INNER JOIN Intergrated_MP_STORAGE.dbo.tbl_MetaData_GODOWN_2018 Gdn\r\n        ON Gdn.Godown_ID = WHR.GodownID\r\n\r\n    INNER JOIN Intergrated_MP_STORAGE.dbo.tbl_MetaData_STACK ST\r\n        ON ST.Stack_ID = SSD.Stack_ID\r\n\r\n    INNER JOIN Intergrated_MP_STORAGE.dbo.tbl_MetaData_STORAGE_COMMODITY C\r\n        ON C.Commodity_Id = WHR.Commodity_Id\r\n\r\n    LEFT JOIN\r\n    (\r\n        SELECT\r\n            DSD.Stack_ID,\r\n            DSD.Depositor_WHR_Id,\r\n            SUM(DSD.No_Of_Bags) AS bags,\r\n            ISNULL(\r\n                (SUM(DSD.Bags_Weight) - SUM(DSD.Gain))\r\n                + SUM(DSD.Loss),\r\n                0\r\n            ) AS wet2\r\n        FROM Intergrated_MP_STORAGE.dbo.tbl_Delivery_Stacking_Details_GatePass DSD\r\n\r\n        INNER JOIN Intergrated_MP_STORAGE.dbo.tbl_Storage_GatePass_Enrty GP\r\n            ON GP.GatePass_No = DSD.GatePass_No\r\n\r\n        WHERE GP.Status='Active'\r\n\r\n        GROUP BY\r\n            DSD.Stack_ID,\r\n            DSD.Depositor_WHR_Id\r\n    ) delbags\r\n        ON SSD.Stack_ID = delbags.Stack_ID\r\n       AND delbags.Depositor_WHR_Id = WHR.Depositor_WHR_Id\r\n\r\n    WHERE\r\n        WHR.GodownID = @Godown_ID\r\n        AND ST.Stack_Killed='N'\r\n        AND WHR.CropYear='2026-27'\r\n        AND (ISNULL(SSD.Bags,0)-ISNULL(delbags.bags,0)) > 0\r\n        AND (ISNULL(SSD.Weight,0)-ISNULL(delbags.wet2,0)) > 0\r\n\r\n    GROUP BY\r\n        WHR.GodownID,\r\n        SSD.Stack_ID\r\n\r\n) TT\r\n\r\nLEFT JOIN\r\n(\r\n    SELECT\r\n        Godown_ID,\r\n        Stack_ID,\r\n        Stack_Moisture_Per,\r\n        DM_Record_Date,\r\n        Bags,\r\n        Weight,\r\n        AVGStack_moisture_per\r\n    FROM\r\n    (\r\n        SELECT *,\r\n               ROW_NUMBER() OVER\r\n               (\r\n                   PARTITION BY Godown_ID, Stack_ID\r\n                   ORDER BY DM_Record_Date DESC\r\n               ) rn\r\n        FROM WLCGodownGatePass.dbo.tbl_Stack_Wise_Moisture_Entry_By_BM\r\n    ) X\r\n    WHERE rn = 1\r\n) SF\r\nON TT.Godown_ID = SF.Godown_ID\r\nAND TT.Stack_ID = SF.Stack_ID\r\n\r\nWHERE\r\nNOT EXISTS\r\n(\r\n    SELECT 1\r\n    FROM WLCGodownGatePass.dbo.tbl_Stack_Wise_Moisture_Entry_By_BM BM\r\n    WHERE BM.Godown_ID = TT.Godown_ID\r\n      AND BM.Stack_ID = TT.Stack_ID\r\n      AND BM.Recorded_By = 'General'\r\n      AND BM.Recorded_for = 'S'\r\n)\r\n\r\nAND NOT EXISTS\r\n(\r\n    SELECT 1\r\n    FROM dbo.tbl_FCI_Moisture_Entry_web WEB\r\n    WHERE CAST(WEB.GodownId AS VARCHAR(20)) = TT.Godown_ID\r\n      AND CAST(WEB.StackId AS VARCHAR(30)) = TT.Stack_ID\r\n)\r\n\r\nORDER BY TT.Stack_ID;";
+        using (SqlConnection conn = new SqlConnection(conStr))
+        using (SqlCommand cmd = new SqlCommand(query, conn))
+        {
+
+            cmd.Parameters.AddWithValue(
+                "@Godown_ID",
+                godownid);
+
+            DataTable dt = new DataTable();
+            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+            adp.Fill(dt);
+            ViewState["StackData"] = dt;
+            ddlStack.DataSource = dt;
+            ddlStack.DataTextField = "Stack_Name";
+            ddlStack.DataValueField = "Stack_ID";
+            ddlStack.DataBind();
+
+            ddlStack.Items.Insert(0,
+                new ListItem("--Select--", ""));
+        }
+        
+    }
+    protected void ddlStack_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (ddlStack.SelectedIndex <= 0)
+            return;
+
+        DataTable dt = ViewState["StackData"] as DataTable;
+
+        if (dt == null)
+            return;
+
+        DataRow[] rows = dt.Select(
+            "Stack_ID='" + ddlStack.SelectedValue.Replace("'", "''") + "'");
+
+        if (rows.Length > 0)
+        {
+            lblStackId.Text = rows[0]["Stack_ID"].ToString();
+
+            lblStackName.Text = rows[0]["Stack_Name"].ToString();
+
+            lblBags.Text =
+                (Convert.ToDecimal(rows[0]["recbags"])
+                - Convert.ToDecimal(rows[0]["delbags"]))
+                .ToString();
+
+            lblQty.Text =
+                (Convert.ToDecimal(rows[0]["recweght"])
+                - Convert.ToDecimal(rows[0]["delwght"]))
+                .ToString("0.00");
+
+            txtStackCompletionDate.Text =
+                rows[0]["Stack_Completion_Date"].ToString();
+
+            lblCommodity.Text =
+                rows[0]["Commodity_Name"].ToString();
+
+            ViewState["CommodityId"] =
+                rows[0]["Commodity_Id"].ToString();
+        }
+    }
+    protected void btnSave_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            DataTable dt = Session["TempStack"] as DataTable;
+
+            if (dt == null || dt.Rows.Count == 0)
+            {
+                ShowMessage("No data to save");
+                return;
+            }
+
+            SqlConnection con = new SqlConnection(conStr);
+            con.Open();
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                DataRow dr = dt.Rows[i];
+
+                SqlCommand cmd = new SqlCommand(@"
+                INSERT INTO tbl_FCI_Moisture_Entry_web
+                (
+                    BranchId, GodownId, CommodityId, StackId, StackName,
+                    Bags, StackQty, MoistureDate, AvgMoisture,
+                    SentFCI, SentDate, IsFCIChecked,
+                    FCICheckDate, FCIMoisture,
+                    BranchDocument, FCIDocument,
+                    StackCompletionDate
+                )
+                VALUES
+                (
+                    @BranchId, @GodownId, @CommodityId, @StackId, @StackName,
+                    @Bags, @StackQty, @MoistureDate, @AvgMoisture,
+                    @SentFCI, @SentDate, @IsFCIChecked,
+                    @FCICheckDate, @FCIMoisture,
+                    @BranchDocument, @FCIDocument,
+                    @StackCompletionDate
+                )", con);
+
+                cmd.Parameters.AddWithValue("@BranchId", branchid);
+                cmd.Parameters.AddWithValue("@GodownId", dr["GodownId"]);
+                cmd.Parameters.AddWithValue("@CommodityId", dr["CommodityId"]);
+                cmd.Parameters.AddWithValue("@StackId", dr["StackId"]);
+                cmd.Parameters.AddWithValue("@StackName", dr["StackName"]);
+
+                cmd.Parameters.AddWithValue("@Bags", dr["Bags"]);
+                cmd.Parameters.AddWithValue("@StackQty", dr["Qty"]);
+
+                cmd.Parameters.AddWithValue("@MoistureDate", Convert.ToDateTime(dr["MoistureDate"]));
+                cmd.Parameters.AddWithValue("@AvgMoisture", Convert.ToDecimal(dr["AvgMoisture"]));
+
+                cmd.Parameters.AddWithValue("@SentFCI", dr["SentFCI"]);
+                cmd.Parameters.AddWithValue("@SentDate", Convert.ToDateTime(dr["SentDate"]));
+                cmd.Parameters.AddWithValue("@IsFCIChecked", dr["FCIChecked"]);
+
+                if (dr["FCIChecked"].ToString() == "Y")
+                {
+                    cmd.Parameters.AddWithValue("@FCICheckDate", Convert.ToDateTime(dr["FCICheckDate"]));
+                    cmd.Parameters.AddWithValue("@FCIMoisture", Convert.ToDecimal(dr["FCIMoisture"]));
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@FCICheckDate", DBNull.Value);
+                    cmd.Parameters.AddWithValue("@FCIMoisture", DBNull.Value);
+                }
+
+                // Documents
+                SqlParameter p1 = new SqlParameter("@BranchDocument", SqlDbType.VarBinary);
+                if (dr["BranchDocument"] != DBNull.Value)
+                    p1.Value = dr["BranchDocument"];
+                else
+                    p1.Value = DBNull.Value;
+
+                cmd.Parameters.Add(p1);
+
+                SqlParameter p2 = new SqlParameter("@FCIDocument", SqlDbType.VarBinary);
+                if (dr["FCIDocument"] != DBNull.Value)
+                    p2.Value = dr["FCIDocument"];
+                else
+                    p2.Value = DBNull.Value;
+
+                cmd.Parameters.Add(p2);
+
+                cmd.Parameters.AddWithValue("@StackCompletionDate", txtStackCompletionDate.Text);
+
+                cmd.ExecuteNonQuery();
+            }
+
+            con.Close();
+
+            Session["TempStack"] = null;
+            gvTempStack.DataSource = null;
+            gvTempStack.DataBind();
+
+            LoadGrid();
+
+            ShowMessage("Saved successfully");
+        }
+        catch (Exception ex)
+        {
+            ShowMessage(ex.Message);
+        }
+    }
+    private void LoadGrid()
+    {
+        SqlConnection con = new SqlConnection(conStr);
+
+        SqlDataAdapter da = new SqlDataAdapter(
+        @"SELECT *
+      FROM tbl_FCI_Moisture_Entry_web
+      ORDER BY M_ID DESC", con);
+
+        DataTable dt = new DataTable();
+
+        da.Fill(dt);
+
+        gvData.DataSource = dt;
+        gvData.DataBind();
+    }
+    private void ClearForm()
+    {
+        ddlStack.Items.Clear();
+
+        lblStackId.Text = "";
+        lblStackName.Text = "";
+        lblCommodity.Text = "";
+        lblBags.Text = "";
+        lblQty.Text = "";
+
+        txtStackCompletionDate.Text = "";
+
+        txtMoistureDate.Text = "";
+        txtAvgMoisture.Text = "";
+
+        ddlSentFCI.SelectedIndex = 0;
+        txtSentDate.Text = "";
+
+        ddlFCIChecked.SelectedIndex = 0;
+        txtFCICheckDate.Text = "";
+        txtFCIMoisture.Text = "";
+    }
+    private void ShowMessage(string message)
+    {
+        ScriptManager.RegisterStartupScript(
+            this,
+            this.GetType(),
+            "msg",
+            "alert('" + message.Replace("'", "\\'") + "');",
+            true);
+    }
+
+    private bool IsPdfFile(FileUpload fu)
+    {
+        if (!fu.HasFile)
+            return false;
+
+        string ext = System.IO.Path.GetExtension(fu.FileName).ToLower();
+
+        return ext == ".pdf";
+    }
+    private bool IsAlreadySaved()
+    {
+        bool result = false;
+
+        using (SqlConnection con = new SqlConnection(conStr))
+        {
+            SqlCommand cmd = new SqlCommand(
+            @"SELECT COUNT(*)
+          FROM tbl_FCI_Moisture_Entry_web
+          WHERE GodownId=@GodownId
+          AND StackId=@StackId", con);
+
+            cmd.Parameters.AddWithValue("@GodownId", ddlGodown.SelectedValue);
+            cmd.Parameters.AddWithValue("@StackId", ddlStack.SelectedValue);
+
+            con.Open();
+
+            object obj = cmd.ExecuteScalar();
+
+            int cnt = 0;
+
+            if (obj != null)
+            {
+                cnt = Convert.ToInt32(obj);
+            }
+
+            if (cnt > 0)
+            {
+                result = true;
+            }
+        }
+
+        return result;
+    }
+    private DataTable GetTempTable()
+    {
+        DataTable dt = Session["TempStack"] as DataTable;
+
+        if (dt == null)
+        {
+            dt = new DataTable();
+
+            dt.Columns.Add("GodownId");
+            dt.Columns.Add("GodownName");
+
+            dt.Columns.Add("StackId");
+            dt.Columns.Add("StackName");
+
+            dt.Columns.Add("CommodityId");
+            dt.Columns.Add("Commodity");
+
+            dt.Columns.Add("Bags");
+            dt.Columns.Add("Qty");
+
+            dt.Columns.Add("MoistureDate");
+            dt.Columns.Add("AvgMoisture");
+
+            dt.Columns.Add("SentFCI");
+            dt.Columns.Add("SentDate");
+
+            dt.Columns.Add("FCIChecked");
+            dt.Columns.Add("FCICheckDate");
+            dt.Columns.Add("FCIMoisture");
+
+            dt.Columns.Add("BranchDocument", typeof(byte[]));
+            dt.Columns.Add("FCIDocument", typeof(byte[]));
+
+            Session["TempStack"] = dt;
+        }
+
+        return dt;
+    }
+    protected void btnAddStack_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            if (ddlGodown.SelectedIndex <= 0)
+            {
+                ShowMessage("Select Godown");
+                return;
+            }
+
+            if (ddlStack.SelectedIndex <= 0)
+            {
+                ShowMessage("Select Stack");
+                return;
+            }
+
+            if (txtMoistureDate.Text.Trim() == "")
+            {
+                ShowMessage("Select Moisture Date");
+                return;
+            }
+
+            if (txtAvgMoisture.Text.Trim() == "")
+            {
+                ShowMessage("Enter Avg Moisture");
+                return;
+            }
+            if (fuBranchDoc.HasFile)
+            {
+                if (!IsPdfFile(fuBranchDoc))
+                {
+                    ShowMessage("Branch document PDF only allowed");
+                    return;
+                }
+            }
+
+            if (fuFCIDoc.HasFile)
+            {
+                if (!IsPdfFile(fuFCIDoc))
+                {
+                    ShowMessage("FCI document PDF only allowed");
+                    return;
+                }
+            }
+            DataTable dt = GetTempTable();
+
+            DataRow[] exist = dt.Select(
+                "StackId='" + ddlStack.SelectedValue.Replace("'", "''") + "'");
+
+            if (exist.Length > 0)
+            {
+                ShowMessage("Stack already added");
+                return;
+            }
+            if (IsAlreadySaved())
+            {
+                ShowMessage("This stack already exists in database.");
+                return;
+            }
+            byte[] branchDoc = null;
+            byte[] fciDoc = null;
+
+            if (fuBranchDoc.HasFile)
+            {
+                branchDoc = fuBranchDoc.FileBytes;
+            }
+
+            if (fuFCIDoc.HasFile)
+            {
+                fciDoc = fuFCIDoc.FileBytes;
+            }
+
+            DataRow dr = dt.NewRow();
+
+            dr["GodownId"] = ddlGodown.SelectedValue;
+            dr["GodownName"] = ddlGodown.SelectedItem.Text;
+
+            dr["StackId"] = ddlStack.SelectedValue;
+            dr["StackName"] = lblStackName.Text;
+
+            dr["CommodityId"] = ViewState["CommodityId"].ToString();
+            dr["Commodity"] = lblCommodity.Text;
+
+            dr["Bags"] = lblBags.Text;
+            dr["Qty"] = lblQty.Text;
+
+            dr["MoistureDate"] = txtMoistureDate.Text.Trim();
+            dr["AvgMoisture"] = txtAvgMoisture.Text.Trim();
+
+            dr["SentFCI"] = ddlSentFCI.SelectedValue;
+            dr["SentDate"] = txtSentDate.Text.Trim();
+
+            dr["FCIChecked"] = ddlFCIChecked.SelectedValue;
+            dr["FCICheckDate"] = txtFCICheckDate.Text.Trim();
+            dr["FCIMoisture"] = txtFCIMoisture.Text.Trim();
+
+            dr["BranchDocument"] = branchDoc;
+            dr["FCIDocument"] = fciDoc;
+
+            dt.Rows.Add(dr);
+
+            Session["TempStack"] = dt;
+
+            gvTempStack.DataSource = dt;
+            gvTempStack.DataBind();
+
+            ClearForNextStack();
+
+            ShowMessage("Stack added successfully");
+        }
+        catch (Exception ex)
+        {
+            ShowMessage(ex.Message);
+        }
+    }
+    private void ClearForNextStack()
+    {
+        //ddlStack.Items.Clear();
+        // ddlStack.Items.Insert(0, new ListItem("--Select--", ""));
+        ddlStack.SelectedIndex = 0;
+        lblStackId.Text = "";
+        lblStackName.Text = "";
+        lblCommodity.Text = "";
+        lblBags.Text = "";
+        lblQty.Text = "";
+
+        txtMoistureDate.Text = "";
+        txtAvgMoisture.Text = "";
+
+        ddlSentFCI.SelectedIndex = 0;
+        txtSentDate.Text = "";
+
+        ddlFCIChecked.SelectedIndex = 0;
+        txtFCICheckDate.Text = "";
+        txtFCIMoisture.Text = "";
+
+    }
+
+
+}

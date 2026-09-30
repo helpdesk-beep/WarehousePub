@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://164.100.196.118/mpeuparjan/WH_micro_srv/SendSms_Service_WareHouse.asmx?wsdl" docRef="http://164.100.196.118/mpeuparjan/WH_micro_srv/SendSms_Service_WareHouse.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://164.100.196.118/mpeuparjan/WH_micro_srv/SendSms_Service_WareHouse.asmx" xmlns:q1="http://tempuri.org/" binding="q1:SendSms_Service_WareHouseSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://164.100.196.118/mpeuparjan/WH_micro_srv/SendSms_Service_WareHouse.asmx" xmlns:q2="http://tempuri.org/" binding="q2:SendSms_Service_WareHouseSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Sms">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppPwd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Mobileno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="msg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tmpltID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SmsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SmsResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SecuredWebServiceHeader" type="tns:SecuredWebServiceHeader" />
+      <s:complexType name="SecuredWebServiceHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="SmsOTP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppPwd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Mobileno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="msg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tmpltID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SmsOTPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SmsOTPResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SmsCDAC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppPwd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Mobileno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="msg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ip" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SMSuser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tmpltID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SmsCDACResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SmsCDACResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SmsOTPCDAC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppPwd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Mobileno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="msg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ip" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SMSuser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tmpltID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SmsOTPCDACResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SmsOTPCDACResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="boolean" type="s:boolean" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SmsSoapIn">
+    <wsdl:part name="parameters" element="tns:Sms" />
+  </wsdl:message>
+  <wsdl:message name="SmsSoapOut">
+    <wsdl:part name="parameters" element="tns:SmsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SmsSecuredWebServiceHeader">
+    <wsdl:part name="SecuredWebServiceHeader" element="tns:SecuredWebServiceHeader" />
+  </wsdl:message>
+  <wsdl:message name="SmsOTPSoapIn">
+    <wsdl:part name="parameters" element="tns:SmsOTP" />
+  </wsdl:message>
+  <wsdl:message name="SmsOTPSoapOut">
+    <wsdl:part name="parameters" element="tns:SmsOTPResponse" />
+  </wsdl:message>
+  <wsdl:message name="SmsOTPSecuredWebServiceHeader">
+    <wsdl:part name="SecuredWebServiceHeader" element="tns:SecuredWebServiceHeader" />
+  </wsdl:message>
+  <wsdl:message name="SmsCDACSoapIn">
+    <wsdl:part name="parameters" element="tns:SmsCDAC" />
+  </wsdl:message>
+  <wsdl:message name="SmsCDACSoapOut">
+    <wsdl:part name="parameters" element="tns:SmsCDACResponse" />
+  </wsdl:message>
+  <wsdl:message name="SmsOTPCDACSoapIn">
+    <wsdl:part name="parameters" element="tns:SmsOTPCDAC" />
+  </wsdl:message>
+  <wsdl:message name="SmsOTPCDACSoapOut">
+    <wsdl:part name="parameters" element="tns:SmsOTPCDACResponse" />
+  </wsdl:message>
+  <wsdl:message name="SmsHttpGetIn">
+    <wsdl:part name="UserName" type="s:string" />
+    <wsdl:part name="AppPwd" type="s:string" />
+    <wsdl:part name="Mobileno" type="s:string" />
+    <wsdl:part name="msg" type="s:string" />
+    <wsdl:part name="tmpltID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SmsHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SmsOTPHttpGetIn">
+    <wsdl:part name="UserName" type="s:string" />
+    <wsdl:part name="AppPwd" type="s:string" />
+    <wsdl:part name="Mobileno" type="s:string" />
+    <wsdl:part name="msg" type="s:string" />
+    <wsdl:part name="tmpltID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SmsOTPHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SmsCDACHttpGetIn">
+    <wsdl:part name="UserName" type="s:string" />
+    <wsdl:part name="AppPwd" type="s:string" />
+    <wsdl:part name="Mobileno" type="s:string" />
+    <wsdl:part name="msg" type="s:string" />
+    <wsdl:part name="ip" type="s:string" />
+    <wsdl:part name="SMSuser" type="s:string" />
+    <wsdl:part name="tmpltID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SmsCDACHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SmsOTPCDACHttpGetIn">
+    <wsdl:part name="UserName" type="s:string" />
+    <wsdl:part name="AppPwd" type="s:string" />
+    <wsdl:part name="Mobileno" type="s:string" />
+    <wsdl:part name="msg" type="s:string" />
+    <wsdl:part name="ip" type="s:string" />
+    <wsdl:part name="SMSuser" type="s:string" />
+    <wsdl:part name="tmpltID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SmsOTPCDACHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SmsHttpPostIn">
+    <wsdl:part name="UserName" type="s:string" />
+    <wsdl:part name="AppPwd" type="s:string" />
+    <wsdl:part name="Mobileno" type="s:string" />
+    <wsdl:part name="msg" type="s:string" />
+    <wsdl:part name="tmpltID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SmsHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SmsOTPHttpPostIn">
+    <wsdl:part name="UserName" type="s:string" />
+    <wsdl:part name="AppPwd" type="s:string" />
+    <wsdl:part name="Mobileno" type="s:string" />
+    <wsdl:part name="msg" type="s:string" />
+    <wsdl:part name="tmpltID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SmsOTPHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SmsCDACHttpPostIn">
+    <wsdl:part name="UserName" type="s:string" />
+    <wsdl:part name="AppPwd" type="s:string" />
+    <wsdl:part name="Mobileno" type="s:string" />
+    <wsdl:part name="msg" type="s:string" />
+    <wsdl:part name="ip" type="s:string" />
+    <wsdl:part name="SMSuser" type="s:string" />
+    <wsdl:part name="tmpltID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SmsCDACHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SmsOTPCDACHttpPostIn">
+    <wsdl:part name="UserName" type="s:string" />
+    <wsdl:part name="AppPwd" type="s:string" />
+    <wsdl:part name="Mobileno" type="s:string" />
+    <wsdl:part name="msg" type="s:string" />
+    <wsdl:part name="ip" type="s:string" />
+    <wsdl:part name="SMSuser" type="s:string" />
+    <wsdl:part name="tmpltID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SmsOTPCDACHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:portType name="SendSms_MicroServiceSoap">
+    <wsdl:operation name="Sms">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For sending SMS</wsdl:documentation>
+      <wsdl:input message="tns:SmsSoapIn" />
+      <wsdl:output message="tns:SmsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SmsOTP">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For sending SMS</wsdl:documentation>
+      <wsdl:input message="tns:SmsOTPSoapIn" />
+      <wsdl:output message="tns:SmsOTPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SmsCDAC">
+      <wsdl:input message="tns:SmsCDACSoapIn" />
+      <wsdl:output message="tns:SmsCDACSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SmsOTPCDAC">
+      <wsdl:input message="tns:SmsOTPCDACSoapIn" />
+      <wsdl:output message="tns:SmsOTPCDACSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SendSms_MicroServiceHttpGet">
+    <wsdl:operation name="Sms">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For sending SMS</wsdl:documentation>
+      <wsdl:input message="tns:SmsHttpGetIn" />
+      <wsdl:output message="tns:SmsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SmsOTP">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For sending SMS</wsdl:documentation>
+      <wsdl:input message="tns:SmsOTPHttpGetIn" />
+      <wsdl:output message="tns:SmsOTPHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SmsCDAC">
+      <wsdl:input message="tns:SmsCDACHttpGetIn" />
+      <wsdl:output message="tns:SmsCDACHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SmsOTPCDAC">
+      <wsdl:input message="tns:SmsOTPCDACHttpGetIn" />
+      <wsdl:output message="tns:SmsOTPCDACHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SendSms_MicroServiceHttpPost">
+    <wsdl:operation name="Sms">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For sending SMS</wsdl:documentation>
+      <wsdl:input message="tns:SmsHttpPostIn" />
+      <wsdl:output message="tns:SmsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SmsOTP">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For sending SMS</wsdl:documentation>
+      <wsdl:input message="tns:SmsOTPHttpPostIn" />
+      <wsdl:output message="tns:SmsOTPHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SmsCDAC">
+      <wsdl:input message="tns:SmsCDACHttpPostIn" />
+      <wsdl:output message="tns:SmsCDACHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SmsOTPCDAC">
+      <wsdl:input message="tns:SmsOTPCDACHttpPostIn" />
+      <wsdl:output message="tns:SmsOTPCDACHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SendSms_MicroServiceSoap" type="tns:SendSms_MicroServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Sms">
+      <soap:operation soapAction="http://tempuri.org/Sms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SmsSecuredWebServiceHeader" part="SecuredWebServiceHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SmsOTP">
+      <soap:operation soapAction="http://tempuri.org/SmsOTP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SmsOTPSecuredWebServiceHeader" part="SecuredWebServiceHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SmsCDAC">
+      <soap:operation soapAction="http://tempuri.org/SmsCDAC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SmsOTPCDAC">
+      <soap:operation soapAction="http://tempuri.org/SmsOTPCDAC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SendSms_MicroServiceSoap12" type="tns:SendSms_MicroServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Sms">
+      <soap12:operation soapAction="http://tempuri.org/Sms" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:SmsSecuredWebServiceHeader" part="SecuredWebServiceHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SmsOTP">
+      <soap12:operation soapAction="http://tempuri.org/SmsOTP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:SmsOTPSecuredWebServiceHeader" part="SecuredWebServiceHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SmsCDAC">
+      <soap12:operation soapAction="http://tempuri.org/SmsCDAC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SmsOTPCDAC">
+      <soap12:operation soapAction="http://tempuri.org/SmsOTPCDAC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SendSms_MicroServiceHttpGet" type="tns:SendSms_MicroServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="Sms">
+      <http:operation location="/Sms" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SmsOTP">
+      <http:operation location="/SmsOTP" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SmsCDAC">
+      <http:operation location="/SmsCDAC" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SmsOTPCDAC">
+      <http:operation location="/SmsOTPCDAC" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SendSms_MicroServiceHttpPost" type="tns:SendSms_MicroServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Sms">
+      <http:operation location="/Sms" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SmsOTP">
+      <http:operation location="/SmsOTP" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SmsCDAC">
+      <http:operation location="/SmsCDAC" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SmsOTPCDAC">
+      <http:operation location="/SmsOTPCDAC" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SendSms_MicroService">
+    <wsdl:port name="SendSms_MicroServiceSoap" binding="tns:SendSms_MicroServiceSoap">
+      <soap:address location="http://164.100.196.118/aclsms/SendSms_MicroService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SendSms_MicroServiceSoap12" binding="tns:SendSms_MicroServiceSoap12">
+      <soap12:address location="http://164.100.196.118/aclsms/SendSms_MicroService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SendSms_MicroServiceHttpGet" binding="tns:SendSms_MicroServiceHttpGet">
+      <http:address location="http://164.100.196.118/aclsms/SendSms_MicroService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SendSms_MicroServiceHttpPost" binding="tns:SendSms_MicroServiceHttpPost">
+      <http:address location="http://164.100.196.118/aclsms/SendSms_MicroService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

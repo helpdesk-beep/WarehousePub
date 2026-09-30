@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Sms">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppPwd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Mobileno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="msg" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SmsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SmsResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SecuredWebServiceHeader" type="tns:SecuredWebServiceHeader" />
+      <s:complexType name="SecuredWebServiceHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="boolean" type="s:boolean" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SmsSoapIn">
+    <wsdl:part name="parameters" element="tns:Sms" />
+  </wsdl:message>
+  <wsdl:message name="SmsSoapOut">
+    <wsdl:part name="parameters" element="tns:SmsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SmsSecuredWebServiceHeader">
+    <wsdl:part name="SecuredWebServiceHeader" element="tns:SecuredWebServiceHeader" />
+  </wsdl:message>
+  <wsdl:message name="SmsHttpGetIn">
+    <wsdl:part name="UserName" type="s:string" />
+    <wsdl:part name="AppPwd" type="s:string" />
+    <wsdl:part name="Mobileno" type="s:string" />
+    <wsdl:part name="msg" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SmsHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SmsHttpPostIn">
+    <wsdl:part name="UserName" type="s:string" />
+    <wsdl:part name="AppPwd" type="s:string" />
+    <wsdl:part name="Mobileno" type="s:string" />
+    <wsdl:part name="msg" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SmsHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:portType name="SendSms_WebSrvSoap">
+    <wsdl:operation name="Sms">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For sending SMS</wsdl:documentation>
+      <wsdl:input message="tns:SmsSoapIn" />
+      <wsdl:output message="tns:SmsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SendSms_WebSrvHttpGet">
+    <wsdl:operation name="Sms">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For sending SMS</wsdl:documentation>
+      <wsdl:input message="tns:SmsHttpGetIn" />
+      <wsdl:output message="tns:SmsHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SendSms_WebSrvHttpPost">
+    <wsdl:operation name="Sms">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For sending SMS</wsdl:documentation>
+      <wsdl:input message="tns:SmsHttpPostIn" />
+      <wsdl:output message="tns:SmsHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SendSms_WebSrvSoap" type="tns:SendSms_WebSrvSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Sms">
+      <soap:operation soapAction="http://tempuri.org/Sms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SmsSecuredWebServiceHeader" part="SecuredWebServiceHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SendSms_WebSrvSoap12" type="tns:SendSms_WebSrvSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Sms">
+      <soap12:operation soapAction="http://tempuri.org/Sms" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:SmsSecuredWebServiceHeader" part="SecuredWebServiceHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SendSms_WebSrvHttpGet" type="tns:SendSms_WebSrvHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="Sms">
+      <http:operation location="/Sms" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SendSms_WebSrvHttpPost" type="tns:SendSms_WebSrvHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Sms">
+      <http:operation location="/Sms" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SendSms_WebSrv">
+    <wsdl:port name="SendSms_WebSrvSoap" binding="tns:SendSms_WebSrvSoap">
+      <soap:address location="http://mpeuparjan.nic.in/SendSms_WebSrv.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SendSms_WebSrvSoap12" binding="tns:SendSms_WebSrvSoap12">
+      <soap12:address location="http://mpeuparjan.nic.in/SendSms_WebSrv.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SendSms_WebSrvHttpGet" binding="tns:SendSms_WebSrvHttpGet">
+      <http:address location="http://mpeuparjan.nic.in/SendSms_WebSrv.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SendSms_WebSrvHttpPost" binding="tns:SendSms_WebSrvHttpPost">
+      <http:address location="http://mpeuparjan.nic.in/SendSms_WebSrv.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,4 @@
+Record Type	Corporte Id	e-PayOrder No.	Account Number	Branch Code	MMID	Mobile Number	Debit Amount	Credit Amount	Corporate Reference Number	Description	Payment Type	Transaction Status	Transaction Date	Transaction Time	Status Description	UTR Number	UTR Posted Date	UTR Status	Maker	Authorizer1	Authorizer1 Date	Authorizer2	Authorizer2 Date	
+Debit leg	'329338	'CTM1925314	'00000038906616113	'30343	'null	'null	'0.0	'null	72320007210120	'Godown Rent Payment	'null	'Unknown	'null	'null	'null	-	-	'null	MPWLCROUJN	-	-	-	-
+Credit leg	'329338	'CTM192531400001	'00000031945958481	'30007	'null	'null	'0.0	'434302	72320007210120	'DEWAS WAREHOUSING 12648GRP232000714220081111	'null	'Unknown	'10/01/2021	'19:05	'null	-	-	'null	null	-	-	-	-
+Credit leg	'329338	'CTM192531400002	'00000031945958481	'30007	'null	'null	'0.0	'449797	72320007210120	'DEWAS WAREHOUSING 12648GRP232000710520081107	'null	'Unknown	'10/01/2021	'19:05	'null	-	-	'null	null	-	-	-	-

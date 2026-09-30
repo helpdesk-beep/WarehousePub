@@ -1,0 +1,2520 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="EDAddInstitutionStorageBillDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="District_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Branch_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Depositor_Type_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Depositor_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Commodity_Type_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Commodity_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="From_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="To_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Packing_Type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Weight" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Financial_Year" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Commodity_Rate" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Net_Amount" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Sub_Amount" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Service_Tax_Perc" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Service_Tax_Amt" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="Depositor_Category" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Rebate_Perc" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Rebate_Amt" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Rebate_on_Unit" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Khasra_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Rin_Pustika_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Cast_Certificate_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Is_Rebate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Created_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Modified_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Client_IP" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Per_Day_Rate" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Type" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="BId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Month" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Godown_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Crop_Year" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="MPWLC_SC" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="GST_Perc_SC" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="GST_Amt_SC" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDAddInstitutionStorageBillDetailsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDAddInstitutionStorageBillCharges">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Dates" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Opening_Balance" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Receive_Bags" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Issue_Bags" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Closing_Balance" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Per_Day_Rate" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Total_Charges" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="Created_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Modified_Date" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Opening_Weight" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Receive_Weight" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Issue_Weight" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Closing_Weight" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="Client_IP" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Godown_Id" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Commodity_ID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Crop_Year" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Type" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDAddInstitutionStorageBillChargesResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDAddInstitutionStorageBillSummary">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="District_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Branch_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Depositor_Type_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Depositor_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Commodity_Type_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Commodity_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="From_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="To_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Packing_Type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Weight" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Financial_Year" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Commodity_Rate" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Net_Amount" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Sub_Amount" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Service_Tax_Perc" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Service_Tax_Amt" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="Depositor_Category" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Rebate_Perc" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Rebate_Amt" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Rebate_on_Unit" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Khasra_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Rin_Pustika_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Cast_Certificate_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Is_Rebate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Created_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Modified_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Client_IP" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Per_Day_Rate" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Type" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="BId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Month" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Year" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Crop_Year" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="MPWLC_SC" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="GST_Perc_SC" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="GST_Amt_SC" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Bill_Count" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDAddInstitutionStorageBillSummaryResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDUpdateInstituitionStorageBillDetailswithFinBillNo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Godown_Bill_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Godown_ID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDUpdateInstituitionStorageBillDetailswithFinBillNoResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDUpdateBOApprovalInSummary">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="District_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Branch_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Client_IP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDUpdateBOApprovalInSummaryResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDUpdateBOApprovalInDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="District_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Branch_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Client_IP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDUpdateBOApprovalInDetailsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDAddInstitutionStorageBillDetailsInLog">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Branch_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Client_IP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDAddInstitutionStorageBillDetailsInLogResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDAddInstitutionStorageBillDetailsInLogDeletebyBillNo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Client_IP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDAddInstitutionStorageBillDetailsInLogDeletebyBillNoResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDDeleteInstitutionStorageBillDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Branch_Id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDDeleteInstitutionStorageBillDetailsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDDeleteInstitutionStorageBillDetailsbyBillNo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDDeleteInstitutionStorageBillDetailsbyBillNoResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDAddInstitutionBillDailyChargesInLog">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Branch_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Client_IP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDAddInstitutionBillDailyChargesInLogResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDAddInstitutionBillDailyChargesInLogByBillNo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Client_IP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDAddInstitutionBillDailyChargesInLogByBillNoResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDDeleteInstitutionStorageDailyBillCharges">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDDeleteInstitutionStorageDailyBillChargesResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDAddGodownRentDeductionAmountInLog">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="District_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Branch_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Client_IP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDAddGodownRentDeductionAmountInLogResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDDeleteGodownRentDeductionAmount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Branch_Id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDDeleteGodownRentDeductionAmountResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDDeleteGodownRentDeductionAmountByBillNo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDDeleteGodownRentDeductionAmountByBillNoResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDAddPrivateGodownDailyRentInLog">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Client_IP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDAddPrivateGodownDailyRentInLogResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDDeletePvtBillGodownDailyRentAmount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDDeletePvtBillGodownDailyRentAmountResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDAddGodownRentDeductionLog">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Branch_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Client_IP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDAddGodownRentDeductionLogResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDAddGodownRentDeductionLogByBillNo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Client_IP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDAddGodownRentDeductionLogByBillNoResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDDeleteFinalBill">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="District_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Branch_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Client_IP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDDeleteFinalBillResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDUpdateBOApprovalInstitutionStorageBillDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="District_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Branch_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BO_Approval_Status" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="BO_Approval_Date" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="BO_Approval_IP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDUpdateBOApprovalInstitutionStorageBillDetailsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDAddInstitutionStorageBillDetailsForGodownRent">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="District_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Branch_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Depositor_Type_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Depositor_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Commodity_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="From_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="To_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Packing_Type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Weight" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Financial_Year" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Commodity_Rate" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Net_Amount" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Sub_Amount" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Service_Tax_Perc" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Service_Tax_Amt" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="Depositor_Category" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Rebate_Perc" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Rebate_Amt" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Rebate_on_Unit" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Khasra_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Rin_Pustika_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Cast_Certificate_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Is_Rebate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Created_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Modified_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Client_IP" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Per_Day_Rate" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Type" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="BId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Month" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Godown_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Crop_Year" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDAddInstitutionStorageBillDetailsForGodownRentResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDAddBillPVTGodownDailyRentCharges">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Dates" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Opening_Balance" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Receive_Bags" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Issue_Bags" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Closing_Balance" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Per_Day_Rate" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Total_Charges" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="Created_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Modified_Date" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Opening_Weight" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Receive_Weight" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Issue_Weight" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Closing_Weight" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDAddBillPVTGodownDailyRentChargesResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDAddSteelSiloGodownDailyRent">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Godown_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Commodity_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Crop_Year" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Type_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Dates" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Opening_Weight" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Receive_Weight" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Issue_Weight" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Closing_Weight" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Chargeable_Closing_Weight" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Opening_Balance" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Receive_Bags" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Issue_Bags" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Closing_Bag_Balance" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Per_Day_Rate" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Total_Charges" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="Created_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Created_By" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDAddSteelSiloGodownDailyRentResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDAddInstitutionSteelSiloStorageBillDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="District_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Branch_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Depositor_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Commodity_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="From_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="To_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Financial_Year" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Commodity_Rate" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Net_Amount" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Sub_Amount" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Service_Tax_Perc" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Service_Tax_Amt" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="Depositor_Category" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Rebate_Perc" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Rebate_Amt" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Rebate_on_Unit" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Is_Rebate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Created_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Client_IP" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Per_Day_Rate" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Bill_Type_ID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Type" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="BId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Month" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Godown_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Crop_Year" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Invoice_No" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Bill_Category_Type_ID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDAddInstitutionSteelSiloStorageBillDetailsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EDDeleteFinalBillSteelSilo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Bill_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Client_IP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EDDeleteFinalBillSteelSiloResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="EDAddInstitutionStorageBillDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:EDAddInstitutionStorageBillDetails" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionStorageBillDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:EDAddInstitutionStorageBillDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionStorageBillChargesSoapIn">
+    <wsdl:part name="parameters" element="tns:EDAddInstitutionStorageBillCharges" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionStorageBillChargesSoapOut">
+    <wsdl:part name="parameters" element="tns:EDAddInstitutionStorageBillChargesResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionStorageBillSummarySoapIn">
+    <wsdl:part name="parameters" element="tns:EDAddInstitutionStorageBillSummary" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionStorageBillSummarySoapOut">
+    <wsdl:part name="parameters" element="tns:EDAddInstitutionStorageBillSummaryResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDUpdateInstituitionStorageBillDetailswithFinBillNoSoapIn">
+    <wsdl:part name="parameters" element="tns:EDUpdateInstituitionStorageBillDetailswithFinBillNo" />
+  </wsdl:message>
+  <wsdl:message name="EDUpdateInstituitionStorageBillDetailswithFinBillNoSoapOut">
+    <wsdl:part name="parameters" element="tns:EDUpdateInstituitionStorageBillDetailswithFinBillNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDUpdateBOApprovalInSummarySoapIn">
+    <wsdl:part name="parameters" element="tns:EDUpdateBOApprovalInSummary" />
+  </wsdl:message>
+  <wsdl:message name="EDUpdateBOApprovalInSummarySoapOut">
+    <wsdl:part name="parameters" element="tns:EDUpdateBOApprovalInSummaryResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDUpdateBOApprovalInDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:EDUpdateBOApprovalInDetails" />
+  </wsdl:message>
+  <wsdl:message name="EDUpdateBOApprovalInDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:EDUpdateBOApprovalInDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionStorageBillDetailsInLogSoapIn">
+    <wsdl:part name="parameters" element="tns:EDAddInstitutionStorageBillDetailsInLog" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionStorageBillDetailsInLogSoapOut">
+    <wsdl:part name="parameters" element="tns:EDAddInstitutionStorageBillDetailsInLogResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionStorageBillDetailsInLogDeletebyBillNoSoapIn">
+    <wsdl:part name="parameters" element="tns:EDAddInstitutionStorageBillDetailsInLogDeletebyBillNo" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionStorageBillDetailsInLogDeletebyBillNoSoapOut">
+    <wsdl:part name="parameters" element="tns:EDAddInstitutionStorageBillDetailsInLogDeletebyBillNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteInstitutionStorageBillDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:EDDeleteInstitutionStorageBillDetails" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteInstitutionStorageBillDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:EDDeleteInstitutionStorageBillDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteInstitutionStorageBillDetailsbyBillNoSoapIn">
+    <wsdl:part name="parameters" element="tns:EDDeleteInstitutionStorageBillDetailsbyBillNo" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteInstitutionStorageBillDetailsbyBillNoSoapOut">
+    <wsdl:part name="parameters" element="tns:EDDeleteInstitutionStorageBillDetailsbyBillNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionBillDailyChargesInLogSoapIn">
+    <wsdl:part name="parameters" element="tns:EDAddInstitutionBillDailyChargesInLog" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionBillDailyChargesInLogSoapOut">
+    <wsdl:part name="parameters" element="tns:EDAddInstitutionBillDailyChargesInLogResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionBillDailyChargesInLogByBillNoSoapIn">
+    <wsdl:part name="parameters" element="tns:EDAddInstitutionBillDailyChargesInLogByBillNo" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionBillDailyChargesInLogByBillNoSoapOut">
+    <wsdl:part name="parameters" element="tns:EDAddInstitutionBillDailyChargesInLogByBillNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteInstitutionStorageDailyBillChargesSoapIn">
+    <wsdl:part name="parameters" element="tns:EDDeleteInstitutionStorageDailyBillCharges" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteInstitutionStorageDailyBillChargesSoapOut">
+    <wsdl:part name="parameters" element="tns:EDDeleteInstitutionStorageDailyBillChargesResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDAddGodownRentDeductionAmountInLogSoapIn">
+    <wsdl:part name="parameters" element="tns:EDAddGodownRentDeductionAmountInLog" />
+  </wsdl:message>
+  <wsdl:message name="EDAddGodownRentDeductionAmountInLogSoapOut">
+    <wsdl:part name="parameters" element="tns:EDAddGodownRentDeductionAmountInLogResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteGodownRentDeductionAmountSoapIn">
+    <wsdl:part name="parameters" element="tns:EDDeleteGodownRentDeductionAmount" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteGodownRentDeductionAmountSoapOut">
+    <wsdl:part name="parameters" element="tns:EDDeleteGodownRentDeductionAmountResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteGodownRentDeductionAmountByBillNoSoapIn">
+    <wsdl:part name="parameters" element="tns:EDDeleteGodownRentDeductionAmountByBillNo" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteGodownRentDeductionAmountByBillNoSoapOut">
+    <wsdl:part name="parameters" element="tns:EDDeleteGodownRentDeductionAmountByBillNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDAddPrivateGodownDailyRentInLogSoapIn">
+    <wsdl:part name="parameters" element="tns:EDAddPrivateGodownDailyRentInLog" />
+  </wsdl:message>
+  <wsdl:message name="EDAddPrivateGodownDailyRentInLogSoapOut">
+    <wsdl:part name="parameters" element="tns:EDAddPrivateGodownDailyRentInLogResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDDeletePvtBillGodownDailyRentAmountSoapIn">
+    <wsdl:part name="parameters" element="tns:EDDeletePvtBillGodownDailyRentAmount" />
+  </wsdl:message>
+  <wsdl:message name="EDDeletePvtBillGodownDailyRentAmountSoapOut">
+    <wsdl:part name="parameters" element="tns:EDDeletePvtBillGodownDailyRentAmountResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDAddGodownRentDeductionLogSoapIn">
+    <wsdl:part name="parameters" element="tns:EDAddGodownRentDeductionLog" />
+  </wsdl:message>
+  <wsdl:message name="EDAddGodownRentDeductionLogSoapOut">
+    <wsdl:part name="parameters" element="tns:EDAddGodownRentDeductionLogResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDAddGodownRentDeductionLogByBillNoSoapIn">
+    <wsdl:part name="parameters" element="tns:EDAddGodownRentDeductionLogByBillNo" />
+  </wsdl:message>
+  <wsdl:message name="EDAddGodownRentDeductionLogByBillNoSoapOut">
+    <wsdl:part name="parameters" element="tns:EDAddGodownRentDeductionLogByBillNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteFinalBillSoapIn">
+    <wsdl:part name="parameters" element="tns:EDDeleteFinalBill" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteFinalBillSoapOut">
+    <wsdl:part name="parameters" element="tns:EDDeleteFinalBillResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDUpdateBOApprovalInstitutionStorageBillDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:EDUpdateBOApprovalInstitutionStorageBillDetails" />
+  </wsdl:message>
+  <wsdl:message name="EDUpdateBOApprovalInstitutionStorageBillDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:EDUpdateBOApprovalInstitutionStorageBillDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionStorageBillDetailsForGodownRentSoapIn">
+    <wsdl:part name="parameters" element="tns:EDAddInstitutionStorageBillDetailsForGodownRent" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionStorageBillDetailsForGodownRentSoapOut">
+    <wsdl:part name="parameters" element="tns:EDAddInstitutionStorageBillDetailsForGodownRentResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDAddBillPVTGodownDailyRentChargesSoapIn">
+    <wsdl:part name="parameters" element="tns:EDAddBillPVTGodownDailyRentCharges" />
+  </wsdl:message>
+  <wsdl:message name="EDAddBillPVTGodownDailyRentChargesSoapOut">
+    <wsdl:part name="parameters" element="tns:EDAddBillPVTGodownDailyRentChargesResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDAddSteelSiloGodownDailyRentSoapIn">
+    <wsdl:part name="parameters" element="tns:EDAddSteelSiloGodownDailyRent" />
+  </wsdl:message>
+  <wsdl:message name="EDAddSteelSiloGodownDailyRentSoapOut">
+    <wsdl:part name="parameters" element="tns:EDAddSteelSiloGodownDailyRentResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionSteelSiloStorageBillDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:EDAddInstitutionSteelSiloStorageBillDetails" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionSteelSiloStorageBillDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:EDAddInstitutionSteelSiloStorageBillDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteFinalBillSteelSiloSoapIn">
+    <wsdl:part name="parameters" element="tns:EDDeleteFinalBillSteelSilo" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteFinalBillSteelSiloSoapOut">
+    <wsdl:part name="parameters" element="tns:EDDeleteFinalBillSteelSiloResponse" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionStorageBillDetailsHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="District_Id" type="s:string" />
+    <wsdl:part name="Branch_Id" type="s:string" />
+    <wsdl:part name="Depositor_Type_Id" type="s:string" />
+    <wsdl:part name="Depositor_Id" type="s:string" />
+    <wsdl:part name="Commodity_Type_Id" type="s:string" />
+    <wsdl:part name="Commodity_Id" type="s:string" />
+    <wsdl:part name="From_Date" type="s:string" />
+    <wsdl:part name="To_Date" type="s:string" />
+    <wsdl:part name="Packing_Type" type="s:string" />
+    <wsdl:part name="Weight" type="s:string" />
+    <wsdl:part name="Financial_Year" type="s:string" />
+    <wsdl:part name="Commodity_Rate" type="s:string" />
+    <wsdl:part name="Net_Amount" type="s:string" />
+    <wsdl:part name="Sub_Amount" type="s:string" />
+    <wsdl:part name="Service_Tax_Perc" type="s:string" />
+    <wsdl:part name="Service_Tax_Amt" type="s:string" />
+    <wsdl:part name="Depositor_Category" type="s:string" />
+    <wsdl:part name="Rebate_Perc" type="s:string" />
+    <wsdl:part name="Rebate_Amt" type="s:string" />
+    <wsdl:part name="Rebate_on_Unit" type="s:string" />
+    <wsdl:part name="Khasra_Number" type="s:string" />
+    <wsdl:part name="Rin_Pustika_No" type="s:string" />
+    <wsdl:part name="Cast_Certificate_No" type="s:string" />
+    <wsdl:part name="Is_Rebate" type="s:string" />
+    <wsdl:part name="Created_Date" type="s:string" />
+    <wsdl:part name="Modified_Date" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+    <wsdl:part name="Per_Day_Rate" type="s:string" />
+    <wsdl:part name="Bill_Type" type="s:string" />
+    <wsdl:part name="BId" type="s:string" />
+    <wsdl:part name="Month" type="s:string" />
+    <wsdl:part name="Godown_Id" type="s:string" />
+    <wsdl:part name="Crop_Year" type="s:string" />
+    <wsdl:part name="MPWLC_SC" type="s:string" />
+    <wsdl:part name="GST_Perc_SC" type="s:string" />
+    <wsdl:part name="GST_Amt_SC" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionStorageBillDetailsHttpGetOut" />
+  <wsdl:message name="EDAddInstitutionStorageBillChargesHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Dates" type="s:string" />
+    <wsdl:part name="Opening_Balance" type="s:string" />
+    <wsdl:part name="Receive_Bags" type="s:string" />
+    <wsdl:part name="Issue_Bags" type="s:string" />
+    <wsdl:part name="Closing_Balance" type="s:string" />
+    <wsdl:part name="Per_Day_Rate" type="s:string" />
+    <wsdl:part name="Total_Charges" type="s:string" />
+    <wsdl:part name="Created_Date" type="s:string" />
+    <wsdl:part name="Modified_Date" type="s:string" />
+    <wsdl:part name="Opening_Weight" type="s:string" />
+    <wsdl:part name="Receive_Weight" type="s:string" />
+    <wsdl:part name="Issue_Weight" type="s:string" />
+    <wsdl:part name="Closing_Weight" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+    <wsdl:part name="Godown_Id" type="s:string" />
+    <wsdl:part name="Commodity_ID" type="s:string" />
+    <wsdl:part name="Crop_Year" type="s:string" />
+    <wsdl:part name="Bill_Type" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionStorageBillChargesHttpGetOut" />
+  <wsdl:message name="EDAddInstitutionStorageBillSummaryHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="District_Id" type="s:string" />
+    <wsdl:part name="Branch_Id" type="s:string" />
+    <wsdl:part name="Depositor_Type_Id" type="s:string" />
+    <wsdl:part name="Depositor_Id" type="s:string" />
+    <wsdl:part name="Commodity_Type_Id" type="s:string" />
+    <wsdl:part name="Commodity_Id" type="s:string" />
+    <wsdl:part name="From_Date" type="s:string" />
+    <wsdl:part name="To_Date" type="s:string" />
+    <wsdl:part name="Packing_Type" type="s:string" />
+    <wsdl:part name="Weight" type="s:string" />
+    <wsdl:part name="Financial_Year" type="s:string" />
+    <wsdl:part name="Commodity_Rate" type="s:string" />
+    <wsdl:part name="Net_Amount" type="s:string" />
+    <wsdl:part name="Sub_Amount" type="s:string" />
+    <wsdl:part name="Service_Tax_Perc" type="s:string" />
+    <wsdl:part name="Service_Tax_Amt" type="s:string" />
+    <wsdl:part name="Depositor_Category" type="s:string" />
+    <wsdl:part name="Rebate_Perc" type="s:string" />
+    <wsdl:part name="Rebate_Amt" type="s:string" />
+    <wsdl:part name="Rebate_on_Unit" type="s:string" />
+    <wsdl:part name="Khasra_Number" type="s:string" />
+    <wsdl:part name="Rin_Pustika_No" type="s:string" />
+    <wsdl:part name="Cast_Certificate_No" type="s:string" />
+    <wsdl:part name="Is_Rebate" type="s:string" />
+    <wsdl:part name="Created_Date" type="s:string" />
+    <wsdl:part name="Modified_Date" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+    <wsdl:part name="Per_Day_Rate" type="s:string" />
+    <wsdl:part name="Bill_Type" type="s:string" />
+    <wsdl:part name="BId" type="s:string" />
+    <wsdl:part name="Month" type="s:string" />
+    <wsdl:part name="Year" type="s:string" />
+    <wsdl:part name="Crop_Year" type="s:string" />
+    <wsdl:part name="MPWLC_SC" type="s:string" />
+    <wsdl:part name="GST_Perc_SC" type="s:string" />
+    <wsdl:part name="GST_Amt_SC" type="s:string" />
+    <wsdl:part name="Bill_Count" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionStorageBillSummaryHttpGetOut" />
+  <wsdl:message name="EDUpdateInstituitionStorageBillDetailswithFinBillNoHttpGetIn">
+    <wsdl:part name="Bill_No" type="s:string" />
+    <wsdl:part name="Godown_Bill_No" type="s:string" />
+    <wsdl:part name="Godown_ID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDUpdateInstituitionStorageBillDetailswithFinBillNoHttpGetOut" />
+  <wsdl:message name="EDUpdateBOApprovalInSummaryHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="District_Id" type="s:string" />
+    <wsdl:part name="Branch_ID" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDUpdateBOApprovalInSummaryHttpGetOut" />
+  <wsdl:message name="EDUpdateBOApprovalInDetailsHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="District_Id" type="s:string" />
+    <wsdl:part name="Branch_ID" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDUpdateBOApprovalInDetailsHttpGetOut" />
+  <wsdl:message name="EDAddInstitutionStorageBillDetailsInLogHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Branch_Id" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionStorageBillDetailsInLogHttpGetOut" />
+  <wsdl:message name="EDAddInstitutionStorageBillDetailsInLogDeletebyBillNoHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionStorageBillDetailsInLogDeletebyBillNoHttpGetOut" />
+  <wsdl:message name="EDDeleteInstitutionStorageBillDetailsHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Branch_Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteInstitutionStorageBillDetailsHttpGetOut" />
+  <wsdl:message name="EDDeleteInstitutionStorageBillDetailsbyBillNoHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteInstitutionStorageBillDetailsbyBillNoHttpGetOut" />
+  <wsdl:message name="EDAddInstitutionBillDailyChargesInLogHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Branch_Id" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionBillDailyChargesInLogHttpGetOut" />
+  <wsdl:message name="EDAddInstitutionBillDailyChargesInLogByBillNoHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionBillDailyChargesInLogByBillNoHttpGetOut" />
+  <wsdl:message name="EDDeleteInstitutionStorageDailyBillChargesHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteInstitutionStorageDailyBillChargesHttpGetOut" />
+  <wsdl:message name="EDAddGodownRentDeductionAmountInLogHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="District_Id" type="s:string" />
+    <wsdl:part name="Branch_Id" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddGodownRentDeductionAmountInLogHttpGetOut" />
+  <wsdl:message name="EDDeleteGodownRentDeductionAmountHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Branch_Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteGodownRentDeductionAmountHttpGetOut" />
+  <wsdl:message name="EDDeleteGodownRentDeductionAmountByBillNoHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteGodownRentDeductionAmountByBillNoHttpGetOut" />
+  <wsdl:message name="EDAddPrivateGodownDailyRentInLogHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddPrivateGodownDailyRentInLogHttpGetOut" />
+  <wsdl:message name="EDDeletePvtBillGodownDailyRentAmountHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDDeletePvtBillGodownDailyRentAmountHttpGetOut" />
+  <wsdl:message name="EDAddGodownRentDeductionLogHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Branch_Id" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddGodownRentDeductionLogHttpGetOut" />
+  <wsdl:message name="EDAddGodownRentDeductionLogByBillNoHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddGodownRentDeductionLogByBillNoHttpGetOut" />
+  <wsdl:message name="EDDeleteFinalBillHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="District_Id" type="s:string" />
+    <wsdl:part name="Branch_Id" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteFinalBillHttpGetOut" />
+  <wsdl:message name="EDUpdateBOApprovalInstitutionStorageBillDetailsHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="District_Id" type="s:string" />
+    <wsdl:part name="Branch_Id" type="s:string" />
+    <wsdl:part name="BO_Approval_Status" type="s:string" />
+    <wsdl:part name="BO_Approval_Date" type="s:string" />
+    <wsdl:part name="BO_Approval_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDUpdateBOApprovalInstitutionStorageBillDetailsHttpGetOut" />
+  <wsdl:message name="EDAddInstitutionStorageBillDetailsForGodownRentHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="District_Id" type="s:string" />
+    <wsdl:part name="Branch_Id" type="s:string" />
+    <wsdl:part name="Depositor_Type_Id" type="s:string" />
+    <wsdl:part name="Depositor_Id" type="s:string" />
+    <wsdl:part name="Commodity_Id" type="s:string" />
+    <wsdl:part name="From_Date" type="s:string" />
+    <wsdl:part name="To_Date" type="s:string" />
+    <wsdl:part name="Packing_Type" type="s:string" />
+    <wsdl:part name="Weight" type="s:string" />
+    <wsdl:part name="Financial_Year" type="s:string" />
+    <wsdl:part name="Commodity_Rate" type="s:string" />
+    <wsdl:part name="Net_Amount" type="s:string" />
+    <wsdl:part name="Sub_Amount" type="s:string" />
+    <wsdl:part name="Service_Tax_Perc" type="s:string" />
+    <wsdl:part name="Service_Tax_Amt" type="s:string" />
+    <wsdl:part name="Depositor_Category" type="s:string" />
+    <wsdl:part name="Rebate_Perc" type="s:string" />
+    <wsdl:part name="Rebate_Amt" type="s:string" />
+    <wsdl:part name="Rebate_on_Unit" type="s:string" />
+    <wsdl:part name="Khasra_Number" type="s:string" />
+    <wsdl:part name="Rin_Pustika_No" type="s:string" />
+    <wsdl:part name="Cast_Certificate_No" type="s:string" />
+    <wsdl:part name="Is_Rebate" type="s:string" />
+    <wsdl:part name="Created_Date" type="s:string" />
+    <wsdl:part name="Modified_Date" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+    <wsdl:part name="Per_Day_Rate" type="s:string" />
+    <wsdl:part name="Bill_Type" type="s:string" />
+    <wsdl:part name="BId" type="s:string" />
+    <wsdl:part name="Month" type="s:string" />
+    <wsdl:part name="Godown_Id" type="s:string" />
+    <wsdl:part name="Crop_Year" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionStorageBillDetailsForGodownRentHttpGetOut" />
+  <wsdl:message name="EDAddBillPVTGodownDailyRentChargesHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Dates" type="s:string" />
+    <wsdl:part name="Opening_Balance" type="s:string" />
+    <wsdl:part name="Receive_Bags" type="s:string" />
+    <wsdl:part name="Issue_Bags" type="s:string" />
+    <wsdl:part name="Closing_Balance" type="s:string" />
+    <wsdl:part name="Per_Day_Rate" type="s:string" />
+    <wsdl:part name="Total_Charges" type="s:string" />
+    <wsdl:part name="Created_Date" type="s:string" />
+    <wsdl:part name="Modified_Date" type="s:string" />
+    <wsdl:part name="Opening_Weight" type="s:string" />
+    <wsdl:part name="Receive_Weight" type="s:string" />
+    <wsdl:part name="Issue_Weight" type="s:string" />
+    <wsdl:part name="Closing_Weight" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddBillPVTGodownDailyRentChargesHttpGetOut" />
+  <wsdl:message name="EDAddSteelSiloGodownDailyRentHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Godown_Id" type="s:string" />
+    <wsdl:part name="Commodity_Id" type="s:string" />
+    <wsdl:part name="Crop_Year" type="s:string" />
+    <wsdl:part name="Bill_Type" type="s:string" />
+    <wsdl:part name="Type_ID" type="s:string" />
+    <wsdl:part name="Dates" type="s:string" />
+    <wsdl:part name="Opening_Weight" type="s:string" />
+    <wsdl:part name="Receive_Weight" type="s:string" />
+    <wsdl:part name="Issue_Weight" type="s:string" />
+    <wsdl:part name="Closing_Weight" type="s:string" />
+    <wsdl:part name="Chargeable_Closing_Weight" type="s:string" />
+    <wsdl:part name="Opening_Balance" type="s:string" />
+    <wsdl:part name="Receive_Bags" type="s:string" />
+    <wsdl:part name="Issue_Bags" type="s:string" />
+    <wsdl:part name="Closing_Bag_Balance" type="s:string" />
+    <wsdl:part name="Per_Day_Rate" type="s:string" />
+    <wsdl:part name="Total_Charges" type="s:string" />
+    <wsdl:part name="Created_Date" type="s:string" />
+    <wsdl:part name="Created_By" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddSteelSiloGodownDailyRentHttpGetOut" />
+  <wsdl:message name="EDAddInstitutionSteelSiloStorageBillDetailsHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="District_Id" type="s:string" />
+    <wsdl:part name="Branch_Id" type="s:string" />
+    <wsdl:part name="Depositor_Id" type="s:string" />
+    <wsdl:part name="Commodity_Id" type="s:string" />
+    <wsdl:part name="From_Date" type="s:string" />
+    <wsdl:part name="To_Date" type="s:string" />
+    <wsdl:part name="Financial_Year" type="s:string" />
+    <wsdl:part name="Commodity_Rate" type="s:string" />
+    <wsdl:part name="Net_Amount" type="s:string" />
+    <wsdl:part name="Sub_Amount" type="s:string" />
+    <wsdl:part name="Service_Tax_Perc" type="s:string" />
+    <wsdl:part name="Service_Tax_Amt" type="s:string" />
+    <wsdl:part name="Depositor_Category" type="s:string" />
+    <wsdl:part name="Rebate_Perc" type="s:string" />
+    <wsdl:part name="Rebate_Amt" type="s:string" />
+    <wsdl:part name="Rebate_on_Unit" type="s:string" />
+    <wsdl:part name="Is_Rebate" type="s:string" />
+    <wsdl:part name="Created_Date" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+    <wsdl:part name="Per_Day_Rate" type="s:string" />
+    <wsdl:part name="Bill_Type_ID" type="s:string" />
+    <wsdl:part name="Bill_Type" type="s:string" />
+    <wsdl:part name="BId" type="s:string" />
+    <wsdl:part name="Month" type="s:string" />
+    <wsdl:part name="Godown_Id" type="s:string" />
+    <wsdl:part name="Crop_Year" type="s:string" />
+    <wsdl:part name="Invoice_No" type="s:string" />
+    <wsdl:part name="Bill_Category_Type_ID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionSteelSiloStorageBillDetailsHttpGetOut" />
+  <wsdl:message name="EDDeleteFinalBillSteelSiloHttpGetIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteFinalBillSteelSiloHttpGetOut" />
+  <wsdl:message name="EDAddInstitutionStorageBillDetailsHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="District_Id" type="s:string" />
+    <wsdl:part name="Branch_Id" type="s:string" />
+    <wsdl:part name="Depositor_Type_Id" type="s:string" />
+    <wsdl:part name="Depositor_Id" type="s:string" />
+    <wsdl:part name="Commodity_Type_Id" type="s:string" />
+    <wsdl:part name="Commodity_Id" type="s:string" />
+    <wsdl:part name="From_Date" type="s:string" />
+    <wsdl:part name="To_Date" type="s:string" />
+    <wsdl:part name="Packing_Type" type="s:string" />
+    <wsdl:part name="Weight" type="s:string" />
+    <wsdl:part name="Financial_Year" type="s:string" />
+    <wsdl:part name="Commodity_Rate" type="s:string" />
+    <wsdl:part name="Net_Amount" type="s:string" />
+    <wsdl:part name="Sub_Amount" type="s:string" />
+    <wsdl:part name="Service_Tax_Perc" type="s:string" />
+    <wsdl:part name="Service_Tax_Amt" type="s:string" />
+    <wsdl:part name="Depositor_Category" type="s:string" />
+    <wsdl:part name="Rebate_Perc" type="s:string" />
+    <wsdl:part name="Rebate_Amt" type="s:string" />
+    <wsdl:part name="Rebate_on_Unit" type="s:string" />
+    <wsdl:part name="Khasra_Number" type="s:string" />
+    <wsdl:part name="Rin_Pustika_No" type="s:string" />
+    <wsdl:part name="Cast_Certificate_No" type="s:string" />
+    <wsdl:part name="Is_Rebate" type="s:string" />
+    <wsdl:part name="Created_Date" type="s:string" />
+    <wsdl:part name="Modified_Date" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+    <wsdl:part name="Per_Day_Rate" type="s:string" />
+    <wsdl:part name="Bill_Type" type="s:string" />
+    <wsdl:part name="BId" type="s:string" />
+    <wsdl:part name="Month" type="s:string" />
+    <wsdl:part name="Godown_Id" type="s:string" />
+    <wsdl:part name="Crop_Year" type="s:string" />
+    <wsdl:part name="MPWLC_SC" type="s:string" />
+    <wsdl:part name="GST_Perc_SC" type="s:string" />
+    <wsdl:part name="GST_Amt_SC" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionStorageBillDetailsHttpPostOut" />
+  <wsdl:message name="EDAddInstitutionStorageBillChargesHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Dates" type="s:string" />
+    <wsdl:part name="Opening_Balance" type="s:string" />
+    <wsdl:part name="Receive_Bags" type="s:string" />
+    <wsdl:part name="Issue_Bags" type="s:string" />
+    <wsdl:part name="Closing_Balance" type="s:string" />
+    <wsdl:part name="Per_Day_Rate" type="s:string" />
+    <wsdl:part name="Total_Charges" type="s:string" />
+    <wsdl:part name="Created_Date" type="s:string" />
+    <wsdl:part name="Modified_Date" type="s:string" />
+    <wsdl:part name="Opening_Weight" type="s:string" />
+    <wsdl:part name="Receive_Weight" type="s:string" />
+    <wsdl:part name="Issue_Weight" type="s:string" />
+    <wsdl:part name="Closing_Weight" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+    <wsdl:part name="Godown_Id" type="s:string" />
+    <wsdl:part name="Commodity_ID" type="s:string" />
+    <wsdl:part name="Crop_Year" type="s:string" />
+    <wsdl:part name="Bill_Type" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionStorageBillChargesHttpPostOut" />
+  <wsdl:message name="EDAddInstitutionStorageBillSummaryHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="District_Id" type="s:string" />
+    <wsdl:part name="Branch_Id" type="s:string" />
+    <wsdl:part name="Depositor_Type_Id" type="s:string" />
+    <wsdl:part name="Depositor_Id" type="s:string" />
+    <wsdl:part name="Commodity_Type_Id" type="s:string" />
+    <wsdl:part name="Commodity_Id" type="s:string" />
+    <wsdl:part name="From_Date" type="s:string" />
+    <wsdl:part name="To_Date" type="s:string" />
+    <wsdl:part name="Packing_Type" type="s:string" />
+    <wsdl:part name="Weight" type="s:string" />
+    <wsdl:part name="Financial_Year" type="s:string" />
+    <wsdl:part name="Commodity_Rate" type="s:string" />
+    <wsdl:part name="Net_Amount" type="s:string" />
+    <wsdl:part name="Sub_Amount" type="s:string" />
+    <wsdl:part name="Service_Tax_Perc" type="s:string" />
+    <wsdl:part name="Service_Tax_Amt" type="s:string" />
+    <wsdl:part name="Depositor_Category" type="s:string" />
+    <wsdl:part name="Rebate_Perc" type="s:string" />
+    <wsdl:part name="Rebate_Amt" type="s:string" />
+    <wsdl:part name="Rebate_on_Unit" type="s:string" />
+    <wsdl:part name="Khasra_Number" type="s:string" />
+    <wsdl:part name="Rin_Pustika_No" type="s:string" />
+    <wsdl:part name="Cast_Certificate_No" type="s:string" />
+    <wsdl:part name="Is_Rebate" type="s:string" />
+    <wsdl:part name="Created_Date" type="s:string" />
+    <wsdl:part name="Modified_Date" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+    <wsdl:part name="Per_Day_Rate" type="s:string" />
+    <wsdl:part name="Bill_Type" type="s:string" />
+    <wsdl:part name="BId" type="s:string" />
+    <wsdl:part name="Month" type="s:string" />
+    <wsdl:part name="Year" type="s:string" />
+    <wsdl:part name="Crop_Year" type="s:string" />
+    <wsdl:part name="MPWLC_SC" type="s:string" />
+    <wsdl:part name="GST_Perc_SC" type="s:string" />
+    <wsdl:part name="GST_Amt_SC" type="s:string" />
+    <wsdl:part name="Bill_Count" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionStorageBillSummaryHttpPostOut" />
+  <wsdl:message name="EDUpdateInstituitionStorageBillDetailswithFinBillNoHttpPostIn">
+    <wsdl:part name="Bill_No" type="s:string" />
+    <wsdl:part name="Godown_Bill_No" type="s:string" />
+    <wsdl:part name="Godown_ID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDUpdateInstituitionStorageBillDetailswithFinBillNoHttpPostOut" />
+  <wsdl:message name="EDUpdateBOApprovalInSummaryHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="District_Id" type="s:string" />
+    <wsdl:part name="Branch_ID" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDUpdateBOApprovalInSummaryHttpPostOut" />
+  <wsdl:message name="EDUpdateBOApprovalInDetailsHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="District_Id" type="s:string" />
+    <wsdl:part name="Branch_ID" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDUpdateBOApprovalInDetailsHttpPostOut" />
+  <wsdl:message name="EDAddInstitutionStorageBillDetailsInLogHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Branch_Id" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionStorageBillDetailsInLogHttpPostOut" />
+  <wsdl:message name="EDAddInstitutionStorageBillDetailsInLogDeletebyBillNoHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionStorageBillDetailsInLogDeletebyBillNoHttpPostOut" />
+  <wsdl:message name="EDDeleteInstitutionStorageBillDetailsHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Branch_Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteInstitutionStorageBillDetailsHttpPostOut" />
+  <wsdl:message name="EDDeleteInstitutionStorageBillDetailsbyBillNoHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteInstitutionStorageBillDetailsbyBillNoHttpPostOut" />
+  <wsdl:message name="EDAddInstitutionBillDailyChargesInLogHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Branch_Id" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionBillDailyChargesInLogHttpPostOut" />
+  <wsdl:message name="EDAddInstitutionBillDailyChargesInLogByBillNoHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionBillDailyChargesInLogByBillNoHttpPostOut" />
+  <wsdl:message name="EDDeleteInstitutionStorageDailyBillChargesHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteInstitutionStorageDailyBillChargesHttpPostOut" />
+  <wsdl:message name="EDAddGodownRentDeductionAmountInLogHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="District_Id" type="s:string" />
+    <wsdl:part name="Branch_Id" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddGodownRentDeductionAmountInLogHttpPostOut" />
+  <wsdl:message name="EDDeleteGodownRentDeductionAmountHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Branch_Id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteGodownRentDeductionAmountHttpPostOut" />
+  <wsdl:message name="EDDeleteGodownRentDeductionAmountByBillNoHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteGodownRentDeductionAmountByBillNoHttpPostOut" />
+  <wsdl:message name="EDAddPrivateGodownDailyRentInLogHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddPrivateGodownDailyRentInLogHttpPostOut" />
+  <wsdl:message name="EDDeletePvtBillGodownDailyRentAmountHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDDeletePvtBillGodownDailyRentAmountHttpPostOut" />
+  <wsdl:message name="EDAddGodownRentDeductionLogHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Branch_Id" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddGodownRentDeductionLogHttpPostOut" />
+  <wsdl:message name="EDAddGodownRentDeductionLogByBillNoHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddGodownRentDeductionLogByBillNoHttpPostOut" />
+  <wsdl:message name="EDDeleteFinalBillHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="District_Id" type="s:string" />
+    <wsdl:part name="Branch_Id" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteFinalBillHttpPostOut" />
+  <wsdl:message name="EDUpdateBOApprovalInstitutionStorageBillDetailsHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="District_Id" type="s:string" />
+    <wsdl:part name="Branch_Id" type="s:string" />
+    <wsdl:part name="BO_Approval_Status" type="s:string" />
+    <wsdl:part name="BO_Approval_Date" type="s:string" />
+    <wsdl:part name="BO_Approval_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDUpdateBOApprovalInstitutionStorageBillDetailsHttpPostOut" />
+  <wsdl:message name="EDAddInstitutionStorageBillDetailsForGodownRentHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="District_Id" type="s:string" />
+    <wsdl:part name="Branch_Id" type="s:string" />
+    <wsdl:part name="Depositor_Type_Id" type="s:string" />
+    <wsdl:part name="Depositor_Id" type="s:string" />
+    <wsdl:part name="Commodity_Id" type="s:string" />
+    <wsdl:part name="From_Date" type="s:string" />
+    <wsdl:part name="To_Date" type="s:string" />
+    <wsdl:part name="Packing_Type" type="s:string" />
+    <wsdl:part name="Weight" type="s:string" />
+    <wsdl:part name="Financial_Year" type="s:string" />
+    <wsdl:part name="Commodity_Rate" type="s:string" />
+    <wsdl:part name="Net_Amount" type="s:string" />
+    <wsdl:part name="Sub_Amount" type="s:string" />
+    <wsdl:part name="Service_Tax_Perc" type="s:string" />
+    <wsdl:part name="Service_Tax_Amt" type="s:string" />
+    <wsdl:part name="Depositor_Category" type="s:string" />
+    <wsdl:part name="Rebate_Perc" type="s:string" />
+    <wsdl:part name="Rebate_Amt" type="s:string" />
+    <wsdl:part name="Rebate_on_Unit" type="s:string" />
+    <wsdl:part name="Khasra_Number" type="s:string" />
+    <wsdl:part name="Rin_Pustika_No" type="s:string" />
+    <wsdl:part name="Cast_Certificate_No" type="s:string" />
+    <wsdl:part name="Is_Rebate" type="s:string" />
+    <wsdl:part name="Created_Date" type="s:string" />
+    <wsdl:part name="Modified_Date" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+    <wsdl:part name="Per_Day_Rate" type="s:string" />
+    <wsdl:part name="Bill_Type" type="s:string" />
+    <wsdl:part name="BId" type="s:string" />
+    <wsdl:part name="Month" type="s:string" />
+    <wsdl:part name="Godown_Id" type="s:string" />
+    <wsdl:part name="Crop_Year" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionStorageBillDetailsForGodownRentHttpPostOut" />
+  <wsdl:message name="EDAddBillPVTGodownDailyRentChargesHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Dates" type="s:string" />
+    <wsdl:part name="Opening_Balance" type="s:string" />
+    <wsdl:part name="Receive_Bags" type="s:string" />
+    <wsdl:part name="Issue_Bags" type="s:string" />
+    <wsdl:part name="Closing_Balance" type="s:string" />
+    <wsdl:part name="Per_Day_Rate" type="s:string" />
+    <wsdl:part name="Total_Charges" type="s:string" />
+    <wsdl:part name="Created_Date" type="s:string" />
+    <wsdl:part name="Modified_Date" type="s:string" />
+    <wsdl:part name="Opening_Weight" type="s:string" />
+    <wsdl:part name="Receive_Weight" type="s:string" />
+    <wsdl:part name="Issue_Weight" type="s:string" />
+    <wsdl:part name="Closing_Weight" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddBillPVTGodownDailyRentChargesHttpPostOut" />
+  <wsdl:message name="EDAddSteelSiloGodownDailyRentHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Godown_Id" type="s:string" />
+    <wsdl:part name="Commodity_Id" type="s:string" />
+    <wsdl:part name="Crop_Year" type="s:string" />
+    <wsdl:part name="Bill_Type" type="s:string" />
+    <wsdl:part name="Type_ID" type="s:string" />
+    <wsdl:part name="Dates" type="s:string" />
+    <wsdl:part name="Opening_Weight" type="s:string" />
+    <wsdl:part name="Receive_Weight" type="s:string" />
+    <wsdl:part name="Issue_Weight" type="s:string" />
+    <wsdl:part name="Closing_Weight" type="s:string" />
+    <wsdl:part name="Chargeable_Closing_Weight" type="s:string" />
+    <wsdl:part name="Opening_Balance" type="s:string" />
+    <wsdl:part name="Receive_Bags" type="s:string" />
+    <wsdl:part name="Issue_Bags" type="s:string" />
+    <wsdl:part name="Closing_Bag_Balance" type="s:string" />
+    <wsdl:part name="Per_Day_Rate" type="s:string" />
+    <wsdl:part name="Total_Charges" type="s:string" />
+    <wsdl:part name="Created_Date" type="s:string" />
+    <wsdl:part name="Created_By" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddSteelSiloGodownDailyRentHttpPostOut" />
+  <wsdl:message name="EDAddInstitutionSteelSiloStorageBillDetailsHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="District_Id" type="s:string" />
+    <wsdl:part name="Branch_Id" type="s:string" />
+    <wsdl:part name="Depositor_Id" type="s:string" />
+    <wsdl:part name="Commodity_Id" type="s:string" />
+    <wsdl:part name="From_Date" type="s:string" />
+    <wsdl:part name="To_Date" type="s:string" />
+    <wsdl:part name="Financial_Year" type="s:string" />
+    <wsdl:part name="Commodity_Rate" type="s:string" />
+    <wsdl:part name="Net_Amount" type="s:string" />
+    <wsdl:part name="Sub_Amount" type="s:string" />
+    <wsdl:part name="Service_Tax_Perc" type="s:string" />
+    <wsdl:part name="Service_Tax_Amt" type="s:string" />
+    <wsdl:part name="Depositor_Category" type="s:string" />
+    <wsdl:part name="Rebate_Perc" type="s:string" />
+    <wsdl:part name="Rebate_Amt" type="s:string" />
+    <wsdl:part name="Rebate_on_Unit" type="s:string" />
+    <wsdl:part name="Is_Rebate" type="s:string" />
+    <wsdl:part name="Created_Date" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+    <wsdl:part name="Per_Day_Rate" type="s:string" />
+    <wsdl:part name="Bill_Type_ID" type="s:string" />
+    <wsdl:part name="Bill_Type" type="s:string" />
+    <wsdl:part name="BId" type="s:string" />
+    <wsdl:part name="Month" type="s:string" />
+    <wsdl:part name="Godown_Id" type="s:string" />
+    <wsdl:part name="Crop_Year" type="s:string" />
+    <wsdl:part name="Invoice_No" type="s:string" />
+    <wsdl:part name="Bill_Category_Type_ID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDAddInstitutionSteelSiloStorageBillDetailsHttpPostOut" />
+  <wsdl:message name="EDDeleteFinalBillSteelSiloHttpPostIn">
+    <wsdl:part name="Bill_Number" type="s:string" />
+    <wsdl:part name="Client_IP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EDDeleteFinalBillSteelSiloHttpPostOut" />
+  <wsdl:portType name="MPSCSC_InstituitionStorageBillDetails_TestSoap">
+    <wsdl:operation name="EDAddInstitutionStorageBillDetails">
+      <wsdl:input message="tns:EDAddInstitutionStorageBillDetailsSoapIn" />
+      <wsdl:output message="tns:EDAddInstitutionStorageBillDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillCharges">
+      <wsdl:input message="tns:EDAddInstitutionStorageBillChargesSoapIn" />
+      <wsdl:output message="tns:EDAddInstitutionStorageBillChargesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillSummary">
+      <wsdl:input message="tns:EDAddInstitutionStorageBillSummarySoapIn" />
+      <wsdl:output message="tns:EDAddInstitutionStorageBillSummarySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateInstituitionStorageBillDetailswithFinBillNo">
+      <wsdl:input message="tns:EDUpdateInstituitionStorageBillDetailswithFinBillNoSoapIn" />
+      <wsdl:output message="tns:EDUpdateInstituitionStorageBillDetailswithFinBillNoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateBOApprovalInSummary">
+      <wsdl:input message="tns:EDUpdateBOApprovalInSummarySoapIn" />
+      <wsdl:output message="tns:EDUpdateBOApprovalInSummarySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateBOApprovalInDetails">
+      <wsdl:input message="tns:EDUpdateBOApprovalInDetailsSoapIn" />
+      <wsdl:output message="tns:EDUpdateBOApprovalInDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillDetailsInLog">
+      <wsdl:input message="tns:EDAddInstitutionStorageBillDetailsInLogSoapIn" />
+      <wsdl:output message="tns:EDAddInstitutionStorageBillDetailsInLogSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillDetailsInLogDeletebyBillNo">
+      <wsdl:input message="tns:EDAddInstitutionStorageBillDetailsInLogDeletebyBillNoSoapIn" />
+      <wsdl:output message="tns:EDAddInstitutionStorageBillDetailsInLogDeletebyBillNoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteInstitutionStorageBillDetails">
+      <wsdl:input message="tns:EDDeleteInstitutionStorageBillDetailsSoapIn" />
+      <wsdl:output message="tns:EDDeleteInstitutionStorageBillDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteInstitutionStorageBillDetailsbyBillNo">
+      <wsdl:input message="tns:EDDeleteInstitutionStorageBillDetailsbyBillNoSoapIn" />
+      <wsdl:output message="tns:EDDeleteInstitutionStorageBillDetailsbyBillNoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionBillDailyChargesInLog">
+      <wsdl:input message="tns:EDAddInstitutionBillDailyChargesInLogSoapIn" />
+      <wsdl:output message="tns:EDAddInstitutionBillDailyChargesInLogSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionBillDailyChargesInLogByBillNo">
+      <wsdl:input message="tns:EDAddInstitutionBillDailyChargesInLogByBillNoSoapIn" />
+      <wsdl:output message="tns:EDAddInstitutionBillDailyChargesInLogByBillNoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteInstitutionStorageDailyBillCharges">
+      <wsdl:input message="tns:EDDeleteInstitutionStorageDailyBillChargesSoapIn" />
+      <wsdl:output message="tns:EDDeleteInstitutionStorageDailyBillChargesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddGodownRentDeductionAmountInLog">
+      <wsdl:input message="tns:EDAddGodownRentDeductionAmountInLogSoapIn" />
+      <wsdl:output message="tns:EDAddGodownRentDeductionAmountInLogSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteGodownRentDeductionAmount">
+      <wsdl:input message="tns:EDDeleteGodownRentDeductionAmountSoapIn" />
+      <wsdl:output message="tns:EDDeleteGodownRentDeductionAmountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteGodownRentDeductionAmountByBillNo">
+      <wsdl:input message="tns:EDDeleteGodownRentDeductionAmountByBillNoSoapIn" />
+      <wsdl:output message="tns:EDDeleteGodownRentDeductionAmountByBillNoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddPrivateGodownDailyRentInLog">
+      <wsdl:input message="tns:EDAddPrivateGodownDailyRentInLogSoapIn" />
+      <wsdl:output message="tns:EDAddPrivateGodownDailyRentInLogSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeletePvtBillGodownDailyRentAmount">
+      <wsdl:input message="tns:EDDeletePvtBillGodownDailyRentAmountSoapIn" />
+      <wsdl:output message="tns:EDDeletePvtBillGodownDailyRentAmountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddGodownRentDeductionLog">
+      <wsdl:input message="tns:EDAddGodownRentDeductionLogSoapIn" />
+      <wsdl:output message="tns:EDAddGodownRentDeductionLogSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddGodownRentDeductionLogByBillNo">
+      <wsdl:input message="tns:EDAddGodownRentDeductionLogByBillNoSoapIn" />
+      <wsdl:output message="tns:EDAddGodownRentDeductionLogByBillNoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteFinalBill">
+      <wsdl:input message="tns:EDDeleteFinalBillSoapIn" />
+      <wsdl:output message="tns:EDDeleteFinalBillSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateBOApprovalInstitutionStorageBillDetails">
+      <wsdl:input message="tns:EDUpdateBOApprovalInstitutionStorageBillDetailsSoapIn" />
+      <wsdl:output message="tns:EDUpdateBOApprovalInstitutionStorageBillDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillDetailsForGodownRent">
+      <wsdl:input message="tns:EDAddInstitutionStorageBillDetailsForGodownRentSoapIn" />
+      <wsdl:output message="tns:EDAddInstitutionStorageBillDetailsForGodownRentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddBillPVTGodownDailyRentCharges">
+      <wsdl:input message="tns:EDAddBillPVTGodownDailyRentChargesSoapIn" />
+      <wsdl:output message="tns:EDAddBillPVTGodownDailyRentChargesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddSteelSiloGodownDailyRent">
+      <wsdl:input message="tns:EDAddSteelSiloGodownDailyRentSoapIn" />
+      <wsdl:output message="tns:EDAddSteelSiloGodownDailyRentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionSteelSiloStorageBillDetails">
+      <wsdl:input message="tns:EDAddInstitutionSteelSiloStorageBillDetailsSoapIn" />
+      <wsdl:output message="tns:EDAddInstitutionSteelSiloStorageBillDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteFinalBillSteelSilo">
+      <wsdl:input message="tns:EDDeleteFinalBillSteelSiloSoapIn" />
+      <wsdl:output message="tns:EDDeleteFinalBillSteelSiloSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MPSCSC_InstituitionStorageBillDetails_TestHttpGet">
+    <wsdl:operation name="EDAddInstitutionStorageBillDetails">
+      <wsdl:input message="tns:EDAddInstitutionStorageBillDetailsHttpGetIn" />
+      <wsdl:output message="tns:EDAddInstitutionStorageBillDetailsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillCharges">
+      <wsdl:input message="tns:EDAddInstitutionStorageBillChargesHttpGetIn" />
+      <wsdl:output message="tns:EDAddInstitutionStorageBillChargesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillSummary">
+      <wsdl:input message="tns:EDAddInstitutionStorageBillSummaryHttpGetIn" />
+      <wsdl:output message="tns:EDAddInstitutionStorageBillSummaryHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateInstituitionStorageBillDetailswithFinBillNo">
+      <wsdl:input message="tns:EDUpdateInstituitionStorageBillDetailswithFinBillNoHttpGetIn" />
+      <wsdl:output message="tns:EDUpdateInstituitionStorageBillDetailswithFinBillNoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateBOApprovalInSummary">
+      <wsdl:input message="tns:EDUpdateBOApprovalInSummaryHttpGetIn" />
+      <wsdl:output message="tns:EDUpdateBOApprovalInSummaryHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateBOApprovalInDetails">
+      <wsdl:input message="tns:EDUpdateBOApprovalInDetailsHttpGetIn" />
+      <wsdl:output message="tns:EDUpdateBOApprovalInDetailsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillDetailsInLog">
+      <wsdl:input message="tns:EDAddInstitutionStorageBillDetailsInLogHttpGetIn" />
+      <wsdl:output message="tns:EDAddInstitutionStorageBillDetailsInLogHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillDetailsInLogDeletebyBillNo">
+      <wsdl:input message="tns:EDAddInstitutionStorageBillDetailsInLogDeletebyBillNoHttpGetIn" />
+      <wsdl:output message="tns:EDAddInstitutionStorageBillDetailsInLogDeletebyBillNoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteInstitutionStorageBillDetails">
+      <wsdl:input message="tns:EDDeleteInstitutionStorageBillDetailsHttpGetIn" />
+      <wsdl:output message="tns:EDDeleteInstitutionStorageBillDetailsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteInstitutionStorageBillDetailsbyBillNo">
+      <wsdl:input message="tns:EDDeleteInstitutionStorageBillDetailsbyBillNoHttpGetIn" />
+      <wsdl:output message="tns:EDDeleteInstitutionStorageBillDetailsbyBillNoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionBillDailyChargesInLog">
+      <wsdl:input message="tns:EDAddInstitutionBillDailyChargesInLogHttpGetIn" />
+      <wsdl:output message="tns:EDAddInstitutionBillDailyChargesInLogHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionBillDailyChargesInLogByBillNo">
+      <wsdl:input message="tns:EDAddInstitutionBillDailyChargesInLogByBillNoHttpGetIn" />
+      <wsdl:output message="tns:EDAddInstitutionBillDailyChargesInLogByBillNoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteInstitutionStorageDailyBillCharges">
+      <wsdl:input message="tns:EDDeleteInstitutionStorageDailyBillChargesHttpGetIn" />
+      <wsdl:output message="tns:EDDeleteInstitutionStorageDailyBillChargesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddGodownRentDeductionAmountInLog">
+      <wsdl:input message="tns:EDAddGodownRentDeductionAmountInLogHttpGetIn" />
+      <wsdl:output message="tns:EDAddGodownRentDeductionAmountInLogHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteGodownRentDeductionAmount">
+      <wsdl:input message="tns:EDDeleteGodownRentDeductionAmountHttpGetIn" />
+      <wsdl:output message="tns:EDDeleteGodownRentDeductionAmountHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteGodownRentDeductionAmountByBillNo">
+      <wsdl:input message="tns:EDDeleteGodownRentDeductionAmountByBillNoHttpGetIn" />
+      <wsdl:output message="tns:EDDeleteGodownRentDeductionAmountByBillNoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddPrivateGodownDailyRentInLog">
+      <wsdl:input message="tns:EDAddPrivateGodownDailyRentInLogHttpGetIn" />
+      <wsdl:output message="tns:EDAddPrivateGodownDailyRentInLogHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeletePvtBillGodownDailyRentAmount">
+      <wsdl:input message="tns:EDDeletePvtBillGodownDailyRentAmountHttpGetIn" />
+      <wsdl:output message="tns:EDDeletePvtBillGodownDailyRentAmountHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddGodownRentDeductionLog">
+      <wsdl:input message="tns:EDAddGodownRentDeductionLogHttpGetIn" />
+      <wsdl:output message="tns:EDAddGodownRentDeductionLogHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddGodownRentDeductionLogByBillNo">
+      <wsdl:input message="tns:EDAddGodownRentDeductionLogByBillNoHttpGetIn" />
+      <wsdl:output message="tns:EDAddGodownRentDeductionLogByBillNoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteFinalBill">
+      <wsdl:input message="tns:EDDeleteFinalBillHttpGetIn" />
+      <wsdl:output message="tns:EDDeleteFinalBillHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateBOApprovalInstitutionStorageBillDetails">
+      <wsdl:input message="tns:EDUpdateBOApprovalInstitutionStorageBillDetailsHttpGetIn" />
+      <wsdl:output message="tns:EDUpdateBOApprovalInstitutionStorageBillDetailsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillDetailsForGodownRent">
+      <wsdl:input message="tns:EDAddInstitutionStorageBillDetailsForGodownRentHttpGetIn" />
+      <wsdl:output message="tns:EDAddInstitutionStorageBillDetailsForGodownRentHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddBillPVTGodownDailyRentCharges">
+      <wsdl:input message="tns:EDAddBillPVTGodownDailyRentChargesHttpGetIn" />
+      <wsdl:output message="tns:EDAddBillPVTGodownDailyRentChargesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddSteelSiloGodownDailyRent">
+      <wsdl:input message="tns:EDAddSteelSiloGodownDailyRentHttpGetIn" />
+      <wsdl:output message="tns:EDAddSteelSiloGodownDailyRentHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionSteelSiloStorageBillDetails">
+      <wsdl:input message="tns:EDAddInstitutionSteelSiloStorageBillDetailsHttpGetIn" />
+      <wsdl:output message="tns:EDAddInstitutionSteelSiloStorageBillDetailsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteFinalBillSteelSilo">
+      <wsdl:input message="tns:EDDeleteFinalBillSteelSiloHttpGetIn" />
+      <wsdl:output message="tns:EDDeleteFinalBillSteelSiloHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MPSCSC_InstituitionStorageBillDetails_TestHttpPost">
+    <wsdl:operation name="EDAddInstitutionStorageBillDetails">
+      <wsdl:input message="tns:EDAddInstitutionStorageBillDetailsHttpPostIn" />
+      <wsdl:output message="tns:EDAddInstitutionStorageBillDetailsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillCharges">
+      <wsdl:input message="tns:EDAddInstitutionStorageBillChargesHttpPostIn" />
+      <wsdl:output message="tns:EDAddInstitutionStorageBillChargesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillSummary">
+      <wsdl:input message="tns:EDAddInstitutionStorageBillSummaryHttpPostIn" />
+      <wsdl:output message="tns:EDAddInstitutionStorageBillSummaryHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateInstituitionStorageBillDetailswithFinBillNo">
+      <wsdl:input message="tns:EDUpdateInstituitionStorageBillDetailswithFinBillNoHttpPostIn" />
+      <wsdl:output message="tns:EDUpdateInstituitionStorageBillDetailswithFinBillNoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateBOApprovalInSummary">
+      <wsdl:input message="tns:EDUpdateBOApprovalInSummaryHttpPostIn" />
+      <wsdl:output message="tns:EDUpdateBOApprovalInSummaryHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateBOApprovalInDetails">
+      <wsdl:input message="tns:EDUpdateBOApprovalInDetailsHttpPostIn" />
+      <wsdl:output message="tns:EDUpdateBOApprovalInDetailsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillDetailsInLog">
+      <wsdl:input message="tns:EDAddInstitutionStorageBillDetailsInLogHttpPostIn" />
+      <wsdl:output message="tns:EDAddInstitutionStorageBillDetailsInLogHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillDetailsInLogDeletebyBillNo">
+      <wsdl:input message="tns:EDAddInstitutionStorageBillDetailsInLogDeletebyBillNoHttpPostIn" />
+      <wsdl:output message="tns:EDAddInstitutionStorageBillDetailsInLogDeletebyBillNoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteInstitutionStorageBillDetails">
+      <wsdl:input message="tns:EDDeleteInstitutionStorageBillDetailsHttpPostIn" />
+      <wsdl:output message="tns:EDDeleteInstitutionStorageBillDetailsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteInstitutionStorageBillDetailsbyBillNo">
+      <wsdl:input message="tns:EDDeleteInstitutionStorageBillDetailsbyBillNoHttpPostIn" />
+      <wsdl:output message="tns:EDDeleteInstitutionStorageBillDetailsbyBillNoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionBillDailyChargesInLog">
+      <wsdl:input message="tns:EDAddInstitutionBillDailyChargesInLogHttpPostIn" />
+      <wsdl:output message="tns:EDAddInstitutionBillDailyChargesInLogHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionBillDailyChargesInLogByBillNo">
+      <wsdl:input message="tns:EDAddInstitutionBillDailyChargesInLogByBillNoHttpPostIn" />
+      <wsdl:output message="tns:EDAddInstitutionBillDailyChargesInLogByBillNoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteInstitutionStorageDailyBillCharges">
+      <wsdl:input message="tns:EDDeleteInstitutionStorageDailyBillChargesHttpPostIn" />
+      <wsdl:output message="tns:EDDeleteInstitutionStorageDailyBillChargesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddGodownRentDeductionAmountInLog">
+      <wsdl:input message="tns:EDAddGodownRentDeductionAmountInLogHttpPostIn" />
+      <wsdl:output message="tns:EDAddGodownRentDeductionAmountInLogHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteGodownRentDeductionAmount">
+      <wsdl:input message="tns:EDDeleteGodownRentDeductionAmountHttpPostIn" />
+      <wsdl:output message="tns:EDDeleteGodownRentDeductionAmountHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteGodownRentDeductionAmountByBillNo">
+      <wsdl:input message="tns:EDDeleteGodownRentDeductionAmountByBillNoHttpPostIn" />
+      <wsdl:output message="tns:EDDeleteGodownRentDeductionAmountByBillNoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddPrivateGodownDailyRentInLog">
+      <wsdl:input message="tns:EDAddPrivateGodownDailyRentInLogHttpPostIn" />
+      <wsdl:output message="tns:EDAddPrivateGodownDailyRentInLogHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeletePvtBillGodownDailyRentAmount">
+      <wsdl:input message="tns:EDDeletePvtBillGodownDailyRentAmountHttpPostIn" />
+      <wsdl:output message="tns:EDDeletePvtBillGodownDailyRentAmountHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddGodownRentDeductionLog">
+      <wsdl:input message="tns:EDAddGodownRentDeductionLogHttpPostIn" />
+      <wsdl:output message="tns:EDAddGodownRentDeductionLogHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddGodownRentDeductionLogByBillNo">
+      <wsdl:input message="tns:EDAddGodownRentDeductionLogByBillNoHttpPostIn" />
+      <wsdl:output message="tns:EDAddGodownRentDeductionLogByBillNoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteFinalBill">
+      <wsdl:input message="tns:EDDeleteFinalBillHttpPostIn" />
+      <wsdl:output message="tns:EDDeleteFinalBillHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateBOApprovalInstitutionStorageBillDetails">
+      <wsdl:input message="tns:EDUpdateBOApprovalInstitutionStorageBillDetailsHttpPostIn" />
+      <wsdl:output message="tns:EDUpdateBOApprovalInstitutionStorageBillDetailsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillDetailsForGodownRent">
+      <wsdl:input message="tns:EDAddInstitutionStorageBillDetailsForGodownRentHttpPostIn" />
+      <wsdl:output message="tns:EDAddInstitutionStorageBillDetailsForGodownRentHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddBillPVTGodownDailyRentCharges">
+      <wsdl:input message="tns:EDAddBillPVTGodownDailyRentChargesHttpPostIn" />
+      <wsdl:output message="tns:EDAddBillPVTGodownDailyRentChargesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddSteelSiloGodownDailyRent">
+      <wsdl:input message="tns:EDAddSteelSiloGodownDailyRentHttpPostIn" />
+      <wsdl:output message="tns:EDAddSteelSiloGodownDailyRentHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionSteelSiloStorageBillDetails">
+      <wsdl:input message="tns:EDAddInstitutionSteelSiloStorageBillDetailsHttpPostIn" />
+      <wsdl:output message="tns:EDAddInstitutionSteelSiloStorageBillDetailsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteFinalBillSteelSilo">
+      <wsdl:input message="tns:EDDeleteFinalBillSteelSiloHttpPostIn" />
+      <wsdl:output message="tns:EDDeleteFinalBillSteelSiloHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MPSCSC_InstituitionStorageBillDetails_TestSoap" type="tns:MPSCSC_InstituitionStorageBillDetails_TestSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EDAddInstitutionStorageBillDetails">
+      <soap:operation soapAction="http://tempuri.org/EDAddInstitutionStorageBillDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillCharges">
+      <soap:operation soapAction="http://tempuri.org/EDAddInstitutionStorageBillCharges" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillSummary">
+      <soap:operation soapAction="http://tempuri.org/EDAddInstitutionStorageBillSummary" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateInstituitionStorageBillDetailswithFinBillNo">
+      <soap:operation soapAction="http://tempuri.org/EDUpdateInstituitionStorageBillDetailswithFinBillNo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateBOApprovalInSummary">
+      <soap:operation soapAction="http://tempuri.org/EDUpdateBOApprovalInSummary" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateBOApprovalInDetails">
+      <soap:operation soapAction="http://tempuri.org/EDUpdateBOApprovalInDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillDetailsInLog">
+      <soap:operation soapAction="http://tempuri.org/EDAddInstitutionStorageBillDetailsInLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillDetailsInLogDeletebyBillNo">
+      <soap:operation soapAction="http://tempuri.org/EDAddInstitutionStorageBillDetailsInLogDeletebyBillNo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteInstitutionStorageBillDetails">
+      <soap:operation soapAction="http://tempuri.org/EDDeleteInstitutionStorageBillDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteInstitutionStorageBillDetailsbyBillNo">
+      <soap:operation soapAction="http://tempuri.org/EDDeleteInstitutionStorageBillDetailsbyBillNo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionBillDailyChargesInLog">
+      <soap:operation soapAction="http://tempuri.org/EDAddInstitutionBillDailyChargesInLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionBillDailyChargesInLogByBillNo">
+      <soap:operation soapAction="http://tempuri.org/EDAddInstitutionBillDailyChargesInLogByBillNo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteInstitutionStorageDailyBillCharges">
+      <soap:operation soapAction="http://tempuri.org/EDDeleteInstitutionStorageDailyBillCharges" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddGodownRentDeductionAmountInLog">
+      <soap:operation soapAction="http://tempuri.org/EDAddGodownRentDeductionAmountInLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteGodownRentDeductionAmount">
+      <soap:operation soapAction="http://tempuri.org/EDDeleteGodownRentDeductionAmount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteGodownRentDeductionAmountByBillNo">
+      <soap:operation soapAction="http://tempuri.org/EDDeleteGodownRentDeductionAmountByBillNo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddPrivateGodownDailyRentInLog">
+      <soap:operation soapAction="http://tempuri.org/EDAddPrivateGodownDailyRentInLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDDeletePvtBillGodownDailyRentAmount">
+      <soap:operation soapAction="http://tempuri.org/EDDeletePvtBillGodownDailyRentAmount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddGodownRentDeductionLog">
+      <soap:operation soapAction="http://tempuri.org/EDAddGodownRentDeductionLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddGodownRentDeductionLogByBillNo">
+      <soap:operation soapAction="http://tempuri.org/EDAddGodownRentDeductionLogByBillNo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteFinalBill">
+      <soap:operation soapAction="http://tempuri.org/EDDeleteFinalBill" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateBOApprovalInstitutionStorageBillDetails">
+      <soap:operation soapAction="http://tempuri.org/EDUpdateBOApprovalInstitutionStorageBillDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillDetailsForGodownRent">
+      <soap:operation soapAction="http://tempuri.org/EDAddInstitutionStorageBillDetailsForGodownRent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddBillPVTGodownDailyRentCharges">
+      <soap:operation soapAction="http://tempuri.org/EDAddBillPVTGodownDailyRentCharges" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddSteelSiloGodownDailyRent">
+      <soap:operation soapAction="http://tempuri.org/EDAddSteelSiloGodownDailyRent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionSteelSiloStorageBillDetails">
+      <soap:operation soapAction="http://tempuri.org/EDAddInstitutionSteelSiloStorageBillDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteFinalBillSteelSilo">
+      <soap:operation soapAction="http://tempuri.org/EDDeleteFinalBillSteelSilo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MPSCSC_InstituitionStorageBillDetails_TestSoap12" type="tns:MPSCSC_InstituitionStorageBillDetails_TestSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EDAddInstitutionStorageBillDetails">
+      <soap12:operation soapAction="http://tempuri.org/EDAddInstitutionStorageBillDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillCharges">
+      <soap12:operation soapAction="http://tempuri.org/EDAddInstitutionStorageBillCharges" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillSummary">
+      <soap12:operation soapAction="http://tempuri.org/EDAddInstitutionStorageBillSummary" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateInstituitionStorageBillDetailswithFinBillNo">
+      <soap12:operation soapAction="http://tempuri.org/EDUpdateInstituitionStorageBillDetailswithFinBillNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateBOApprovalInSummary">
+      <soap12:operation soapAction="http://tempuri.org/EDUpdateBOApprovalInSummary" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateBOApprovalInDetails">
+      <soap12:operation soapAction="http://tempuri.org/EDUpdateBOApprovalInDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillDetailsInLog">
+      <soap12:operation soapAction="http://tempuri.org/EDAddInstitutionStorageBillDetailsInLog" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillDetailsInLogDeletebyBillNo">
+      <soap12:operation soapAction="http://tempuri.org/EDAddInstitutionStorageBillDetailsInLogDeletebyBillNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteInstitutionStorageBillDetails">
+      <soap12:operation soapAction="http://tempuri.org/EDDeleteInstitutionStorageBillDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteInstitutionStorageBillDetailsbyBillNo">
+      <soap12:operation soapAction="http://tempuri.org/EDDeleteInstitutionStorageBillDetailsbyBillNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionBillDailyChargesInLog">
+      <soap12:operation soapAction="http://tempuri.org/EDAddInstitutionBillDailyChargesInLog" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionBillDailyChargesInLogByBillNo">
+      <soap12:operation soapAction="http://tempuri.org/EDAddInstitutionBillDailyChargesInLogByBillNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteInstitutionStorageDailyBillCharges">
+      <soap12:operation soapAction="http://tempuri.org/EDDeleteInstitutionStorageDailyBillCharges" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddGodownRentDeductionAmountInLog">
+      <soap12:operation soapAction="http://tempuri.org/EDAddGodownRentDeductionAmountInLog" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteGodownRentDeductionAmount">
+      <soap12:operation soapAction="http://tempuri.org/EDDeleteGodownRentDeductionAmount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteGodownRentDeductionAmountByBillNo">
+      <soap12:operation soapAction="http://tempuri.org/EDDeleteGodownRentDeductionAmountByBillNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddPrivateGodownDailyRentInLog">
+      <soap12:operation soapAction="http://tempuri.org/EDAddPrivateGodownDailyRentInLog" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDDeletePvtBillGodownDailyRentAmount">
+      <soap12:operation soapAction="http://tempuri.org/EDDeletePvtBillGodownDailyRentAmount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddGodownRentDeductionLog">
+      <soap12:operation soapAction="http://tempuri.org/EDAddGodownRentDeductionLog" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddGodownRentDeductionLogByBillNo">
+      <soap12:operation soapAction="http://tempuri.org/EDAddGodownRentDeductionLogByBillNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteFinalBill">
+      <soap12:operation soapAction="http://tempuri.org/EDDeleteFinalBill" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateBOApprovalInstitutionStorageBillDetails">
+      <soap12:operation soapAction="http://tempuri.org/EDUpdateBOApprovalInstitutionStorageBillDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillDetailsForGodownRent">
+      <soap12:operation soapAction="http://tempuri.org/EDAddInstitutionStorageBillDetailsForGodownRent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddBillPVTGodownDailyRentCharges">
+      <soap12:operation soapAction="http://tempuri.org/EDAddBillPVTGodownDailyRentCharges" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddSteelSiloGodownDailyRent">
+      <soap12:operation soapAction="http://tempuri.org/EDAddSteelSiloGodownDailyRent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionSteelSiloStorageBillDetails">
+      <soap12:operation soapAction="http://tempuri.org/EDAddInstitutionSteelSiloStorageBillDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteFinalBillSteelSilo">
+      <soap12:operation soapAction="http://tempuri.org/EDDeleteFinalBillSteelSilo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MPSCSC_InstituitionStorageBillDetails_TestHttpGet" type="tns:MPSCSC_InstituitionStorageBillDetails_TestHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="EDAddInstitutionStorageBillDetails">
+      <http:operation location="/EDAddInstitutionStorageBillDetails" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillCharges">
+      <http:operation location="/EDAddInstitutionStorageBillCharges" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillSummary">
+      <http:operation location="/EDAddInstitutionStorageBillSummary" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateInstituitionStorageBillDetailswithFinBillNo">
+      <http:operation location="/EDUpdateInstituitionStorageBillDetailswithFinBillNo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateBOApprovalInSummary">
+      <http:operation location="/EDUpdateBOApprovalInSummary" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateBOApprovalInDetails">
+      <http:operation location="/EDUpdateBOApprovalInDetails" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillDetailsInLog">
+      <http:operation location="/EDAddInstitutionStorageBillDetailsInLog" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillDetailsInLogDeletebyBillNo">
+      <http:operation location="/EDAddInstitutionStorageBillDetailsInLogDeletebyBillNo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteInstitutionStorageBillDetails">
+      <http:operation location="/EDDeleteInstitutionStorageBillDetails" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteInstitutionStorageBillDetailsbyBillNo">
+      <http:operation location="/EDDeleteInstitutionStorageBillDetailsbyBillNo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionBillDailyChargesInLog">
+      <http:operation location="/EDAddInstitutionBillDailyChargesInLog" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionBillDailyChargesInLogByBillNo">
+      <http:operation location="/EDAddInstitutionBillDailyChargesInLogByBillNo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteInstitutionStorageDailyBillCharges">
+      <http:operation location="/EDDeleteInstitutionStorageDailyBillCharges" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddGodownRentDeductionAmountInLog">
+      <http:operation location="/EDAddGodownRentDeductionAmountInLog" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteGodownRentDeductionAmount">
+      <http:operation location="/EDDeleteGodownRentDeductionAmount" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteGodownRentDeductionAmountByBillNo">
+      <http:operation location="/EDDeleteGodownRentDeductionAmountByBillNo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddPrivateGodownDailyRentInLog">
+      <http:operation location="/EDAddPrivateGodownDailyRentInLog" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeletePvtBillGodownDailyRentAmount">
+      <http:operation location="/EDDeletePvtBillGodownDailyRentAmount" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddGodownRentDeductionLog">
+      <http:operation location="/EDAddGodownRentDeductionLog" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddGodownRentDeductionLogByBillNo">
+      <http:operation location="/EDAddGodownRentDeductionLogByBillNo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteFinalBill">
+      <http:operation location="/EDDeleteFinalBill" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateBOApprovalInstitutionStorageBillDetails">
+      <http:operation location="/EDUpdateBOApprovalInstitutionStorageBillDetails" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillDetailsForGodownRent">
+      <http:operation location="/EDAddInstitutionStorageBillDetailsForGodownRent" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddBillPVTGodownDailyRentCharges">
+      <http:operation location="/EDAddBillPVTGodownDailyRentCharges" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddSteelSiloGodownDailyRent">
+      <http:operation location="/EDAddSteelSiloGodownDailyRent" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionSteelSiloStorageBillDetails">
+      <http:operation location="/EDAddInstitutionSteelSiloStorageBillDetails" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteFinalBillSteelSilo">
+      <http:operation location="/EDDeleteFinalBillSteelSilo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MPSCSC_InstituitionStorageBillDetails_TestHttpPost" type="tns:MPSCSC_InstituitionStorageBillDetails_TestHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="EDAddInstitutionStorageBillDetails">
+      <http:operation location="/EDAddInstitutionStorageBillDetails" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillCharges">
+      <http:operation location="/EDAddInstitutionStorageBillCharges" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillSummary">
+      <http:operation location="/EDAddInstitutionStorageBillSummary" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateInstituitionStorageBillDetailswithFinBillNo">
+      <http:operation location="/EDUpdateInstituitionStorageBillDetailswithFinBillNo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateBOApprovalInSummary">
+      <http:operation location="/EDUpdateBOApprovalInSummary" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateBOApprovalInDetails">
+      <http:operation location="/EDUpdateBOApprovalInDetails" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillDetailsInLog">
+      <http:operation location="/EDAddInstitutionStorageBillDetailsInLog" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillDetailsInLogDeletebyBillNo">
+      <http:operation location="/EDAddInstitutionStorageBillDetailsInLogDeletebyBillNo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteInstitutionStorageBillDetails">
+      <http:operation location="/EDDeleteInstitutionStorageBillDetails" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteInstitutionStorageBillDetailsbyBillNo">
+      <http:operation location="/EDDeleteInstitutionStorageBillDetailsbyBillNo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionBillDailyChargesInLog">
+      <http:operation location="/EDAddInstitutionBillDailyChargesInLog" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionBillDailyChargesInLogByBillNo">
+      <http:operation location="/EDAddInstitutionBillDailyChargesInLogByBillNo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteInstitutionStorageDailyBillCharges">
+      <http:operation location="/EDDeleteInstitutionStorageDailyBillCharges" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddGodownRentDeductionAmountInLog">
+      <http:operation location="/EDAddGodownRentDeductionAmountInLog" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteGodownRentDeductionAmount">
+      <http:operation location="/EDDeleteGodownRentDeductionAmount" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteGodownRentDeductionAmountByBillNo">
+      <http:operation location="/EDDeleteGodownRentDeductionAmountByBillNo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddPrivateGodownDailyRentInLog">
+      <http:operation location="/EDAddPrivateGodownDailyRentInLog" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeletePvtBillGodownDailyRentAmount">
+      <http:operation location="/EDDeletePvtBillGodownDailyRentAmount" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddGodownRentDeductionLog">
+      <http:operation location="/EDAddGodownRentDeductionLog" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddGodownRentDeductionLogByBillNo">
+      <http:operation location="/EDAddGodownRentDeductionLogByBillNo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteFinalBill">
+      <http:operation location="/EDDeleteFinalBill" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDUpdateBOApprovalInstitutionStorageBillDetails">
+      <http:operation location="/EDUpdateBOApprovalInstitutionStorageBillDetails" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionStorageBillDetailsForGodownRent">
+      <http:operation location="/EDAddInstitutionStorageBillDetailsForGodownRent" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddBillPVTGodownDailyRentCharges">
+      <http:operation location="/EDAddBillPVTGodownDailyRentCharges" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddSteelSiloGodownDailyRent">
+      <http:operation location="/EDAddSteelSiloGodownDailyRent" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDAddInstitutionSteelSiloStorageBillDetails">
+      <http:operation location="/EDAddInstitutionSteelSiloStorageBillDetails" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="EDDeleteFinalBillSteelSilo">
+      <http:operation location="/EDDeleteFinalBillSteelSilo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MPSCSC_InstituitionStorageBillDetails_Test">
+    <wsdl:port name="MPSCSC_InstituitionStorageBillDetails_TestSoap" binding="tns:MPSCSC_InstituitionStorageBillDetails_TestSoap">
+      <soap:address location="https://csmsmpscsc.mp.gov.in/csmsNew/Android_WS/MPSCSC_InstituitionStorageBillDetails_test.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MPSCSC_InstituitionStorageBillDetails_TestSoap12" binding="tns:MPSCSC_InstituitionStorageBillDetails_TestSoap12">
+      <soap12:address location="https://csmsmpscsc.mp.gov.in/csmsNew/Android_WS/MPSCSC_InstituitionStorageBillDetails_test.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MPSCSC_InstituitionStorageBillDetails_TestHttpGet" binding="tns:MPSCSC_InstituitionStorageBillDetails_TestHttpGet">
+      <http:address location="https://csmsmpscsc.mp.gov.in/csmsNew/Android_WS/MPSCSC_InstituitionStorageBillDetails_test.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MPSCSC_InstituitionStorageBillDetails_TestHttpPost" binding="tns:MPSCSC_InstituitionStorageBillDetails_TestHttpPost">
+      <http:address location="https://csmsmpscsc.mp.gov.in/csmsNew/Android_WS/MPSCSC_InstituitionStorageBillDetails_test.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

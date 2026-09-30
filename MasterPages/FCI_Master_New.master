@@ -1,0 +1,530 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="FCI_Master_New.master.cs" Inherits="MasterPages_FCI_Master_New" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MP Warehousing & Logistics Corporation</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Open Sans', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #eef2f7 100%);
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+        .main-header {
+            background: linear-gradient(135deg, #0b5e8a 0%, #1a4d6b 100%);
+            color: white;
+            padding: 0 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1050;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            height: 70px;
+            backdrop-filter: blur(2px);
+        }
+
+        .main-header .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .main-header .logo img {
+            height: 52px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+            transition: transform 0.3s ease;
+        }
+
+        .main-header .title {
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: 0.5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #fff, #e0f0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* SIDEBAR LAYOUT STABILITY ENGINE */
+        #sidebar {
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 260px;
+            height: calc(100% - 70px);
+            padding-top: 15px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-x: hidden;
+            overflow-y: auto;
+            z-index: 1040;
+            box-shadow: 2px 0 12px rgba(0, 0, 0, 0.05);
+            border-right: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        /* Toggle Off Compact Visibility State */
+        #sidebar.collapsed {
+            width: 70px;
+        }
+
+        #sidebar.hover-expanded {
+            width: 260px;
+        }
+
+        #sidebar ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        #sidebar ul li {
+            margin-bottom: 2px;
+            position: relative;
+        }
+
+        #sidebar ul li a {
+            display: flex;
+            align-items: center;
+            color: #2c3e50;
+            padding: 12px 15px;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 500;
+            margin: 4px 10px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        #sidebar ul li a i:first-child {
+            width: 25px;
+            margin-right: 10px;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #5a6e7c;
+            flex-shrink: 0;
+        }
+
+        #sidebar ul li a span {
+            white-space: normal;
+            line-height: 1.3;
+            flex-grow: 1;
+            padding-right: 5px;
+            transition: opacity 0.2s ease;
+        }
+
+        #sidebar ul li a:hover {
+            background: linear-gradient(135deg, #eef2ff 0%, #e8f0fe 100%);
+            color: #0b5e8a;
+        }
+
+        #sidebar ul li.active > a {
+            background: linear-gradient(135deg, #e8f0ff 0%, #dfeaff 100%);
+            color: #0b5e8a;
+            font-weight: 600;
+            border-left: 3px solid #0b5e8a;
+        }
+
+        /* Collapsed behavior hidden elements management */
+        #sidebar.collapsed:not(.hover-expanded) ul li a span {
+            opacity: 0;
+            display: none !important;
+        }
+
+        #sidebar.collapsed:not(.hover-expanded) .has-submenu .fa-caret-down {
+            display: none !important;
+        }
+
+        /* SUBMENU LAYOUT DESIGN */
+        #sidebar ul li ul.submenu {
+            display: none;
+            margin: 0;
+            padding-left: 15px;
+            background-color: rgba(248, 250, 252, 0.6);
+        }
+
+        #sidebar.collapsed:not(.hover-expanded) ul li ul.submenu {
+            display: none !important;
+        }
+
+        #sidebar ul li.open > ul.submenu {
+            display: block;
+        }
+
+        #sidebar ul li ul.submenu li a {
+            padding: 9px 12px 9px 10px;
+            font-size: 13.5px;
+            font-weight: 400;
+            color: #4a627a;
+            margin: 2px 8px;
+        }
+
+        #sidebar ul li ul.submenu li a i {
+            font-size: 0.95rem !important;
+            color: #788c9b !important;
+        }
+
+        #sidebar ul li ul.submenu li.active > a {
+            color: #0b5e8a;
+            background: #e8f0fe;
+            font-weight: 500;
+            border-left: none;
+        }
+
+        .has-submenu {
+            cursor: pointer;
+        }
+
+        .has-submenu .fa-caret-down {
+            transition: transform 0.2s ease;
+            color: #8a9ba8;
+            margin-left: auto;
+        }
+
+        #sidebar ul li.open > a .fa-caret-down {
+            transform: rotate(180deg);
+            color: #0b5e8a;
+        }
+
+        /* PAGE WRAPPER RESPONSIVE ALIGNMENT FIX */
+        #page-wrapper {
+            margin-left: 260px;
+            padding: 90px 30px 30px 30px;
+            min-height: calc(100vh - 70px);
+            transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 1;
+        }
+
+        #sidebar.collapsed ~ #page-wrapper {
+            margin-left: 70px;
+        }
+
+        #sidebar.collapsed.hover-expanded ~ #page-wrapper {
+            margin-left: 260px;
+        }
+
+        /* TOGGLE BUTTON */
+        #sidebarToggle {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 1.3rem;
+            padding: 8px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+        }
+
+        /* USER DROPDOWN */
+        .user-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .user-dropdown .user-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            background: #fff;
+            padding: 2px;
+        }
+
+        .user-dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 60px;
+            background: #fff;
+            min-width: 220px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+            border-radius: 16px;
+            overflow: hidden;
+            z-index: 1060;
+        }
+
+        .user-dropdown-content a, .user-dropdown-content .dropdown-header {
+            color: #2c3e50;
+            padding: 12px 18px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            gap: 12px;
+        }
+
+        .user-dropdown-content .dropdown-header {
+            font-weight: 700;
+            background: #f1f5f9;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .user-dropdown-content .dropdown-logout {
+            color: #dc3545 !important;
+            font-weight: 600;
+            border-top: 1px solid #e9ecef;
+        }
+
+        /* PAGE-CENTERED MODAL LOADER WITH LOGO ENGINE COMPONENTS */
+        #loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(5px);
+            z-index: 99999 !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .loader-card {
+            background: #ffffff;
+            padding: 35px 45px;
+            border-radius: 20px;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            max-width: 90%;
+            text-align: center;
+        }
+
+        /* Container designed to layout spinner and logo overlapping perfectly */
+        .spinner-logo-container {
+            position: relative;
+            width: 90px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spinner-logo-container .spinner-border {
+            width: 100% !important;
+            height: 100% !important;
+            border-width: 0.28em !important;
+        }
+
+        /* Logo centered strictly within spinner core element bounds track */
+        .spinner-logo-container .inner-logo {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            /* Applies subtle drop-shadow visibility contrasting juicing engine rules */
+            filter: drop-shadow(0px 1px 2px rgba(0,0,0,0.1)); 
+        }
+
+        @media(max-width: 768px) {
+            #sidebar {
+                left: -260px;
+            }
+
+            #page-wrapper {
+                margin-left: 0 !important;
+                padding: 85px 20px 20px 20px;
+            }
+
+            #sidebar.active {
+                left: 0;
+            }
+
+            #sidebar.collapsed ~ #page-wrapper {
+                margin-left: 0 !important;
+            }
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" />
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+
+    <script type="text/javascript">
+        function toggleGlobalLoader(show) {
+            var loader = document.getElementById("loader-overlay");
+            if (loader) loader.style.display = show ? "flex" : "none";
+        }
+        window.onload = function () { toggleGlobalLoader(false); };
+        window.onbeforeunload = function () { toggleGlobalLoader(true); };
+
+        if (typeof (Sys) !== "undefined") {
+            var prm = Sys.WebForms.PageRequestManager.getInstance();
+            prm.add_beginRequest(function () { toggleGlobalLoader(true); });
+            prm.add_endRequest(function () { toggleGlobalLoader(false); });
+        }
+    </script>
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>
+
+        <div id="loader-overlay" style="display: none;">
+            <div class="loader-card">
+                <div class="spinner-logo-container">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <img src="../Images/LOGO-removebg-preview.png" alt="MPWLC Logo" class="inner-logo" />
+                </div>
+                <h5 class="text-dark mt-4 font-weight-bold" style="letter-spacing: 0.3px;">Fetching Large Report Data...</h5>
+                <p class="text-muted small mb-0 mt-1">Please wait, optimizing server connection.</p>
+            </div>
+        </div>
+
+        <div class="main-header">
+            <button type="button" id="sidebarToggle" class="ml-2">☰</button>
+            <div class="logo">
+                <img src="../Images/LOGO-removebg-preview.png" alt="Logo" />
+                <div class="title">Madhya Pradesh Warehousing & Logistics Corporation</div>
+            </div>
+
+            <div class="d-flex align-items-center">
+                <div class="user-dropdown" id="userDropdown">
+                    <img src="../Images/user.png" alt="User" class="user-avatar" />
+                    <div class="user-dropdown-content">
+                        <div class="dropdown-header">
+                            <i class="fa fa-user-circle"></i>
+                            <label id="lblusername" runat="server"></label>
+                        </div>
+                        <asp:LinkButton ID="LinkButton1" runat="server" OnClick="lnkLogout_Click" CssClass="dropdown-logout">
+                            <i class="fa fa-power-off"></i> Logout
+                        </asp:LinkButton>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="sidebar">
+            <ul class="nav flex-column" id="accordionSidebar">
+                <li><a href="../FCINew/Default.aspx"><i class="fa fa-home"></i><span>Home</span></a></li>
+
+                <li runat="server" visible="false" id="divwhr">
+                    <ul class="nav flex-column p-0 m-0">
+
+                        <li class="menu-item-has-children">
+                            <a class="has-submenu"><i class="fa fa-bullhorn"></i><span>FCI Employee</span><i class="fa fa-caret-down"></i></a>
+                            <ul class="submenu">
+                                <li><a href="../FCINew/AddFCIEmployee.aspx"><i class="fa fa-file-text-o"></i><span>Add FCI Employee</span></a></li>
+                                <li><a href="../FCINew/Schedule_FCI_Employee.aspx"><i class="fa fa-check-circle-o"></i><span>Schedule FCI Employee</span></a></li>
+                                <li><a href="../FCINew/Depositor_Wise_CropYear_Wise_Commodity_Wise_Stock_Position.aspx"><i class="fa fa-check-circle-o"></i><span>Depositor Wise CropYear Wise Commodity Wise Stock Position</span></a></li>
+                            </ul>
+                        </li>
+                        
+                         <li class="menu-item-has-children">
+                            <a class="has-submenu"><i class="fa fa-bar-chart"></i><span>Reports</span><i class="fa fa-caret-down"></i></a>
+                            <ul class="submenu">
+                                <li><a href="../FCINew/Rpt_District_Wise_Qty_Available_Last_10_Year_Date_Wise_For_FCI.aspx"><i class="fa fa-file-text-o"></i><span>	District Commodity, CropYear, Date Wise Stock Position</span></a></li>
+                                <li><a href="../FCINew/Rpt_Godown_Wise_Qty_Available_Last_10_Year_Date_Wise_HireType_For_FCI.aspx"><i class="fa fa-file-text-o"></i><span>Godown Commodity, CropYear, Hired Type, Storage, Date Wise Stock Position</span></a></li>
+                                <li><a href="../FCINew/Rpt_Godown_Wise_Qty_Available_Last_10_Year_Date_Wise_SteelSilo_For_FCI.aspx"><i class="fa fa-file-text-o"></i><span>Steel Silo</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <li runat="server" visible="false" id="divbill" class="menu-item-has-children">
+                    <a class="has-submenu"><i class="fa fa-bullhorn"></i><span>Online Billing</span><i class="fa fa-caret-down"></i></a>
+                    <ul class="submenu">
+                        <li><a href="../NCCF/NCCF_Bill_Approved_By_Bussiness.aspx"><i class="fa fa-building-o"></i><span>Bill Approved By Business section</span></a></li>
+                        <li><a href="../NCCF/NCCF_Bill_Approved_By_Acoount_For_Payment.aspx"><i class="fa fa-credit-card"></i><span>Bill Approved By Account For Payment</span></a></li>
+                        <li><a href="../NCCF/NCCF_Deduction_For_Final_Storage_Bill.aspx"><i class="fa fa-calculator"></i><span>NCCF Deduction For Storage Bill</span></a></li>
+                        <li><a href="../NCCF/Bill_Approved_By_Accounting_Section_For_Accounting.aspx"><i class="fa fa-print"></i><span>Bill Approved Print Bill Accounting</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div id="page-wrapper">
+            <asp:ContentPlaceHolder ID="body" runat="server"></asp:ContentPlaceHolder>
+        </div>
+    </form>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var sidebar = $('#sidebar');
+            sidebar.removeClass('collapsed');
+
+            $('#sidebarToggle').click(function () {
+                sidebar.toggleClass('collapsed');
+                if (sidebar.hasClass('collapsed')) {
+                    sidebar.removeClass('hover-expanded');
+                    $('#sidebar li.menu-item-has-children').removeClass('open').children('.submenu').hide();
+                }
+            });
+
+            sidebar.hover(
+                function () { if (sidebar.hasClass('collapsed')) { sidebar.addClass('hover-expanded'); } },
+                function () { if (sidebar.hasClass('collapsed')) { sidebar.removeClass('hover-expanded'); } }
+            );
+
+            // PERFECT ACCORDION INTERACTION (Auto close matching alternate states)
+            $('#sidebar .has-submenu').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                if (sidebar.hasClass('collapsed') && !sidebar.hasClass('hover-expanded')) {
+                    sidebar.addClass('hover-expanded');
+                }
+
+                var currentLi = $(this).closest('li');
+
+                if (currentLi.hasClass('open')) {
+                    currentLi.children('.submenu').slideUp(200);
+                    currentLi.removeClass('open');
+                } else {
+                    // Close all standard sibling dropdown wrappers dynamically tracks
+                    $('#sidebar li.menu-item-has-children').not(currentLi).removeClass('open').children('.submenu').slideUp(200);
+                    currentLi.children('.submenu').slideDown(200);
+                    currentLi.addClass('open');
+                }
+            });
+
+            // ROUTE SYNC RUNTIME SELECTOR ENGINE matching
+            var path = window.location.pathname.split("/").pop();
+            $('#sidebar ul.submenu li a').each(function () {
+                var href = $(this).attr('href') ? $(this).attr('href').split("/").pop() : '';
+                if (href === path) {
+                    $(this).parent().addClass('active');
+                    var parentLi = $(this).closest('.menu-item-has-children');
+                    if (parentLi.length) {
+                        parentLi.addClass('open');
+                        parentLi.children('.submenu').show();
+                    }
+                }
+            });
+
+            $('#userDropdown .user-avatar').click(function (e) {
+                e.stopPropagation();
+                $('#userDropdown .user-dropdown-content').toggle();
+            });
+            $(document).click(function () { $('#userDropdown .user-dropdown-content').hide(); });
+        });
+    </script>
+</body>
+</html>

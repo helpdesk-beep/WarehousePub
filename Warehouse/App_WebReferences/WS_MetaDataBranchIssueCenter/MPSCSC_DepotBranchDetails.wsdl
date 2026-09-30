@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="AddMetaDetaBranchWithIssueCenter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="varDepotId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varIssueCenterId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDistrictId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varCreatedDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="varCreatedBy" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varCretaedBYIP" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varUpdatedDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="varBranchName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varIssueCenterName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varBranchID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varBranchTypeID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varBranchPwd" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddMetaDetaBranchWithIssueCenterResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="AddDepotMasterDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="varDepotID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varStateId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDistrictId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDepoTypeID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDepotName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varCreatedBy" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varCreatedDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDepoBelongs" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varBranchId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddDepotMasterDetailsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UpdateMetaDetaBranchWithIssueCenter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="varIssueCenterId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varCreatedBy" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varCretaedBYIP" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varBranchName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varIssueCenterName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varBranchID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varBranchTypeID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateMetaDetaBranchWithIssueCenterResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UpdateMetaDetaDepot">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="varDepoTypeID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDepotName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varUpdatedBy" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varBranchId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateMetaDetaDepotResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AddMetaDetaBranchWithIssueCenterSoapIn">
+    <wsdl:part name="parameters" element="tns:AddMetaDetaBranchWithIssueCenter" />
+  </wsdl:message>
+  <wsdl:message name="AddMetaDetaBranchWithIssueCenterSoapOut">
+    <wsdl:part name="parameters" element="tns:AddMetaDetaBranchWithIssueCenterResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddDepotMasterDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:AddDepotMasterDetails" />
+  </wsdl:message>
+  <wsdl:message name="AddDepotMasterDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:AddDepotMasterDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateMetaDetaBranchWithIssueCenterSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateMetaDetaBranchWithIssueCenter" />
+  </wsdl:message>
+  <wsdl:message name="UpdateMetaDetaBranchWithIssueCenterSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateMetaDetaBranchWithIssueCenterResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateMetaDetaDepotSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateMetaDetaDepot" />
+  </wsdl:message>
+  <wsdl:message name="UpdateMetaDetaDepotSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateMetaDetaDepotResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddMetaDetaBranchWithIssueCenterHttpGetIn">
+    <wsdl:part name="varDepotId" type="s:string" />
+    <wsdl:part name="varIssueCenterId" type="s:string" />
+    <wsdl:part name="varDistrictId" type="s:string" />
+    <wsdl:part name="varCreatedDate" type="s:string" />
+    <wsdl:part name="varCreatedBy" type="s:string" />
+    <wsdl:part name="varCretaedBYIP" type="s:string" />
+    <wsdl:part name="varUpdatedDate" type="s:string" />
+    <wsdl:part name="varBranchName" type="s:string" />
+    <wsdl:part name="varIssueCenterName" type="s:string" />
+    <wsdl:part name="varBranchID" type="s:string" />
+    <wsdl:part name="varBranchTypeID" type="s:string" />
+    <wsdl:part name="varBranchPwd" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddMetaDetaBranchWithIssueCenterHttpGetOut" />
+  <wsdl:message name="AddDepotMasterDetailsHttpGetIn">
+    <wsdl:part name="varDepotID" type="s:string" />
+    <wsdl:part name="varStateId" type="s:string" />
+    <wsdl:part name="varDistrictId" type="s:string" />
+    <wsdl:part name="varDepoTypeID" type="s:string" />
+    <wsdl:part name="varDepotName" type="s:string" />
+    <wsdl:part name="varCreatedBy" type="s:string" />
+    <wsdl:part name="varCreatedDate" type="s:string" />
+    <wsdl:part name="varDepoBelongs" type="s:string" />
+    <wsdl:part name="varBranchId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddDepotMasterDetailsHttpGetOut" />
+  <wsdl:message name="UpdateMetaDetaBranchWithIssueCenterHttpGetIn">
+    <wsdl:part name="varIssueCenterId" type="s:string" />
+    <wsdl:part name="varCreatedBy" type="s:string" />
+    <wsdl:part name="varCretaedBYIP" type="s:string" />
+    <wsdl:part name="varBranchName" type="s:string" />
+    <wsdl:part name="varIssueCenterName" type="s:string" />
+    <wsdl:part name="varBranchID" type="s:string" />
+    <wsdl:part name="varBranchTypeID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateMetaDetaBranchWithIssueCenterHttpGetOut" />
+  <wsdl:message name="UpdateMetaDetaDepotHttpGetIn">
+    <wsdl:part name="varDepoTypeID" type="s:string" />
+    <wsdl:part name="varDepotName" type="s:string" />
+    <wsdl:part name="varUpdatedBy" type="s:string" />
+    <wsdl:part name="varBranchId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateMetaDetaDepotHttpGetOut" />
+  <wsdl:message name="AddMetaDetaBranchWithIssueCenterHttpPostIn">
+    <wsdl:part name="varDepotId" type="s:string" />
+    <wsdl:part name="varIssueCenterId" type="s:string" />
+    <wsdl:part name="varDistrictId" type="s:string" />
+    <wsdl:part name="varCreatedDate" type="s:string" />
+    <wsdl:part name="varCreatedBy" type="s:string" />
+    <wsdl:part name="varCretaedBYIP" type="s:string" />
+    <wsdl:part name="varUpdatedDate" type="s:string" />
+    <wsdl:part name="varBranchName" type="s:string" />
+    <wsdl:part name="varIssueCenterName" type="s:string" />
+    <wsdl:part name="varBranchID" type="s:string" />
+    <wsdl:part name="varBranchTypeID" type="s:string" />
+    <wsdl:part name="varBranchPwd" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddMetaDetaBranchWithIssueCenterHttpPostOut" />
+  <wsdl:message name="AddDepotMasterDetailsHttpPostIn">
+    <wsdl:part name="varDepotID" type="s:string" />
+    <wsdl:part name="varStateId" type="s:string" />
+    <wsdl:part name="varDistrictId" type="s:string" />
+    <wsdl:part name="varDepoTypeID" type="s:string" />
+    <wsdl:part name="varDepotName" type="s:string" />
+    <wsdl:part name="varCreatedBy" type="s:string" />
+    <wsdl:part name="varCreatedDate" type="s:string" />
+    <wsdl:part name="varDepoBelongs" type="s:string" />
+    <wsdl:part name="varBranchId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddDepotMasterDetailsHttpPostOut" />
+  <wsdl:message name="UpdateMetaDetaBranchWithIssueCenterHttpPostIn">
+    <wsdl:part name="varIssueCenterId" type="s:string" />
+    <wsdl:part name="varCreatedBy" type="s:string" />
+    <wsdl:part name="varCretaedBYIP" type="s:string" />
+    <wsdl:part name="varBranchName" type="s:string" />
+    <wsdl:part name="varIssueCenterName" type="s:string" />
+    <wsdl:part name="varBranchID" type="s:string" />
+    <wsdl:part name="varBranchTypeID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateMetaDetaBranchWithIssueCenterHttpPostOut" />
+  <wsdl:message name="UpdateMetaDetaDepotHttpPostIn">
+    <wsdl:part name="varDepoTypeID" type="s:string" />
+    <wsdl:part name="varDepotName" type="s:string" />
+    <wsdl:part name="varUpdatedBy" type="s:string" />
+    <wsdl:part name="varBranchId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateMetaDetaDepotHttpPostOut" />
+  <wsdl:portType name="MPSCSC_DepotBranchDetailsSoap">
+    <wsdl:operation name="AddMetaDetaBranchWithIssueCenter">
+      <wsdl:input message="tns:AddMetaDetaBranchWithIssueCenterSoapIn" />
+      <wsdl:output message="tns:AddMetaDetaBranchWithIssueCenterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddDepotMasterDetails">
+      <wsdl:input message="tns:AddDepotMasterDetailsSoapIn" />
+      <wsdl:output message="tns:AddDepotMasterDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMetaDetaBranchWithIssueCenter">
+      <wsdl:input message="tns:UpdateMetaDetaBranchWithIssueCenterSoapIn" />
+      <wsdl:output message="tns:UpdateMetaDetaBranchWithIssueCenterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMetaDetaDepot">
+      <wsdl:input message="tns:UpdateMetaDetaDepotSoapIn" />
+      <wsdl:output message="tns:UpdateMetaDetaDepotSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MPSCSC_DepotBranchDetailsHttpGet">
+    <wsdl:operation name="AddMetaDetaBranchWithIssueCenter">
+      <wsdl:input message="tns:AddMetaDetaBranchWithIssueCenterHttpGetIn" />
+      <wsdl:output message="tns:AddMetaDetaBranchWithIssueCenterHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddDepotMasterDetails">
+      <wsdl:input message="tns:AddDepotMasterDetailsHttpGetIn" />
+      <wsdl:output message="tns:AddDepotMasterDetailsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMetaDetaBranchWithIssueCenter">
+      <wsdl:input message="tns:UpdateMetaDetaBranchWithIssueCenterHttpGetIn" />
+      <wsdl:output message="tns:UpdateMetaDetaBranchWithIssueCenterHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMetaDetaDepot">
+      <wsdl:input message="tns:UpdateMetaDetaDepotHttpGetIn" />
+      <wsdl:output message="tns:UpdateMetaDetaDepotHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MPSCSC_DepotBranchDetailsHttpPost">
+    <wsdl:operation name="AddMetaDetaBranchWithIssueCenter">
+      <wsdl:input message="tns:AddMetaDetaBranchWithIssueCenterHttpPostIn" />
+      <wsdl:output message="tns:AddMetaDetaBranchWithIssueCenterHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddDepotMasterDetails">
+      <wsdl:input message="tns:AddDepotMasterDetailsHttpPostIn" />
+      <wsdl:output message="tns:AddDepotMasterDetailsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMetaDetaBranchWithIssueCenter">
+      <wsdl:input message="tns:UpdateMetaDetaBranchWithIssueCenterHttpPostIn" />
+      <wsdl:output message="tns:UpdateMetaDetaBranchWithIssueCenterHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMetaDetaDepot">
+      <wsdl:input message="tns:UpdateMetaDetaDepotHttpPostIn" />
+      <wsdl:output message="tns:UpdateMetaDetaDepotHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MPSCSC_DepotBranchDetailsSoap" type="tns:MPSCSC_DepotBranchDetailsSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddMetaDetaBranchWithIssueCenter">
+      <soap:operation soapAction="http://tempuri.org/AddMetaDetaBranchWithIssueCenter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddDepotMasterDetails">
+      <soap:operation soapAction="http://tempuri.org/AddDepotMasterDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMetaDetaBranchWithIssueCenter">
+      <soap:operation soapAction="http://tempuri.org/UpdateMetaDetaBranchWithIssueCenter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMetaDetaDepot">
+      <soap:operation soapAction="http://tempuri.org/UpdateMetaDetaDepot" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MPSCSC_DepotBranchDetailsSoap12" type="tns:MPSCSC_DepotBranchDetailsSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddMetaDetaBranchWithIssueCenter">
+      <soap12:operation soapAction="http://tempuri.org/AddMetaDetaBranchWithIssueCenter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddDepotMasterDetails">
+      <soap12:operation soapAction="http://tempuri.org/AddDepotMasterDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMetaDetaBranchWithIssueCenter">
+      <soap12:operation soapAction="http://tempuri.org/UpdateMetaDetaBranchWithIssueCenter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMetaDetaDepot">
+      <soap12:operation soapAction="http://tempuri.org/UpdateMetaDetaDepot" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MPSCSC_DepotBranchDetailsHttpGet" type="tns:MPSCSC_DepotBranchDetailsHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="AddMetaDetaBranchWithIssueCenter">
+      <http:operation location="/AddMetaDetaBranchWithIssueCenter" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="AddDepotMasterDetails">
+      <http:operation location="/AddDepotMasterDetails" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMetaDetaBranchWithIssueCenter">
+      <http:operation location="/UpdateMetaDetaBranchWithIssueCenter" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMetaDetaDepot">
+      <http:operation location="/UpdateMetaDetaDepot" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MPSCSC_DepotBranchDetailsHttpPost" type="tns:MPSCSC_DepotBranchDetailsHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="AddMetaDetaBranchWithIssueCenter">
+      <http:operation location="/AddMetaDetaBranchWithIssueCenter" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="AddDepotMasterDetails">
+      <http:operation location="/AddDepotMasterDetails" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMetaDetaBranchWithIssueCenter">
+      <http:operation location="/UpdateMetaDetaBranchWithIssueCenter" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateMetaDetaDepot">
+      <http:operation location="/UpdateMetaDetaDepot" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MPSCSC_DepotBranchDetails">
+    <wsdl:port name="MPSCSC_DepotBranchDetailsSoap" binding="tns:MPSCSC_DepotBranchDetailsSoap">
+      <soap:address location="http://164.100.196.62/csmsnew/Android_Ws/MPSCSC_DepotBranchDetails.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MPSCSC_DepotBranchDetailsSoap12" binding="tns:MPSCSC_DepotBranchDetailsSoap12">
+      <soap12:address location="http://164.100.196.62/csmsnew/Android_Ws/MPSCSC_DepotBranchDetails.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MPSCSC_DepotBranchDetailsHttpGet" binding="tns:MPSCSC_DepotBranchDetailsHttpGet">
+      <http:address location="http://164.100.196.62/csmsnew/Android_Ws/MPSCSC_DepotBranchDetails.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MPSCSC_DepotBranchDetailsHttpPost" binding="tns:MPSCSC_DepotBranchDetailsHttpPost">
+      <http:address location="http://164.100.196.62/csmsnew/Android_Ws/MPSCSC_DepotBranchDetails.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

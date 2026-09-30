@@ -1,0 +1,3 @@
+Record Type	Corporte Id	e-PayOrder No.	Account Number	Branch Code	MMID	Mobile Number	Debit Amount	Credit Amount	Corporate Reference Number	Description	Payment Type	Transaction Status	Transaction Date	Transaction Time	Status Description	UTR Number	UTR Posted Date	UTR Status	Maker	Authorizer1	Authorizer1 Date	Authorizer2	Authorizer2 Date	
+Debit leg	'329338	'CNABHFAYE6	'00000038906616113	'30343	'null	'null	'0.0	'null	7232000521011	'Godown Rent Payment	'NEFT	'Unknown	'null	'null	'null	-	-	'null	MPWLCROUJN	-	-	-	-
+Credit leg	'329338	'CNABHFAYE600001	'0213002100059889	'PUNB0021300	'null	'null	'0.0	'375549	7232000521011	'SHREE GANGA AGRO AND WAREHOUSE11509GRP2320005070200815	'NEFT	'Unknown	'06/01/2021	'19:52	'null	-	-	'Pending	null	-	-	-	-

@@ -1,0 +1,102 @@
+<html>
+<head>
+    <style>
+        body {
+            text-align: center;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0px;
+            font-family: helvetica;
+        }
+
+        #wrapper {
+            text-align: center;
+            margin: 0 auto;
+            padding: 0px;
+            width: 100%;
+        }
+
+        #effect {
+            position: relative;
+            width: 60%;
+            height: 280px;
+            margin: auto;
+            box-shadow: 0px 0px 6px 2px #003B83;
+            margin-top: 100px;
+            background: #FFF;
+        }
+
+        /*#effect h1 {
+                line-height: 5.5em;
+                /*margin: auto;
+                font-size: 50px;
+                color: #525252;
+                height:810px;
+                width:100%;
+            }*/
+
+        #curtain1 {
+            top: 0px;
+            position: absolute;
+            left: 0px;
+            height: 1000px;
+            margin-top: -8px;
+            margin-left: 10px;
+        }
+
+        #curtain2 {
+            top: 0px;
+            position: absolute;
+            height: 1000px;
+            right: 0px;
+            margin-top: -8px;
+            margin-right: 30px;
+        }
+
+        #curtain_buttons input[type="button"] {
+            margin-top: 150px;
+            width: 150px;
+            height: 45px;
+            border-radius: 2px;
+            color: white;
+            background-color: #0061BC;
+            border: none;
+            border-bottom: 6px solid #003D9C;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function open_curtain() {
+            $("#curtain1").animate({ width: 20 }, 10000);
+            $("#curtain2").animate({ width: 20 }, 10000);
+            document.getElementById("audio_mp3").play();
+        }
+        function close_curtain() {
+            $("#curtain1").animate({ width: 800 }, 1000);
+            $("#curtain2").animate({ width: 800 }, 1000);
+        }
+    </script>
+    <!--<script type="text/javascript">
+        window.onload = function () {
+            document.getElementById("audio_mp3").play();
+        }
+    </script>-->
+</head>
+<body background="image.png">
+    <div id="wrapper" onclick="open_curtain();">
+
+        <div id="effect" style="width:1370PX; height:1000PX; margin-top:-18px;">
+            <!--<h1><img src="/Images/IMG-20181024-WA0010.jpg" id="img"></h1>-->
+          
+            <!--<audio src="/music/good_enough.mp3" controls>
+                <p>If you are reading this, it is because your browser does not support the audio element.</p>
+            </audio>-->
+            <img src="C1.jpg" id="curtain1">
+            <img src="C2.jpg" id="curtain2">
+
+            <audio id="audio_mp3" src="music/Audio.mp3" loop="loop"></audio>
+        </div>
+
+    </div>
+</body>
+</html>

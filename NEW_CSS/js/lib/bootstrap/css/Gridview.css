@@ -1,0 +1,101 @@
+﻿
+
+.GridviewDiv
+{
+	font-size: 62.5%;
+	font-family: 'Lucida Grande' , 'Lucida Sans Unicode' , Verdana, Arial, Helevetica, sans-serif;
+	color: #303933;
+}
+
+
+Table.Gridview
+{
+	border: solid 1px #04699E;
+	-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+.GridviewTable
+{
+	border: none;
+}
+.GridviewTable td
+{
+	margin-top: 0;
+	padding: 0;
+	vertical-align: middle;
+}
+.GridviewTable tr
+{
+	color: White;
+	background-color: #df5015;
+	height: 25px;
+	text-align: "center";
+}
+.Gridview th
+{
+	text-align: "center";
+	color: #ffffff;
+	text-shadow: #000 1px 1px;
+	border-right-color: #04699E;
+	border-bottom-color: #04699E;
+	padding: 0.5em 0.5em 0.5em 0.5em;
+	text-align: "center";
+	height: 22px;
+	background-color: #22A3ED;
+}
+.Gridview td
+{
+	border-bottom-color: #04699E;
+	border-right-color: #04699E;
+	padding: 0.5em 0.5em 0.5em 0.5em;
+}
+.Gridview tr
+{
+	color: Black;
+	background-color: White;
+	text-align: "center";
+}
+:link, :visited
+{
+	/*color: #FFFFFF;*/
+}
+
+.Gridview tr:hover
+{
+	background-color: #fee2e0;
+}
+
+
+
+.divgrid
+{
+	height: 200px;
+	width: 100%;
+}
+
+.divgrid table
+{
+	width: 100%;
+}
+
+.divgrid table th
+{
+	color: #fff;
+}
+
+.DataList tr:hover
+{
+	background-color: #fee2e0;
+}
+.DataList tr
+{
+	text-align: "center";
+	border-bottom-style: solid; 
+	border-bottom-width: 1px;
+	
+}
+
+
+
+

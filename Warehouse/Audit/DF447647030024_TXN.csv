@@ -1,0 +1,5 @@
+Record Type	Corporte Id	e-PayOrder No.	Account Number	Branch Code	MMID	Mobile Number	Debit Amount	Credit Amount	Corporate Reference Number	Description	Payment Type	Transaction Status	Transaction Date	Transaction Time	Status Description	UTR Number	UTR Posted Date	UTR Status	Maker	Authorizer1	Authorizer1 Date	Authorizer2	Authorizer2 Date	
+Debit leg	'329338	'CNABGWPOV4	'00000038906616113	'30343	'null	'null	'0.0	'null	7233600320121	'Godown Rent Payment	'NEFT	'Unknown	'null	'null	'null	-	-	'null	MPWLCROJBP	-	-	-	-
+Credit leg	'329338	'CNABGWPOV400001	'00000053025220481	'30252	'null	'null	'0.0	'128485	7233600320121	'KAVI SINGH CHOUDHARY10675GRP233600318220081116	'NEFT	'Unknown	'29/12/2020	'13:05	'null	-	-	'Pending	null	-	-	-	-
+Credit leg	'329338	'CNABGWPOV400002	'00000053025245043	'30252	'null	'null	'0.0	'56904	7233600320121	'Surendra kumar jain10664GRP233600317320081122	'NEFT	'Unknown	'29/12/2020	'13:05	'null	-	-	'Pending	null	-	-	-	-
+Credit leg	'329338	'CNABGWPOV400003	'00000063052536485	'30252	'null	'null	'0.0	'105926	7233600320121	'Preeti ritesh suchak10694GRP233600318320081136	'NEFT	'Unknown	'29/12/2020	'13:05	'null	-	-	'Pending	null	-	-	-	-

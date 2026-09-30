@@ -1,0 +1,5 @@
+Record Type	Corporte Id	e-PayOrder No.	Account Number	Branch Code	MMID	Mobile Number	Debit Amount	Credit Amount	Corporate Reference Number	Description	Payment Type	Transaction Status	Transaction Date	Transaction Time	Status Description	UTR Number	UTR Posted Date	UTR Status	Maker	Authorizer1	Authorizer1 Date	Authorizer2	Authorizer2 Date	
+Debit leg	'329338	'CNABHEMLF1	'00000038906616113	'30343	'null	'null	'643.0	'null	7230200121011	'Godown Rent Payment	'NEFT	'Unknown	'null	'null	'null	-	-	'null	MPWLCROGWL	-	-	-	-
+Credit leg	'329338	'CNABHEMLF100001	'3059619534	'CBIN0280781	'null	'null	'0.0	'643	7230200121011	'K S AGRO WAREHOUSE10832GRP23020010072008163	'NEFT	'Unknown	'06/01/2021	'14:26	'null	-	-	'Pending	null	-	-	-	-
+Credit leg	'329338	'CNABHEMLF100002	'6677201000038	'CNRB0004780	'null	'null	'0.0	'2456	7230200121011	'MORVINANDAN WARE HOUSE10795GRP23020010262008195	'NEFT	'Unknown	'06/01/2021	'14:26	'null	-	-	'Pending	null	-	-	-	-
+Credit leg	'329338	'CNABHEMLF100003	'6677201000038	'CNRB0004780	'null	'null	'0.0	'26652	7230200121011	'MORVINANDAN WARE HOUSE10795GRP23020010262008161	'NEFT	'Unknown	'06/01/2021	'14:26	'null	-	-	'Pending	null	-	-	-	-

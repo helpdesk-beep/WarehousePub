@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="FetchDataHere">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tbl" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="noOfRecord" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fromDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="toDate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FetchDataHereResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FetchDataHereResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="FetchDataHereSoapIn">
+    <wsdl:part name="parameters" element="tns:FetchDataHere" />
+  </wsdl:message>
+  <wsdl:message name="FetchDataHereSoapOut">
+    <wsdl:part name="parameters" element="tns:FetchDataHereResponse" />
+  </wsdl:message>
+  <wsdl:message name="FetchDataHereHttpGetIn">
+    <wsdl:part name="tbl" type="s:string" />
+    <wsdl:part name="noOfRecord" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="toDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FetchDataHereHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="FetchDataHereHttpPostIn">
+    <wsdl:part name="tbl" type="s:string" />
+    <wsdl:part name="noOfRecord" type="s:string" />
+    <wsdl:part name="fromDate" type="s:string" />
+    <wsdl:part name="toDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FetchDataHereHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="Replicate_Table_DataSoap">
+    <wsdl:operation name="FetchDataHere">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Fetch each table data</wsdl:documentation>
+      <wsdl:input message="tns:FetchDataHereSoapIn" />
+      <wsdl:output message="tns:FetchDataHereSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="Replicate_Table_DataHttpGet">
+    <wsdl:operation name="FetchDataHere">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Fetch each table data</wsdl:documentation>
+      <wsdl:input message="tns:FetchDataHereHttpGetIn" />
+      <wsdl:output message="tns:FetchDataHereHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="Replicate_Table_DataHttpPost">
+    <wsdl:operation name="FetchDataHere">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Fetch each table data</wsdl:documentation>
+      <wsdl:input message="tns:FetchDataHereHttpPostIn" />
+      <wsdl:output message="tns:FetchDataHereHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Replicate_Table_DataSoap" type="tns:Replicate_Table_DataSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FetchDataHere">
+      <soap:operation soapAction="http://tempuri.org/FetchDataHere" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Replicate_Table_DataSoap12" type="tns:Replicate_Table_DataSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FetchDataHere">
+      <soap12:operation soapAction="http://tempuri.org/FetchDataHere" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Replicate_Table_DataHttpGet" type="tns:Replicate_Table_DataHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="FetchDataHere">
+      <http:operation location="/FetchDataHere" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Replicate_Table_DataHttpPost" type="tns:Replicate_Table_DataHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="FetchDataHere">
+      <http:operation location="/FetchDataHere" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Replicate_Table_Data">
+    <wsdl:port name="Replicate_Table_DataSoap" binding="tns:Replicate_Table_DataSoap">
+      <soap:address location="https://mpsc.mp.nic.in/warehouse/replicate_table_data.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Replicate_Table_DataSoap12" binding="tns:Replicate_Table_DataSoap12">
+      <soap12:address location="https://mpsc.mp.nic.in/warehouse/replicate_table_data.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Replicate_Table_DataHttpGet" binding="tns:Replicate_Table_DataHttpGet">
+      <http:address location="https://mpsc.mp.nic.in/warehouse/replicate_table_data.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Replicate_Table_DataHttpPost" binding="tns:Replicate_Table_DataHttpPost">
+      <http:address location="https://mpsc.mp.nic.in/warehouse/replicate_table_data.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

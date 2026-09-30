@@ -1,0 +1,4 @@
+Record Type	Corporte Id	e-PayOrder No.	Account Number	Branch Code	MMID	Mobile Number	Debit Amount	Credit Amount	Corporate Reference Number	Description	Payment Type	Transaction Status	Transaction Date	Transaction Time	Status Description	UTR Number	UTR Posted Date	UTR Status	Maker	Authorizer1	Authorizer1 Date	Authorizer2	Authorizer2 Date	
+Debit leg	'329338	'CNABGZTRM4	'00000038906616113	'30343	'null	'null	'0.0	'null	7230800221012	'Godown Rent Payment	'NEFT	'Unknown	'null	'null	'null	-	-	'null	MPWLCROIND	-	-	-	-
+Credit leg	'329338	'CNABGZTRM400001	'00000020183706595	'30015	'null	'null	'0.0	'6584	7230800221012	'Anita jakhetia11900GRP23080020392008149	'NEFT	'Unknown	'01/01/2021	'13:01	'null	-	-	'Pending	null	-	-	-	-
+Credit leg	'329338	'CNABGZTRM400002	'00000053036750299	'30024	'null	'null	'0.0	'58502	7230800221012	'NAZMA BEE11351GRP23080020132008171	'NEFT	'Unknown	'01/01/2021	'13:01	'null	-	-	'Pending	null	-	-	-	-

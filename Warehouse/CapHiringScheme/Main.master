@@ -1,0 +1,133 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Main.master.cs" Inherits="Main" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Cap Hiring Scheme</title>
+
+   <!-- CSS -->
+
+      <!-- bootstrap -->
+      <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+      <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-theme.css">
+ 
+
+      <!-- font awesome -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+      <link href="assets/css/style.css" rel="stylesheet">
+      <link href="assets/css/customize.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!--/ CSS -->
+
+ <asp:ContentPlaceHolder ID="head" runat="server">
+            
+    </asp:ContentPlaceHolder>
+  
+</head>
+<body >
+    <form id="form1"  runat="server">
+        
+    <header>
+        <div class="top_bar">
+                <div class="container">
+            <div class="row">
+                    <div class="col-md-6">
+                        Government Of India
+                    </div>
+
+                    <div class="col-md-6">
+                        <ul class="navbar-nav ulink">
+                            <li><a href="#" title="Skip to main content">Skip to main content</a></li>
+                            <li><a href="AdminLogin.aspx">Admin Login</a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                        </ul>
+                    </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="logo_bar">
+
+            <div class="container">
+                <div class="row">
+                        <div class="col-md-6">
+                            <a href="Home.aspx"><img src="assets/img/logo_with_text.png" class="img-responsive" style="width:400px;"></a>
+                        </div>
+
+                        <div class="col-md-6 text-right">
+
+                                <a href="Login.aspx" class="btn btn-info rounded-pill btn-custom shadow"><i class="fa fa-sign-in btn-info"></i>Sign In</a>
+                        
+                                <a href="SignUp.aspx" class="btn btn-danger rounded-pill btn-custom shadow"><i class="fa fa-user-plus btn-danger"></i>Sign Up</a>
+                        </div>
+                </div>
+                </div>
+            </div>
+    </header>
+
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+        <div class="row">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"></a>
+          </div>
+
+          
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li><a href="Home.aspx"> Home </a></li>
+              <li><a href="#"> Cap Hiring Scheme</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav> 
+      
+    <asp:ContentPlaceHolder ID="body" runat="server">
+        
+    </asp:ContentPlaceHolder>
+            
+    <footer>
+        <p class="text-center">© 2020 MPWLC. All Rights Reserved</p>
+    </footer>
+           
+   </form>
+    <!-- Java Script -->
+
+    <script type="text/javascript" src="assets/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+   
+ 
+ 
+    <asp:ContentPlaceHolder ID="script" runat="server">
+            
+    </asp:ContentPlaceHolder>
+        
+   
+
+   <!-- /Java Script -->
+</body>
+</html>

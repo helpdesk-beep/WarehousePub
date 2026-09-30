@@ -1,0 +1,570 @@
+/*
+ * custom-ie-lt-8.css
+ * An alternate to provide support for Internet Explorer < 8
+ * Each HTML page has the conditional html declaration for IE and other browsers
+ * CSS classes:
+ * IE < 7 : .lt-ie7
+ * IE < 8 : .lt-ie8
+ * IE < 9 : .lt-ie9
+ */
+
+
+/***********************************************
+ * GLOBAL WIDTH FOR BOOTSTRAP COLUMNS
+ * ********************************************/
+.lt-ie8 .ie-lt8-col-10, .lt-ie8 .col-md-10, .lt-ie8-about .col-md-10{ width: 80.80%; }
+.lt-ie8 .ie-lt8-col-9, .lt-ie8 .col-md-9, .lt-ie8-about .col-md-9{ width: 69.80%; }
+.lt-ie8 .ie-lt8-col-8, .lt-ie8 .col-md-8, .lt-ie8-about .col-md-8{ width: 64.12%; }
+.lt-ie8 .ie-lt8-col-7, .lt-ie8 .col-md-7, .lt-ie8-about .col-md-7{ width: 53.28%; }
+.lt-ie8 .ie-lt8-col-6, .lt-ie8 .col-md-6, .lt-ie8-about .col-md-6{ width: 47.38%; }
+.lt-ie8-about #MemberDetails .container .col-md-6{ width: 46.50%; }
+/*.lt-ie8 .ie-lt8-col-5{ width: 47.38%; }*/
+.lt-ie8 .ie-lt8-col-4, .lt-ie8 .col-md-4, .lt-ie8-about .col-md-4{ width: 30%; }
+.lt-ie8 .ie-lt8-col-3, .lt-ie8 .col-md-3, .lt-ie8-about .col-md-3{ width: 22.43%; }
+.lt-ie8 .ie-lt8-col-2, .lt-ie8 .col-md-2, .lt-ie8-about .col-md-2{ width: 14.14%; }
+
+.lt-ie8 .news-calendar-wrapper .col-md-11{ width: 85%; }
+.lt-ie8 .news-calendar-wrapper .col-md-1{ width: 5%; }
+
+
+/***********************************************
+ * BACKGROUND COLOR VS GRADIENT
+ * ********************************************/
+.lt-ie8 .alternate-bg-color, .lt-ie8-about .alternate-bg-color{ background-color: #e2e2e2; }
+.lt-ie8 #page_resources .alternate-bg-color{ background-color: #e2e2e2; float: left; width: 100%; }
+.lt-ie8 .gradient-blue, .lt-ie8-about .gradient-blue{ background-color: #204a7c; }
+
+
+/***********************************************
+ * HEADER AND TOP NAVIGATION
+ * ********************************************/
+.lt-ie8 header .navbar-nav:first-child,
+.lt-ie8-about header .navbar-nav:first-child{
+	position: absolute;
+	left: 38%;
+}
+.lt-ie8 .navbar-default .navbar-nav > .open > a,
+.lt-ie8 .navbar-default .navbar-nav > .open > a:hover,
+.lt-ie8 .navbar-default .navbar-nav > .open > a:focus,
+.lt-ie8 .navbar-default .navbar-nav > .active > a,
+.lt-ie8 .navbar-default .navbar-nav > .active > a:hover,
+.lt-ie8 .navbar-default .navbar-nav > .active > a:focus,
+
+.lt-ie8-about .navbar-default .navbar-nav > .open > a,
+.lt-ie8-about .navbar-default .navbar-nav > .open > a:hover,
+.lt-ie8-about .navbar-default .navbar-nav > .open > a:focus,
+.lt-ie8-about .navbar-default .navbar-nav > .active > a,
+.lt-ie8-about .navbar-default .navbar-nav > .active > a:hover,
+.lt-ie8-about .navbar-default .navbar-nav > .active > a:focus{
+	background: none;
+}
+.lt-ie8 header .navbar-right .fa,
+.lt-ie8-about header .navbar-right .fa{
+	display: inline;
+	width: 18px;
+	height: 13px;
+	background-repeat: no-repeat;
+}
+.lt-ie8 header .navbar-right .fa-comment,
+.lt-ie8-about header .navbar-right .fa-comment{ background-image: url("../img/icon-blog.png"); }
+.lt-ie8 header .navbar-right .fa-envelope,
+.lt-ie8-about header .navbar-right .fa-envelope{ background-image: url("../img/icon-contact.png"); }
+.lt-ie8 header .navbar-right .fa-download,
+.lt-ie8-about header .navbar-right .fa-download{ background-image: url("../img/icon-resources.png"); }
+
+
+/***********************************************
+ * FOOTER NAVIGATION
+ * ********************************************/
+.lt-ie8 footer ul,
+.lt-ie8-about footer ul{ margin: 0}
+.lt-ie8 footer ul li,
+.lt-ie8-about footer ul li{ line-height: 1.5; }
+.lt-ie8 footer .new-icons-social ul li,
+.lt-ie8-about footer .new-icons-social ul li{ display:inline; float:left; }
+.lt-ie8 footer .new-icons-social a .fa,
+.lt-ie8-about footer .new-icons-social a .fa{
+	display:inline-block;
+	width: 35px;
+	height:35px;
+	float:left;
+}
+.lt-ie8 footer .new-icons-social a .fa-twitter-square,
+.lt-ie8-about footer .new-icons-social a .fa-twitter-square{background: url('../img/icon-social2.png') no-repeat -35px 0;}
+.lt-ie8 footer .new-icons-social a .fa-linkedin-square,
+.lt-ie8-about footer .new-icons-social a .fa-linkedin-square{background: url('../img/icon-social2.png') no-repeat -70px 0;}
+.lt-ie8 footer .new-icons-social a .fa-facebook-square,
+.lt-ie8-about footer .new-icons-social a .fa-facebook-square{background: url('../img/icon-social2.png') no-repeat 0 0;}
+
+.lt-ie8 footer #servient-footer-bottom .ie-lt8-col-4,
+.lt-ie8-about footer #servient-footer-bottom .ie-lt8-col-4{ line-height: 1.5}
+
+
+/***********************************************
+ * PAGES
+ * ********************************************/
+.lt-ie8 *{
+	z-index: 2;
+}
+
+#Overview{background-attachment: scroll;
+    background-clip: border-box;
+    background:#3668A0 url("../img/expertise.png"), linear-gradient(0deg, #3668A0 0%, #204A7C 100%) 0 0;
+/*    background-image: url("../img/expertise.png"), linear-gradient(0deg, #3668A0 0%, #204A7C 100%);*/
+    background-origin: padding-box;
+    background-position:75% 40%;
+    background-repeat: no-repeat;
+    background-size: cover;padding-bottom:5em}
+
+
+/* PAGE - ABOUT */
+.lt-ie8-about #MemberDetails .container{
+	left: 20%;
+	right: 20%;
+	background: #000;
+}
+.lt-ie8-about #MemberDetails .container .member-scores h2{
+	display: inline;
+}
+.lt-ie8-about .active-thumbnail .active-info{
+	display: none;
+}
+
+/* PAGE - CAREER */
+	
+#Careers{
+	background: url('../img/career_panel.jpg') no-repeat top center;
+	background-size: cover;
+	/*height: 700px;*/
+}
+
+.lt-ie8 #current_openings_new .col-md-8,
+.lt-ie8 #current_openings_new .col-md-4{
+	float: left;
+	display: inline;
+}
+.lt-ie8 #current_openings_new .col-md-4{
+	float: right;
+}
+.lt-ie9 #Careers .jumbotron,
+.lt-ie8-about #Careers .jumbotron{
+	position: relative;
+	z-index: 2;
+}
+
+/* PAGE - NEWS */
+.lt-ie8 .news-calendar-wrapper .row{ clear: both; }
+
+/* PAGE - E-DISCOVERY */
+.lt-ie8 #image_ondemand,
+.lt-ie8 #image_ondemand img{ position: relative;}
+
+
+/***********************************************
+ * SCALED BACKGROUND IMAGES
+ * ********************************************/
+.lt-ie9 .lt-ie9-scaled-bg-img,
+.lt-ie8-about .lt-ie9-scaled-bg-img{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	left: 0;
+}
+.lt-ie8-about a.dot-thumbnail,
+.lt-ie8 .fixed-submenu{
+	z-index: 4;
+}
+.lt-ie8 span#global_scroll_top,
+.lt-ie8-about span#global_scroll_top{
+	z-index: 8;
+}
+
+.lt-ie8 #customer_quotes blockquote .fa-quote-left,
+.lt-ie8-about #customer_quotes blockquote .fa-quote-left{
+	background: url('../img/icon-quote-open.png') no-repeat top left;
+}
+.lt-ie8 #customer_quotes blockquote .fa-quote-right,
+.lt-ie8-about #customer_quotes blockquote .fa-quote-right{
+	background: url('../img/icon-quote-close.png') no-repeat top right;
+}
+
+
+/* PRODUCTS PAGE FA ICONS */
+.lt-ie8 .lt-ie8-products-icons h2{ margin-top: 40px; }
+.lt-ie8 .lt-ie8-products-icons .fa{
+	display: inline;
+	height: 60px;
+}
+.lt-ie8 .lt-ie8-products-icons .fa span{ top: -20px;}
+.lt-ie8 .lt-ie8-products-icons .fa img{
+	position: relative;
+	vertical-align: top;
+	width: 90px;
+}
+.lt-ie8 .lt-ie8-products-icons .fa-file-text-o img{ width: 60px;}
+.lt-ie8 #panel_streamline_the_process .fa-cogs img{ width: 230px;}
+.lt-ie8 #panel_repeatable_and_reliable .fa-check-circle-o img{ width: 200px;}
+
+
+/***********************************************
+ * NCP POPUP
+ * ********************************************/
+.lt-ie8 .ncp-popup{
+	z-index: 5;
+}
+.lt-ie8 .ncp-popup .ncp-popup-close{
+	z-index: 6;
+}
+.lt-ie8 input.form-control{
+	height: 20px;
+}
+
+
+/***********************************************
+ * MEDIA QUERY
+ * ********************************************/
+@media only screen and (max-width: 480px){
+	.lt-ie8 .ie-lt8-col-10, .lt-ie8 .col-md-10, .lt-ie8-about .col-md-10,
+	.lt-ie8 .ie-lt8-col-9, .lt-ie8 .col-md-9, .lt-ie8-about .col-md-9,
+	.lt-ie8 .ie-lt8-col-8, .lt-ie8 .col-md-8, .lt-ie8-about .col-md-8,
+	.lt-ie8 .ie-lt8-col-7, .lt-ie8 .col-md-7, .lt-ie8-about .col-md-7,
+	.lt-ie8 .ie-lt8-col-6, .lt-ie8 .col-md-6, .lt-ie8-about .col-md-6,
+	.lt-ie8-about #MemberDetails .container .col-md-6,
+	.lt-ie8 .ie-lt8-col-4, .lt-ie8 .col-md-4, .lt-ie8-about .col-md-4,
+	.lt-ie8 .ie-lt8-col-3, .lt-ie8 .col-md-3, .lt-ie8-about .col-md-3,
+	.lt-ie8 .ie-lt8-col-2, .lt-ie8 .col-md-2, .lt-ie8-about .col-md-2,
+	.lt-ie8 .news-calendar-wrapper .col-md-11,
+	.lt-ie8 .news-calendar-wrapper .col-md-1{ width: 89.85%; }
+	
+	.lt-ie9 header .navbar-brand
+	/*.lt-ie8-about header .navbar-brand*/{
+		padding-left: 15px;
+	}
+	.lt-ie9 header .navbar-collapse /*,
+	.lt-ie8-about header .navbar-collapse*/{
+		clear: both;
+		text-align: left;
+		margin-top: 8px;
+	}
+	.lt-ie9 header .navbar-collapse ul.nav/*,
+	.lt-ie8-about header .navbar-collapse ul.nav*/{
+		clear: both;
+		display: block;
+		width: 100%;
+	}
+	.lt-ie9 header .navbar-nav:first-child/*,
+	.lt-ie8-about header .navbar-nav:first-child*/{
+		position: relative;
+		left: 0;
+		margin-top: 5px;
+	}
+	.lt-ie9 header .navbar-collapse .navbar-right/*,
+	.lt-ie8-about header .navbar-collapse .navbar-right*/{
+		float: none !important;
+	}
+	.lt-ie9 header .navbar-collapse ul.nav a/*,
+	.lt-ie8-about header .navbar-collapse ul.nav a*/{
+		border: 0;
+		padding: 3px 10px;
+	}
+	.lt-ie9 footer ul/*,
+	.lt-ie8-about footer ul*/{
+		margin-bottom: 10px;
+	}
+	.lt-ie9 #page_news .container,
+	.lt-ie9 #joblist .container,
+	.lt-ie9 #ManagementTeam .jumbotron,
+	.lt-ie9 #page_resources,
+	.lt-ie9 #application_form{
+		padding: 15px;
+	}
+	.lt-ie9 #joblist .container .col-md-12{
+		padding: 10px 0;
+	}
+	.lt-ie9 #resources_form .form-group,
+	.lt-ie9 #resources_form label,
+	.lt-ie9 #application_form .form-group,
+	.lt-ie9 #application_form label{
+		text-align: left;
+	}
+	
+	.lt-ie8 .ncp-popup{
+		position: absolute;
+		bottom: auto;
+	}
+	.lt-ie8 .ncp-popup-medium{
+		width: 278px;
+		height: inherit;
+		top: 0;
+		left: auto;
+		position: relative;
+		overflow: visible;
+	}
+	.lt-ie8 .ncp-popup .text-right{
+		text-align: left;
+	}
+	.lt-ie8 .ncp-popup .form-group {
+		margin-bottom: 5px;
+	}
+	
+	.lt-ie8 #current_openings_new .job-title,
+	.lt-ie8 #current_openings_new .col-md-8,
+	.lt-ie8 #current_openings_new .col-md-4{
+		float: none;
+	}
+	
+	.lt-ie8-about #MemberDetails .container{
+		/*left: 0;*/
+	}
+	.lt-ie8-about #MemberDetails a.CloseDetails{
+		
+		display: inline;
+		/*width: 8px;
+		height: 10px;*/
+		position: relative;
+		top: 5px;
+		left: 5px;
+	}
+}
+
+@media only screen and (max-width: 640px){
+	.lt-ie8 .ie-lt8-col-10, .lt-ie8 .col-md-10, .lt-ie8-about .col-md-10,
+	.lt-ie8 .ie-lt8-col-9, .lt-ie8 .col-md-9, .lt-ie8-about .col-md-9,
+	.lt-ie8 .ie-lt8-col-8, .lt-ie8 .col-md-8, .lt-ie8-about .col-md-8,
+	.lt-ie8 .ie-lt8-col-7, .lt-ie8 .col-md-7, .lt-ie8-about .col-md-7,
+	.lt-ie8 .ie-lt8-col-6, .lt-ie8 .col-md-6, .lt-ie8-about .col-md-6,
+	.lt-ie8-about #MemberDetails .container .col-md-6,
+	.lt-ie8 .ie-lt8-col-4, .lt-ie8 .col-md-4, .lt-ie8-about .col-md-4,
+	.lt-ie8 .ie-lt8-col-3, .lt-ie8 .col-md-3, .lt-ie8-about .col-md-3,
+	.lt-ie8 .ie-lt8-col-2, .lt-ie8 .col-md-2, .lt-ie8-about .col-md-2,
+	.lt-ie8 .news-calendar-wrapper .col-md-11,
+	.lt-ie8 .news-calendar-wrapper .col-md-1{ width: 89.85%; }
+	
+	.lt-ie9 header .navbar-brand
+	/*.lt-ie8-about header .navbar-brand*/{
+		padding-left: 15px;
+	}
+	.lt-ie9 header .navbar-collapse /*,
+	.lt-ie8-about header .navbar-collapse*/{
+		clear: both;
+		text-align: left;
+		margin-top: 8px;
+	}
+	.lt-ie9 header .navbar-collapse ul.nav/*,
+	.lt-ie8-about header .navbar-collapse ul.nav*/{
+		clear: both;
+		display: block;
+		width: 100%;
+	}
+	.lt-ie9 header .navbar-nav:first-child/*,
+	.lt-ie8-about header .navbar-nav:first-child*/{
+		position: relative;
+		left: 0;
+		margin-top: 5px;
+	}
+	.lt-ie9 header .navbar-collapse .navbar-right/*,
+	.lt-ie8-about header .navbar-collapse .navbar-right*/{
+		float: none !important;
+	}
+	.lt-ie9 header .navbar-collapse ul.nav a/*,
+	.lt-ie8-about header .navbar-collapse ul.nav a*/{
+		border: 0;
+		padding: 3px 10px;
+	}
+	.lt-ie9 footer ul/*,
+	.lt-ie8-about footer ul*/{
+		margin-bottom: 10px;
+	}
+	.lt-ie9 #page_news .container,
+	.lt-ie9 #joblist .container,
+	.lt-ie9 #ManagementTeam .jumbotron,
+	.lt-ie9 #page_resources{
+		padding: 15px;
+	}
+	.lt-ie9 #joblist .container .col-md-12{
+		padding: 10px 0;
+	}
+	.lt-ie9 #resources_form .form-group,
+	.lt-ie9 #resources_form label,
+	.lt-ie9 #application_form .form-group,
+	.lt-ie9 #application_form label{
+		text-align: left;
+	}
+	
+	.lt-ie8 .ncp-popup{
+		position: absolute;
+		bottom: auto;
+	}
+	.lt-ie8 .ncp-popup-medium{
+		width: 278px;
+		height: inherit;
+		top: 0;
+		left: auto;
+		position: relative;
+		overflow: visible;
+	}
+	.lt-ie8 .ncp-popup .text-right{
+		text-align: left;
+	}
+	.lt-ie8 .ncp-popup .form-group {
+		margin-bottom: 5px;
+	}
+	
+	.lt-ie8 #current_openings_new .job-title,
+	.lt-ie8 #current_openings_new .col-md-8,
+	.lt-ie8 #current_openings_new .col-md-4{
+		float: none;
+	}
+}
+
+@media only screen and (max-width: 768px){
+	.lt-ie8 .ie-lt8-col-10, .lt-ie8 .col-md-10, .lt-ie8-about .col-md-10,
+	.lt-ie8 .ie-lt8-col-9, .lt-ie8 .col-md-9, .lt-ie8-about .col-md-9,
+	.lt-ie8 .ie-lt8-col-8, .lt-ie8 .col-md-8, .lt-ie8-about .col-md-8,
+	.lt-ie8 .ie-lt8-col-7, .lt-ie8 .col-md-7, .lt-ie8-about .col-md-7,
+	.lt-ie8 .ie-lt8-col-6, .lt-ie8 .col-md-6, .lt-ie8-about .col-md-6,
+	.lt-ie8-about #MemberDetails .container .col-md-6,
+	.lt-ie8 .ie-lt8-col-4, .lt-ie8 .col-md-4, .lt-ie8-about .col-md-4,
+	.lt-ie8 .ie-lt8-col-3, .lt-ie8 .col-md-3, .lt-ie8-about .col-md-3,
+	.lt-ie8 .ie-lt8-col-2, .lt-ie8 .col-md-2, .lt-ie8-about .col-md-2,
+	.lt-ie8 .news-calendar-wrapper .col-md-11,
+	.lt-ie8 .news-calendar-wrapper .col-md-1{ width: 89.85%; }
+	
+	.lt-ie9 header .navbar-brand
+	/*.lt-ie8-about header .navbar-brand*/{
+		padding-left: 15px;
+	}
+	.lt-ie9 header .navbar-collapse /*,
+	.lt-ie8-about header .navbar-collapse*/{
+		clear: both;
+		text-align: left;
+		margin-top: 8px;
+	}
+	.lt-ie9 header .navbar-collapse ul.nav/*,
+	.lt-ie8-about header .navbar-collapse ul.nav*/{
+		clear: both;
+		display: block;
+		width: 100%;
+	}
+	.lt-ie9 header .navbar-nav:first-child/*,
+	.lt-ie8-about header .navbar-nav:first-child*/{
+		position: relative;
+		left: 0;
+		margin-top: 5px;
+	}
+	.lt-ie9 header .navbar-collapse .navbar-right/*,
+	.lt-ie8-about header .navbar-collapse .navbar-right*/{
+		float: none !important;
+	}
+	.lt-ie9 header .navbar-collapse ul.nav a/*,
+	.lt-ie8-about header .navbar-collapse ul.nav a*/{
+		border: 0;
+		padding: 3px 10px;
+	}
+	.lt-ie9 footer ul/*,
+	.lt-ie8-about footer ul*/{
+		margin-bottom: 10px;
+	}
+	.lt-ie9 #page_news .container,
+	.lt-ie9 #joblist .container,
+	.lt-ie9 #ManagementTeam .jumbotron,
+	.lt-ie9 #page_resources,
+	.lt-ie9 #application_form{
+		padding: 15px;
+	}
+	.lt-ie9 #joblist .container .col-md-12{
+		padding: 10px 0;
+	}
+	.lt-ie9 #resources_form .form-group,
+	.lt-ie9 #resources_form label,
+	.lt-ie9 #application_form .form-group,
+	.lt-ie9 #application_form label{
+		text-align: left;
+	}
+	
+	.lt-ie8 .ncp-popup{
+		position: absolute;
+		bottom: auto;
+	}
+	.lt-ie8 .ncp-popup-medium{
+		width: 278px;
+		height: inherit;
+		top: 0;
+		left: auto;
+		position: relative;
+		overflow: visible;
+	}
+	.lt-ie8 .ncp-popup .text-right{
+		text-align: left;
+	}
+	.lt-ie8 .ncp-popup .form-group {
+		margin-bottom: 5px;
+	}
+	
+	.lt-ie8 #current_openings_new .job-title,
+	.lt-ie8 #current_openings_new .col-md-8,
+	.lt-ie8 #current_openings_new .col-md-4{
+		float: none;
+	}
+	
+	.lt-ie8-about #MemberDetails .container{
+		left: 10px;
+		/*right: 10px;*/
+		margin: 0 auto;
+		width: 90%;
+	}
+	.lt-ie8-about #MemberDetails a.CloseDetails{
+		display: inline;
+		position: relative;
+		top: 5px;
+		left: 5px;
+		margin-right: 10px;
+	}
+}
+
+/*
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+	
+}*/
+
+.banner{
+   background-image: url('../img/banner.jpg');
+    background-repeat: no-repeat;
+    background-size: 1024px;
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='../img/banner.jpg', sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='../img/banner.jpg', sizingMethod='scale')";
+
+}
+
+.img-circle{behavior:url(PIE.htc)}
+.img-rounded{behavior:url(PIE.htc)}
+.img-thumbnail{behavior:url(PIE.htc)}
+.table-bordered{behavior:url(PIE.htc)}
+select,textarea,input,code,pre,kbd,pre{behavior:url(PIE.htc)}
+.input-group-addon{behavior:url(PIE.htc)}
+.btn{behavior:url(PIE.htc)}
+.dropdown-menu{behavior:url(PIE.htc)}
+.form-control{behavior:url(PIE.htc)}
+.panel{behavior:url(PIE.htc)}
+.well{behavior:url(PIE.htc)}
+.nav-tabs > li > a{behavior:url(PIE.htc)}
+.nav-pills > li > a{behavior:url(PIE.htc)}
+.navbar{behavior:url(PIE.htc)}
+.navbar-nav > li > a{behavior:url(PIE.htc)}
+.navbar-toggle{behavior:url(PIE.htc)}
+.navbar-toggle .icon-bar{behavior:url(PIE.htc)}
+.breadcrumb{behavior:url(PIE.htc)}
+.pagination{behavior:url(PIE.htc)}
+.pager li > a,.pager li > span{behavior:url(PIE.htc)}
+.modal-content{behavior:url(PIE.htc)}
+.tooltip-inner{behavior:url(PIE.htc)}
+.popover{behavior:url(PIE.htc)}
+.popover-title{behavior:url(PIE.htc)}
+.alert{behavior:url(PIE.htc)}
+.thumbnail,.img-thumbnail{behavior:url(IE.htc)}
+.label{behavior:url(PIE.htc)}
+.badge{behavior:url(PIE.htc)}
+.progress{behavior:url(PIE.htc)}
+.carousel-indicators li{behavior:url(PIE.htc)}
+.jumbotron{behavior:url(PIE.htc)} 

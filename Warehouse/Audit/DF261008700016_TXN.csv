@@ -1,0 +1,5 @@
+Record Type	Corporte Id	e-PayOrder No.	Account Number	Branch Code	MMID	Mobile Number	Debit Amount	Credit Amount	Corporate Reference Number	Description	Payment Type	Transaction Status	Transaction Date	Transaction Time	Status Description	UTR Number	UTR Posted Date	UTR Status	Maker	Authorizer1	Authorizer1 Date	Authorizer2	Authorizer2 Date	
+Debit leg	'329338	'CNABHXSIQ2	'00000038906616113	'30343	'null	'null	'87639.0	'null	7231600421017	'Godown Rent Payment	'NEFT	'Unknown	'null	'null	'null	-	-	'null	MPWLCROUJN	-	-	-	-
+Credit leg	'329338	'CNABHXSIQ200001	'203511130000087	'BKID0NAMRGB	'null	'null	'0.0	'87639	7231600421017	'SHRI RAM WAREHOUSE10781GRP231600401520081123	'NEFT	'Unknown	'27/01/2021	'17:28	'null	-	-	'Pending	null	-	-	-	-
+Credit leg	'329338	'CNABHXSIQ200002	'1001039000280	'YESB0SNSB01	'null	'null	'0.0	'139053	7231600421017	'Kabra and Company10797GRP231600403320081127	'NEFT	'Unknown	'27/01/2021	'17:28	'null	-	-	'Pending	null	-	-	-	-
+Credit leg	'329338	'CNABHXSIQ200003	'1001039000280	'YESB0SNSB01	'null	'null	'0.0	'722739	7231600421017	'Kabra and Company10797GRP23160040332008171	'NEFT	'Unknown	'27/01/2021	'17:28	'null	-	-	'Pending	null	-	-	-	-
