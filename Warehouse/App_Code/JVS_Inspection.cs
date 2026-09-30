@@ -30,9 +30,10 @@ public class JVS_Inspection : System.Web.Services.WebService
         string respas = "";
         try
         {
-            string query = "select * from View_JVS_Inspection_for_JVSKharif_202223 where BranchId='"+ BranchId + "' and  Is_Inspected is null";
+            const string query = "select * from View_JVS_Inspection_for_JVSKharif_202223 where BranchId=@BranchId and Is_Inspected is null";
             //XmlElement xmlElement = null;
             SqlCommand cmd = new SqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@BranchId", BranchId);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             if (con.State == ConnectionState.Closed)
@@ -50,9 +51,9 @@ public class JVS_Inspection : System.Web.Services.WebService
                 xmlElement = xmldata1.DocumentElement;
             }
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            throw new SoapException(ex.Message, SoapException.ClientFaultCode);
+            throw new SoapException("Unable to fetch inspection parameters.", SoapException.ServerFaultCode);
         }
         finally
         {
