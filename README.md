@@ -6,7 +6,7 @@ The Warehouse Web Site reads the following secrets from protected deployment con
 
 | Setting | Used by |
 | --- | --- |
-| `WarehouseApiKey` | `ExportDataMPWLC_MPSCSC` mutations, NAFED/NCCF NeML transaction imports, and Android read methods. Send it in the `X-Warehouse-Api-Key` HTTP header. |
+| `WarehouseApiKey` | `ExportDataMPWLC_MPSCSC` mutations, NAFED/NCCF NeML transaction imports, Android read methods, WHR file retrieval, and table replication. Send it in the `X-Warehouse-Api-Key` HTTP header. |
 | `WarehouseDscApiCredential` | `Upload_DSC.Insert_DSC_Data`, supplied through its existing `Credential` SOAP argument. |
 | `MPSCSCStorageBillApiCredential` | `Get_MPSCSC_StorageBill_List`, supplied through its existing `Credential` SOAP argument. |
 | `NAFEDNEMLServiceUsername`, `NAFEDNEMLServicePassword` | Credentials accepted by `SendDataToNEML.GetProcedureData`. |
