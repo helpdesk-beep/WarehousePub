@@ -1,6 +1,7 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Admin.master.cs" Inherits="Admin_Admin" %>
 
 <!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
