@@ -1,0 +1,574 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Inspections/Masters/Inspection_RO.master" AutoEventWireup="true" CodeFile="Delete_Gadna_Patrak_EntryDuplicate.aspx.cs" Inherits="Inspections_RO_Delete_Gadna_Patrak_EntryDuplicate" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+            <%--Dropdown New--%>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="../../assets/New/css/select2.min.css" rel="stylesheet" />
+<script type="text/javascript" src="../../assets/New/js/select2.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("[id*=ddl_dist]").select2();
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("[id*=ddl_branch]").select2();
+    });
+</script>
+   <%--Dropdown End--%>
+        <%--Search Box --%>
+<script type="text/javascript">
+    function filterGrid() {
+
+        var input = document.getElementById("<%= txtSearch.ClientID %>");
+        var filter = input.value.toLowerCase();
+
+        var table = document.getElementById("<%= Gridview_OfficerPreviousInsp.ClientID %>");
+        var trs = table.getElementsByTagName("tr");
+
+        for (var i = 1; i < trs.length; i++) { // skip header row
+            var display = false;
+            var tds = trs[i].getElementsByTagName("td");
+
+            for (var j = 0; j < tds.length; j++) {
+                var cell = tds[j];
+                if (cell && cell.textContent.toLowerCase().indexOf(filter) > -1) {
+                    display = true;
+                    break;
+                }
+            }
+
+            trs[i].style.display = display ? "" : "none";
+        }
+    }
+</script>
+    <%--Search End--%>
+    <script type="text/javascript">
+        window.history.forward();
+
+        function noBack() { window.history.forward(); }
+    </script>
+    <script type="text/javascript">
+        Cufon.replace('h1,h2,h3,h4,h5,#menu,#copy,.blog-date');
+    </script>
+    <style type="text/css">
+        ul.svertical {
+            width: 220px; /* width of menu */
+            overflow: auto;
+            background: #f4f4f4; /* background of menu */
+            margin: 0;
+            padding: 0;
+            padding-top: 7px; /* top padding */
+            list-style-type: none;
+        }
+
+            ul.svertical li {
+                text-align: right; /* right align menu links */
+            }
+
+                ul.svertical li a {
+                    position: relative;
+                    display: inline-block;
+                    text-indent: 5px;
+                    overflow: hidden;
+                    background: rgb(1, 138, 180); /* initial background color of links */
+                    font: bold 16px Germand;
+                    text-decoration: none;
+                    padding: 5px;
+                    margin-bottom: 5px; /* spacing between links */
+                    color: White;
+                    -moz-box-shadow: inset -7px 0 5px rgba(114,114,114, 0.8); /* inner right shadow added to each link */
+                    -webkit-box-shadow: inset -7px 0 5px rgba(114,114,114, 0.8);
+                    box-shadow: inset -7px 0 5px rgba(114,114,114, 0.8);
+                    -moz-transition: all 0.2s ease-in-out; /* CSS3 transition of hover properties */
+                    -webkit-transition: all 0.2s ease-in-out;
+                    -o-transition: all 0.2s ease-in-out;
+                    -ms-transition: all 0.2s ease-in-out;
+                    transition: all 0.2s ease-in-out;
+                }
+
+                    ul.svertical li a:hover {
+                        padding-right: 30px; /* add right padding to expand link horizontally to the left */
+                        color: Black;
+                        background: rgb(153,249,75);
+                        -moz-box-shadow: inset -3px 0 2px rgba(114,114,114, 0.8); /* contract inner right shadow */
+                        -webkit-box-shadow: inset -3px 0 5px rgba(114,114,114, 0.8);
+                        box-shadow: inset -3px 0 5px rgba(114,114,114, 0.8);
+                    }
+
+                    ul.svertical li a:before { /* CSS generated content: slanted right edge */
+                        content: "";
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        border-style: solid;
+                        border-width: 70px 0 0 20px; /* Play around with 1st and 4th value to change slant degree */
+                        border-color: transparent transparent transparent #f4f4f4; /* change black to match the background color of the menu UL */
+                    }
+
+        /*print*/
+
+
+        * {
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+        }
+
+        .page {
+            width: 21cm;
+            min-height: 29.7cm;
+            padding: 2cm;
+            margin: 1cm auto;
+            border: 1px #D3D3D3 solid;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .subpage {
+            padding: 1cm;
+            border: 5px red solid;
+            height: 237mm;
+            outline: 2cm #FFEAEA solid;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+            font-size: smaller;
+        }
+
+        @media print {
+            .page {
+                margin: 0;
+                border: initial;
+                border-radius: initial;
+                width: initial;
+                min-height: initial;
+                box-shadow: initial;
+                background: initial;
+                page-break-after: always;
+                font-size: smaller;
+            }
+        }
+
+        @media print {
+            html, body {
+                width: 210mm;
+                height: 297mm;
+                font-size: smaller;
+            }
+            /* ... the rest of the rules ... */
+        }
+        /*td{font-size:smaller;}*/
+        page[size="A4"] {
+            background: white;
+            width: 21cm;
+            height: 29.7cm;
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 0.5cm;
+            box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+        }
+
+        @media print {
+            body, page[size="A4"] {
+                margin: 0;
+                box-shadow: 0;
+                font-size: smaller;
+            }
+        }
+
+        .style7 {
+            height: 15px;
+        }
+
+        .style8 {
+            height: 20px;
+        }
+    </style>
+    <style type="text/css">
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 0px 0px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 4px 2px;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .button1 {
+            background-color: white;
+            color: black;
+            border: 2px solid #4CAF50;
+        }
+
+            .button1:hover {
+                background-color: #4CAF50;
+                color: white;
+            }
+
+        .button2 {
+            background-color: white;
+            color: black;
+            border: 2px solid #008CBA;
+        }
+
+            .button2:hover {
+                background-color: #008CBA;
+                color: white;
+            }
+
+        .button3 {
+            background-color: white;
+            color: black;
+            border: 2px solid #f44336;
+        }
+
+            .button3:hover {
+                background-color: #f44336;
+                color: white;
+            }
+
+        .button6 {
+            background-color: white;
+            color: black;
+            border: 2px solid #008CBA;
+        }
+
+            .button6:hover {
+                background-color: #008CBA;
+                color: white;
+            }
+    </style>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#Panel1").hide();
+
+            $("#Button1").click(function () {
+
+                $("#Panel1").show();
+
+            });
+
+        });
+    </script>
+    <script type="text/javascript">
+        function preventInput(evnt) {
+            //Checked In IE9,Chrome,FireFox
+            if (evnt.which != 9) evnt.preventDefault();
+        }
+    </script>
+    <script type="text/javascript" language="javascript">
+        function ConfirmOnDelete() {
+            if (confirm("Are you sure want to Delete This Inspection ?") == true)
+                return true;
+            else
+                return false;
+        }
+    </script>
+
+    <style type="text/css">
+        .modalBackground {
+            background-color: Black;
+            filter: alpha(opacity=60);
+            opacity: 0.6;
+        }
+
+        .modalPopup {
+            background-color: #FFFFFF;
+            width: 80%;
+            border: 3px solid #0DA9D0;
+            border-radius: 12px;
+            padding: 0;
+        }
+
+            .modalPopup .header {
+                background-color: #D69758;
+                height: 30px;
+                color: White;
+                line-height: 30px;
+                text-align: center;
+                font-weight: bold;
+                border-top-left-radius: 6px;
+                border-top-right-radius: 6px;
+            }
+
+            .modalPopup .body {
+                min-height: 50px;
+                line-height: 30px;
+                text-align: center;
+                font-weight: bold;
+            }
+
+            .modalPopup .footer {
+                padding: 6px;
+            }
+
+            .modalPopup .yes, .modalPopup .no {
+                height: 23px;
+                color: White;
+                line-height: 23px;
+                text-align: center;
+                font-weight: bold;
+                cursor: pointer;
+                border-radius: 4px;
+            }
+
+            .modalPopup .yes {
+                background-color: #2FBDF1;
+                border: 1px solid #0DA9D0;
+            }
+
+            .modalPopup .no {
+                background-color: #9F9F9F;
+                border: 1px solid #5C5C5C;
+            }
+    </style>
+    <script type="text/javascript">
+        function HeaderClick(CheckBox) {
+
+            //Get target base & child control.
+            var TargetBaseControl =
+                document.getElementById('<%= this.Gridview_OfficerPreviousInsp.ClientID %>');
+
+            var TargetChildControl = "chk_Sum";
+
+            //Get all the control of the type INPUT in the base control.
+            var Inputs = TargetBaseControl.getElementsByTagName("input");
+
+            //Checked/Unchecked all the checkBoxes in side the GridView.er
+            for (var n = 0; n < Inputs.length; ++n)
+                if (Inputs[n].type == 'checkbox' &&
+                    Inputs[n].id.indexOf(TargetChildControl, 0) >= 0)
+                    Inputs[n].checked = CheckBox.checked;
+
+            //Reset Counter
+            Counter = CheckBox.checked ? TotalChkBx : 0;
+
+            var txtTotalRecBags = 0;
+            var txtTotalRecQty = 0;
+            var txtTotalcharges = 0;
+            var txttTotalGSTAmt = 0.0;
+            var txttTotalSupcharges = 0.0;
+            var txttTotalGSTPer = 0.0;
+            var Check = "N";
+            var checkBoxes = 0;
+            //checkBoxes = (1.toString();
+            var grid = document.getElementById("<%= Gridview_OfficerPreviousInsp.ClientID%>");
+            var CheckCount = 1;
+            for (var i = 0; i < grid.rows.length - 1; i++) {
+
+
+                var txtAmount = 0.0;
+                var txtcharges = 0.0;
+                var txtGSTAmt = 0.0;
+                var txtSupcharges = 0.0;
+                var txtGSTPer = 0.0;
+                txtcharges = $("input[id*=txtcharges]")
+
+                var txtQtyReceive = 0.0;
+                var checkBoxes = $("input[id*=chk_Sum]")
+                if (checkBoxes[i].checked == true) {
+                    txtTotalcharges = txtTotalcharges + parseFloat(txtcharges[i].value);
+                    CheckCount = grid.rows.length;
+
+
+                }
+
+            }
+
+
+
+        }
+        function calculate() {
+
+            var txtTotalRecBags = 0;
+            var txtTotalRecQty = 0;
+            var CheckCount = 0;
+            var txtTotalcharges = 0;
+            var txttTotalGSTAmt = 0.0;
+            var txttTotalSupcharges = 0.0;
+            var txttTotalGSTPer = 0.0;
+            var grid = document.getElementById("<%= Gridview_OfficerPreviousInsp.ClientID%>");
+            for (var i = 0; i < grid.rows.length - 1; i++) {
+
+                var txtBagSend = $("input[id*=sendb]")
+                var txtNetQty = 0.0;
+                var txtcharges = 0.0;
+                var txtGSTAmt = 0.0;
+                var txtSupcharges = 0.0;
+                var txtGSTPer = 0.0;
+                txtcharges = $("input[id*=txtcharges]")
+
+                var txtQtyReceive = 0.0;
+
+                var checkBoxes = $("input[id*=chk_Sum]")
+                if (checkBoxes[i].checked == true) {
+
+                    txtTotalcharges = txtTotalcharges + parseFloat(txtcharges[i].value);
+
+                    CheckCount = CheckCount + 1;
+
+                }
+            }
+
+        }
+    </script>
+    <div runat="server">
+
+      <%--  <div class="pop" style="background-color: #FFFFCC0; min-height: 600PX; max-height: 500px; overflow: auto;">--%>
+            <%-- <div class="col-sm-12 col-md-12 col-xs-12">--%>
+         <%--   <img visible="true" runat="server" src="~/images/close-icon.png" alt="quit" class="x" id="x" />--%>
+
+
+            <div id="divNewInsp" runat="server" visible="true" style="width: 100%;">
+                <table align="center" style="width: 100%; border: #008CBA; border-style: solid; border-width: 0px;">
+                    <tr>
+                        <td style="height: 5px;"></td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td align="center" style="border: #E6C79D; border-style: solid; border-width: 2px; width: 100%" colspan="6">
+                            <span style="color: #cb4e48; font-weight: bold; font-size: 17px">कृपया यहाँ से ब्रांच पर गाडना पत्रक अपडेट करने के आप दोबारा दे सकते हैं ,एडिट रिमूव का ऑप्शन देने से पहले ब्रांच और इंस्पेक्शन अधिकारी से यहाँ पता कर ले कि जो पूर्व में इंस्पेक्शन /भौतिक सत्यापन दिया गया था वह पूर्ण हो गया हे और फाइनल सबमिट कर दिया गया हैं यदि पहले वाला इंस्पेक्शन / भौतिक सत्यापन पूर्ण नहीं किया और ब्रांच से गढ़ना पत्रक अपडेट कर दिया है तो उस स्थिति में पहले के इंस्पेक्शन अधिकारी का डाटा भी अपडेट हो जायेगा</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="height: 5px;" colspan="6"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" align="center" style="font-size: small;">Total Record :
+                                            <asp:Label ID="lblTotalInsp" runat="server"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp&nbsp&nbsp&nbsp
+                        <asp:Label ID="Label9" runat="server" Text="District : "></asp:Label>
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddl_dist" runat="server" AutoPostBack="true" Width="222px"
+                                Height="25px" Font-Bold="true" ForeColor="Navy" CssClass="tb6"
+                                OnSelectedIndexChanged="ddl_dist_SelectedIndexChanged">
+                            </asp:DropDownList>
+                        </td>
+                        <td>
+                            <asp:Label ID="Label1" runat="server" Text="Branch : "></asp:Label>
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddl_branch" runat="server" AutoPostBack="True" Width="222px"
+                                Height="25px" Font-Bold="true" ForeColor="Navy" CssClass="tb6">
+                            </asp:DropDownList>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td colspan="6" align="center">
+                            <asp:Button class="button button6" ID="btn_show" runat="server" Text="Show"
+                                TabIndex="11" Width="222px" Height="30px" OnClick="btn_show_Click"></asp:Button>
+                            &nbsp&nbsp&nbsp&nbsp
+                                            <asp:Button class="button button6" ID="btnclear" runat="server" Text="Clear All"
+                                                TabIndex="12" Width="222px" Height="30px" OnClick="btnclear_Click"></asp:Button>
+                        </td>
+                    </tr>
+                                                                                                          <%--Search Textbox--%>
+<tr>
+    <td colspan="10" align="left">
+        <asp:TextBox ID="txtSearch" runat="server"
+            placeholder="Search here..."
+            Style="width: 380px; height: 36px;margin-left: 88px; padding: 0 15px; font-size: 15px; border: 1px solid #000; border-radius: 8px; outline: none; transition: all 0.25s ease; box-shadow: 0 2px 6px rgba(0,0,0,0.08);"
+            onkeyup="filterGrid();" Visible="false" />
+
+    </td>
+</tr>
+<%--Search Textbox End--%>                      
+                    <tr>
+                        <td colspan="6" valign="top" align="center">
+                            <asp:GridView ID="Gridview_OfficerPreviousInsp" runat="server"
+                                AutoGenerateColumns="False" Width="90%" Font-Size="10pt" Font-Bold="true" BackColor="White"
+                                BorderColor="#008CBA" BorderStyle="Double"
+                                BorderWidth="1px" CellPadding="2" CellSpacing="2" OnRowCommand="Gridview_OfficerPreviousInsp_RowCommand">
+
+                                <Columns>
+                                    <asp:TemplateField HeaderText="क्रमांक">
+                                        <ItemTemplate>
+                                            <%#Container.DataItemIndex+1%>
+                                            <asp:HiddenField ID="hdnId" runat="server" Value='<%# Bind("Godown_ID") %>' />
+                                        </ItemTemplate>
+                                        <ItemStyle Width="1%" />
+                                        <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
+                                        <ItemStyle HorizontalAlign="Center"></ItemStyle>
+                                    </asp:TemplateField>
+                                    <asp:BoundField DataField="Godown_ID" HeaderText="Godown ID" />
+                                    <asp:BoundField DataField="Godown_Name" HeaderText="Godown_Name" />
+
+                                    <%--<asp:TemplateField HeaderText="Approved For Edit">
+                                                <ItemTemplate>
+                                                    <asp:Button ID="btnRemove" Text="Remove" runat="server" CommandName="RemoveRow" CssClass="btneditstyle" CommandArgument='<%# Container.DataItemIndex %>' OnClientClick="return confirm('Do you want to Remove this row?');" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>--%>
+                                    <asp:TemplateField HeaderText="Select">
+                                        <HeaderTemplate>
+                                            <asp:CheckBox ID="chkBxHeader" Text="All" onclick="javascript:HeaderClick(this);" runat="server" Visible="false"/>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:CheckBox ID="chk_Sum" runat="server" />
+                                            <asp:HiddenField ID="hdncheckID" runat="server" Value='<%# Eval("Godown_ID") %>' />
+                                        </ItemTemplate>
+                                        <HeaderStyle Font-Bold="True" Font-Names="Arial" Font-Size="12pt" HorizontalAlign="Center"
+                                            Width="80px" />
+                                        <ItemStyle HorizontalAlign="Center" Width="10px" />
+                                        <ControlStyle Width="15px" />
+                                    </asp:TemplateField>
+                                </Columns>
+                                
+
+                                <%--<FooterStyle BackColor="#719cb6" ForeColor="White" Font-Bold="True" HorizontalAlign="Center" />--%>
+                                <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Center" Height="20px" Font-Size="10pt" />
+                                <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
+                                <HeaderStyle BackColor="#F7ECDD" Font-Bold="True" ForeColor="#cb4e48" HorizontalAlign="center"
+                                    Height="20px" Font-Size="10pt" />
+                                <AlternatingRowStyle BackColor="#eeeeee" />
+                            </asp:GridView>
+                        </td>
+                    </tr>
+                  <%--  <tr>
+                    <td colspan="4" align="center">&nbsp;&nbsp;&nbsp;
+                         <asp:Button ID="btnRemove" runat="server" Text="Delete" class="btn btn-danger" Width="150px" Height="30px"
+                               Visible="true" TabIndex="13" ValidationGroup="SaveValid" OnClick="btnDelete_Click"/>
+                    </td>
+                </tr>--%>
+                    
+                                                        <tr>
+    <td colspan="10" align="center" style="padding-top: 10px;">
+        <asp:Button ID="btnRemove" runat="server" Text="Selected Remove" class="btn btn-danger" Width="150px" Height="30px"
+            OnClientClick="return confirm('Are you sure want to Remove selected records?');"
+            OnClick="btnRemove_Click" Visible="false" />
+    </td>
+</tr>
+                       
+
+                    <%-------------End of Second Gride --------%>
+                </table>
+                <asp:Label ID="Label12" runat="server" Font-Bold="true" Font-Size="Medium"></asp:Label>
+                
+            </div>
+        </div>
+       
+    </div>
+</asp:Content>
+

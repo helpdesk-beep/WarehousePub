@@ -1,0 +1,7 @@
+Record Type	Corporte Id	e-PayOrder No.	Account Number	Branch Code	MMID	Mobile Number	Debit Amount	Credit Amount	Corporate Reference Number	Description	Payment Type	Transaction Status	Transaction Date	Transaction Time	Status Description	UTR Number	UTR Posted Date	UTR Status	Maker	Authorizer1	Authorizer1 Date	Authorizer2	Authorizer2 Date	
+Debit leg	'329338	'CNABHLZGW7	'00000038906616113	'30343	'null	'null	'52241.0	'null	7233800521011	'Godown Rent Payment	'NEFT	'Unknown	'null	'null	'null	-	-	'null	MPWLCROJBP	-	-	-	-
+Credit leg	'329338	'CNABHLZGW700001	'3242951222	'CBIN0281986	'null	'null	'0.0	'25647	7233800521011	'LIKHAN BAI BISEN11758GRP23380050602008145	'NEFT	'Unknown	'13/01/2021	'12:54	'null	-	-	'Pending	null	-	-	-	-
+Credit leg	'329338	'CNABHLZGW700002	'17661530001075	'HDFC0001766	'null	'null	'0.0	'2790	7233800521011	'DIMPLE CHATURMOHTA11757GRP23380050352008157	'NEFT	'Unknown	'13/01/2021	'12:54	'null	-	-	'Pending	null	-	-	-	-
+Credit leg	'329338	'CNABHLZGW700003	'0038000100108083	'PUNB0003800	'null	'null	'0.0	'6568	7233800521011	'Usha Baghrecha11756GRP23380050302008185	'NEFT	'Unknown	'13/01/2021	'12:54	'null	-	-	'Pending	null	-	-	-	-
+Credit leg	'329338	'CNABHLZGW700004	'0038002100025759	'PUNB0003800	'null	'null	'0.0	'26305	7233800521011	'PARUL SIHORE11737GRP23380050812008134	'NEFT	'Unknown	'13/01/2021	'12:54	'null	-	-	'Pending	null	-	-	-	-
+Credit leg	'329338	'CNABHLZGW700005	'0038002100025759	'PUNB0003800	'null	'null	'0.0	'289	7233800521011	'PARUL SIHORE11737GRP23380050812008140	'NEFT	'Unknown	'13/01/2021	'12:54	'null	-	-	'Pending	null	-	-	-	-

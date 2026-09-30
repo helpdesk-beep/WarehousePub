@@ -1,0 +1,214 @@
+﻿<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warehouse Deposit Application</title>
+    <style>
+        body {
+            font-family: 'Arial Unicode MS', 'FreeSans', sans-serif;
+            margin: 20px;
+            color: #000;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            border: 1px solid #000;
+            padding: 30px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+            .header h1 {
+                font-size: 22px;
+                margin: 0;
+            }
+
+            .header h2 {
+                font-size: 18px;
+                margin: 10px 0;
+                font-weight: normal;
+            }
+
+        .receipt-header {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .meta-data {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .address-to {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .declaration {
+            margin-top: 20px;
+            text-indent: 30px;
+        }
+
+        .info-row {
+            margin: 10px 0;
+        }
+
+        .footer-sigs {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .page-2 {
+            margin-top: 50px;
+            border-top: 2px dashed #333;
+            padding-top: 40px;
+        }
+
+        .underline {
+            border-bottom: 1px dotted #000;
+            padding: 0 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>एम.पी वेअरहाउसिंग एंड लॉजिस्टिक्स कार्पोरेशन</h1>
+            <h2>माल जमा (डिपॉजिट) करने का प्रार्थना पत्र</h2>
+        </div>
+
+        <div class="receipt-header">
+            वेयर हाउस रसीद क्रमांक: <span class="underline">{{RecieptNumber}}</span>
+        </div>
+
+        <div class="meta-data">
+            <div>
+                जमा फॉर्म क्रमांक: <span class="underline">{{SubmitedFormNumber}}</span>
+            </div>
+            <div>
+                दिनांक: <span class="underline">{{CurrentDateTime}}</span>
+            </div>
+        </div>
+
+        <div class="address-to">
+            प्रति,<br>
+            शाखा प्रबन्धक,<br>
+            <span class="underline">{{DepotName}}</span>
+        </div>
+
+        <p>कृपया नीचे लिखे माल को अपने वेयर हाउस मे रखने के लिए स्वीकार कीजिए । </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>माल का विवरण</th>
+                    <th>वर्ग ग्रेड अथवा किस्म क्वालिटी</th>
+                    <th>खोखा, वोरा नग इत्यादि की संख्या</th>
+                    <th>नाप या वजन (In Qtl.)</th>
+                    <th>बाजार भाओ रु मे (In Qtl.)</th>
+                    <th>माल की कुल कीमत रु मे</th>
+                    <th>कैफियत</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{Commodity_Name}}</td>
+                    <td>A</td>
+                    <td>{{Qty_Issued_Weight}}</td>
+                    <td>0000.00</td>
+                    <td>{{MktValue_of_Commodity}}</td>
+                    <td>3648761.0000</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="info-row">
+            स्कन्ध में नमी का प्रतिशतः <span class="underline">{{Moisture_Content}}</span>
+        </div>
+
+        <div class="declaration">
+            में यह प्रमाणित करता हूँ कि ऊपर स्कन्ध वास्तव में मेरा स्वतः का/श्री <span class="underline">MPSCSC</span> ग्राम नगर <span class="underline">___________</span> तहसील <span class="underline">___________</span> का है और उस पर किसी दूसरे व्यक्ति का किसी प्रकार का हक नहीं है ।
+        </div>
+
+        <div class="info-row" style="margin-top:20px;">
+            <strong>माल जमा करने वाले का/एजेंट का नाम व पता:</strong> <span class="underline">MPSCSC</span>
+        </div>
+        <div class="info-row">
+            <strong>भंडारगृह रसीद जिस नाम से जारी होना है उसका पूरा नाम व पता:</strong> <span class="underline">{{Godown}}</span>
+        </div>
+        <div class="info-row">
+            <strong>जिला:</strong> <span class="underline">{{District_Name}}</span>
+        </div>
+
+        <p>आपके रिकॉर्ड के लिए मेरे/हमारे नमूने के साथ नत्थी है। </p>
+
+        <div class="footer-sigs">
+            <div>
+                स्थान: <span class="underline">{{District_Name}}</span><br>
+                दिनांक: <span class="underline">{{CurrentDateTime}}</span>
+            </div>
+            <div style="text-align: center;">
+                <br>
+                __________________________<br>
+                जमाकर्ता के हस्ताक्षर<br>
+                जमाकर्ता (डिपॉजिट)/एजेंट
+            </div>
+        </div>
+
+        <div class="page-2">
+            <p>क्रमांक: <span class="underline">__________</span> </p>
+            <p>
+                इस मामले के वर्ग या किस्म तादाद और कीमत के सम्बंध में उपरोक्त विवरण अनुसार वेयर हाउस रसीद
+                <span class="underline">{{Delivery_Order_No}}</span>
+                गोदाम क्रमांक <span class="underline">{{Godown_ID}}</span>
+                दिनांक <span class="underline">{{CurrentDateTime}}</span>
+                स्टेक क्रमांक <span class="underline">__________</span> जारी कि गई ।
+            </p>
+
+            <p>
+                स्टाक रजिस्टर पेज क्रमांक <span class="underline">__________</span>
+                डिपाजित लेजर पेज क्रमांक <span class="underline">__________</span>
+            </p>
+
+            <div class="footer-sigs" style="margin-top: 80px;">
+                <div>
+                    स्थान: <span class="underline">{{District_Name}}</span><br>
+                    दिनांक: <span class="underline">{{CurrentDateTime}}</span>
+                </div>
+                <div style="text-align: center;">
+                    <br>
+                    __________________________<br>
+                    शाखा प्रबंधक <br>
+                    मध्यप्रदेश स्टेट वेयरहाउससिंग कारपोरेशन <br>
+                    शाखा <span class="underline">{{DepotName}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

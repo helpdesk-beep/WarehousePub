@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+<script src="jquery-1.10.2.js"></script>
+<script src="jquery.validate.js"></script>
+<script src="jquery-ui.js"></script>
+<script src="ValidationClasses.js"></script>
+<link rel="stylesheet" href="jquery-ui.css">
+<link rel="stylesheet" href="themes/12/theme.css" />
+<script>
+$(document).ready(function(e)
+{
+	 $(".PerformClick").click(function ()
+	 {
+		 if ($("form").valid())
+        {
+			$(".PerformClick").hide();
+			return true;
+		}
+        else
+		{
+		  return false;
+		}
+	});
+});
+</script>
+<style>
+img[class="tooltips"] {
+    height: 15px;
+    width: 15px;
+}
+</style>
+<body>
+<form id="aspnetForm">
+  <table style="width: 100%; height: auto" class="table table-bordered">
+    <tbody>
+      <tr>
+        <td style="text-align: right" colspan="1"><span id="lblFirstName" class="text-info">First Name:</span></td>
+        <td colspan="1" align="left"><select data-original-title="" name="ddlTitle" id="ddlTitle" class="vd_DDL_required" style="width:30%;">
+            <option selected="selected" value="0">-- Title --</option>
+            <option value="1">Mr.</option>
+            <option value="2">Mrs.</option>
+            <option value="3">Smt.</option>
+          </select>
+          <input data-original-title="" name="txtFName" maxlength="100" id="txtFName" class="vd_Alphabets"  style="width:200px;" type="text" /></td>
+        <td style="text-align: right" colspan="1"><span id="Label9" class="text-info">Last Name:</span></td>
+        <td colspan="1" align="left"><input name="txtLName" maxlength="100" id="txtLName" class="vd_Required" style="width:200px;" type="text" /></td>
+      </tr>
+      <tr>
+        <td align="right" width="20%"><span id="Label2" class="text-info">Father's Name  :</span></td>
+        <td style="width: 30%" align="left"><input data-original-title="" name="txtFatherName" maxlength="100" id="txtFatherName" class="input-large vd_Required"  style="width:200px;" type="text" /></td>
+        <td align="right" width="20%"><span id="Label3" class="text-info">Date Of Birth :</span></td>
+        <td style="width: 30%" align="left"><div class="input-append date DB_datepicker" data-date="" data-date-format="dd/mm/yyyy">
+            <input name="txtDOB" maxlength="10" id="txtDOB" class="input-large date_picker vd_Required vd_Date" onblur="return validateDoB()" style="width:200px;" type="text" />
+            <span class="add-on"><i class="icon-th"></i></span></div></td>
+      </tr>
+      <tr>
+        <td align="right" width="20%"><span id="Label8" class="text-info">Department :</span></td>
+        <td style="width: 30%" align="left"><select  name="ddlDepartment" id="ddlDepartment" class="vd_DDL_required" style="width:220px;">
+            <option value="0">--SELECT--</option>
+            <option value="10">Rural Development</option>
+            <option value="3">Urban Development</option>
+            <option value="16">Samagra Social Security Mission</option>
+          </select></td>
+        <td align="right" width="20%"><span id="Label4" class="text-info">Designation :</span></td>
+        <td style="width: 30%" align="left"><select  name="ddlDesignation" id="ddlDesignation" class="vd_DDL_required" style="width:220px;">
+            <option value="0">--Select--</option>
+            <option value="1">Chief Executive Officer, JP</option>
+            <option value="2">Additional CEO, JP</option>
+           
+            <option value="12">Extension officer</option>
+            <option value="13">Assistant grade1</option>
+          </select></td>
+      </tr>
+      <tr>
+        <td align="right" width="20%"><span id="Label1" class="text-info">Section :</span></td>
+        <td style="width: 30%" align="left"><select data-original-title="" name="ddlSection" id="ddlSection" class="vd_DDL_required" style="width:220px;">
+            <option selected="selected" value="0">-- Select Section --</option>
+            <option value="38">Account</option>
+            <option value="40">Correspondance</option>
+            <option value="37">Establishment</option>
+            <option value="36">HR</option>
+            <option value="42">Other</option>
+            <option value="41">SC</option>
+            <option value="39">Schemes</option>
+          </select></td>
+        <td align="right" width="20%"><span id="Label10" class="text-info">Blood Group :</span></td>
+        <td style="width: 30%" align="left"><select name="ddlBloodGroup" id="ddlBloodGroup" class="vd_DDL_required" style="width:220px;">
+            <option selected="selected" value="0">-- Select Blood Group --</option>
+            <option value="1">A+</option>
+            <option value="2">A-</option>
+            <option value="7">AB+</option>
+            <option value="8">AB-</option>
+            <option value="3">B+</option>
+            <option value="4">B-</option>
+            <option value="9">Not Known</option>
+            <option value="5">O+</option>
+            <option value="6">O-</option>
+          </select></td>
+      </tr>
+      <tr>
+        <td align="right" width="20%"><span id="lblDistrict1" class="ui-widget">Email Address  :</span></td>
+        <td align="left" width="30%"><input data-original-title="" name="txtEmail" id="txtEmail" class="vd_Required vd_Email" placeholder="--xyz@abc.xx--" style="width:200px;" type="text" /></td>
+        <td align="right" width="20%"><span id="Label6" class="text-info">Mobile Number (do not prefix 0 before number) :</span></td>
+        <td align="left" width="30%"><input name="txtMobile" maxlength="10" id="txtMobile" class="vd_Mob" placeholder="--10 digit number--" style="width:200px;" type="text" /></td>
+      </tr>
+      <tr>
+        <td colspan="1" align="right" width="20%"><span id="lblAddress" class="text-info">Contact Address  :</span></td>
+        <td colspan="2" align="left" width="10%"><textarea name="txtAddress" rows="3" cols="20" id="txtAddress" class="vd_Required" onkeypress="return CharNumAddressOnly(event);" placeholder="--Address--" style="width:60%;"></textarea></td>
+      </tr>
+    </tbody>
+  </table>
+  <input name="btnSaveEmployee" value="Register Employee" id="btnSaveEmployee" class="PerformClick" type="submit">
+  <input name="btnCancel" value="Cancel" id="btnCancel" class="button button-danger" type="submit">
+</form>
+</body>
+</html>

@@ -1,0 +1,252 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Tachnical.master.cs" Inherits="Masters_Tachnical" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>MP Warehousing Online Inspection</title>
+    <%--Changes on 12-05-2026--%>
+    <style>
+        /* 1. Hide the top Google Translate frame/banner */
+        .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon {
+            display: none !important;
+        }
+
+        body {
+            top: 0px !important;
+        }
+
+        /* 2. Hide the Google logo and branding in the dropdown */
+        .goog-te-gadget {
+            font-family: 'Arial', sans-serif !important;
+            color: transparent !important; /* Hides the "Powered by" text */
+        }
+
+            .goog-te-gadget .goog-te-combo {
+                color: #333 !important; /* Keeps the dropdown text visible */
+                padding: 8px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                background-color: #fff;
+            }
+
+        /* 3. Remove the tooltip popups when hovering over translated text */
+        #goog-gt-tt, .goog-te-balloon-frame {
+            display: none !important;
+        }
+
+        .goog-text-highlight {
+            background: none !important;
+            box-shadow: none !important;
+        }
+    </style>
+    <style>
+        /* Dropdown ke andar ke text ko hamesha readable rakhne ke liye */
+        .goog-te-combo {
+            text-transform: none !important;
+        }
+        /* Targeted fix for the iframe class you mentioned */
+        .VIpgJd-ZVi9od-ORHb-OEVmcd,
+        .goog-te-banner-frame,
+        #goog-gt-tt,
+        .goog-te-balloon-frame,
+        #\:2\.container {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+        /* Prevent the page from shifting down */
+        body {
+            top: 0px !important;
+        }
+
+        /* Remove the hover highlight effect */
+        .goog-text-highlight {
+            background: none !important;
+            box-shadow: none !important;
+        }
+    </style>
+    <%--END--%>
+
+    <%-- <style type="text/css">
+        header, nav, section, article, aside, footer {
+            display: block;
+        }
+    </style>--%>
+
+
+    <!--[if lt IE 9]>
+   <script>
+      document.createElement('header');
+      document.createElement('nav');
+      document.createElement('section');
+      document.createElement('article');
+      document.createElement('aside');
+      document.createElement('footer');
+   </script>
+<![endif]-->
+
+    <!-- Bootstrap core CSS -->
+    <link href="../Assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="../Assets/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
+
+    <!-- font awesome -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="../Assets/css/style.css" rel="stylesheet" type="text/css">
+    <link href="../Assets/css/custome.css" rel="stylesheet" type="text/css">
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+
+<body>
+    <form id="form1" runat="server">
+        <%--Changes on 12-05-2026--%>
+        <div class="col-md-3 col-sm-6 text-center">
+            <div id="google_translate_element"></div>
+        </div>
+        <header>
+            <div class="top_bar">
+                <div class="container">
+                    <span class="pull-left" style="width: 800px;">
+                        <asp:Repeater ID="rptMarquee" runat="server">
+                            <HeaderTemplate>
+                                <marquee direction="left" scrollamount="3" onmouseover="this.stop();" onmouseout="this.start();">
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <a href='<%#Eval("Link")%>' target="_blank" class="red"><%#Eval("Title") %></a> | 
+                            </ItemTemplate>
+                            <FooterTemplate>
+                                </marquee>
+                            </FooterTemplate>
+                        </asp:Repeater>
+
+                    </span>
+
+                    <span class="pull-right">
+                        <asp:Label ID="lblVCount" class="label label-danger" runat="server"></asp:Label>
+                        |
+                <a><strong><i class="fa fa-calendar"></i><%= DateTime.Now.ToString("dd MMMM yyyy")%> |&nbsp;<i class="fa fa-clock-o"></i>&nbsp;<label id="lblTime"></label></strong></a>
+                    </span>
+
+                </div>
+            </div>
+            <div class="logo_bar">
+                <div class="">
+                    <img src="../../images/insp.jpg" style="width: 100%" alt="" height="140" />
+                </div>
+            </div>
+
+        </header>
+
+
+
+        <asp:ContentPlaceHolder ID="banner" runat="server">
+        </asp:ContentPlaceHolder>
+
+
+        <asp:ContentPlaceHolder ID="body" runat="server">
+        </asp:ContentPlaceHolder>
+
+
+        <asp:ContentPlaceHolder ID="widget" runat="server">
+        </asp:ContentPlaceHolder>
+        <footer>
+
+            <div class="footer-bottom">
+                <div class="container">
+
+                    <p style="text-align: center;">
+                        Copyright &copy; 2020 MPWLC - All Rights Reserved | Madhya Pradesh Warehousing and Logistics Corporation
+                    </p>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </footer>
+        <!--Java Script -->
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+        <!--[if IE]>
+
+    <link href="../Assets/css/custom-ie-lt-8.css" rel="stylesheet" />
+
+<![endif]-->
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+  <script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
+<![endif]-->
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                ShowTime();
+            });
+            function ShowTime() {
+                var dt = new Date();
+                document.getElementById("lblTime").innerHTML = dt.toLocaleTimeString();
+                window.setTimeout("ShowTime()", 1000); // Here 1000(milliseconds) means one 1 Sec  
+            }
+            $(document).ready(function () {
+                $(".trigger").click(function () {
+                    $(".mdsliding").toggle("fast");
+                    $(this).toggleClass("active");
+                    return false;
+                });
+            });
+
+        </script>
+
+        <asp:ContentPlaceHolder ID="script" runat="server">
+        </asp:ContentPlaceHolder>
+    </form>
+    <%--changes On 12-05-2026--%>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+        // Dropdown fix ke liye naya logic
+        $(window).load(function () {
+            // Jab dropdown change ho, toh hum check karenge
+            $('.goog-te-combo').on('change', function () {
+                var lang = $(this).val();
+                // Agar language Hindi select hui hai toh ensure karein ki wo dikhe
+                if (lang === 'hi') {
+                    console.log("Hindi Selected");
+                }
+            });
+
+            // Interval check: Kabhi-kabhi Google Translate der se load hota hai
+            var checkInterval = setInterval(function () {
+                var combo = document.querySelector('.goog-te-combo');
+                if (combo) {
+                    // Agar cookie mein Hindi saved hai par dropdown me nahi dikh raha
+                    var langCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+                    if (langCookie && langCookie.includes('/en/hi')) {
+                        combo.value = 'en';
+                    }
+                    clearInterval(checkInterval);
+                }
+            }, 500);
+        });
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <%--END--%>
+</body>
+</html>

@@ -1,0 +1,48 @@
+﻿   
+ .barIndicatorBorder {
+
+border:solid 1px #c0c0c0;
+width:200px;
+padding:2px;
+
+}
+
+.barIndicator_poor {
+
+background: Red;
+color:White;
+font-weight:bold;
+
+}
+
+.barIndicator_weak {
+
+background: Gray;
+color:White;
+font-weight:bold;
+
+}
+
+.barIndicator_good {
+
+background: blue;
+color:White;
+font-weight:bold;
+
+}
+
+.barIndicator_strong {
+
+background: orange;
+color:black;
+font-weight:bold;
+
+}
+
+.barIndicator_excellent {
+
+background: Green;
+color:White;
+font-weight:bold;
+}
+        

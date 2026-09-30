@@ -1,0 +1,4 @@
+Record Type	Corporte Id	e-PayOrder No.	Account Number	Branch Code	MMID	Mobile Number	Debit Amount	Credit Amount	Corporate Reference Number	Description	Payment Type	Transaction Status	Transaction Date	Transaction Time	Status Description	UTR Number	UTR Posted Date	UTR Status	Maker	Authorizer1	Authorizer1 Date	Authorizer2	Authorizer2 Date	
+Debit leg	'329338	'CNABHJRZL1	'00000038906616113	'30343	'null	'null	'79977.0	'null	7234400221012	'Godown Rent Payment	'NEFT	'Unknown	'null	'null	'null	-	-	'null	MPWLCROUJN	-	-	-	-
+Credit leg	'329338	'CNABHJRZL100001	'41340200000154	'BARB0MANASA	'null	'null	'0.0	'79977	7234400221012	'CHAITANYA AGRO. TECH10945GRP23440010862010157	'NEFT	'Unknown	'11/01/2021	'16:02	'null	-	-	'Pending	null	-	-	-	-
+Credit leg	'329338	'CNABHJRZL100002	'3499477325	'CBIN0280772	'null	'null	'0.0	'167573	7234400221012	'anil mundra10950GRP23440020412010159	'NEFT	'Unknown	'11/01/2021	'16:02	'null	-	-	'Pending	null	-	-	-	-

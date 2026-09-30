@@ -1,0 +1,5 @@
+Record Type	Corporte Id	e-PayOrder No.	Account Number	Branch Code	MMID	Mobile Number	Debit Amount	Credit Amount	Corporate Reference Number	Description	Payment Type	Transaction Status	Transaction Date	Transaction Time	Status Description	UTR Number	UTR Posted Date	UTR Status	Maker	Authorizer1	Authorizer1 Date	Authorizer2	Authorizer2 Date	
+Debit leg	'329338	'CNABHJJHW2	'00000038906616113	'30343	'null	'null	'17336.0	'null	7231500421012	'Godown Rent Payment	'NEFT	'Unknown	'null	'null	'null	-	-	'null	MPWLCRORWA	-	-	-	-
+Credit leg	'329338	'CNABHJJHW200001	'423104000006538	'IBKL0000423	'null	'null	'0.0	'17336	7231500421012	'PRAMILA GUPTA10553GRP23150040172009125	'NEFT	'Unknown	'11/01/2021	'13:25	'null	-	-	'Pending	null	-	-	-	-
+Credit leg	'329338	'CNABHJJHW200002	'6424000100032264	'PUNB0642400	'null	'null	'0.0	'11284	7231500421012	'Jila panchayat sidhi11389GRP23150040222009219	'NEFT	'Unknown	'11/01/2021	'13:25	'null	-	-	'Pending	null	-	-	-	-
+Credit leg	'329338	'CNABHJJHW200003	'6424000100032264	'PUNB0642400	'null	'null	'0.0	'12276	7231500421012	'Jila panchayat sidhi11389GRP23150040232009221	'NEFT	'Unknown	'11/01/2021	'13:25	'null	-	-	'Pending	null	-	-	-	-

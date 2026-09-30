@@ -1,0 +1,283 @@
+/*Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+--*/
+hr
+{
+    margin-top: 0.1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+.mg-t-20
+{
+    margin-top: 20px;
+}
+.bg-indigo
+{
+    background-color: #6610f2;
+}
+.bg-purple
+{
+    background-color: #6f42c1;
+}
+.bg-Lightpurple
+{
+    background-color: #a475f9;
+}
+.bg-pink
+{
+    background-color: #e83e8c;
+}
+.bg-orange
+{
+    background-color: #f27510;
+}
+.bg-teal
+{
+    background-color: #1CAF9A;
+}
+.bg-br-primary
+{
+    background-color: #1D2939;
+}
+.bg-lightsky
+{
+    background-color: #E4F2F2;
+}
+.bg-seaGreen
+{
+    background-color: #489FB7;
+}
+.bg-lightGreen
+{
+    background-color: #94C08F;
+}
+.bg-lightYel
+{
+    background-color: #C2C9AA;
+}
+
+.bg-lightTeal
+{
+    background-color: #04DDDD;
+}
+.bg-orangelite
+{
+    background-image: linear-gradient(to     right, #f27510 0%, #E4F2F2 100%);
+    background-repeat: repeat-x;
+}
+.bg-mantle
+{
+    background-image: linear-gradient(to right, #514A9D 0%, #24C6DC 100%);
+    background-repeat: repeat-x;
+}
+.bg-reef
+{
+    background-image: linear-gradient(to right, #3a7bd5 0%, #00d2ff 100%);
+    background-repeat: repeat-x;
+}
+.bg-transfile
+{
+    background-image: linear-gradient(to     right, #CB3066 0%, #16BFFD 100%);
+    background-repeat: repeat-x;
+}
+.bg-neon
+{
+    background-image: linear-gradient(to right, #789291 0%, #B3FFAB 100%);
+    background-repeat: repeat-x;
+}
+.bg-delicate
+{
+    background-image: linear-gradient(to right, #90889C 0%, #D3CCE3     100%);
+    background-repeat: repeat-x;
+}
+.bg-emerald
+{
+    background-image: linear-gradient(to     right, #56B4D3 0%, #348F50 100%);
+    background-repeat: repeat-x;
+}
+.bg-mojito
+{
+    background-image: linear-gradient(to right, #1D976C 0%, #93F9B9 100%);
+    background-repeat: repeat-x;
+}
+.bg-mojito-mix
+{
+    background-image: linear-gradient(to right, #7870AE 0%, #88F2AF     100%);
+    background-repeat: repeat-x;
+}
+.bg-dance
+{
+    background-image: linear-gradient(to     right, #FFD151 0%, #BDBFBE 100%);
+    background-repeat: repeat-x;
+}
+.bg-teal-love
+{
+    background-image: linear-gradient(to right, #7A908A 0%, #73F972 100%);
+    background-repeat: repeat-x;
+}
+.bg-crystal-clear
+{
+    background-image: linear-gradient(to right, #72b1f0     0%, #6ddaa3 100%);
+    background-repeat: repeat-x;
+}
+.bg-crystal-Opal
+{
+    background-image: linear-gradient(to right, #6b6565 0%, #e3e178 100%);
+    background-repeat: repeat-x;
+}
+.bg-grandeur
+{
+    background-image: linear-gradient(to right, #b7b7fb 0%, #489FB7     100%);
+    background-repeat: repeat-x;
+}
+.bg-flickr
+{
+    background-image: linear-gradient(to     right, #ed8af8 0%, #9f6382 100%);
+    background-repeat: repeat-x;
+}
+.bg-royal
+{
+    background-image: linear-gradient(to right, #6B7B98 0%, #A8CCF5 100%);
+    background-repeat: repeat-x;
+}
+.bg-royal-mix
+{
+    background-image: linear-gradient(to right, #8D5A6A 0%, #A8CCF5     100%);
+    background-repeat: repeat-x;
+}
+.bg-firewatch
+{
+    background-image: linear-gradient(to     right, #ef473a 0%, #b1baff 100%);
+    background-repeat: repeat-x;
+}
+.bg-teal-info
+{
+    background-image: linear-gradient(to right, #1CAF9A 0%, #17A2B8 100%);
+    background-repeat: repeat-x;
+}
+.bg-mixup
+{
+    background-image: linear-gradient(to right, #816f3a 0%,     #da6d79 100%);
+    background-repeat: repeat-x;
+}
+.bg-cyan
+{
+    background-image: linear-gradient(to     right, #6AC391 0%, #93F9B9 100%);
+    background-repeat: repeat-x;
+}
+.rounded
+{
+    border-radius: 8px 0px 8px 0px;
+}
+.ht-50
+{
+    height: 50px;
+}
+.ht-50p
+{
+    height: 50%;
+}
+.mg-l-20
+{
+    margin-left: 20px;
+}
+.mg-b-20
+{
+    margin-bottom: 20px;
+}
+.pd-x-20
+{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.pd-t-20
+{
+    padding-top: 20px;
+}
+.zoom
+{
+    transition: transform .2s;
+}
+.zoom:hover
+{
+    color: Black;
+    transform: scale(1.05);
+}
+.Heading
+{
+    padding: 7px;
+    margin-bottom: 10px;
+    border: 1px solid transparent;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    border-radius: 0px;
+    color: black;
+}
+
+.Grid_Heading
+{
+    background-color: #dff0d8;
+}
+
+.Counters_Heading
+{
+    background-color: #f7fafc;
+}
+
+.Grid
+{
+    width: 80%;
+    min-width: 80%;
+}
+.Grid th
+{
+    background-color: #e8e5ea;
+    font-family: Arial;
+    color: Black;
+    border: none 0px transparent;
+    height: 25px;
+    text-align: center;
+    font-size: 16px;
+    border: solid 1px black;
+    padding: 3px;
+}
+.Grid tr
+{
+    background-color: #fff;
+    font-family: Arial;
+    font-size: 14px;
+    color: #000;
+    min-height: 25px;
+    text-align: left;
+    border: none 0px transparent;
+}
+.Grid tr:hover
+{
+    background-color: #ff8000;
+    font-family: Arial;
+    color: #fff;
+    text-align: left;
+}
+.Grid a /** FOR THE PAGING ICONS  **/
+{
+    background-color: Transparent;
+    padding: 5px 5px 5px 5px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+.Grid a:hover /** FOR THE PAGING ICONS  HOVER STYLES**/
+{
+    color: #fff;
+}
+.Grid td
+{
+    padding: 5px;
+    border: solid 1px black;
+    font-family:Calibri;
+}

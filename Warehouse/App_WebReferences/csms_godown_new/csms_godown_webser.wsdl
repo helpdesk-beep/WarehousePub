@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://microsoft.co.in/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://microsoft.co.in/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Insert Data into tbl_Metadata_Godown</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.co.in/">
+      <s:element name="InsertRecord">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Godown_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StateId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DistrictId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DepotId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Godown_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Godown_Formation_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Godown_Updation_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Godown_Capacity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Remarks" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Hired_Type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Storage_Type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Godown_Scientific_Capacity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BranchId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertRecordResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UpdateRecord">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Godown_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StateId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DistrictId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DepotId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Godown_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Godown_Formation_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Godown_Updation_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Godown_Capacity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Remarks" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Hired_Type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Storage_Type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Godown_Scientific_Capacity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BranchId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateRecordResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DeleteRecord">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Godown_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DistrictId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteRecordResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="InsertRecordSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertRecord" />
+  </wsdl:message>
+  <wsdl:message name="InsertRecordSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateRecordSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateRecord" />
+  </wsdl:message>
+  <wsdl:message name="UpdateRecordSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteRecordSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteRecord" />
+  </wsdl:message>
+  <wsdl:message name="DeleteRecordSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertRecordHttpGetIn">
+    <wsdl:part name="Godown_ID" type="s:string" />
+    <wsdl:part name="StateId" type="s:string" />
+    <wsdl:part name="DistrictId" type="s:string" />
+    <wsdl:part name="DepotId" type="s:string" />
+    <wsdl:part name="Godown_Name" type="s:string" />
+    <wsdl:part name="Godown_Formation_Date" type="s:string" />
+    <wsdl:part name="Godown_Updation_Date" type="s:string" />
+    <wsdl:part name="Godown_Capacity" type="s:string" />
+    <wsdl:part name="Remarks" type="s:string" />
+    <wsdl:part name="Hired_Type" type="s:string" />
+    <wsdl:part name="Storage_Type" type="s:string" />
+    <wsdl:part name="Godown_Scientific_Capacity" type="s:string" />
+    <wsdl:part name="BranchId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertRecordHttpGetOut" />
+  <wsdl:message name="UpdateRecordHttpGetIn">
+    <wsdl:part name="Godown_ID" type="s:string" />
+    <wsdl:part name="StateId" type="s:string" />
+    <wsdl:part name="DistrictId" type="s:string" />
+    <wsdl:part name="DepotId" type="s:string" />
+    <wsdl:part name="Godown_Name" type="s:string" />
+    <wsdl:part name="Godown_Formation_Date" type="s:string" />
+    <wsdl:part name="Godown_Updation_Date" type="s:string" />
+    <wsdl:part name="Godown_Capacity" type="s:string" />
+    <wsdl:part name="Remarks" type="s:string" />
+    <wsdl:part name="Hired_Type" type="s:string" />
+    <wsdl:part name="Storage_Type" type="s:string" />
+    <wsdl:part name="Godown_Scientific_Capacity" type="s:string" />
+    <wsdl:part name="BranchId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateRecordHttpGetOut" />
+  <wsdl:message name="DeleteRecordHttpGetIn">
+    <wsdl:part name="Godown_ID" type="s:string" />
+    <wsdl:part name="DistrictId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteRecordHttpGetOut" />
+  <wsdl:message name="InsertRecordHttpPostIn">
+    <wsdl:part name="Godown_ID" type="s:string" />
+    <wsdl:part name="StateId" type="s:string" />
+    <wsdl:part name="DistrictId" type="s:string" />
+    <wsdl:part name="DepotId" type="s:string" />
+    <wsdl:part name="Godown_Name" type="s:string" />
+    <wsdl:part name="Godown_Formation_Date" type="s:string" />
+    <wsdl:part name="Godown_Updation_Date" type="s:string" />
+    <wsdl:part name="Godown_Capacity" type="s:string" />
+    <wsdl:part name="Remarks" type="s:string" />
+    <wsdl:part name="Hired_Type" type="s:string" />
+    <wsdl:part name="Storage_Type" type="s:string" />
+    <wsdl:part name="Godown_Scientific_Capacity" type="s:string" />
+    <wsdl:part name="BranchId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertRecordHttpPostOut" />
+  <wsdl:message name="UpdateRecordHttpPostIn">
+    <wsdl:part name="Godown_ID" type="s:string" />
+    <wsdl:part name="StateId" type="s:string" />
+    <wsdl:part name="DistrictId" type="s:string" />
+    <wsdl:part name="DepotId" type="s:string" />
+    <wsdl:part name="Godown_Name" type="s:string" />
+    <wsdl:part name="Godown_Formation_Date" type="s:string" />
+    <wsdl:part name="Godown_Updation_Date" type="s:string" />
+    <wsdl:part name="Godown_Capacity" type="s:string" />
+    <wsdl:part name="Remarks" type="s:string" />
+    <wsdl:part name="Hired_Type" type="s:string" />
+    <wsdl:part name="Storage_Type" type="s:string" />
+    <wsdl:part name="Godown_Scientific_Capacity" type="s:string" />
+    <wsdl:part name="BranchId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateRecordHttpPostOut" />
+  <wsdl:message name="DeleteRecordHttpPostIn">
+    <wsdl:part name="Godown_ID" type="s:string" />
+    <wsdl:part name="DistrictId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteRecordHttpPostOut" />
+  <wsdl:portType name="csms_godown_webserSoap">
+    <wsdl:operation name="InsertRecord">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For insert data into tbl_Metadata_Godown </wsdl:documentation>
+      <wsdl:input message="tns:InsertRecordSoapIn" />
+      <wsdl:output message="tns:InsertRecordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRecord">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For Update data into tbl_Metadata_Godown </wsdl:documentation>
+      <wsdl:input message="tns:UpdateRecordSoapIn" />
+      <wsdl:output message="tns:UpdateRecordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRecord">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For Delete data from tbl_Metadata_Godown </wsdl:documentation>
+      <wsdl:input message="tns:DeleteRecordSoapIn" />
+      <wsdl:output message="tns:DeleteRecordSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="csms_godown_webserHttpGet">
+    <wsdl:operation name="InsertRecord">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For insert data into tbl_Metadata_Godown </wsdl:documentation>
+      <wsdl:input message="tns:InsertRecordHttpGetIn" />
+      <wsdl:output message="tns:InsertRecordHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRecord">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For Update data into tbl_Metadata_Godown </wsdl:documentation>
+      <wsdl:input message="tns:UpdateRecordHttpGetIn" />
+      <wsdl:output message="tns:UpdateRecordHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRecord">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For Delete data from tbl_Metadata_Godown </wsdl:documentation>
+      <wsdl:input message="tns:DeleteRecordHttpGetIn" />
+      <wsdl:output message="tns:DeleteRecordHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="csms_godown_webserHttpPost">
+    <wsdl:operation name="InsertRecord">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For insert data into tbl_Metadata_Godown </wsdl:documentation>
+      <wsdl:input message="tns:InsertRecordHttpPostIn" />
+      <wsdl:output message="tns:InsertRecordHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRecord">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For Update data into tbl_Metadata_Godown </wsdl:documentation>
+      <wsdl:input message="tns:UpdateRecordHttpPostIn" />
+      <wsdl:output message="tns:UpdateRecordHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRecord">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For Delete data from tbl_Metadata_Godown </wsdl:documentation>
+      <wsdl:input message="tns:DeleteRecordHttpPostIn" />
+      <wsdl:output message="tns:DeleteRecordHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="csms_godown_webserSoap" type="tns:csms_godown_webserSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InsertRecord">
+      <soap:operation soapAction="http://microsoft.co.in/InsertRecord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRecord">
+      <soap:operation soapAction="http://microsoft.co.in/UpdateRecord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRecord">
+      <soap:operation soapAction="http://microsoft.co.in/DeleteRecord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="csms_godown_webserSoap12" type="tns:csms_godown_webserSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InsertRecord">
+      <soap12:operation soapAction="http://microsoft.co.in/InsertRecord" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRecord">
+      <soap12:operation soapAction="http://microsoft.co.in/UpdateRecord" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRecord">
+      <soap12:operation soapAction="http://microsoft.co.in/DeleteRecord" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="csms_godown_webserHttpGet" type="tns:csms_godown_webserHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="InsertRecord">
+      <http:operation location="/InsertRecord" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRecord">
+      <http:operation location="/UpdateRecord" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRecord">
+      <http:operation location="/DeleteRecord" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="csms_godown_webserHttpPost" type="tns:csms_godown_webserHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="InsertRecord">
+      <http:operation location="/InsertRecord" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRecord">
+      <http:operation location="/UpdateRecord" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRecord">
+      <http:operation location="/DeleteRecord" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="csms_godown_webser">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Insert Data into tbl_Metadata_Godown</wsdl:documentation>
+    <wsdl:port name="csms_godown_webserSoap" binding="tns:csms_godown_webserSoap">
+      <soap:address location="http://164.100.96.13/csms/csms_godown_webser.ASMX" />
+    </wsdl:port>
+    <wsdl:port name="csms_godown_webserSoap12" binding="tns:csms_godown_webserSoap12">
+      <soap12:address location="http://164.100.96.13/csms/csms_godown_webser.ASMX" />
+    </wsdl:port>
+    <wsdl:port name="csms_godown_webserHttpGet" binding="tns:csms_godown_webserHttpGet">
+      <http:address location="http://164.100.96.13/csms/csms_godown_webser.ASMX" />
+    </wsdl:port>
+    <wsdl:port name="csms_godown_webserHttpPost" binding="tns:csms_godown_webserHttpPost">
+      <http:address location="http://164.100.96.13/csms/csms_godown_webser.ASMX" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

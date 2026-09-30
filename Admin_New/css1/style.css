@@ -1,0 +1,1903 @@
+﻿@import url("http://rajbhavan.gujarat.gov.in/p7tpm/p7tpm01.css");
+@import url("http://rajbhavan.gujarat.gov.in/tab/p7APM01.css");
+
+body {
+    font-weight: normal;
+    font-family: calibri, Arial, Verdana;
+    color: #323232;
+    font-size: 17px;
+    margin: 0 auto;
+    padding: 0;
+    background-image: url(../images/logo/paper-backgrounds.jpg);
+    background-color: #fff;
+}
+
+.body_text {
+    font-weight: normal;
+    font-family: calibri, Arial, Verdana;
+    color: #323232;
+    font-size: 17px;
+    text-align: justify;
+}
+
+.clear {
+    clear: both;
+}
+
+.main {
+    display: inline-table;
+}
+
+.full {
+    width: 100%;
+    margin: 0 auto;
+    float: left;
+    padding: 0;
+}
+
+.page {
+    /*width: 960px;
+    width: 971px;*/
+    width: 1200px;
+    margin: 0 auto;
+    padding: 0 23px;
+}
+
+h1 {
+    font-family: 'Lato', sans-serif, Calibri, Arial, Verdana;
+    font-weight: 300;
+    font-size: 32px;
+    color: #4a3a2f;
+    text-align: left;
+}
+
+/*h2 {
+    font-family: calibri, Arial, Verdana;
+    font-weight: normal;
+    font-size: 28px;
+    color: #0e56b7;
+    text-transform: uppercase;
+    margin: 1% 0;
+    padding: 2% 0 0 0;
+    text-align: left;*/
+/*}
+
+h3 {
+    font-family: calibri, Arial, Verdana;
+    font-size: 22px;
+    font-weight: normal;
+    color: #093774;
+    margin: 5px 0;
+    padding: 5px 0 0 0;
+}
+
+.heading {
+    font-family: 'Lato', sans-serif, Calibri, Arial, Verdana;
+    font-weight: normal;
+    font-size: 24px;
+    color: #b14e01;
+    text-transform: uppercase;
+    margin: 24px 0 0px 0;
+    text-align: left;
+}
+
+.sub-heading {
+    font-family: 'Lato', sans-serif, Calibri, Arial, Verdana;
+    font-weight: bold;
+    font-size: 21px;
+    color: #6b2e00;
+    text-transform: none;
+    margin: 20px 0 0px 0;
+    text-align: left;
+}
+
+.sub-heading1 {
+    font-family: 'Lato', sans-serif, Calibri, Arial, Verdana;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 19px;
+    color: #000000;
+    text-transform: none;
+    margin: 18px 0 0px 0;
+    text-align: left;
+}
+
+.sub-heading2 {
+    font-family: 'Lato', sans-serif, Calibri, Arial, Verdana;
+    font-weight: normal;
+    font-size: 17px;
+    color: #000;
+    text-transform: uppercase;
+    margin: 18px 0 0px 0;
+    text-align: left;
+}
+
+.sp {
+    clear: both;
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/dot-h.gif);
+    background-repeat: repeat-x;
+    background-position: center;
+    margin: 18px 0 0px 0;
+}*/
+
+.img-sh {
+    box-shadow: 0px 2px 2px 1px rgba(0, 0, 51, 0.2);
+    margin: 10px 0 20px 0;
+}
+
+.img-border {
+    border: 1px solid #aeaeae;
+    padding: 5px;
+}
+/*======= BUTTONS ====*/
+.search_button {
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/icon-search.png);
+    width: 31px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-position: top left;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    float: left;
+    display: block;
+}
+
+.button {
+    font-family: calibri, Arial, Verdana;
+    display: inline-block;
+    color: #fff;
+    padding: 5px 10px 5px 10px;
+    margin: 8px 0 8px 0;
+    font-size: 16px;
+    text-transform: uppercase;
+    background-color: #c24d04;
+    font-weight: normal;
+    float: right;
+}
+
+/*a.button {
+    font-family: calibri, Arial, Verdana;
+    color: #ffffff !important;
+    text-decoration: none;
+    font-weight: normal;
+    line-height: normal;
+}*/
+/*List*/
+/*ul.list, ul.list1, ul.list2 {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.list li {
+    font-size: 14px;
+    color: #323232;
+    position: relative;
+    margin: 8px 0 8px 13px;
+    padding-left: 18px;
+    list-style: none outside none;
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/arrow.png);
+    background-repeat: no-repeat;
+    background-position: 0px 6px;
+    font-weight: normal;
+}
+
+.list1 li {
+    font-size: 16px;
+    color: #323232;
+    position: relative;
+    margin: 23px 0;
+    padding: 1px 0 1px 22px;
+    list-style: none outside none;
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/arrow-o.png);
+    background-repeat: no-repeat;
+    background-position: 0px 5px;
+    text-transform: none;
+}
+
+    .list1 li a {
+        color: #323232;
+        text-decoration: none;
+    }
+
+        .list1 li a:hover {
+            text-decoration: underline;
+        }
+
+.list2 li {
+    background-image: url("http://rajbhavan.gujarat.gov.in/images/arrow-orange.gif");
+    background-position: 0 8px;
+    background-repeat: no-repeat;
+    color: #323232;
+    font-size: 13px;
+    font-weight: normal;
+    list-style: none outside none;
+    margin: 9px 0 14px;
+    padding-left: 23px;
+}*/
+/*====== HEADER ======*/
+/*#header {
+    width: 100%;
+    padding: 0 0 0 0;
+    margin: 10px 0 0 0;
+    float: left;*/
+/*background-image: url('../images/logo/main_logo.png');*/
+/*background-image: url(../images/logo/main_logo_1.png);
+    background-repeat: no-repeat;
+    background-position: left top;
+}*/
+
+/*.header-bg {
+    background-image: url(../images/logo/paper-backgrounds.jpg);
+    float: left;
+    width: 100%;
+}
+
+.grs {
+    width: 100%;
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/grs.png);
+    background-repeat: repeat-x;
+    background-position: center bottom;
+    float: left;
+    height: 188px;
+}*/
+
+/*.logo {
+    width: auto;
+    float: right;
+    padding: 0;
+    margin: 0 135px 0 329px;
+}*/
+/*========================= Header Rightr =========================*/
+/*.header-right {
+    width: 299px;
+    height: auto;
+    float: right;
+}*/
+
+/*#top-link {
+    font-size: 12px;
+    text-transform: none;
+    color: #833200;
+    width: 100%;
+    display: table;
+}
+
+    #top-link .table-cell {
+        display: table-cell;
+        height: 36px;
+        padding: 0px 0px 0 0;
+        vertical-align: bottom;
+        width: 100%;
+    }
+
+    #top-link ul {
+        padding: 0;
+        margin: 0;
+        text-decoration: none;
+        float: right;
+    }
+
+        #top-link ul li {
+            position: relative;
+            float: left;
+            padding: 0px 5px 0px 5px;
+            list-style: none outside none;
+            line-height: 20px;
+        }
+
+            #top-link ul li.last {
+                border: none;
+            }
+
+        #top-link ul a {
+            padding: 0;
+            margin: 0;
+            text-decoration: none;
+            font-size: 13px;
+            text-transform: none;
+            color: #3f3f3f;
+        }
+
+            #top-link ul a:hover {
+                color: #000000;
+            }*/
+/*---accesibility----*/
+/*.top-mid {
+    display: table-cell;
+    height: 90px;
+    vertical-align: bottom;
+    width: 100%;
+}*/
+
+.accesibility-area {
+    float: right; /*padding: 68px 0 25px 0;*/
+    width: auto;
+}
+
+.accesibility-option {
+    float: left;
+    margin: 0 2px;
+}
+
+    .accesibility-option a {
+        font-family: calibri, Arial, Verdana;
+        font-size: 13px;
+        font-weight: normal;
+        color: #575757 !important;
+        text-decoration: none;
+        text-transform: none;
+    }
+
+.search {
+    display: table;
+    width: 100%;
+}
+
+    .search .table-cell {
+        display: table-cell;
+        height: 62px;
+        vertical-align: bottom;
+        width: 100%;
+    }
+
+#search {
+    float: right;
+    width: 275px;
+    min-height: 30px;
+    padding: 6px 6px 0px 6px;
+    margin: 0px 0px 0 0;
+    background-color: #990000;
+    border-radius: 10px 10px 0 0;
+}
+
+.searchbox {
+    color: #666;
+    font-size: 13px;
+    width: 224px;
+    height: 30px;
+    float: left;
+    border: none;
+    padding: 0 10px;
+    background: #FFF;
+    border-radius: 5px 0 0 0;
+}
+
+.search_button {
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/icon-search.png);
+    width: 17px;
+    height: 17px;
+    background-repeat: no-repeat;
+    background-position: top right;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    float: right;
+    margin: 5px 5px 0 5px;
+}
+/*========================= MENU =========================*/
+#menu {
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+    height: auto;
+    float: left;
+    background-color: #990000;
+    position: relative;
+    border-bottom: 4px solid #e57823; /* z-index: 1000;*/
+}
+
+.sf-menu > li.sfHoverForce > a, .sf-menu > li.sfHover > a, .sf-menu a:focus, .sf-menu a:hover, .sf-menu a:active {
+    color: #990000;
+    position: relative;
+    border-radius: 5px;
+}
+
+.sf-contener {
+    clear: both;
+    padding: 0px 0;
+    float: left;
+    margin: 0 0 0 0;
+    position: relative;
+    display: inline-block;
+}
+
+.sf-right {
+    margin-right: 14px;
+    float: right;
+    width: 7px;
+    position: relative;
+}
+
+.sf-menu, .sf-menu * {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: relative;
+}
+
+    .sf-menu ul {
+        position: absolute;
+        top: -999em;
+        width: 190px;
+        padding: 0;
+        padding-right: 3px;
+        margin: -7px 0 0 0;
+        padding-top: 0px;
+    }
+
+        .sf-menu ul ul {
+            margin-top: 0px;
+        }
+
+        .sf-menu ul li {
+            width: 100%;
+        }
+
+    .sf-menu li:hover {
+        visibility: inherit;
+        background-color: #e57823;
+        border-radius: 5px;
+    }
+
+    .sf-menu .img > a {
+        padding: 5px;
+        margin: 0 10px 0 0px;
+        border-radius: 19px;
+        background: #fa8c37;
+        box-shadow: 0px 2px 2px 1px rgba(0, 0, 51, 0.2);
+    }
+
+        .sf-menu .img > a:hover {
+            padding: 5px;
+            margin: 0 10px 0 0px;
+            border-radius: 19px;
+            background: #e57823;
+            box-shadow: 0px 2px 2px 1px rgba(0, 0, 51, 0.2);
+        }
+
+    .sf-menu > li {
+        margin-right: 0; /*background:url('../images/border.gif') right top no-repeat;*/
+        padding-right: 0px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        float: left;
+        position: relative;
+    }
+
+    .sf-menu li {
+        float: left;
+        position: relative; /*background:url(../images/menu-seprator.png) no-repeat left;*/
+    }
+
+.first {
+    background: none !important; /*margin:-5px 0 0;*/
+}
+
+.sf-menu li:hover ul, .sf-menu li.sfHover ul {
+    left: 0;
+    top: 42px;
+    z-index: 99;
+    width: auto;
+}
+
+ul.sf-menu li:hover li ul, ul.sf-menu li.sfHover li ul {
+    top: -999em;
+}
+
+ul.sf-menu li li:hover ul, ul.sf-menu li li.sfHover ul {
+    right: auto;
+    top: -8px;
+    left: 100%;
+    margin-right: 0px;
+    margin-left: -1px;
+    background-image: none;
+}
+
+ul.sf-menu li li:hover li ul, ul.sf-menu li li.sfHover li ul {
+    top: -999em;
+}
+
+ul.sf-menu li li li:hover ul, ul.sf-menu li li li.sfHover ul {
+    left: 195px;
+    top: -8px;
+}
+
+.sf-menu li:hover ul .right-menu, .sf-menu li.sfHover ul .right-menu {
+    top: -3px;
+    z-index: 99;
+    width: 100%;
+}
+
+ul.sf-menu ul .right-menu {
+    left: -101% !important;
+}
+
+.sf-menu a {
+    color: #ffffff;
+    font-size: 15px !important;
+    font-weight: normal;
+    text-transform: uppercase;
+    text-decoration: none; /*padding: 9px 24px;*/
+    padding: 9px 19px;
+    border: 0;
+    display: block;
+    position: relative;
+}
+
+    .sf-menu a:hover {
+        color: #ffe2d1;
+    }
+
+.sf-menu li li a {
+    font-size: 14px;
+    color: #fff;
+    text-transform: none;
+    padding: 11px 3px 8px 8px;
+    font-weight: bold;
+    text-transform: none;
+    display: block;
+    border: none;
+    margin: 0 0px;
+}
+
+.sf-menu li li:first-child {
+    border-top: none;
+}
+
+.sf-menu li li {
+    min-width: 190px;
+    border-top: 1px solid #bf6229;
+    color: #ffffff;
+    background: #e57823;
+    font-size: 12px;
+    color: #000;
+    text-transform: none;
+    display: inline-block;
+    font-weight: normal;
+    display: block;
+}
+
+    .sf-menu li li.sfHoverForce a, .sf-menu li li.sfHover > a {
+        color: #00306f;
+        background: none;
+    }
+
+.sf-menu ul li:hover, .sf-menu ul li.sfHover, .sf-menu ul li a:focus, .sf-menu ul li a:hover, .sf-menu ul li a:active {
+    outline: 0;
+    color: #ffffff;
+    background: #990000;
+    border-radius: 0px;
+}
+
+.sf-menu a.sf-with-ul {
+    /*padding-right: 1.5em;*/
+    min-width: 1px;
+}
+
+.sf-sub-indicator {
+    position: absolute;
+    display: block;
+    right: 5px;
+    top: 1.05em;
+    width: 10px;
+    height: 11px;
+    text-indent: -999em;
+    overflow: hidden;
+    background: url('http://rajbhavan.gujarat.gov.in/images/arrows-menu.png') no-repeat -10px -100px;
+}
+
+/*a > .sf-sub-indicator {
+    top: 10px;
+    background-position: 0 -100px;
+}*/
+
+.sf-menu li li a > .sf-sub-indicator {
+    top: 2px;
+}
+
+.sf-menu li li > .sf-sub-indicator {
+    top: 13px;
+}
+
+.sf-menu li li:hover > .sf-sub-indicator {
+    background-position: 0px 0px;
+}
+
+a:focus > .sf-sub-indicator, a:hover > .sf-sub-indicator, a:active > .sf-sub-indicator, li:hover > a > .sf-sub-indicator, li.sfHover > a > .sf-sub-indicator, .sf-menu > li.sfHoverForce > a > .sf-sub-indicator {
+    top: 10px;
+}
+
+.sf-menu ul .sf-sub-indicator {
+    background-position: -10px 0;
+}
+
+.sf-menu ul a > .sf-sub-indicator {
+    background-position: 0 0px;
+}
+
+.sf-menu ul a:focus > .sf-sub-indicator, .sf-menu ul a:hover > .sf-sub-indicator, .sf-menu ul a:active > .sf-sub-indicator, .sf-menu ul li:hover > a > .sf-sub-indicator, .sf-menu ul li.sfHover > a > .sf-sub-indicator {
+    background-position: -10px 0px;
+}
+/*======content-home=====*/
+.home-page {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 0 23px;
+    display: table;
+}
+
+.home-left {
+    width: 68.5%;
+    padding: 15px 15px;
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/page-bg.gif);
+    background-color: #ffe9de;
+    box-shadow: 0px 0px 5px 2px rgba(0,0,51,.3);
+    display: table-cell;
+    vertical-align: top;
+}
+
+.home-sp {
+    width: 3%;
+}
+
+.home-right {
+    width: 28.5%;
+    display: table-cell;
+    vertical-align: top;
+    padding: 15px 0;
+}
+/*=============== NEWS ===============*/
+#palypausestop {
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/lines-2.png);
+    background-repeat: repeat-x;
+    background-position: bottom;
+    padding: 0 0 12px 0;
+    margin: 0 0 10px 0;
+}
+
+    #palypausestop a {
+        font-size: 12px;
+        text-decoration: none;
+        color: #3b3b3b;
+    }
+
+        #palypausestop a.pause {
+            background-image: url(http://rajbhavan.gujarat.gov.in/images/pause.png);
+            background-repeat: no-repeat;
+            background-position: left;
+            padding: 0 0 0 18px;
+            height: 20px;
+            display: block;
+            cursor: pointer;
+            float: left;
+        }
+
+        #palypausestop a.play {
+            background-image: url(http://rajbhavan.gujarat.gov.in/images/play.png);
+            background-repeat: no-repeat;
+            background-position: left;
+            padding: 0 0 0 18px;
+            height: 20px;
+            display: none;
+            float: left;
+        }
+
+        #palypausestop a.stop {
+            background-image: url(http://rajbhavan.gujarat.gov.in/images/stop.png);
+            background-repeat: no-repeat;
+            background-position: left;
+            padding: 0 0 0 18px;
+            height: 20px;
+            margin: 0px 0px 0px 10px;
+            cursor: pointer;
+            float: left;
+        }
+/*Speeches*/
+#palypausestopspeeches {
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/lines-2.png);
+    background-repeat: repeat-x;
+    background-position: bottom;
+    padding: 0 0 12px 0;
+    margin: 0 0 10px 0;
+}
+
+    #palypausestopspeeches a {
+        font-size: 12px;
+        text-decoration: none;
+        color: #3b3b3b;
+    }
+
+        #palypausestopspeeches a.pause {
+            background-image: url(http://rajbhavan.gujarat.gov.in/images/pause.png);
+            background-repeat: no-repeat;
+            background-position: left;
+            padding: 0 0 0 18px;
+            height: 15px;
+            display: block;
+            cursor: pointer;
+            float: left;
+        }
+
+        #palypausestopspeeches a.play {
+            background-image: url(http://rajbhavan.gujarat.gov.in/images/play.png);
+            background-repeat: no-repeat;
+            background-position: left;
+            padding: 0 0 0 18px;
+            height: 15px;
+            display: none;
+            float: left;
+        }
+
+        #palypausestopspeeches a.stop {
+            background-image: url(http://rajbhavan.gujarat.gov.in/images/stop.png);
+            background-repeat: no-repeat;
+            background-position: left;
+            padding: 0 0 0 18px;
+            height: 15px;
+            margin: 0px 0px 0px 10px;
+            cursor: pointer;
+            float: left;
+        }
+
+#marqueecontainerspeeches {
+    position: static;
+    width: 100%; /*marquee width */
+    height: 190px; /*marquee height */ /*background-color: white;*/
+    overflow: hidden;
+    padding: 0;
+    font-size: 16px;
+    text-align: left;
+    color: #3b3b3b;
+    border-bottom: 1px solid #B1B1B1;
+}
+
+    #marqueecontainerspeeches a {
+        font-size: 16px;
+        color: #3b3b3b;
+    }
+
+/*Speeches*/
+#palypausestopmessage {
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/lines-2.png);
+    background-repeat: repeat-x;
+    background-position: bottom;
+    padding: 0 0 12px 0;
+    margin: 0 0 10px 0;
+}
+
+    #palypausestopmessage a {
+        font-size: 12px;
+        text-decoration: none;
+        color: #3b3b3b;
+    }
+
+        #palypausestopmessage a.pause {
+            background-image: url(http://rajbhavan.gujarat.gov.in/images/pause.png);
+            background-repeat: no-repeat;
+            background-position: left;
+            padding: 0 0 0 18px;
+            height: 15px;
+            display: block;
+            cursor: pointer;
+            float: left;
+        }
+
+        #palypausestopmessage a.play {
+            background-image: url(http://rajbhavan.gujarat.gov.in/images/play.png);
+            background-repeat: no-repeat;
+            background-position: left;
+            padding: 0 0 0 18px;
+            height: 15px;
+            display: none;
+            float: left;
+        }
+
+        #palypausestopmessage a.stop {
+            background-image: url(http://rajbhavan.gujarat.gov.in/images/stop.png);
+            background-repeat: no-repeat;
+            background-position: left;
+            padding: 0 0 0 18px;
+            height: 15px;
+            margin: 0px 0px 0px 10px;
+            cursor: pointer;
+            float: left;
+        }
+
+#marqueecontainermessage {
+    position: static;
+    width: 100%; /*marquee width */
+    height: 190px; /*marquee height */ /*background-color: white;*/
+    overflow: hidden;
+    padding: 0;
+    font-size: 16px;
+    text-align: left;
+    color: #3b3b3b;
+    border-bottom: 1px solid #B1B1B1;
+}
+
+    #marqueecontainermessage a {
+        font-size: 16px;
+        color: #3b3b3b;
+    }
+/*Press Release*/
+#palypausestoppress {
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/lines-2.png);
+    background-repeat: repeat-x;
+    background-position: bottom;
+    padding: 0 0 12px 0;
+    margin: 0 0 10px 0;
+}
+
+    #palypausestoppress a {
+        font-size: 12px;
+        text-decoration: none;
+        color: #3b3b3b;
+    }
+
+        #palypausestoppress a.pause {
+            background-image: url(http://rajbhavan.gujarat.gov.in/images/pause.png);
+            background-repeat: no-repeat;
+            background-position: left;
+            padding: 0 0 0 18px;
+            height: 15px;
+            display: block;
+            cursor: pointer;
+            float: left;
+        }
+
+        #palypausestoppress a.play {
+            background-image: url(http://rajbhavan.gujarat.gov.in/images/play.png);
+            background-repeat: no-repeat;
+            background-position: left;
+            padding: 0 0 0 18px;
+            height: 15px;
+            display: none;
+            float: left;
+        }
+
+        #palypausestoppress a.stop {
+            background-image: url(http://rajbhavan.gujarat.gov.in/images/stop.png);
+            background-repeat: no-repeat;
+            background-position: left;
+            padding: 0 0 0 18px;
+            height: 15px;
+            margin: 0px 0px 0px 10px;
+            cursor: pointer;
+            float: left;
+        }
+
+#marqueecontainerPress {
+    position: static;
+    width: 100%; /*marquee width */
+    height: 190px; /*marquee height */ /*background-color: white;*/
+    overflow: hidden;
+    padding: 0;
+    font-size: 16px;
+    text-align: left;
+    color: #3b3b3b;
+    border-bottom: 1px solid #B1B1B1;
+}
+
+    #marqueecontainerPress a {
+        font-size: 16px;
+        color: #3b3b3b;
+    }
+/*end*/
+
+#news {
+    width: 200px;
+}
+
+#marqueecontainer {
+    position: static;
+    width: 100%; /*marquee width */
+    height: 190px; /*marquee height */ /*background-color: white;*/
+    overflow: hidden;
+    padding: 0;
+    font-size: 16px;
+    text-align: left;
+    color: #3b3b3b;
+    border-bottom: 1px solid #B1B1B1;
+}
+
+    #marqueecontainer a {
+        font-size: 16px;
+        color: #3b3b3b;
+    }
+
+.newscroll_area {
+    position: relative;
+}
+
+.news_container {
+    width: 296px;
+}
+
+.news {
+    margin-bottom: 10px;
+    padding: 0px 0 0px 0;
+    width: 100%;
+    margin: 0px 0;
+    display: table;
+}
+
+    .news .news-text {
+        display: table-cell;
+        background-image: url(http://rajbhavan.gujarat.gov.in/images/line.gif);
+        background-repeat: repeat-x;
+        background-position: bottom;
+        padding: 0px 0 30px 0;
+    }
+
+    .news .date {
+        display: table-cell;
+        background-image: url(http://rajbhavan.gujarat.gov.in/images/bg-date1.png);
+        background-position: top left;
+        background-repeat: no-repeat;
+        padding: 0px 15px 0 0;
+        width: 75px;
+        height: 90px;
+    }
+
+    .news .year {
+        color: #3b3b3b;
+        font-size: 14px;
+        text-align: center;
+        border-top: 1px solid #b6b6b6;
+        padding-top: 5px;
+        width: 40px;
+        margin: 0 auto;
+    }
+
+    .news .day {
+        color: #990000;
+        font-size: 16px;
+        text-align: center;
+        text-transform: uppercase;
+        width: 62px;
+        margin: 14px auto 2px auto;
+    }
+
+    .news:last-child .date {
+        height: 73px;
+        background-image: url(http://rajbhavan.gujarat.gov.in/images/bg-date1.png);
+        background-position: top left;
+        background-repeat: no-repeat;
+    }
+
+    .news:last-child .news-text {
+        background: none;
+        padding: 0px 0 0px 0;
+    }
+/*News End*/
+
+.box-main {
+    display: table;
+    width: 100%;
+    padding: 25px 0 0 0;
+    font-size: 22px;
+    font-weight: 300;
+}
+
+.box {
+    display: table-cell;
+    width: 50%;
+    text-transform: uppercase;
+}
+/*====== Welcome =====*/
+.welcome {
+    padding: 0px 0 25px 0;
+    display: inline-block;
+}
+
+    .welcome h2 {
+        font-family: 'Lato', sans-serif, Calibri, Arial, Verdana;
+        font-weight: 300;
+        font-size: 30px;
+        color: #4a3a2f;
+        text-transform: none;
+        background-image: url(http://rajbhavan.gujarat.gov.in/images/heading-line.gif);
+        background-repeat: no-repeat;
+        background-position: left bottom;
+        padding-bottom: 8px;
+        margin-bottom: 10px;
+    }
+
+        .welcome h2 span {
+            font-weight: normal;
+            font-size: 18px;
+            color: #4a3a2f;
+            font-style: italic;
+        }
+
+    .welcome .heading {
+        color: #432e1f;
+        font-size: 18px;
+        margin: 0;
+        padding: 10px 0 0 0;
+    }
+/*====== Message =====*/
+.message {
+    font-family: calibri, Arial, Verdana;
+    font-size: 18px;
+    color: #3b3b3b;
+    font-weight: normal;
+    text-transform: none;
+    padding: 0px 0 15px 0;
+    width: 100%;
+    font-style: italic;
+    text-align: center;
+}
+
+    .message .b1 {
+        text-align: center;
+    }
+
+    .message .b2 {
+        color: #665244;
+        font-size: 33px;
+        font-weight: lighter;
+        font-style: normal;
+        margin: 15px 0;
+    }
+
+    .message span {
+        color: #b55b15;
+        font-size: 22px;
+        font-weight: normal;
+        font-style: normal;
+    }
+/*****Event Gallery*****/
+.home-gallery {
+    font-family: 'Lato', sans-serif, Calibri, Arial, Verdana;
+    font-size: 24px;
+    font-weight: 300;
+    text-transform: uppercase;
+    color: #4a3a2f;
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/sp.gif);
+    background-repeat: repeat-x;
+    background-position: top;
+    width: 100%;
+    float: left;
+    margin: 30px 0 0px 0;
+    padding: 25px 0 0 0;
+}
+
+.img-box1 {
+    margin: 0 0 0 0;
+    /*border: 1px solid #b6b6b4;*/
+    padding-bottom: 5px;
+}
+
+    .img-box1 img {
+        padding: 4px;
+        margin: 5px 0px 0px 4px;
+        border: 1px solid #b6b6b4;
+        height: 106px;
+        width: 105px;
+    }
+/*Last box*/
+/*.last-box {
+    color: #fff;
+    font-weight: 300;
+    width: 100%;
+    margin: 0 auto;
+    float: left;
+    padding: 25px 0;
+    background-color: #686868;
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/sp.gif);
+    background-repeat: repeat-x;
+    background-position: top;
+}
+
+    .last-box .page {
+        padding: 0;
+    }
+
+    .last-box .heading {
+        font-family: 'Lato', sans-serif, Calibri, Arial, Verdana;
+        font-size: 28px;
+        font-weight: 300;
+        text-transform: uppercase;
+        color: #FFF;
+        text-align: center;
+        min-width: 487px;
+        background-image: url(http://rajbhavan.gujarat.gov.in/images/divder-1.png);
+        background-repeat: no-repeat;
+        background-position: bottom center;
+        padding: 0 0 14px 0;
+        margin: 0 0 25px 0;
+    }*/
+
+/*.img-box {
+    font-size: 14px;
+    color: #fff;
+    text-transform: uppercase;
+    float: left;
+    padding: 0;
+    position: relative;
+    text-transform: uppercase;
+    vertical-align: baseline;
+}
+
+    .img-box.first-child {
+        padding: 0px 7px 0 0px;
+    }
+
+    .img-box:last-child {
+        padding: 0 0px 0 6px;
+    }
+
+    .img-box .text {
+        background-color: #000;
+        color: #fff;
+        margin: -103px 0 0 3px;
+        text-decoration: none;
+        position: absolute;
+        width: 175px;
+    }
+
+    .img-box a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+        .img-box a:hover {
+            text-decoration: underline;
+        }
+
+    .img-box span {
+        background-image: url("http://rajbhavan.gujarat.gov.in/images/img-gallery-bg-rep.png");
+        background-repeat: repeat;
+        color: #fff !important;
+        font-size: 18px;
+        padding: 15px 5px;
+        bottom: 8px;
+        margin: 0 0 0 6px;
+        word-wrap: break-word;
+        position: absolute;
+        width: 158px;
+        z-index: 10000;
+        text-align: center;
+    }
+
+    .img-box a span {
+        color: #105486;
+    }
+
+    .img-box a:hover span {
+        color: #105486;
+        text-decoration: underline;
+    }
+
+    .img-box img {
+        height: auto;
+        width: auto;
+        border: 3px solid #ffa48f;
+    }*/
+/**************FOOTER***********/
+#footer {
+    font-size: 14px;
+    color: #FFF;
+    width: 100%;
+    margin: 0 auto;
+    float: left;
+    padding: 20px 0;
+    background-color: #1f1f1f;
+}
+
+.footer {
+    display: table;
+    width: 100%;
+}
+
+    .footer .footer-left {
+        display: table-cell;
+    }
+
+    .footer .footer-center {
+        font-size: 14px;
+        display: table-cell;
+        text-align: center;
+    }
+
+    .footer .footer-right {
+        display: table-cell;
+        font-size: 15px;
+        color: #ffffff;
+        font-weight: normal;
+        width: auto;
+        text-align: right;
+    }
+
+.footer-link {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 0 10px 0;
+}
+
+#footer a {
+    color: #ffffff;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+    #footer a:hover {
+        color: #ffffff;
+        font-size: 15px;
+        text-decoration: underline;
+    }
+
+.visitors-box {
+    background-color: #0f0f0f;
+    border-radius: 5px 5px 5px 5px;
+    color: #FFFFFF;
+    font-size: 15px;
+    margin: 0px 0 0 5px;
+    padding: 4px 10px 5px 10px;
+}
+
+#footer-last {
+    font-size: 14px;
+    color: #FFF;
+    width: 100%;
+    margin: 0 auto;
+    float: left;
+    background-color: #3b3b3b;
+}
+
+    #footer-last .footer {
+        padding: 15px 0;
+        display: table;
+        width: 100%;
+    }
+
+    #footer-last .footer-left {
+        display: table-cell;
+        width: 33.33%;
+        min-height: 50px;
+        vertical-align: middle;
+    }
+
+    #footer-last .footer-center {
+        display: table-cell;
+        text-align: center;
+        width: 33.33%;
+        vertical-align: middle;
+    }
+
+    #footer-last .footer-right {
+        display: table-cell;
+        text-align: right;
+        width: 33.33%;
+        vertical-align: middle;
+    }
+
+#toTop {
+    cursor: pointer;
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/top.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 29px;
+    height: 28px;
+    display: inline-block;
+}
+
+/*.fb {
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/icon-facebook.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 10px;
+    height: 19px;
+    display: inline-block;
+    margin-right: 5px;
+}*/
+
+/*.twitter {
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/icon-twitter.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 23px;
+    height: 19px;
+    display: inline-block;
+    margin-right: 5px;
+}*/
+
+.google-plus {
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/icon-google-plus.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 19px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.linkedin {
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/icon-linkedin.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 22px;
+    height: 19px;
+    display: inline-block;
+    margin-right: 5px;
+}
+/*============= INNER =============*/
+.inner-page {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 0 23px;
+}
+
+.inner-full {
+    width: 1200px;
+    padding: 0 15px;
+    margin: 0 auto;
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/page-bg.gif);
+    background-color: #ffe9de;
+    box-shadow: 0px 0px 5px 2px rgba(0,0,51,.3);
+    display: table-cell;
+    vertical-align: top;
+}
+
+.inner-page .title {
+    border-bottom: 1px solid #ae9e97;
+    float: left;
+    width: 100%;
+}
+
+.inner-page h2 {
+    font-family: 'Lato', sans-serif, Calibri, Arial, Verdana;
+    font-weight: 300;
+    font-size: 28px;
+    color: #FFFFFF;
+    text-align: left;
+    padding: 25px;
+    margin: 0 15px;
+    background-color: #ca6314;
+    float: left;
+    text-transform: uppercase;
+}
+
+/*.inner-page h3 {
+    font-family: 'Lato', sans-serif, Calibri, Arial, Verdana;
+    font-weight: 300;
+    font-size: 20px;
+    color: #4a3a2f;
+    text-align: left;
+    padding: 5px 0px 15px 0px;
+    margin: 0 0px;
+    background-image: url(../images/heading-line.gif);
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    margin-bottom: 10px;
+}*/
+
+.inner-content {
+    width: 1200px; /*padding: 15px 15px;*/
+    padding: 15px 0;
+    margin: 0 auto;
+    display: table-cell;
+    vertical-align: top;
+}
+/*inner2*/
+
+.inner-left {
+    width: 678px;
+    padding: 0 15px;
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/page-bg.gif);
+    background-color: #ffe9de;
+    box-shadow: 0px 0px 5px 2px rgba(0,0,51,.3);
+    display: table-cell;
+    vertical-align: top;
+}
+
+.inner-sp {
+    width: 32px;
+    display: table-cell;
+}
+
+.inner-right {
+    width: 220px;
+    display: table-cell;
+    vertical-align: top;
+    padding: 15px 0;
+}
+/*right-menu*/
+#right-menu {
+    float: left;
+    height: auto;
+    padding: 0;
+    width: 100%;
+}
+
+.right-heading {
+    color: #e57823;
+    font-size: 22px;
+    padding: 0px 8px 8px 0px;
+}
+
+ul.right-menu {
+    padding: 0;
+    margin: 0;
+}
+
+.right-menu li {
+    font-size: 14px;
+    position: relative;
+    margin: 0 0 5px 0;
+    list-style: none outside none;
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/arrow-o.png);
+    background-repeat: no-repeat;
+    background-position: left 8px;
+    padding: 6px 3px 11px 25px;
+    border-bottom: 1px solid #c1c1c1;
+}
+
+    .right-menu li a {
+        font-size: 14px;
+        color: #333333;
+        text-decoration: none;
+    }
+
+        .right-menu li a:hover {
+            font-size: 14px;
+            color: #000000;
+            text-decoration: underline;
+        }
+/*====TABLE====*/
+.table {
+    background-color: #FFF;
+}
+
+    .table td:first-child, .table th:first-child {
+        padding-left: 20px;
+    }
+
+    .table td {
+        padding: 8px;
+    }
+
+    .table th {
+        padding: 8px; /* background-color: #ca6314;*/
+        background-color: #af5611;
+        font-size: 18px;
+        color: #ffffff;
+        font-weight: normal;
+    }
+
+.td-bg {
+    background-color: #fff3ed;
+}
+/*============= Gallery ==============*/
+.gallery ul {
+    margin: 0;
+    padding: 16px 0;
+    float: left;
+}
+
+    .gallery ul li {
+        list-style: none;
+        float: left;
+        margin: 0 57px 0 0;
+    }
+
+        .gallery ul li .text {
+            text-align: center;
+            margin: 8px auto 0 0;
+            max-width: 200px;
+        }
+
+        .gallery ul li img {
+            border: #aeaeae solid 1px;
+            padding: 5px; /*height: 212px;*/
+            height: 188px;
+        }
+
+        .gallery ul li:last-child {
+            margin: 0px;
+        }
+
+.nav {
+    text-align: center;
+    height: 27px;
+    float: left;
+    width: 100%;
+}
+
+.next {
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/arr-next.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.previous {
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/arr-previous.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.gallery-main {
+    width: 100%;
+    margin: 0 auto;
+    float: left;
+    padding: 20px 0;
+    display: table;
+}
+
+.gallery-box {
+    font-size: 14px;
+    text-transform: none;
+    display: table-cell;
+    padding: 0 10px;
+    text-align: center;
+    width: 150px;
+}
+
+    .gallery-box img {
+        border: #aeaeae solid 1px;
+        margin: 0 0 10px;
+        padding: 5px;
+    }
+
+    .gallery-box a {
+        color: #000;
+        text-decoration: none;
+    }
+
+        .gallery-box a:hover {
+            text-decoration: underline;
+            float: none;
+        }
+
+.home-page .title {
+    border-bottom: 1px solid #ae9e97;
+    float: left;
+    width: 100%;
+    margin: 0 0 18px;
+}
+
+    .home-page .title h2 {
+        font-family: Calibri, Arial, Verdana;
+        font-weight: 300;
+        font-size: 28px;
+        color: #FFFFFF;
+        text-align: left;
+        padding: 25px;
+        margin: 0 15px;
+        background-color: #ca6314;
+        float: left;
+        text-transform: uppercase;
+    }
+
+.news-width {
+    width: 296px;
+}
+/*=============================SITEMAP=========================*/
+.sitemap {
+    width: 960px;
+    height: auto;
+    margin: 0 auto;
+}
+
+    .sitemap a {
+        font-family: 'Lato', sans-serif, Calibri, Arial, Verdana;
+        font-weight: lighter;
+        font-size: 14px;
+        line-height: 34px;
+        text-decoration: none;
+        color: #FFFFFF;
+    }
+
+.sitemap-content {
+    width: 270px;
+    height: auto;
+    display: inline-table;
+    margin: 0 15px 0 15px;
+}
+
+.sitemap-title {
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/arrow-o.png);
+    background-repeat: no-repeat;
+    background-position: 0px 10px;
+    padding: 0 0 0 22px;
+    display: block;
+    font-family: 'Lato', sans-serif, Calibri, Arial, Verdana;
+    font-weight: normal;
+    text-transform: none;
+    text-align: left;
+    font-size: 20px;
+    color: #CA6314;
+    line-height: 34px;
+    padding-bottom: 3px;
+}
+
+    .sitemap-title a {
+        font-family: 'Lato', sans-serif, Calibri, Arial, Verdana;
+        font-weight: normal;
+        text-transform: none;
+        text-align: left;
+        font-size: 20px;
+        color: #CA6314;
+    }
+
+.sitemap-sub-title ul {
+    width: 100%;
+    margin: 0px 0 15px 0;
+    padding: 0;
+    max-height: 100%;
+}
+
+    .sitemap-sub-title ul li {
+        background-image: url(http://rajbhavan.gujarat.gov.in/images/arrow.png);
+        background-repeat: no-repeat;
+        background-position: 0 12px;
+        padding: 0 0 0 15px;
+        display: block;
+        list-style: none;
+        font-family: 'Lato', sans-serif, Calibri, Arial, Verdana;
+        font-weight: 300;
+        text-transform: none;
+        text-align: left;
+        font-size: 16px;
+        color: #212121;
+        line-height: 34px;
+    }
+
+        .sitemap-sub-title ul li a {
+            font-family: 'Lato', sans-serif, Calibri, Arial, Verdana;
+            font-weight: 300;
+            text-transform: none;
+            text-align: left;
+            font-size: 16px;
+            color: #212121;
+        }
+
+            .sitemap-sub-title ul li a:hover {
+                color: #000000;
+            }
+
+        .sitemap-sub-title ul li ul {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            border-top: none;
+        }
+
+            .sitemap-sub-title ul li ul li {
+                list-style: none;
+                background-image: url(http://rajbhavan.gujarat.gov.in/images/arrow.png);
+                background-repeat: no-repeat;
+                background-position: 0 12px;
+                padding: 0 0 0 15px;
+                display: block;
+                font-size: 14px;
+                font-weight: 300;
+                color: #666666;
+            }
+
+                .sitemap-sub-title ul li ul li a {
+                    font-family: 'Lato', sans-serif, Calibri, Arial, Verdana;
+                    font-weight: 300;
+                    text-transform: none;
+                    text-align: left;
+                    font-size: 14px;
+                    color: #666666;
+                }
+
+                    .sitemap-sub-title ul li ul li a:hover {
+                        color: #000000;
+                    }
+/* Added By Developer*/
+
+
+.welcome a {
+    color: #333333;
+}
+
+    .welcome a:hover {
+        color: #000000;
+    }
+
+.mandatoryfields {
+    color: red;
+}
+
+.fieldname {
+    font-weight: bold;
+    font-family: calibri, Arial, Verdana;
+    color: #323232;
+    font-size: 14px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.textbox {
+    background-color: #ffffff;
+    border: 1px solid #c8c8c7;
+    border-radius: 5px;
+    color: #757575;
+    font-family: Calibri, Arial, Verdana;
+    font-size: 13px;
+    margin: 6px 4px;
+    padding: 5px;
+}
+
+.dropdown {
+    border: 1px solid #c8c8c7;
+    border-radius: 5px;
+    color: #757575;
+    font-family: Calibri, Arial, Verdana;
+    font-size: 13px;
+    /*margin: 6px 4px;*/
+    /*padding: 5px;*/
+    width: 215px;
+}
+
+.PageHeader {
+    font-family: 'Lato', sans-serif, Calibri, Arial, Verdana;
+    font-weight: 300;
+    font-size: 30px;
+    color: #4a3a2f;
+    text-align: left;
+}
+
+.Inconveniencemsg {
+    color: #e57823;
+    font-size: 18px;
+    text-align: left;
+}
+
+.no-float {
+    float: none !important;
+}
+
+.left-float {
+    float: left !important;
+    width: 100%;
+}
+/* News Css */
+.news-main {
+    width: 100%;
+    margin: 0 auto;
+    float: left;
+    padding: 15px 0;
+    display: table;
+}
+
+.news-content {
+    font-size: 14px;
+    color: #484848;
+    margin: 0 0 25px 0;
+    text-align: justify;
+}
+
+.news-date {
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/news-icon.png);
+    background-repeat: no-repeat;
+    padding: 0 0 0 35px;
+    font-size: 16px;
+    color: #CA6314;
+    line-height: 26px;
+    margin: 0 0 10px 0;
+}
+
+.news-title {
+    color: #CA6314;
+    font-size: 22px;
+    font-family: 'Lato', sans-serif, Calibri, Arial, Verdana;
+    font-weight: 300;
+}
+/* Speeches Css */
+.news-date.speeches {
+    background: none;
+    margin: 10px 0 0 0;
+    padding: 0 0 15px 0;
+    text-align: right;
+    line-height: normal;
+    border-bottom: #ae9e97 solid 1px;
+}
+
+    .news-date.speeches span {
+        color: #484848;
+    }
+/* END */
+.accordionTypeHeader {
+    color: #ffffff !important;
+    font-size: 17px;
+    display: block;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 8px 20px 8px 15px;
+    background-color: #b7570d !important;
+    background-image: url(img/p7apmPlus_white.gif);
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+.size1of3 {
+    float: left;
+    width: 33.33%;
+}
+/*Left Menu*/
+.javascript {
+    /*background-image: url(../images/line.gif); 	background-repeat: repeat-x; 	background-position: bottom right;*/
+}
+
+    .javascript a {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1.5em;
+        color: #746a66;
+        text-transform: none;
+        height: auto;
+        display: block; /*background-image: url(../images/arr-left.png); 	background-repeat: no-repeat; 	background-position: 10px 12px;*/
+        padding: 10px;
+        text-decoration: none;
+    }
+
+        .javascript a:hover {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.5em;
+            color: #000;
+            text-transform: none;
+            height: auto;
+            display: block; /*background-image: url(../images/arr-left-ho.png); 	background-repeat: no-repeat; 	background-position: 9px 12px;*/
+            padding: 10px;
+            text-decoration: none;
+        }
+
+.yatkinchit-menu {
+    display: inline-block;
+    width: 66px;
+    height: 21px;
+    margin: 0 0 0px 0px;
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/yatkinchit-menu-w.png);
+    background-repeat: no-repeat;
+}
+
+.yatkinchit {
+    display: inline-block;
+    width: 58px;
+    height: 18px;
+    margin: 0 0 -6px 0px;
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/yatkinchit.png);
+    background-repeat: no-repeat;
+}
+
+.yatkinchit-title {
+    display: inline-block;
+    width: 120px;
+    height: 35px;
+    margin: 0 0 -6px 0px;
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/yatkinchit-title-w.png);
+    background-repeat: no-repeat;
+}
+
+.yatkinchit-footer {
+    display: inline-block;
+    width: 58px;
+    height: 18px;
+    margin: 0 0 -6px 0px;
+    background-image: url(http://rajbhavan.gujarat.gov.in/images/yatkinchit-w.png);
+    background-repeat: no-repeat;
+}
+
+.displaynone {
+    display: none;
+}
+
+.TableHeader {
+    background-color: #f59565;
+    color: white;
+}

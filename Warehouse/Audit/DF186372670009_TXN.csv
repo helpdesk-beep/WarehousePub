@@ -1,0 +1,9 @@
+Record Type	Corporte Id	e-PayOrder No.	Account Number	Branch Code	MMID	Mobile Number	Debit Amount	Credit Amount	Corporate Reference Number	Description	Payment Type	Transaction Status	Transaction Date	Transaction Time	Status Description	UTR Number	UTR Posted Date	UTR Status	Maker	Authorizer1	Authorizer1 Date	Authorizer2	Authorizer2 Date	
+Debit leg	'329338	'CTM1303843	'00000038906616113	'30343	'null	'null	'862677.0	'null	7230600321011	'Godown Rent Payment	'null	'Unknown	'null	'null	'null	-	-	'null	MPWLCROGWL	-	-	-	-
+Credit leg	'329338	'CTM130384300001	'00000010395465279	'00430	'null	'null	'0.0	'61341	7230600321011	'K S OIL LTD11108GRP2306003058200824	'null	'Unknown	'06/01/2021	'14:49	'null	-	-	'null	null	-	-	-	-
+Credit leg	'329338	'CTM130384300002	'00000010752700886	'03849	'null	'null	'0.0	'32869	7230600321011	'SAI WAREHOUSE GUNA10330GRP23060030482008160	'null	'Unknown	'06/01/2021	'14:49	'null	-	-	'null	null	-	-	-	-
+Credit leg	'329338	'CTM130384300003	'00000010752700886	'03849	'null	'null	'0.0	'477466	7230600321011	'SAI WAREHOUSE GUNA10330GRP23060030382008158	'null	'Unknown	'06/01/2021	'14:49	'null	-	-	'null	null	-	-	-	-
+Credit leg	'329338	'CTM130384300004	'00000010752700886	'03849	'null	'null	'0.0	'88403	7230600321011	'SAI WAREHOUSE GUNA10330GRP23060030412008159	'null	'Unknown	'06/01/2021	'14:49	'null	-	-	'null	null	-	-	-	-
+Credit leg	'329338	'CTM130384300005	'00000031985637482	'03849	'null	'null	'0.0	'57346	7230600321011	'VIRENDRA KUMAR10334GRP23060030532008174	'null	'Unknown	'06/01/2021	'14:49	'null	-	-	'null	null	-	-	-	-
+Credit leg	'329338	'CTM130384300006	'00000031985637482	'03849	'null	'null	'0.0	'86056	7230600321011	'VIRENDRA KUMAR10334GRP23060030542008173	'null	'Unknown	'06/01/2021	'14:49	'null	-	-	'null	null	-	-	-	-
+Credit leg	'329338	'CTM130384300007	'00000053008362551	'30081	'null	'null	'0.0	'120537	7230600321011	'RAJESH KUMAR11110GRP23060030472008172	'null	'Unknown	'06/01/2021	'14:49	'null	-	-	'null	null	-	-	-	-

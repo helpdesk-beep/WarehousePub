@@ -1,0 +1,2044 @@
+﻿using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Xml.Linq;
+using System.Data.SqlClient;
+
+public partial class BranchPages_Receiptfrom_Procurement : System.Web.UI.Page
+{
+    public SqlConnection Con = new SqlConnection(ConfigurationManager.ConnectionStrings["FCIConnectionString"].ToString());
+    public string qry = "";
+    DataTable Dt1 = new DataTable();
+    DataTable EditStack = new DataTable();
+    DataTable EditStackNonMPSCSC = new DataTable();
+    string receiptid = string.Empty;
+    string ArrivalStockid = string.Empty;
+    SqlCommand cmd = null;
+    SqlTransaction sqltran;
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        CalendarExtender.EndDate = DateTime.Now;   //to dissable future  Date
+        if ((Session["Depot_DistID"] != null) && (Session["Depot_DepotID"] != null))
+        {
+            try
+            {
+                if (Session["lang"].ToString() == "Hindi")
+                {
+                    lblInstruction.Text = Resources.hindi.lblInstruction1;
+                    lblDepositDetail.Text = Resources.hindi.lblSourceOfDeposit;
+                    lblAcceptanceNote.Text = Resources.hindi.lblAcceptanceNote;
+                    lblSourcesociety.Text = Resources.hindi.lblSourcesociety;
+                    lblProcTCNo.Text = Resources.hindi.lblProcTCNo;
+                    lblProcTruckNo.Text = Resources.hindi.lblProcTruckNo;
+                    lblProcCommodity.Text = Resources.hindi.lblCommodity;
+                    lblProcMoisture.Text = Resources.hindi.lblMoisture;
+                    lblProcDepostiDate.Text = Resources.hindi.lblDepositDate;
+                    lblProcBags.Text = Resources.hindi.lblBagNumber;
+                    lblProcQtyDeposit.Text = Resources.hindi.lblQtyDeposit;
+                    lblProcWeigmentMode.Text = Resources.hindi.lblweigmentMode;
+                    lblProcWCMNo.Text = Resources.hindi.lblWCMNo;
+                    lblGodownNo.Text = Resources.hindi.lblGodownNo;
+                    lblStackNo.Text = Resources.hindi.lblStackNo;
+                    lblStackBags.Text = Resources.hindi.lblBagNumber;
+                    lblStackWt.Text = Resources.hindi.lblStackWt;
+                    lblStackMaxCap.Text = Resources.hindi.lblStackMaxCap;
+                    lblStackCurrentCapacity.Text = Resources.hindi.lblStackCurrentCapacity;
+                    lblStackAvailable.Text = Resources.hindi.lblStackAvailable;
+                    btnAddStack.Text = Resources.hindi.btnAddStack;
+                    lblStackingInform.Text = Resources.hindi.lblStackingInform;
+                    lblRemarks.Text = Resources.hindi.lblRemarks;
+                    lblProcBagsAcceptable.Text = Resources.hindi.lblProcBagsAcceptable;
+                    lblProcQtyAcceptable.Text = Resources.hindi.lblProcQtyAcceptable;
+
+                }
+                string var = ClientScript.GetPostBackEventReference(btnsave, "").ToString();
+                btnsave.Attributes.Add("onClick", "javascript :if ( Page_ClientValidate() ){this.disabled=true; this.value='Please Wait...';" + var + "};");
+                if (!IsPostBack)
+                {
+                    //for preventing duplicate record insert
+                    //
+                    string PopMsg = "";
+                    PopMsg = Request.QueryString["PopMsg"];
+                    if (PopMsg != null)
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('" + PopMsg + "')", true);
+                    }
+                    Printcurrentdate();
+                    fillCropYear();
+                    fillprocCommodity();
+                    ViewState["ckstat"] = "Empty";
+                    ViewState["ckEditstat"] = "Empty";
+                    if (Session["WLC_StorageReceipt_Id"] == null)
+                    {
+                        if (Session["Mode"] != null)
+                        {
+                            if (Session["Mode"].ToString() == "Add")
+                            {
+                                if (Session["WLCDepSource"] != null)
+                                {
+                                    if (Session["whrreq"] == "OldProc")
+                                    {
+                                        Session["dt1"] = null;
+                                        FillProcData();
+                                    }
+                                    else
+                                    {
+                                        Session["dt1"] = null;
+                                        if (Session["ProcComm"] == "22")
+                                        {
+                                            FillProcDataNew();
+                                        }
+                                        else if (Session["ProcComm"] == "63" || Session["ProcComm"] == "64" || Session["ProcComm"] == "33")
+                                        {
+                                            FillProcDataNewCMS();
+                                        }
+                                        else if (Session["ProcComm"] == "106" || Session["ProcComm"] == "92" || Session["ProcComm"] == "52" || Session["ProcComm"] == "27")
+                                        {
+                                            FillProcOnion();
+                                        }
+                                        else
+                                        { 
+                                            string DepositorNo=Session["whrreq"].ToString();
+                                            if (DepositorNo.Substring(0, 2) == "17" || DepositorNo.Substring(0, 2) == "18")
+                                            {                                             
+                                               FillProcKharif2017();
+                                            }
+                                            else if (DepositorNo.Substring(0, 2) == "16")
+                                            {
+                                                FillProcKharif2016();
+                                            }
+                                        }
+
+                                    }
+                                }
+                                else
+                                {
+                                    ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Invalid Record access, try again!')", true);
+                                }
+                                btnUpdate.Visible = false;
+                                btnsave.Visible = true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (Session["Mode"] != null)
+                        {
+                            if (Session["Mode"].ToString() == "Edit")
+                            {
+                                btnUpdate.Visible = true;
+                                btnsave.Visible = false;
+                                gdEditStackingDetails.Visible = true;
+                                gdstackingdetails.Visible = false;
+                                if (!IsPostBack)
+                                {
+                                    FillDefaultsForUpdate();
+                                }
+                            }
+                            else if (Session["Mode"].ToString() == "Add")
+                            {
+                                btnUpdate.Visible = false;
+                                btnsave.Visible = true;
+                                gdEditStackingDetails.Visible = false;
+                                gdstackingdetails.Visible = true;
+                                Session["EditStack"] = null;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    Session.Remove("DType");
+                    Session.Remove("Did");
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Some error has occurred(page Load) , try again!')", true);
+            }
+        }
+        else
+        {
+            Response.Redirect("~/SessionExpired.htm");
+        }
+    }
+
+    protected void btnsave_Click(object sender, EventArgs e)
+    {
+        if ((Session["Depot_DistID"] != null) && (Session["Depot_DepotID"] != null))
+        {
+            try
+            {
+                btnsave.Enabled = false;
+                string ClientIP = Request.ServerVariables["REMOTE_ADDR"];
+                int _stackbags = 0;
+                decimal _stackwt = 0;
+                int l;
+                string DepositorNM = "";
+                string comid = ddlProcCommodity.SelectedValue.ToString();
+                if (Session["WLCDepSource"].ToString() == "01")//Procurement
+                {
+                    if (Session["whrreq"] == "OldProc")
+                    {
+                        if (Session["Acceptance No"].ToString() == "" || Session["IssueId"].ToString() == "")
+                        {
+                            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Please enter Acceptance Number')", true);
+                            return;
+                        }
+                        if (gdstackingdetails.Rows.Count > 0)
+                        {
+                            for (l = 0; l < gdstackingdetails.Rows.Count; l++)
+                            {
+                                _stackbags = _stackbags + int.Parse(gdstackingdetails.Rows[l].Cells[5].Text.ToString());
+                                _stackwt = _stackwt + decimal.Parse(gdstackingdetails.Rows[l].Cells[6].Text.ToString());
+                            }
+                            if (Convert.ToInt32(txtProcBagsAcceptable.Text.ToString()) != Convert.ToInt32(_stackbags.ToString()) || decimal.Parse(txtProcQtyAcceptable.Text) != decimal.Parse(_stackwt.ToString()))
+                            {
+                                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Total Bags/Weight Recieved should be equal to sum of Stack Bags/Weight ')", true);
+                            }
+                            else
+                            {
+                                if (Con.State == ConnectionState.Closed)
+                                {
+                                    Con.Open();
+                                }
+                                sqltran = Con.BeginTransaction();
+
+                                qry = "select ISMFD from tbl_MetaData_DISTRICT where District_Id='" + Session["Depot_DistID"].ToString() + "'";
+                                cmd = new SqlCommand(qry, Con, sqltran); // check ArrivalStockid present in tbl_Storage_Arrival_Stock table
+                                string ism = cmd.ExecuteScalar().ToString();
+                                if (ism == "Y" && comid == "13" || comid == "14" || comid == "24")
+                                {
+                                    DepositorNM = "DMO Markfed";
+                                }
+                                else if (comid == "63" || comid == "64" || comid == "33")
+                                {
+                                    DepositorNM = "NAFED";
+                                }
+                                else
+                                {
+                                    DepositorNM = "MPSCSC";
+                                }
+
+                                qry = "select count(ArrivalStock_Id) from tbl_Storage_Arrival_Stock where District_Id='" + Session["Depot_DistID"].ToString() + "' and BranchID = '" + Session["BranchId"].ToString() + "' and Commodity_Id = '" + ddlProcCommodity.SelectedValue.ToString() + "' and Challan_No = '" + txtProcTCNo.Text.Trim().ToString() + "' and Truck_No = '" + txtProcTruckNo.Text.Trim().ToString() + "' and Qty_No_of_Bags = '" + _stackbags + "' and Qty_Wt ='" + _stackwt + "' and AcceptanceNo = '" + txtAcceptanceNote.Text.Trim().ToString() + "'";
+                                cmd = new SqlCommand(qry, Con, sqltran); // check ArrivalStockid present in tbl_Storage_Arrival_Stock table
+                                string precount = cmd.ExecuteScalar().ToString();
+                                if (Convert.ToInt16(precount) == 0)
+                                {
+                                    qry = "select isnull(Max(ArrivalStock_Id),0) from tbl_Storage_Arrival_Stock where District_Id='" + Session["Depot_DistID"].ToString() + "' and BranchID='" + Session["BranchId"].ToString() + "' ";
+                                    cmd = new SqlCommand(qry, Con, sqltran); // check ArrivalStockid present in tbl_Storage_Arrival_Stock table
+                                    string str3 = cmd.ExecuteScalar().ToString();
+                                    if (Convert.ToInt64(str3) != 0)
+                                    {
+                                        ArrivalStockid = Convert.ToString(Convert.ToInt64(str3) + 1);
+                                        if (ArrivalStockid != String.Empty || ArrivalStockid != "")
+                                        {
+                                        Found:
+                                            qry = "select count(ArrivalStock_Id) from tbl_Storage_Arrival_Stock where ArrivalStock_Id='" + ArrivalStockid + "'";
+                                            cmd = new SqlCommand(qry, Con, sqltran); // check ArrivalStockid present in tbl_Storage_Arrival_Stock table
+                                            string maxcount = cmd.ExecuteScalar().ToString();
+                                            if (Convert.ToInt16(maxcount) > 0)
+                                            {
+                                                ArrivalStockid = Convert.ToString(Convert.ToInt64(ArrivalStockid) + 1);
+                                                goto Found;
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        string Depotid = Session["Depot_DepotID"].ToString();
+                                        string BranchId = Session["BranchId"].ToString();
+                                        ArrivalStockid = BranchId + System.DateTime.Now.Year.ToString().Substring(2, 2) + "00001";
+                                    }
+                                    cmd = new SqlCommand("MPWLC_sp_MomentChallan_Reciept_insert", Con, sqltran);
+                                    cmd.CommandType = CommandType.StoredProcedure;
+                                    cmd.Parameters.AddWithValue("@ArrivalStockId", ArrivalStockid);
+                                    cmd.Parameters.AddWithValue("@District_Id", Session["Depot_DistID"].ToString());
+                                    cmd.Parameters.AddWithValue("@DepotId", Session["Depot_DepotID"].ToString());
+                                    cmd.Parameters.AddWithValue("@DepositDate", getDate_MDY(Convert.ToString(txtProcDepostiDate.Text.Trim())));
+                                    cmd.Parameters.AddWithValue("@Commodity_Id", ddlProcCommodity.SelectedValue.ToString());
+                                    cmd.Parameters.AddWithValue("@Mode_of_weighment", ddlProcWeigmentMode.SelectedValue.ToString());
+                                    cmd.Parameters.AddWithValue("@AcceptanceNo", Session["Acceptance No"].ToString());
+                                    cmd.Parameters.AddWithValue("@PurchasCentre", Session["SocietyCode"].ToString());
+                                    cmd.Parameters.AddWithValue("@IssueID", Session["IssueId"].ToString());
+                                    cmd.Parameters.AddWithValue("@BranchId", Session["BranchId"].ToString());
+                                    if (txtProcBags.Text.Trim().ToString() == "")
+                                    {
+                                        cmd.Parameters.AddWithValue("@Qty_No_of_Bags", _stackbags);
+                                    }
+                                    else
+                                    {
+                                        cmd.Parameters.AddWithValue("@Qty_No_of_Bags", Convert.ToInt64(txtProcBags.Text.ToString()));
+                                    }
+                                    if (txtProcQtyDeposit.Text.Trim().ToString() == "")
+                                    {
+                                        cmd.Parameters.AddWithValue("@Qty_Wt", _stackwt);
+                                    }
+                                    else
+                                    {
+                                        cmd.Parameters.AddWithValue("@Qty_Wt", Convert.ToDecimal(txtProcQtyDeposit.Text.Trim().ToString()));
+                                    }
+                                    cmd.Parameters.AddWithValue("@Category_Id", "1");
+                                    cmd.Parameters.AddWithValue("@Depositor_Name", DepositorNM.ToString());
+                                    cmd.Parameters.AddWithValue("@DepositorType", "Institution");
+                                    cmd.Parameters.AddWithValue("@Crop_Year", ddlcropyear.SelectedValue.ToString());
+                                    cmd.Parameters.AddWithValue("@Sender_District", "23" + hfSending_Dist.Value);
+                                    cmd.Parameters.AddWithValue("@Sender_Godown", ddlSourceS.SelectedValue.ToString());
+                                    cmd.Parameters.AddWithValue("@Challan_No", txtProcTCNo.Text.ToString());
+                                    cmd.Parameters.AddWithValue("@Truck_No", txtProcTruckNo.Text.ToString());
+                                    cmd.Parameters.AddWithValue("@Source_of_Arrival", Session["WLCDepSource"].ToString());
+                                    cmd.Parameters.AddWithValue("@ArrivalSource_ID", "01");
+                                    if (txtProcMoisture.Text.ToString().Trim() == "")
+                                    {
+                                        cmd.Parameters.AddWithValue("@Quality_Moisture", DBNull.Value);
+                                    }
+                                    else
+                                    {
+                                        cmd.Parameters.AddWithValue("@Quality_Moisture", Convert.ToDecimal(txtProcMoisture.Text.ToString()));
+                                    }
+                                    cmd.Parameters.AddWithValue("@Remarks", txtRemarks.Text.ToString());
+                                    cmd.Parameters.AddWithValue("@Scheme_ID", "0");
+                                    cmd.Parameters.AddWithValue("@Acpt_FCIRO_No", txtAcceptanceNote.Text.ToString());
+                                    cmd.Parameters.AddWithValue("@Acpt_FCIRO_Date", getDate_MDY(Convert.ToString(hfAcptDate.Value.Trim())));
+                                    cmd.Parameters.AddWithValue("@CreatedBy", ClientIP.ToString());
+                                    cmd.Parameters.AddWithValue("@Client_IP", ClientIP.ToString());
+                                    cmd.Parameters.AddWithValue("@Transporter_id", DBNull.Value);
+                                    cmd.Parameters.AddWithValue("@Miller", DBNull.Value);
+                                    if (txtProcWCMNo.Text.Trim() == "")
+                                    {
+                                        cmd.Parameters.AddWithValue("@WCMNo_Sending", DBNull.Value);
+                                    }
+                                    else
+                                    {
+                                        cmd.Parameters.AddWithValue("@WCMNo_Sending", txtProcWCMNo.Text.Trim().ToString());
+                                    }
+                                    if (txtProcBagsAcceptable.Text.Trim().ToString() == "")
+                                    {
+                                        cmd.Parameters.AddWithValue("@Acceptable_Bags", _stackbags);
+                                    }
+                                    else
+                                    {
+                                        cmd.Parameters.AddWithValue("@Acceptable_Bags", Convert.ToInt64(txtProcBagsAcceptable.Text.ToString()));
+                                    }
+                                    if (txtProcQtyAcceptable.Text.Trim().ToString() == "")
+                                    {
+                                        cmd.Parameters.AddWithValue("@Acceptable_Wt", _stackwt);
+                                    }
+                                    else
+                                    {
+                                        cmd.Parameters.AddWithValue("@Acceptable_Wt", Convert.ToDecimal(txtProcQtyAcceptable.Text.Trim().ToString()));
+                                    }
+                                    cmd.Parameters.Add("@receiptid", SqlDbType.NVarChar, 20);
+                                    cmd.Parameters["@receiptid"].Direction = ParameterDirection.Output;
+                                    int res = cmd.ExecuteNonQuery();
+                                    receiptid = cmd.Parameters["@receiptid"].Value.ToString();
+                                    if (res > 0)
+                                    {
+                                        for (int j = 0; j < gdstackingdetails.Rows.Count; j++)
+                                        {
+                                            if (Con.State == ConnectionState.Closed)
+                                            {
+                                                Con.Open();
+                                            }
+                                            cmd = new SqlCommand("MPWLC_sp_stackingdetails_insert", Con, sqltran);
+                                            cmd.CommandType = CommandType.StoredProcedure;
+                                            cmd.Parameters.AddWithValue("@receiptid", receiptid);
+                                            cmd.Parameters.AddWithValue("@GodownId", gdstackingdetails.Rows[j].Cells[1].Text.ToString());
+                                            cmd.Parameters.AddWithValue("@StackId", gdstackingdetails.Rows[j].Cells[2].Text.ToString());
+                                            cmd.Parameters.AddWithValue("@SBags", int.Parse(gdstackingdetails.Rows[j].Cells[5].Text.ToString()));
+                                            cmd.Parameters.AddWithValue("@SWeight", decimal.Parse(gdstackingdetails.Rows[j].Cells[6].Text.ToString()));
+                                            cmd.Parameters.AddWithValue("@District_Id", Session["Depot_DistID"].ToString());
+                                            cmd.Parameters.AddWithValue("@DepotId", Session["Depot_DepotID"].ToString());
+                                            cmd.Parameters.AddWithValue("@BranchId", Session["BranchId"].ToString());
+                                            cmd.Connection = Con;
+                                            cmd.ExecuteNonQuery();
+                                        }
+                                        sqltran.Commit();
+                                        Session["dt1"] = null;
+                                        gdstackingdetails.DataSource = null;
+                                        gdstackingdetails.DataBind();
+                                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Record saved successfully')", true);
+                                        Session["RefreshButton"] = "No";
+                                    }
+                                }
+                                else
+                                {
+                                    ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Record is already saved..')", true);
+                                }
+                            } ///here transactions ends
+                        }
+                        else
+                        {
+                            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Please add Stack information first')", true);
+                        }
+                    }
+                    else
+                    {
+                        // from Depositor form mpscsc
+
+                        if (Session["whrreq"].ToString()== "")
+                        {
+                            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Please enter Depositor form number')", true);
+                            return;
+                        }
+                        if (gdstackingdetails.Rows.Count > 0)
+                        {
+                            for (l = 0; l < gdstackingdetails.Rows.Count; l++)
+                            {
+                                _stackbags = _stackbags + int.Parse(gdstackingdetails.Rows[l].Cells[5].Text.ToString());
+                                _stackwt = _stackwt + decimal.Parse(gdstackingdetails.Rows[l].Cells[6].Text.ToString());
+                            }
+                            if (Convert.ToInt32(txtProcBagsAcceptable.Text.ToString()) != Convert.ToInt32(_stackbags.ToString()) || decimal.Parse(txtProcQtyAcceptable.Text) != decimal.Parse(_stackwt.ToString()))
+                            {
+                                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Total Bags/Weight Recieved should be equal to sum of Stack Bags/Weight ')", true);
+                            }
+                            else
+                            {
+                                if (Con.State == ConnectionState.Closed)
+                                {
+                                    Con.Open();
+                                }
+                                sqltran = Con.BeginTransaction();
+
+                                qry = "select ISMFD from tbl_MetaData_DISTRICT where District_Id='" + Session["Depot_DistID"].ToString() + "'";
+                                cmd = new SqlCommand(qry, Con, sqltran); // check ArrivalStockid present in tbl_Storage_Arrival_Stock table
+                                string ism = cmd.ExecuteScalar().ToString();
+                                if (ism == "Y" && comid == "13" || comid == "14" || comid == "24")
+                                {
+                                    DepositorNM = "DMO Markfed";
+                                }
+                                else if (comid == "63" || comid == "64" || comid == "33")
+                                {
+                                    DepositorNM = "NAFED";
+                                }
+                                else
+                                {
+                                    DepositorNM = "MPSCSC";
+                                }
+
+                                qry = "select count(ArrivalStock_Id) from tbl_Storage_Arrival_Stock where District_Id='" + Session["Depot_DistID"].ToString() + "' and BranchID = '" + Session["BranchId"].ToString() + "' and Commodity_Id = '" + ddlProcCommodity.SelectedValue.ToString() + "' and Challan_No = '" + txtProcTCNo.Text.Trim().ToString() + "' and Truck_No = '" + txtProcTruckNo.Text.Trim().ToString() + "' and Qty_No_of_Bags = '" + _stackbags + "' and Qty_Wt ='" + _stackwt + "' and AcceptanceNo = '" + txtAcceptanceNote.Text.Trim().ToString() + "'";
+                                cmd = new SqlCommand(qry, Con, sqltran); // check ArrivalStockid present in tbl_Storage_Arrival_Stock table
+                                string precount = cmd.ExecuteScalar().ToString();
+                                if (Convert.ToInt16(precount) == 0)
+                                {
+                                    qry = "select isnull(Max(ArrivalStock_Id),0) from tbl_Storage_Arrival_Stock where District_Id='" + Session["Depot_DistID"].ToString() + "' and BranchID='" + Session["BranchId"].ToString() + "' ";
+                                    cmd = new SqlCommand(qry, Con, sqltran); // check ArrivalStockid present in tbl_Storage_Arrival_Stock table
+                                    string str3 = cmd.ExecuteScalar().ToString();
+                                    if (Convert.ToInt64(str3) != 0)
+                                    {
+                                        ArrivalStockid = Convert.ToString(Convert.ToInt64(str3) + 1);
+                                        if (ArrivalStockid != String.Empty || ArrivalStockid != "")
+                                        {
+                                        Found:
+                                            qry = "select count(ArrivalStock_Id) from tbl_Storage_Arrival_Stock where ArrivalStock_Id='" + ArrivalStockid + "'";
+                                            cmd = new SqlCommand(qry, Con, sqltran); // check ArrivalStockid present in tbl_Storage_Arrival_Stock table
+                                            string maxcount = cmd.ExecuteScalar().ToString();
+                                            if (Convert.ToInt16(maxcount) > 0)
+                                            {
+                                                ArrivalStockid = Convert.ToString(Convert.ToInt64(ArrivalStockid) + 1);
+                                                goto Found;
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        string Depotid = Session["Depot_DepotID"].ToString();
+                                        string BranchId = Session["BranchId"].ToString();
+                                        ArrivalStockid = BranchId + System.DateTime.Now.Year.ToString().Substring(2, 2) + "00001";
+                                    }
+                                    cmd = new SqlCommand("MPWLC_sp_MomentChallan_Reciept_insert", Con, sqltran);
+                                    cmd.CommandType = CommandType.StoredProcedure;
+                                    cmd.Parameters.AddWithValue("@ArrivalStockId", ArrivalStockid);
+                                    cmd.Parameters.AddWithValue("@District_Id", Session["Depot_DistID"].ToString());
+                                    cmd.Parameters.AddWithValue("@DepotId", Session["Depot_DepotID"].ToString());
+                                    cmd.Parameters.AddWithValue("@DepositDate", getDate_MDY(Convert.ToString(txtProcDepostiDate.Text.Trim())));
+                                    cmd.Parameters.AddWithValue("@Commodity_Id", ddlProcCommodity.SelectedValue.ToString());
+                                    cmd.Parameters.AddWithValue("@Mode_of_weighment", ddlProcWeigmentMode.SelectedValue.ToString());
+                                    cmd.Parameters.AddWithValue("@AcceptanceNo", txtAcceptanceNote.Text);
+                                    cmd.Parameters.AddWithValue("@PurchasCentre","DF");
+                                    cmd.Parameters.AddWithValue("@IssueID", "NA");
+                                    cmd.Parameters.AddWithValue("@BranchId", Session["BranchId"].ToString());
+                                    if (txtProcBags.Text.Trim().ToString() == "")
+                                    {
+                                        cmd.Parameters.AddWithValue("@Qty_No_of_Bags", _stackbags);
+                                    }
+                                    else
+                                    {
+                                        cmd.Parameters.AddWithValue("@Qty_No_of_Bags", Convert.ToInt64(txtProcBags.Text.ToString()));
+                                    }
+                                    if (txtProcQtyDeposit.Text.Trim().ToString() == "")
+                                    {
+                                        cmd.Parameters.AddWithValue("@Qty_Wt", _stackwt);
+                                    }
+                                    else
+                                    {
+                                        cmd.Parameters.AddWithValue("@Qty_Wt", Convert.ToDecimal(txtProcQtyDeposit.Text.Trim().ToString()));
+                                    }
+                                    cmd.Parameters.AddWithValue("@Category_Id", "1");
+
+                                    cmd.Parameters.AddWithValue("@Depositor_Name", DepositorNM.ToString());
+                                  
+                                    cmd.Parameters.AddWithValue("@DepositorType", "Institution");
+                                    cmd.Parameters.AddWithValue("@Crop_Year", ddlcropyear.SelectedValue.ToString());
+                                    cmd.Parameters.AddWithValue("@Sender_District", "23" + hfSending_Dist.Value);
+                                    cmd.Parameters.AddWithValue("@Sender_Godown", ddlSourceS.SelectedValue.ToString());
+                                    cmd.Parameters.AddWithValue("@Challan_No", "NA");
+                                    cmd.Parameters.AddWithValue("@Truck_No", "NA");
+                                    cmd.Parameters.AddWithValue("@Source_of_Arrival", Session["WLCDepSource"].ToString());
+                                    cmd.Parameters.AddWithValue("@ArrivalSource_ID", "01");
+                                    if (txtProcMoisture.Text.ToString().Trim() == "")
+                                    {
+                                        cmd.Parameters.AddWithValue("@Quality_Moisture", DBNull.Value);
+                                    }
+                                    else
+                                    {
+                                        cmd.Parameters.AddWithValue("@Quality_Moisture", Convert.ToDecimal(txtProcMoisture.Text.ToString()));
+                                    }
+                                    cmd.Parameters.AddWithValue("@Remarks", txtRemarks.Text.ToString());
+                                    cmd.Parameters.AddWithValue("@Scheme_ID", "0");
+                                    cmd.Parameters.AddWithValue("@Acpt_FCIRO_No", txtAcceptanceNote.Text.ToString());
+                                    cmd.Parameters.AddWithValue("@Acpt_FCIRO_Date", getDate_MDY(Convert.ToString(hfAcptDate.Value.Trim())));
+                                    cmd.Parameters.AddWithValue("@CreatedBy", ClientIP.ToString());
+                                    cmd.Parameters.AddWithValue("@Client_IP", ClientIP.ToString());
+                                    cmd.Parameters.AddWithValue("@Transporter_id", DBNull.Value);
+                                    cmd.Parameters.AddWithValue("@Miller", DBNull.Value);
+                                    if (txtProcWCMNo.Text.Trim() == "")
+                                    {
+                                        cmd.Parameters.AddWithValue("@WCMNo_Sending", DBNull.Value);
+                                    }
+                                    else
+                                    {
+                                        cmd.Parameters.AddWithValue("@WCMNo_Sending", txtProcWCMNo.Text.Trim().ToString());
+                                    }
+                                    if (txtProcBagsAcceptable.Text.Trim().ToString() == "")
+                                    {
+                                        cmd.Parameters.AddWithValue("@Acceptable_Bags", _stackbags);
+                                    }
+                                    else
+                                    {
+                                        cmd.Parameters.AddWithValue("@Acceptable_Bags", Convert.ToInt64(txtProcBagsAcceptable.Text.ToString()));
+                                    }
+                                    if (txtProcQtyAcceptable.Text.Trim().ToString() == "")
+                                    {
+                                        cmd.Parameters.AddWithValue("@Acceptable_Wt", _stackwt);
+                                    }
+                                    else
+                                    {
+                                        cmd.Parameters.AddWithValue("@Acceptable_Wt", Convert.ToDecimal(txtProcQtyAcceptable.Text.Trim().ToString()));
+                                    }
+                                    cmd.Parameters.Add("@receiptid", SqlDbType.NVarChar, 20);
+                                    cmd.Parameters["@receiptid"].Direction = ParameterDirection.Output;
+                                    int res = cmd.ExecuteNonQuery();
+                                    receiptid = cmd.Parameters["@receiptid"].Value.ToString();
+                                    if (res > 0)
+                                    {
+                                        for (int j = 0; j < gdstackingdetails.Rows.Count; j++)
+                                        {
+                                            if (Con.State == ConnectionState.Closed)
+                                            {
+                                                Con.Open();
+                                            }
+                                            cmd = new SqlCommand("MPWLC_sp_stackingdetails_insert", Con, sqltran);
+                                            cmd.CommandType = CommandType.StoredProcedure;
+                                            cmd.Parameters.AddWithValue("@receiptid", receiptid);
+                                            cmd.Parameters.AddWithValue("@GodownId", gdstackingdetails.Rows[j].Cells[1].Text.ToString());
+                                            cmd.Parameters.AddWithValue("@StackId", gdstackingdetails.Rows[j].Cells[2].Text.ToString());
+                                            cmd.Parameters.AddWithValue("@SBags", int.Parse(gdstackingdetails.Rows[j].Cells[5].Text.ToString()));
+                                            cmd.Parameters.AddWithValue("@SWeight", decimal.Parse(gdstackingdetails.Rows[j].Cells[6].Text.ToString()));
+                                            cmd.Parameters.AddWithValue("@District_Id", Session["Depot_DistID"].ToString());
+                                            cmd.Parameters.AddWithValue("@DepotId", Session["Depot_DepotID"].ToString());
+                                            cmd.Parameters.AddWithValue("@BranchId", Session["BranchId"].ToString());
+                                            cmd.Connection = Con;
+                                            cmd.ExecuteNonQuery();
+                                        }
+                                        /////////////////Insert into Receive_Proc_Kharif2016/////////////
+                                        string DepositorNo = Session["whrreq"].ToString();
+                                        if (Session["Depot_DistID"] != null && Session["ProcComm"] != null)
+                                        {
+                                            string query2 = "";
+                                            if (Session["ProcComm"] != "22" && DepositorNo.Substring(0, 2) == "16")
+                                            {
+                                                query2 = "SELECT Prc.Distt_ID,prc.IssueCenter_ID,prc.Purchase_Center,convert(varchar(10),prc.Dispatch_Date,101) as Dispatch_Date,prc.TC_Number,prc.Truck_No,Prc.CropYear,Prc.Acceptance_No,convert(varchar(10),Prc.Acceptance_Date,101) as Acceptance_Date,Prc.IssueID,prc.godown,ISNULL(prc.Bags,0) as Recd_Bags,ISNULL(Prc.Accept_Qty,0) AS Recd_Qty,Prc.CommodityId,Prc.WHR_Request as Depositor_Form_No,sp.Branch_Id,sp.TaulParchi,sp.Weighbridge_ID,sp.Weighbridge_TaulParchi,ISNULL(sp.Weighbridge_Qty,0) as Weighbridge_Qty FROM MPSCSC.dbo.[Acceptance_Note_Kharif2016] as Prc inner join MPSCSC.dbo.SCSC_Procurement_Kharif2016 as sp on Prc.IssueID=sp.Receipt_Id and Prc.Acceptance_No=sp.Acceptance_No  where Prc.WHR_Request is not null  and sp.Branch_Id='" + Session["BranchId"].ToString() + "' and Prc.WHR_Request='" + Session["whrreq"].ToString() + "' and convert(varchar(10),Prc.Acceptance_Date,103)='" + Session["AccepDate"].ToString() + "' and Prc.CommodityId='" + Session["ProcComm"].ToString() + "'";
+                                            }
+                                            else if (Session["ProcComm"] == "22" && DepositorNo.Substring(0, 2) == "18")
+                                            {
+                                                //Wheat 2017-18
+                                                //query2 = "SELECT Prc.Distt_ID,prc.IssueCenter_ID,prc.Purchase_Center,convert(varchar(10),prc.Dispatch_Date,101) as Dispatch_Date,prc.TC_Number,prc.Truck_No,Prc.CropYear,Prc.Acceptance_No,convert(varchar(10),Prc.Acceptance_Date,101) as Acceptance_Date,Prc.IssueID,prc.godown,ISNULL(prc.Bags,0) as Recd_Bags,ISNULL(Prc.Accept_Qty,0) AS Recd_Qty,Prc.CommodityId,Prc.WHR_Request as Depositor_Form_No,sp.Branch_Id,sp.TaulParchi,sp.Weighbridge_ID,sp.Weighbridge_TaulParchi,ISNULL(sp.Weighbridge_Qty,0) as Weighbridge_Qty FROM MPSCSC.dbo.[Acceptance_Note_Wheat2017] as Prc inner join MPSCSC.dbo.SCSC_Procurement_Wheat2017 as sp on Prc.IssueID=sp.Receipt_Id and Prc.Acceptance_No=sp.Acceptance_No  where Prc.WHR_Request is not null  and sp.Branch_Id='" + Session["BranchId"].ToString() + "' and Prc.WHR_Request='" + Session["whrreq"].ToString() + "' and convert(varchar(10),Prc.Acceptance_Date,103)='" + Session["AccepDate"].ToString() + "' and Prc.CommodityId='" + Session["ProcComm"].ToString() + "'";
+                                                query2 = "SELECT Prc.Distt_ID,prc.IssueCenter_ID,prc.Purchase_Center,convert(varchar(10),prc.Dispatch_Date,101) as Dispatch_Date,prc.TC_Number,prc.Truck_No,Prc.CropYear,Prc.Acceptance_No,convert(varchar(10),Prc.Acceptance_Date,101) as Acceptance_Date,Prc.IssueID,prc.godown,ISNULL(prc.Bags,0) as Recd_Bags,ISNULL(Prc.Accept_Qty,0) AS Recd_Qty,Prc.CommodityId,Prc.WHR_Request as Depositor_Form_No,sp.Branch_Id,sp.TaulParchi,sp.Weighbridge_ID,sp.Weighbridge_TaulParchi,ISNULL(sp.Weighbridge_Qty,0) as Weighbridge_Qty FROM MPSCSC.dbo.[Acceptance_Note_Wheat2018] as Prc inner join MPSCSC.dbo.SCSC_Procurement_Wheat2018 as sp on Prc.IssueID=sp.Receipt_Id and Prc.Acceptance_No=sp.Acceptance_No  where Prc.WHR_Request is not null  and sp.Branch_Id='" + Session["BranchId"].ToString() + "' and Prc.WHR_Request='" + Session["whrreq"].ToString() + "' and convert(varchar(10),Prc.Acceptance_Date,103)='" + Session["AccepDate"].ToString() + "' and Prc.CommodityId='" + Session["ProcComm"].ToString() + "'";
+
+                                            }
+                                                //Kharif 2017
+                                            else if (Session["ProcComm"] != "22" && (DepositorNo.Substring(0, 2) == "17" || DepositorNo.Substring(0, 2) == "18"))
+                                            {
+                                                query2 = "SELECT Prc.Distt_ID,prc.IssueCenter_ID,prc.Purchase_Center,convert(varchar(10),prc.Dispatch_Date,101) as Dispatch_Date,prc.TC_Number,prc.Truck_No,Prc.CropYear,Prc.Acceptance_No,convert(varchar(10),Prc.Acceptance_Date,101) as Acceptance_Date,Prc.IssueID,prc.godown,ISNULL(prc.Bags,0) as Recd_Bags,ISNULL(Prc.Accept_Qty,0) AS Recd_Qty,Prc.CommodityId,Prc.WHR_Request as Depositor_Form_No,sp.Branch_Id,sp.TaulParchi,sp.Weighbridge_ID,sp.Weighbridge_TaulParchi,ISNULL(sp.Weighbridge_Qty,0) as Weighbridge_Qty FROM MPSCSC.dbo.[Acceptance_Note_Kharif2017] as Prc inner join MPSCSC.dbo.SCSC_Procurement_Kharif2017 as sp on Prc.IssueID=sp.Receipt_Id and Prc.Acceptance_No=sp.Acceptance_No  where Prc.WHR_Request is not null  and sp.Branch_Id='" + Session["BranchId"].ToString() + "' and Prc.WHR_Request='" + Session["whrreq"].ToString() + "' and convert(varchar(10),Prc.Acceptance_Date,103)='" + Session["AccepDate"].ToString() + "' and Prc.CommodityId='" + Session["ProcComm"].ToString() + "'";
+                                            }
+
+                                            SqlCommand cmd2 = new SqlCommand(query2, Con, sqltran);
+                                            SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
+                                            DataSet ds2 = new DataSet();
+                                            da2.Fill(ds2);
+                                            if (ds2.Tables[0].Rows.Count >= 1)
+                                            {
+                                                for (int z = 0; z < ds2.Tables[0].Rows.Count; z++)
+                                                {
+                                                    string StorageReceipt_Id = receiptid;
+                                                    string Distt_ID = ds2.Tables[0].Rows[z]["Distt_ID"].ToString();
+                                                    string IssueCenter_ID = ds2.Tables[0].Rows[z]["IssueCenter_ID"].ToString();
+                                                    string Purchase_Center = ds2.Tables[0].Rows[z]["Purchase_Center"].ToString();
+                                                    string Dispatch_Date = ds2.Tables[0].Rows[z]["Dispatch_Date"].ToString();
+                                                    string TC_Number = ds2.Tables[0].Rows[z]["TC_Number"].ToString();
+                                                    string Truck_Number = ds2.Tables[0].Rows[z]["Truck_No"].ToString();
+                                                    string Commodity_Id = ddlProcCommodity.SelectedValue.ToString();
+                                                    string Crop_Year = ds2.Tables[0].Rows[z]["CropYear"].ToString();
+                                                    int No_of_Bags = Convert.ToInt32(ds2.Tables[0].Rows[z]["Recd_Bags"]);
+                                                    string Acceptance_No = ds2.Tables[0].Rows[z]["Acceptance_No"].ToString();
+                                                    string Acceptance_Date = ds2.Tables[0].Rows[z]["Acceptance_Date"].ToString();
+                                                    string Godown = ds2.Tables[0].Rows[z]["godown"].ToString();
+                                                    string IssueId = ds2.Tables[0].Rows[z]["IssueID"].ToString();
+                                                    string Branch_Id = ds2.Tables[0].Rows[z]["Branch_Id"].ToString();
+                                                    string TaulParchi = ds2.Tables[0].Rows[z]["TaulParchi"].ToString();
+                                                    string Weighbridge_ID = ds2.Tables[0].Rows[z]["Weighbridge_ID"].ToString();
+                                                    string Weighbridge_TaulParchi = ds2.Tables[0].Rows[z]["Weighbridge_TaulParchi"].ToString();
+                                                    float Weighbridge_Qty = Convert.ToSingle(ds2.Tables[0].Rows[z]["Weighbridge_Qty"]);
+                                                    float Rec_Qty = Convert.ToSingle(ds2.Tables[0].Rows[z]["Recd_Qty"]);
+                                                    string Depositor_Form_No = ds2.Tables[0].Rows[z]["Depositor_Form_No"].ToString();
+                                                    //string Created_Date = "";
+                                                    //string IP_Address = "";
+
+                                                    if (Con.State == ConnectionState.Closed)
+                                                    {
+                                                        Con.Open();
+                                                    }
+                                                    string RQry = "";
+                                                    //string RQry = "INSERT INTO [Intergrated_MP_STORAGE].[dbo].[Receive_Proc_Kharif2016]([StorageReceipt_Id],[Distt_ID],[IssueCenter_ID],[Purchase_Center],[Dispatch_Date],[TC_Number],[Truck_Number],[Commodity_Id],[Crop_Year],[No_of_Bags],[Acceptance_No],[Acceptance_Date],[Godown],[IssueId],[Branch_Id],[TaulParchi],[Weighbridge_ID],[Weighbridge_TaulParchi],[Weighbridge_Qty],[Created_Date],[IP_Address],Rec_Qty,Depositor_Form_No) VALUES ('" + StorageReceipt_Id + "','" + Distt_ID + "','" + IssueCenter_ID + "','" + Purchase_Center + "','" + Dispatch_Date + "','" + TC_Number + "','" + Truck_Number + "','" + Commodity_Id + "','" + Crop_Year + "','" + No_of_Bags + "','" + Acceptance_No + "','" + Acceptance_Date + "','" + Godown + "','" + IssueId + "','" + Branch_Id + "','" + TaulParchi + "','" + Weighbridge_ID + "','" + Weighbridge_TaulParchi + "','" + Weighbridge_Qty + "',getdate(),'" + ClientIP + "','" + Rec_Qty + "','" + Depositor_Form_No + "')";
+                                                    if (Session["ProcComm"] == "22" && DepositorNo.Substring(0, 2) == "18")
+                                                    {
+                                                        RQry = "INSERT INTO [Intergrated_MP_STORAGE].[dbo].[Receive_Proc_Rabi2018]([StorageReceipt_Id],[Distt_ID],[IssueCenter_ID],[Purchase_Center],[Dispatch_Date],[TC_Number],[Truck_Number],[Commodity_Id],[Crop_Year],[No_of_Bags],[Acceptance_No],[Acceptance_Date],[Godown],[IssueId],[Branch_Id],[TaulParchi],[Weighbridge_ID],[Weighbridge_TaulParchi],[Weighbridge_Qty],[Created_Date],[IP_Address],Rec_Qty,Depositor_Form_No) VALUES ('" + StorageReceipt_Id + "','" + Distt_ID + "','" + IssueCenter_ID + "','" + Purchase_Center + "','" + Dispatch_Date + "','" + TC_Number + "','" + Truck_Number + "','" + Commodity_Id + "','" + Crop_Year + "','" + No_of_Bags + "','" + Acceptance_No + "','" + Acceptance_Date + "','" + Godown + "','" + IssueId + "','" + Branch_Id + "','" + TaulParchi + "','" + Weighbridge_ID + "','" + Weighbridge_TaulParchi + "','" + Weighbridge_Qty + "',getdate(),'" + ClientIP + "','" + Rec_Qty + "','" + Depositor_Form_No + "')";
+                                                    }
+                                                    else if (Session["ProcComm"] == "63" || Session["ProcComm"] == "64" || Session["ProcComm"] == "33" && (DepositorNo.Substring(0, 2) == "18"))
+                                                    {
+                                                        RQry = "INSERT INTO [Intergrated_MP_STORAGE].[dbo].[Receive_Proc_Rabi2018]([StorageReceipt_Id],[Distt_ID],[IssueCenter_ID],[Purchase_Center],[Dispatch_Date],[TC_Number],[Truck_Number],[Commodity_Id],[Crop_Year],[No_of_Bags],[Acceptance_No],[Acceptance_Date],[Godown],[IssueId],[Branch_Id],[TaulParchi],[Weighbridge_ID],[Weighbridge_TaulParchi],[Weighbridge_Qty],[Created_Date],[IP_Address],Rec_Qty,Depositor_Form_No) VALUES ('" + StorageReceipt_Id + "','" + Distt_ID + "','" + IssueCenter_ID + "','" + Purchase_Center + "','" + Dispatch_Date + "','" + TC_Number + "','" + Truck_Number + "','" + Commodity_Id + "','" + Crop_Year + "','" + No_of_Bags + "','" + Acceptance_No + "','" + Acceptance_Date + "','" + Godown + "','" + IssueId + "','" + Branch_Id + "','" + TaulParchi + "','" + Weighbridge_ID + "','" + Weighbridge_TaulParchi + "','" + Weighbridge_Qty + "',getdate(),'" + ClientIP + "','" + Rec_Qty + "','" + Depositor_Form_No + "')";
+                                                    }
+                                                    else
+                                                    {
+                                                        RQry = "INSERT INTO [Intergrated_MP_STORAGE].[dbo].[Receive_Proc_Kharif2016]([StorageReceipt_Id],[Distt_ID],[IssueCenter_ID],[Purchase_Center],[Dispatch_Date],[TC_Number],[Truck_Number],[Commodity_Id],[Crop_Year],[No_of_Bags],[Acceptance_No],[Acceptance_Date],[Godown],[IssueId],[Branch_Id],[TaulParchi],[Weighbridge_ID],[Weighbridge_TaulParchi],[Weighbridge_Qty],[Created_Date],[IP_Address],Rec_Qty,Depositor_Form_No) VALUES ('" + StorageReceipt_Id + "','" + Distt_ID + "','" + IssueCenter_ID + "','" + Purchase_Center + "','" + Dispatch_Date + "','" + TC_Number + "','" + Truck_Number + "','" + Commodity_Id + "','" + Crop_Year + "','" + No_of_Bags + "','" + Acceptance_No + "','" + Acceptance_Date + "','" + Godown + "','" + IssueId + "','" + Branch_Id + "','" + TaulParchi + "','" + Weighbridge_ID + "','" + Weighbridge_TaulParchi + "','" + Weighbridge_Qty + "',getdate(),'" + ClientIP + "','" + Rec_Qty + "','" + Depositor_Form_No + "')";
+                                                    }
+                                                    cmd = new SqlCommand(RQry, Con, sqltran);
+                                                    cmd.CommandType = CommandType.Text;
+
+                                                    cmd.Connection = Con;
+                                                    cmd.ExecuteNonQuery();
+                                                }
+                                            }
+                                        }
+
+                                        /////////////////Finish into Receive_Proc_Kharif2016/////////////
+                                        sqltran.Commit();
+                                        Session["dt1"] = null;
+                                        gdstackingdetails.DataSource = null;
+                                        gdstackingdetails.DataBind();
+                                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Record saved successfully')", true);
+                                        Response.Redirect("../IssueCenterLevel/Storage/WLC_Deposit_From.aspx");
+                                        Session["RefreshButton"] = "No";
+                                    }
+                                }
+                                else
+                                {
+                                    ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Record is already saved..')", true);
+                                }
+                            } ///here transactions ends
+                        }
+                        else
+                        {
+                            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Please add Stack information first')", true);
+                        }
+                    }
+                }
+                else
+                {
+                    sqltran.Rollback();
+                    ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Error in button save click')", true);
+                }
+                btnsave.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                sqltran.Rollback();
+                lblmsg.Text = ex.ToString();
+            }
+            finally
+            {
+                Con.Close();
+              //  sqltran.Dispose();
+            }
+        }
+        else
+        {
+            Response.Redirect("~/SessionExpired.htm");
+        }
+    }
+
+    protected void btn_Close_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/IssueCenterLevel/Storage/WLC_Deposit_From.aspx");
+    }
+
+    protected string getDate_MDY(string inDate)
+    {
+        System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-GB");
+        DateTime dtProjectStartDate = Convert.ToDateTime(inDate);
+        System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+        return (Convert.ToDateTime(dtProjectStartDate).ToString("MM/dd/yyyy"));
+    }
+
+    protected void ddlGodownNo_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        fillStack();
+        ddlStackNo_SelectedIndexChanged(sender, e);
+    }
+
+    protected void fillStack()
+    {
+        try
+        {
+            string query = "";
+            ddlStackNo.Items.Clear();
+            query = "SELECT Stack_ID, Stack_Name FROM tbl_MetaData_STACK WHERE (Godown_ID = '" + ddlGodownNo.SelectedValue + "' and Commodity_Id = '" + ddlProcCommodity.SelectedValue + "' and Stack_Killed = 'N' ) order by Stack_Name";
+            SqlCommand cmd = new SqlCommand(query, Con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                ddlStackNo.DataSource = ds.Tables[0];
+                ddlStackNo.DataTextField = "Stack_Name";
+                ddlStackNo.DataValueField = "Stack_ID";
+                ddlStackNo.DataBind();
+            }
+            else
+            {
+                ddlStackNo.Items.Clear();
+                ddlStackNo.DataSource = null;
+                ddlStackNo.DataBind();
+            }
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Error in FillStack has occured, try again ')", true);
+        }
+    }
+
+    protected void ddlStackNo_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        txtStackCurrentCapacity.Text = "0";
+        txtStackMaxCap.Text = "0";
+        txtStackAvailable.Text = "0";
+        try
+        {
+            if (ddlStackNo.Items.Count > 0)
+            {
+                String query = "select tbl_MetaData_STACK.Stack_capacity,(select (isnull(a.wet,0) - isnull(b.wet2,0)) as Current_Capacity from (select SUM(Weight) as wet from tbl_storage_Stacking_Details where Stack_ID = tbl_MetaData_STACK.Stack_ID) a,(select SUM(Bags_Weight) as wet2 from tbl_Delivery_Stacking_Details_GatePass JOIN tbl_Storage_GatePass_Enrty GP ON tbl_Delivery_Stacking_Details_GatePass.GatePass_No = GP.GatePass_No where tbl_Delivery_Stacking_Details_GatePass.Stack_ID = tbl_MetaData_STACK.Stack_ID AND GP.Status !='CANCEL') b) AS 'Current_Capacity' from tbl_MetaData_STACK  where BranchId='" + Session["BranchId"].ToString() + "' and tbl_MetaData_STACK.Stack_ID = '" + ddlStackNo.SelectedValue.ToString() + "'";
+                SqlCommand cmd = new SqlCommand(query, Con);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    double Stackcap = Convert.ToDouble(ds.Tables[0].Rows[0]["Stack_capacity"].ToString());
+                    double cureentcap = Convert.ToDouble(ds.Tables[0].Rows[0]["Current_Capacity"].ToString());
+                    txtStackCurrentCapacity.Text = cureentcap.ToString();
+                    txtStackMaxCap.Text = Stackcap.ToString();
+                    txtStackAvailable.Text = String.Format("{0:0.00000}", (Convert.ToDouble(txtStackMaxCap.Text) - Convert.ToDouble(txtStackCurrentCapacity.Text)));
+                }
+            }
+            else
+            {
+                //Page.RegisterClientScriptBlock("mymsg2", "<script language=javascript> alert('" + "No stack under the selected Commodity ,Category and Godown Number" + "'); </script> ");  
+            }
+        }
+        catch (Exception ex)
+        {
+            Page.RegisterClientScriptBlock("mymsg2", "<script language=javascript> alert('Error in ddlStackNo_SelectedIndexChanged has occured, try again'); </script> ");
+        }
+    }
+
+    protected void ddlStackNo_PreRender(object sender, EventArgs e)
+    {
+        ddlStackNo_SelectedIndexChanged(sender, e);
+    }
+
+    protected void btnAddStack_Click(object sender, EventArgs e)
+    {
+        bool checkstatus = false;
+        try
+        {
+            if (txtStackBags.Text == "")
+            {
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('No of Bags to be added in Stack is required!')", true);
+                return;
+            }
+            else if (txtStackWt.Text == "")
+            {
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Bags Weight to be added in Stack is required!')", true);
+                return;
+            }
+            else if ((txtStackAvailable.Text != "") && (Convert.ToDecimal(txtStackAvailable.Text) < Convert.ToDecimal(txtStackWt.Text)))
+            {
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Insuffient StackCapacity in the Selected Stack!')", true);
+                return;
+            }
+            else
+            {
+                if (Session["WLC_StorageReceipt_Id"] != null)
+                {
+                    if (Session["Mode"] != null)
+                    {
+                        if (Session["Mode"].ToString() == "Edit")
+                        {
+                            ADD_EditStock();
+                        }
+                        else if (Session["Mode"].ToString() == "NON-Edit")
+                        {
+                            //Edit Stack for NON MPSCSC
+                            ADD_EditStockNonMPSCSC();
+                        }
+                    }
+                }
+                else
+                {
+                    if (ddlStackNo.Items.Count > 0)
+                    {
+
+                        btnsave.Enabled = true;
+                        if (Session["dt1"] == null)
+                        {
+                            Dt1 = CreateTable();
+                            Session["dt1"] = Dt1;
+                        }
+                        // adding rows to the datatable
+                        DataRow dr = ((DataTable)Session["dt1"]).NewRow();
+                        ((DataTable)Session["dt1"]).AcceptChanges();
+                        dr["Godownid"] = ddlGodownNo.SelectedValue;
+                        dr["Stackid"] = ddlStackNo.SelectedValue;
+                        dr["GodownName"] = ddlGodownNo.SelectedItem.Text;
+                        dr["StackName"] = ddlStackNo.SelectedItem.Text;
+                        dr["Bags"] = txtStackBags.Text.Trim();
+                        dr["Weight"] = txtStackWt.Text.Trim();
+                        if (gdstackingdetails.Rows.Count > 0)
+                        {
+                            int i;
+
+                            // checking whether or not the stack is already added to the grid view
+                            for (i = 0; i <= gdstackingdetails.Rows.Count - 1; i++)
+                            {
+                                string stackid = gdstackingdetails.Rows[i].Cells[2].Text.ToString();
+                                string selectstackid = ddlStackNo.SelectedValue.ToString();
+                                if (stackid == selectstackid)
+                                {
+                                    checkstatus = true;
+                                }
+                            }
+                            if (checkstatus == false)
+                            {
+                                ((DataTable)Session["dt1"]).Rows.Add(dr);
+                                ((DataTable)Session["dt1"]).AcceptChanges();
+                                gdstackingdetails.DataSource = (DataTable)Session["dt1"];
+                                gdstackingdetails.DataBind();
+                                txtStackBags.Text = null;
+                                txtStackWt.Text = null;
+                                chksum();
+                            }
+                            else
+                            {
+                                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Entry for this stack is already done')", true);
+                            }
+                        }
+                        else
+                        {
+                            ((DataTable)Session["dt1"]).Rows.Add(dr);
+                            ((DataTable)Session["dt1"]).AcceptChanges();
+                            gdstackingdetails.DataSource = (DataTable)Session["dt1"];
+                            gdstackingdetails.DataBind();
+                            txtStackBags.Text = null;
+                            txtStackWt.Text = null;
+                            chksum();
+                        }
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('No stack under the selected Commodity ,Category and Godown Number')", true);
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Error in btnAddStack_Click has occured, try again')", true);
+        }
+    }
+
+    protected void ADD_EditStock()
+    {
+        bool checkEditstatus = false;
+        try
+        {
+            if (ddlStackNo.Items.Count > 0)
+            {
+
+                btnUpdate.Enabled = true;
+                if (Session["EditStack"] == null)
+                {
+                    EditStack = CreateTableEditStack();
+
+                    Session["EditStack"] = EditStack;
+
+                }
+                // adding rows to the datatable
+                DataRow dr = ((DataTable)Session["EditStack"]).NewRow();
+                ((DataTable)Session["EditStack"]).AcceptChanges();
+                dr["Godownid"] = ddlGodownNo.SelectedValue;
+                dr["Stackid"] = ddlStackNo.SelectedValue;
+                dr["GodownName"] = ddlGodownNo.SelectedItem.Text;
+                dr["StackName"] = ddlStackNo.SelectedItem.Text;
+                dr["Bags"] = txtStackBags.Text.Trim();
+                dr["Weight"] = txtStackWt.Text.Trim();
+                if (gdEditStackingDetails.Rows.Count > 0)
+                {
+                    int i;
+                    // checking whether or not the stack is already added to the grid view
+                    for (i = 0; i <= gdEditStackingDetails.Rows.Count - 1; i++)
+                    {
+                        string stackid = gdEditStackingDetails.Rows[i].Cells[2].Text.ToString();
+                        string selectstackid = ddlStackNo.SelectedValue.ToString();
+                        if (stackid == selectstackid)
+                        {
+                            checkEditstatus = true;
+                        }
+                    }
+                    if (checkEditstatus == false)
+                    {
+                        ((DataTable)Session["EditStack"]).Rows.Add(dr);
+                        ((DataTable)Session["EditStack"]).AcceptChanges();
+                        gdEditStackingDetails.DataSource = (DataTable)Session["EditStack"];
+                        gdEditStackingDetails.DataBind();
+                        txtStackBags.Text = null;
+                        txtStackWt.Text = null;
+                        chksumEdit();
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Entry for this stack is already done')", true);
+                    }
+                }
+                else
+                {
+                    ((DataTable)Session["EditStack"]).Rows.Add(dr);
+                    ((DataTable)Session["EditStack"]).AcceptChanges();
+                    gdEditStackingDetails.DataSource = (DataTable)Session["EditStack"];
+                    gdEditStackingDetails.DataBind();
+                    txtStackBags.Text = null;
+                    txtStackWt.Text = null;
+                    chksumEdit();
+                }
+                btnUpdate.Enabled = true;
+                gdEditStackingDetails.Enabled = true;
+            }
+            else
+            {
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('No stack under the selected Commodity ,Category and Godown Number')", true);
+            }
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Error in Add_EDITStock has occured, try again')", true);
+        }
+    }
+
+    protected void ADD_EditStockNonMPSCSC()
+    {
+        bool checkEditstatusNonMPCSCS = false;
+        try
+        {
+            if (ddlStackNo.Items.Count > 0)
+            {
+
+                btnUpdate.Enabled = true;
+                if (Session["EditStack"] == null)
+                {
+                    EditStack = CreateTableEditStack();
+
+                    Session["EditStack"] = EditStack;
+
+                }
+                // adding rows to the datatable
+                DataRow dr = ((DataTable)Session["EditStack"]).NewRow();
+                ((DataTable)Session["EditStack"]).AcceptChanges();
+                dr["Godownid"] = ddlGodownNo.SelectedValue;
+                dr["Stackid"] = ddlStackNo.SelectedValue;
+                dr["GodownName"] = ddlGodownNo.SelectedItem.Text;
+                dr["StackName"] = ddlStackNo.SelectedItem.Text;
+                dr["Bags"] = txtStackBags.Text.Trim();
+                dr["Weight"] = txtStackWt.Text.Trim();
+                if (gdEditStackingDetails.Rows.Count > 0)
+                {
+                    int i;
+                    // checking whether or not the stack is already added to the grid view
+                    for (i = 0; i <= gdEditStackingDetails.Rows.Count - 1; i++)
+                    {
+                        string stackid = gdEditStackingDetails.Rows[i].Cells[2].Text.ToString();
+                        string selectstackid = ddlStackNo.SelectedValue.ToString();
+                        if (stackid == selectstackid)
+                        {
+                            checkEditstatusNonMPCSCS = true;
+                        }
+                    }
+                    if (checkEditstatusNonMPCSCS == false)
+                    {
+                        ((DataTable)Session["EditStack"]).Rows.Add(dr);
+                        ((DataTable)Session["EditStack"]).AcceptChanges();
+                        gdEditStackingDetails.DataSource = (DataTable)Session["EditStack"];
+                        gdEditStackingDetails.DataBind();
+                        txtStackBags.Text = null;
+                        txtStackWt.Text = null;
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Entry for this stack is already done')", true);
+                    }
+                }
+                else
+                {
+                    ((DataTable)Session["EditStack"]).Rows.Add(dr);
+                    ((DataTable)Session["EditStack"]).AcceptChanges();
+                    gdEditStackingDetails.DataSource = (DataTable)Session["EditStack"];
+                    gdEditStackingDetails.DataBind();
+                    txtStackBags.Text = null;
+                    txtStackWt.Text = null;
+                }
+                btnUpdate.Enabled = true;
+                gdEditStackingDetails.Enabled = true;
+            }
+            else
+            {
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('No stack under the selected Commodity ,Category and Godown Number')", true);
+            }
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Error in ADD_EditStockNonMPSCSC has occured, try again')", true);
+        }
+    }
+
+    private DataTable CreateTable()
+    {
+        DataTable dt = new DataTable();//DataTable is created
+        DataColumn Godownid = new DataColumn("Godownid", Type.GetType("System.String"));
+        DataColumn Stackid = new DataColumn("Stackid", Type.GetType("System.String"));
+        DataColumn GodownName = new DataColumn("GodownName", Type.GetType("System.String"));
+        DataColumn StackName = new DataColumn("StackName", Type.GetType("System.String"));
+        DataColumn Bags = new DataColumn("Bags", Type.GetType("System.Int32"));
+        DataColumn Weight = new DataColumn("Weight", Type.GetType("System.Decimal"));
+        dt.Columns.Add(Godownid);//Column is added to the DataTable
+        dt.Columns.Add(Stackid);//Column is added to the DataTable
+        dt.Columns.Add(GodownName);//Column is added to the DataTable
+        dt.Columns.Add(StackName);//Column is added to the DataTable
+        dt.Columns.Add(Bags);//Column is added to the DataTable
+        dt.Columns.Add(Weight);//Column is added to the DataTable
+        dt.AcceptChanges();
+        return dt;
+    }
+
+    private DataTable CreateTableEditStack()
+    {
+        DataTable dtEditStack = new DataTable();//DataTable is created
+        DataColumn Godownid = new DataColumn("Godownid", Type.GetType("System.String"));
+        DataColumn Stackid = new DataColumn("Stackid", Type.GetType("System.String"));
+        DataColumn GodownName = new DataColumn("GodownName", Type.GetType("System.String"));
+        DataColumn StackName = new DataColumn("StackName", Type.GetType("System.String"));
+        DataColumn Bags = new DataColumn("Bags", Type.GetType("System.Int32"));
+        DataColumn Weight = new DataColumn("Weight", Type.GetType("System.Decimal"));
+        dtEditStack.Columns.Add(Godownid);//Column is added to the DataTable
+        dtEditStack.Columns.Add(Stackid);//Column is added to the DataTable
+        dtEditStack.Columns.Add(GodownName);//Column is added to the DataTable
+        dtEditStack.Columns.Add(StackName);//Column is added to the DataTable
+        dtEditStack.Columns.Add(Bags);//Column is added to the DataTable
+        dtEditStack.Columns.Add(Weight);//Column is added to the DataTable
+        dtEditStack.AcceptChanges();
+        return dtEditStack;
+    }
+
+    private DataTable CreateTableEditStackNonMPSCSC()
+    {
+        DataTable dtEditStackNonMPSCSC = new DataTable();//DataTable is created
+        DataColumn Godownid = new DataColumn("Godownid", Type.GetType("System.String"));
+        DataColumn Stackid = new DataColumn("Stackid", Type.GetType("System.String"));
+        DataColumn GodownName = new DataColumn("GodownName", Type.GetType("System.String"));
+        DataColumn StackName = new DataColumn("StackName", Type.GetType("System.String"));
+        DataColumn Bags = new DataColumn("Bags", Type.GetType("System.Int32"));
+        DataColumn Weight = new DataColumn("Weight", Type.GetType("System.Decimal"));
+        dtEditStackNonMPSCSC.Columns.Add(Godownid);//Column is added to the DataTable
+        dtEditStackNonMPSCSC.Columns.Add(Stackid);//Column is added to the DataTable
+        dtEditStackNonMPSCSC.Columns.Add(GodownName);//Column is added to the DataTable
+        dtEditStackNonMPSCSC.Columns.Add(StackName);//Column is added to the DataTable
+        dtEditStackNonMPSCSC.Columns.Add(Bags);//Column is added to the DataTable
+        dtEditStackNonMPSCSC.Columns.Add(Weight);//Column is added to the DataTable
+        dtEditStackNonMPSCSC.AcceptChanges();
+        return dtEditStackNonMPSCSC;
+    }
+
+    protected void gdEditStackingDetails_PreRender(object sender, EventArgs e)
+    {
+        int count = 0;
+        count = gdEditStackingDetails.Rows.Count;
+        if (count > 0)
+        {
+            btnUpdate.Enabled = true;
+        }
+        else
+        {
+            btnUpdate.Enabled = false;
+        }
+    }
+
+    protected void gdEditStackingDetails_RowCreated(object sender, GridViewRowEventArgs e)
+    {
+        try
+        {
+            if (ViewState["ckEditstat"].ToString() != "Delete")
+            {
+                e.Row.Cells[1].Visible = false;
+                e.Row.Cells[2].Visible = false;
+            }
+        }
+        catch (Exception ex)
+        {
+            Page.RegisterClientScriptBlock("mymsg2", "<script language=javascript> alert('Error in gdEditStackingDetails_RowCreated has occured, try again'); </script> ");
+        }
+    }
+
+    protected void gdEditStackingDetails_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        try
+        {
+            int i = e.RowIndex;
+            if (gdEditStackingDetails.Rows.Count < 1)
+            {
+                ViewState["ckEditstat"] = "Delete";
+            }
+
+            ((DataTable)Session["EditStack"]).Rows[i]["Bags"] = "0";
+            ((DataTable)Session["EditStack"]).Rows[i]["Weight"] = "0";
+            ((DataTable)Session["EditStack"]).AcceptChanges();
+
+            gdEditStackingDetails.DataSource = (DataTable)Session["EditStack"];
+            gdEditStackingDetails.DataBind();
+            chksumEdit();
+        }
+        catch (Exception ex)
+        {
+            Page.RegisterClientScriptBlock("mymsg2", "<script language=javascript> alert('Error in gdEditStackingDetails_RowDeleting has occured, try again'); </script> ");
+        }
+    }
+
+    protected void gdEditStackingDetails_RowEditing(object sender, GridViewEditEventArgs e)
+    {
+        try
+        {
+            int i = e.NewEditIndex;
+            if (gdEditStackingDetails.Rows.Count < 1)
+            {
+                ViewState["ckEditstat"] = "Edit";
+            }
+
+            ddlGodownNo.SelectedValue = ((DataTable)Session["EditStack"]).Rows[i][0].ToString();
+            ddlGodownNo_SelectedIndexChanged(sender, e);
+            ddlStackNo.SelectedValue = ((DataTable)Session["EditStack"]).Rows[i][1].ToString();
+            ddlGodownNo.Enabled = false;
+            ddlStackNo.Enabled = false;
+            txtStackBags.Text = ((DataTable)Session["EditStack"]).Rows[i][4].ToString();
+            txtStackWt.Text = ((DataTable)Session["EditStack"]).Rows[i][5].ToString();
+
+            ((DataTable)Session["EditStack"]).Rows[i].Delete();
+
+            ((DataTable)Session["EditStack"]).AcceptChanges();
+
+            gdEditStackingDetails.DataSource = (DataTable)Session["EditStack"];
+            gdEditStackingDetails.DataBind();
+            chksumEdit();
+            btnUpdate.Enabled = false;
+            gdEditStackingDetails.Enabled = false;
+        }
+        catch (Exception ex)
+        {
+            Page.RegisterClientScriptBlock("mymsg2", "<script language=javascript> alert('Error gdEditStackingDetails_RowEditing has occured, try again'); </script> ");
+        }
+    }
+
+    protected void gdstackingdetails_PreRender(object sender, EventArgs e)
+    {
+        try
+        {
+            int count = 0;
+            count = gdstackingdetails.Rows.Count;
+            if (count > 0)
+            {
+                btnsave.Enabled = true;
+            }
+            else
+            {
+                btnsave.Enabled = false;
+            }
+        }
+        catch (Exception ex)
+        {
+            Page.RegisterClientScriptBlock("mymsg2", "<script language=javascript> alert('Error gdStackingDetails_PreRender has occured, try again'); </script> ");
+        }
+    }
+
+    protected void gdstackingdetails_RowCreated(object sender, GridViewRowEventArgs e)
+    {
+        try
+        {
+            if (ViewState["ckstat"].ToString() != "Delete")
+            {
+                e.Row.Cells[1].Visible = false;
+                e.Row.Cells[2].Visible = false;
+            }
+        }
+        catch (Exception ex)
+        {
+            Page.RegisterClientScriptBlock("mymsg2", "<script language=javascript> alert('Error gdStackingDetails_RowCreated has occured, try again'); </script> ");
+        }
+    }
+
+    protected void gdstackingdetails_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        try
+        {
+            int i = e.RowIndex;
+            if (gdstackingdetails.Rows.Count < 1)
+            {
+                ViewState["ckstat"] = "Delete";
+            }
+            ((DataTable)Session["dt1"]).Rows[i].Delete();
+            ((DataTable)Session["dt1"]).AcceptChanges();
+
+            gdstackingdetails.DataSource = (DataTable)Session["dt1"];
+            gdstackingdetails.DataBind();
+            chksum();
+        }
+        catch (Exception ex)
+        {
+            Page.RegisterClientScriptBlock("mymsg2", "<script language=javascript> alert('Error in gdStackingDetails_RowDeleting has occured, try again'); </script> ");
+        }
+    }
+
+    protected void chksum()
+    {
+        try
+        {
+            int stackbag = 0;
+            decimal stackwts = 0;
+            if (gdstackingdetails.Rows.Count > 0)
+            {
+                for (int s = 0; s < gdstackingdetails.Rows.Count; s++)
+                {
+                    stackbag = stackbag + int.Parse(gdstackingdetails.Rows[s].Cells[5].Text.ToString());
+                    stackwts = stackwts + decimal.Parse(gdstackingdetails.Rows[s].Cells[6].Text.ToString());
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Page.RegisterClientScriptBlock("mymsg2", "<script language=javascript> alert('Error in Chksum has occured, try again'); </script> ");
+        }
+    }
+
+    protected void chksumEdit()
+    {
+        try
+        {
+            int stackbag = 0;
+            decimal stackwts = 0;
+            if (gdEditStackingDetails.Rows.Count > 0)
+            {
+                for (int s = 0; s < gdEditStackingDetails.Rows.Count; s++)
+                {
+                    stackbag = stackbag + int.Parse(gdEditStackingDetails.Rows[s].Cells[5].Text.ToString());
+                    stackwts = stackwts + decimal.Parse(gdEditStackingDetails.Rows[s].Cells[6].Text.ToString());
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Page.RegisterClientScriptBlock("mymsg2", "<script language=javascript> alert('Error in chksumEdit has occured, try again'); </script> ");
+        }
+    }
+
+    protected void btnupdate_Click(object sender, EventArgs e)
+    {
+        if (Session["WLC_StorageReceipt_Id"] != null)
+        {
+            string Arrivalid = Session["WLC_StorageReceipt_Id"].ToString();
+            if (Con.State == ConnectionState.Closed)
+            {
+                Con.Open();
+            }
+            qry = "update [tbl_Storage_Arrival_Stock] set DepositDate='" + getDate_MDY(txtProcDepostiDate.Text.Trim().ToString()) + "',Crop_Year='" + ddlcropyear.SelectedItem.Text.ToString() + "' where ArrivalStock_Id ='" + Arrivalid + "'";
+            cmd = new SqlCommand(qry, Con);
+            int z = cmd.ExecuteNonQuery();
+            if (z > 0)
+            {
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Record Updated Successfully ')", true);
+                Con.Close();
+            }
+            else
+            {
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Record Not Updated')", true);
+            }
+        }
+    }
+
+    private void fillprocCommodity()
+    {
+        try
+        {
+            string query = "SELECT Commodity_Id, Commodity_Name FROM tbl_MetaData_STORAGE_COMMODITY order by Qry_Order";
+            SqlCommand cmd = new SqlCommand(query, Con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                ddlProcCommodity.Items.Clear();
+                ddlProcCommodity.DataSource = ds.Tables[0];
+                ddlProcCommodity.DataTextField = "Commodity_Name";
+                ddlProcCommodity.DataValueField = "Commodity_Id";
+                ddlProcCommodity.DataBind();
+            }
+        }
+        catch (Exception)
+        {
+
+            // throw;
+        }
+    }
+
+    protected void FillProcData()
+    {
+        try
+        {
+            string query = "SELECT Purchase_Center,[Truck_No] AS Truck_Number,[TC_Number],[godown],[CommodityId],[Bags] AS Recd_Bags,[Accept_Qty] AS Recd_Qty,Acceptance_No,Convert(varchar(10),Acceptance_Date,103) as 'Acceptance_Date',[Sending_District],(select [Society_Name] From [MPSCSC].[dbo].[Society] AS SOC where SOC.Society_Id='" + Session["SocietyCode"].ToString() + "') AS Society_Name,[IssueID] FROM [mpscsc].[dbo].[Acceptance_Note_Detail] AS ADN WHERE Distt_ID='" + Session["WLC_Distt_ID"].ToString() + "' AND Purchase_Center='" + Session["SocietyCode"].ToString() + "' AND IssueCenter_ID='" + Session["WLC_IssueCenter_ID"].ToString() + "' AND TC_Number='" + Session["WLC_TC_Number"].ToString() + "' AND Truck_No='" + Session["TruckNo"] + "' AND IssueID='" + Session["IssueId"].ToString() + "'";
+            //  string query = "SELECT Purchase_Center,[Truck_No] AS Truck_Number,[TC_Number],[godown],[CommodityId],[Bags] AS Recd_Bags,[Accept_Qty] AS Recd_Qty,Acceptance_No,Convert(varchar(10),Acceptance_Date,103) as 'Acceptance_Date',[Sending_District],(select [Society_Name] From  [MPSCSC].[dbo].[Society] AS SOC where SOC.Society_Id='" + Session["SocietyCode"].ToString() + "') AS Society_Name,[IssueID] FROM [mpscsc].[dbo].[Acceptance_Note_Detail] AS ADN WHERE Distt_ID='" + Session["WLC_Distt_ID"].ToString() + "' AND Purchase_Center='" + Session["SocietyCode"].ToString() + "' AND IssueCenter_ID='" + Session["WLC_IssueCenter_ID"].ToString() + "' AND TC_Number='" + Session["WLC_TC_Number"].ToString() + "' AND Truck_No='" + Session["TruckNo"] + "' AND IssueID='" + Session["IssueId"].ToString() + "'";
+            SqlCommand cmd = new SqlCommand(query, Con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            if (ds.Tables[0].Rows.Count == 1)
+            {
+                txtProcTruckNo.Visible = true;
+                lblProcTCNo.Visible = true;
+                lblProcTruckNo.Visible = true;
+                txtProcTCNo.Visible = true;
+                lblSourcesociety.Visible = true;
+                lblAcceptanceNote.Text = "Acceptance No.";
+                lbl_societyname.Text = ds.Tables[0].Rows[0]["Society_Name"].ToString();
+                ddlSourceS.Items.Add(new ListItem(ds.Tables[0].Rows[0][9].ToString(), ds.Tables[0].Rows[0][0].ToString()));
+                txtProcTruckNo.Text = ds.Tables[0].Rows[0]["Truck_Number"].ToString();
+                txtProcTruckNo.Enabled = false;
+                txtProcTCNo.Text = ds.Tables[0].Rows[0]["TC_Number"].ToString();
+                txtProcTCNo.Enabled = false;
+                ddlProcCommodity.SelectedValue = ds.Tables[0].Rows[0]["CommodityId"].ToString();
+                ddlProcCommodity.Enabled = false;
+                txtProcQtyDeposit.Text = ds.Tables[0].Rows[0]["Recd_Qty"].ToString();
+                txtProcQtyDeposit.Enabled = false;
+                txtProcBags.Text = ds.Tables[0].Rows[0]["Recd_Bags"].ToString();
+                txtProcBags.Enabled = false;
+
+                txtProcBagsAcceptable.Text = ds.Tables[0].Rows[0]["Recd_Bags"].ToString();
+                txtProcQtyAcceptable.Text = ds.Tables[0].Rows[0]["Recd_Qty"].ToString();
+                //
+                hfAcptDate.Value = ds.Tables[0].Rows[0]["Acceptance_Date"].ToString();
+                txtAcceptanceNote.Text = ds.Tables[0].Rows[0]["Acceptance_No"].ToString();
+                txtAcceptanceNote.Enabled = false;
+                hfSending_Dist.Value = ds.Tables[0].Rows[0]["sending_district"].ToString();
+                FillGodown();
+                string godownid = ds.Tables[0].Rows[0]["godown"].ToString();
+                if (godownid != "")
+                {
+                    ddlGodownNo.SelectedValue = ds.Tables[0].Rows[0]["godown"].ToString();
+                }
+                
+                
+                fillStack();
+            }
+            else
+            {
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Invalid Record')", true);
+                Response.Redirect("~/IssueCenterLevel/Storage/WLC_Deposit_From.aspx?PopMsg=" + "Invalid Record!" + "");
+            }
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Error in FillProcData has occured, try again')", true);
+        }
+    }
+    //27-03-15
+    protected void FillProcDataNew()
+    {
+        try
+        {
+            string DepoNo=Session["whrreq"].ToString();
+            //if (DepoNo.Substring(0, 2) == "18" || DepoNo.Substring(0, 2) == "19")
+            if (DepoNo.Substring(0, 2) == "18" || DepoNo.Substring(0, 2) == "19" || DepoNo.Substring(0, 2) == "20")
+            {
+                //string query2 = "SELECT distinct prc.IssueCenter_ID,convert(varchar(10),Prc.Acceptance_Date,103) as 'Acceptance_Date',prc.godown,sum(prc.Bags) as Recd_Bags, sum(Prc.Accept_Qty) AS Recd_Qty,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name FROM MPSCSC.dbo.[Acceptance_Note_Wheat2017] as Prc join tbl_MetaData_STORAGE_COMMODITY as cm on cm.Commodity_Id=Prc.CommodityId inner join MPSCSC.dbo.SCSC_Procurement_Wheat2017 as sp on Prc.IssueID=sp.Receipt_Id and Prc.Acceptance_No=sp.Acceptance_No  where Prc.WHR_Request is not null  and  sp.Branch_Id='" + Session["BranchId"].ToString() + "' and Prc.WHR_Request='" + Session["whrreq"].ToString() + "' and convert(varchar(10),Prc.Acceptance_Date,103)='" + Session["AccepDate"].ToString() + "' group by WHR_Request,prc.IssueCenter_ID,Prc.Acceptance_Date,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name,prc.godown";
+                string query2 = "SELECT distinct prc.IssueCenter_ID,convert(varchar(10),Prc.Acceptance_Date,103) as 'Acceptance_Date',prc.godown,sum(prc.Bags) as Recd_Bags, sum(Prc.Accept_Qty) AS Recd_Qty,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name FROM MPSCSC.dbo.[Acceptance_Note_Wheat2018] as Prc join tbl_MetaData_STORAGE_COMMODITY as cm on cm.Commodity_Id=Prc.CommodityId inner join MPSCSC.dbo.SCSC_Procurement_Wheat2018 as sp on Prc.IssueID=sp.Receipt_Id and Prc.Acceptance_No=sp.Acceptance_No  where Prc.WHR_Request is not null  and  sp.Branch_Id='" + Session["BranchId"].ToString() + "' and Prc.WHR_Request='" + Session["whrreq"].ToString() + "' and convert(varchar(10),Prc.Acceptance_Date,103)='" + Session["AccepDate"].ToString() + "' group by WHR_Request,prc.IssueCenter_ID,Prc.Acceptance_Date,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name,prc.godown";
+
+                SqlCommand cmd2 = new SqlCommand(query2, Con);
+                SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
+                DataSet ds2 = new DataSet();
+                da2.Fill(ds2);
+                if (ds2.Tables[0].Rows.Count == 1)
+                {
+                    // lbl_societyname.Text = ds.Tables[0].Rows[0]["Society_Name"].ToString();
+                    // ddlSourceS.Items.Add(new ListItem(ds.Tables[0].Rows[0][9].ToString(), ds.Tables[0].Rows[0][0].ToString()));
+                    //txtProcTruckNo.Text = ds.Tables[0].Rows[0]["Truck_Number"].ToString();
+                    lblSourcesociety.Visible = false;
+                    lblAcceptanceNote.Text = "Depositor Form No:";
+                    lblProcTCNo.Visible = true;
+                    lblProcTruckNo.Visible = false;
+                    txtProcTruckNo.Visible = false;
+                    txtProcTCNo.Visible = true;
+                    txtProcTCNo.Text = ds2.Tables[0].Rows[0]["WHR_Request"].ToString();
+                    txtProcTCNo.Enabled = false;
+                    ddlProcCommodity.SelectedValue = ds2.Tables[0].Rows[0]["CommodityId"].ToString();
+                    ddlProcCommodity.Enabled = false;
+                    txtProcQtyDeposit.Text = ds2.Tables[0].Rows[0]["Recd_Qty"].ToString();
+                    txtProcQtyDeposit.Enabled = false;
+                    txtProcBags.Text = ds2.Tables[0].Rows[0]["Recd_Bags"].ToString();
+                    txtProcBags.Enabled = false;
+
+                    txtProcBagsAcceptable.Text = ds2.Tables[0].Rows[0]["Recd_Bags"].ToString();
+                    txtProcQtyAcceptable.Text = ds2.Tables[0].Rows[0]["Recd_Qty"].ToString();
+                    //
+                    hfAcptDate.Value = ds2.Tables[0].Rows[0]["Acceptance_Date"].ToString();
+                    txtAcceptanceNote.Text = ds2.Tables[0].Rows[0]["WHR_Request"].ToString();
+                    txtAcceptanceNote.Enabled = false;
+                    // hfSending_Dist.Value = ds.Tables[0].Rows[0]["sending_district"].ToString();
+                    FillGodown();
+                    string godownid = ds2.Tables[0].Rows[0]["godown"].ToString();
+                    if (godownid != "")
+                    {
+                        ddlGodownNo.SelectedValue = ds2.Tables[0].Rows[0]["godown"].ToString();
+                    }
+
+
+                    fillStack();
+                }
+            }
+            else
+            {
+                //06-05-without acceptancedate filter string query = "SELECT distinct prc.IssueCenter_ID,convert(varchar(10),Prc.Acceptance_Date,103) as 'Acceptance_Date',prc.godown,sum(prc.Bags) as Recd_Bags,sum(Prc.Accept_Qty) AS Recd_Qty,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name FROM MPSCSC.dbo.[Acceptance_Note_Detail] as Prc join tbl_MetaData_STORAGE_COMMODITY as cm on cm.Commodity_Id=Prc.CommodityId where Prc.WHR_Request='" + Session["whrreq"].ToString() + "' group by WHR_Request,prc.IssueCenter_ID,Prc.Acceptance_Date,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name,prc.godown";
+                //local string query = "SELECT distinct prc.IssueCenter_ID,convert(varchar(10),Prc.Acceptance_Date,103) as 'Acceptance_Date',prc.godown,sum(prc.Bags) as Recd_Bags,sum(Prc.Accept_Qty) AS Recd_Qty,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name FROM MPSCSC.dbo.[Acceptance_Note_Detail] as Prc join tbl_MetaData_STORAGE_COMMODITY as cm on cm.Commodity_Id=Prc.CommodityId where Prc.WHR_Request='" + Session["whrreq"].ToString() + "' group by WHR_Request,prc.IssueCenter_ID,Prc.Acceptance_Date,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name,prc.godown";
+                //19-05-15   string query = "SELECT distinct prc.IssueCenter_ID,convert(varchar(10),Prc.Acceptance_Date,103) as 'Acceptance_Date',prc.godown,sum(prc.Bags) as Recd_Bags,sum(Prc.Accept_Qty) AS Recd_Qty,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name FROM MPSCSC.dbo.[Acceptance_Note_Detail] as Prc join tbl_MetaData_STORAGE_COMMODITY as cm on cm.Commodity_Id=Prc.CommodityId where Prc.WHR_Request='" + Session["whrreq"].ToString() + "' and convert(varchar(10),Prc.Acceptance_Date,103)='" + Session["AccepDate"].ToString() + "' group by WHR_Request,prc.IssueCenter_ID,Prc.Acceptance_Date,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name,prc.godown";
+                string query = "SELECT distinct prc.IssueCenter_ID,convert(varchar(10),Prc.Acceptance_Date,103) as 'Acceptance_Date',prc.godown,sum(prc.Bags) as Recd_Bags, sum(Prc.Accept_Qty) AS Recd_Qty,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name FROM MPSCSC.dbo.[Acceptance_Note_Detail] as Prc join tbl_MetaData_STORAGE_COMMODITY as cm on cm.Commodity_Id=Prc.CommodityId inner join MPSCSC.dbo.SCSC_Procurement as sp on Prc.IssueID=sp.Receipt_Id and Prc.Acceptance_No=sp.Acceptance_No  where Prc.WHR_Request is not null  and  sp.Branch_Id='" + Session["BranchId"].ToString() + "' and Prc.WHR_Request='" + Session["whrreq"].ToString() + "' and convert(varchar(10),Prc.Acceptance_Date,103)='" + Session["AccepDate"].ToString() + "' group by WHR_Request,prc.IssueCenter_ID,Prc.Acceptance_Date,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name,prc.godown";
+
+                SqlCommand cmd = new SqlCommand(query, Con);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                if (ds.Tables[0].Rows.Count == 1)
+                {
+                    // lbl_societyname.Text = ds.Tables[0].Rows[0]["Society_Name"].ToString();
+                    // ddlSourceS.Items.Add(new ListItem(ds.Tables[0].Rows[0][9].ToString(), ds.Tables[0].Rows[0][0].ToString()));
+                    //txtProcTruckNo.Text = ds.Tables[0].Rows[0]["Truck_Number"].ToString();
+                    lblSourcesociety.Visible = false;
+                    lblAcceptanceNote.Text = "Depositor Form No:";
+                    lblProcTCNo.Visible = true;
+                    lblProcTruckNo.Visible = false;
+                    txtProcTruckNo.Visible = false;
+                    txtProcTCNo.Visible = true;
+                    txtProcTCNo.Text = ds.Tables[0].Rows[0]["WHR_Request"].ToString();
+                    txtProcTCNo.Enabled = false;
+                    ddlProcCommodity.SelectedValue = ds.Tables[0].Rows[0]["CommodityId"].ToString();
+                    ddlProcCommodity.Enabled = false;
+                    txtProcQtyDeposit.Text = ds.Tables[0].Rows[0]["Recd_Qty"].ToString();
+                    txtProcQtyDeposit.Enabled = false;
+                    txtProcBags.Text = ds.Tables[0].Rows[0]["Recd_Bags"].ToString();
+                    txtProcBags.Enabled = false;
+
+                    txtProcBagsAcceptable.Text = ds.Tables[0].Rows[0]["Recd_Bags"].ToString();
+                    txtProcQtyAcceptable.Text = ds.Tables[0].Rows[0]["Recd_Qty"].ToString();
+                    //
+                    hfAcptDate.Value = ds.Tables[0].Rows[0]["Acceptance_Date"].ToString();
+                    txtAcceptanceNote.Text = ds.Tables[0].Rows[0]["WHR_Request"].ToString();
+                    txtAcceptanceNote.Enabled = false;
+                    // hfSending_Dist.Value = ds.Tables[0].Rows[0]["sending_district"].ToString();
+                    FillGodown();
+                    string godownid = ds.Tables[0].Rows[0]["godown"].ToString();
+                    if (godownid != "")
+                    {
+                        ddlGodownNo.SelectedValue = ds.Tables[0].Rows[0]["godown"].ToString();
+                    }
+
+
+                    fillStack();
+                }
+                else if (Session["Depot_DistID"] != null)
+                {
+
+                    string query2 = "SELECT distinct prc.IssueCenter_ID,convert(varchar(10),Prc.Acceptance_Date,103) as 'Acceptance_Date',prc.godown,sum(prc.Bags) as Recd_Bags, sum(Prc.Accept_Qty) AS Recd_Qty,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name FROM MPSCSC.dbo.[Acceptance_Note_Detail2016] as Prc join tbl_MetaData_STORAGE_COMMODITY as cm on cm.Commodity_Id=Prc.CommodityId inner join MPSCSC.dbo.SCSC_Procurement2016 as sp on Prc.IssueID=sp.Receipt_Id and Prc.Acceptance_No=sp.Acceptance_No  where Prc.WHR_Request is not null  and  sp.Branch_Id='" + Session["BranchId"].ToString() + "' and Prc.WHR_Request='" + Session["whrreq"].ToString() + "' and convert(varchar(10),Prc.Acceptance_Date,103)='" + Session["AccepDate"].ToString() + "' group by WHR_Request,prc.IssueCenter_ID,Prc.Acceptance_Date,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name,prc.godown";
+
+                    SqlCommand cmd2 = new SqlCommand(query2, Con);
+                    SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
+                    DataSet ds2 = new DataSet();
+                    da2.Fill(ds2);
+                    if (ds2.Tables[0].Rows.Count == 1)
+                    {
+                        // lbl_societyname.Text = ds.Tables[0].Rows[0]["Society_Name"].ToString();
+                        // ddlSourceS.Items.Add(new ListItem(ds.Tables[0].Rows[0][9].ToString(), ds.Tables[0].Rows[0][0].ToString()));
+                        //txtProcTruckNo.Text = ds.Tables[0].Rows[0]["Truck_Number"].ToString();
+                        lblSourcesociety.Visible = false;
+                        lblAcceptanceNote.Text = "Depositor Form No:";
+                        lblProcTCNo.Visible = true;
+                        lblProcTruckNo.Visible = false;
+                        txtProcTruckNo.Visible = false;
+                        txtProcTCNo.Visible = true;
+                        txtProcTCNo.Text = ds2.Tables[0].Rows[0]["WHR_Request"].ToString();
+                        txtProcTCNo.Enabled = false;
+                        ddlProcCommodity.SelectedValue = ds2.Tables[0].Rows[0]["CommodityId"].ToString();
+                        ddlProcCommodity.Enabled = false;
+                        txtProcQtyDeposit.Text = ds2.Tables[0].Rows[0]["Recd_Qty"].ToString();
+                        txtProcQtyDeposit.Enabled = false;
+                        txtProcBags.Text = ds2.Tables[0].Rows[0]["Recd_Bags"].ToString();
+                        txtProcBags.Enabled = false;
+
+                        txtProcBagsAcceptable.Text = ds2.Tables[0].Rows[0]["Recd_Bags"].ToString();
+                        txtProcQtyAcceptable.Text = ds2.Tables[0].Rows[0]["Recd_Qty"].ToString();
+                        //
+                        hfAcptDate.Value = ds2.Tables[0].Rows[0]["Acceptance_Date"].ToString();
+                        txtAcceptanceNote.Text = ds2.Tables[0].Rows[0]["WHR_Request"].ToString();
+                        txtAcceptanceNote.Enabled = false;
+                        // hfSending_Dist.Value = ds.Tables[0].Rows[0]["sending_district"].ToString();
+                        FillGodown();
+                        string godownid = ds2.Tables[0].Rows[0]["godown"].ToString();
+                        if (godownid != "")
+                        {
+                            ddlGodownNo.SelectedValue = ds2.Tables[0].Rows[0]["godown"].ToString();
+                        }
+
+
+                        fillStack();
+                    }
+
+                }
+                else
+                {
+                    ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Invalid Record')", true);
+                    Response.Redirect("~/IssueCenterLevel/Storage/WLC_Deposit_From.aspx?PopMsg=" + "Invalid Record!" + "");
+
+                }
+            }
+         
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Error in FillProcData has occured, try again')", true);
+        }
+    }
+    protected void FillProcDataNewCMS()
+    {
+        try
+        {
+            string DepoNo = Session["whrreq"].ToString();
+            if (DepoNo.Substring(0, 2) == "18" || DepoNo.Substring(0, 2) == "19")
+            {
+                //string query2 = "SELECT distinct prc.IssueCenter_ID,convert(varchar(10),Prc.Acceptance_Date,103) as 'Acceptance_Date',prc.godown,sum(prc.Bags) as Recd_Bags, sum(Prc.Accept_Qty) AS Recd_Qty,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name FROM MPSCSC.dbo.[Acceptance_Note_Wheat2018] as Prc join tbl_MetaData_STORAGE_COMMODITY as cm on cm.Commodity_Id=Prc.CommodityId inner join MPSCSC.dbo.SCSC_Procurement_Wheat2018 as sp on Prc.IssueID=sp.Receipt_Id and Prc.Acceptance_No=sp.Acceptance_No  where Prc.WHR_Request is not null  and  sp.Branch_Id='" + Session["BranchId"].ToString() + "' and Prc.WHR_Request='" + Session["whrreq"].ToString() + "' and convert(varchar(10),Prc.Acceptance_Date,103)='" + Session["AccepDate"].ToString() + "' group by WHR_Request,prc.IssueCenter_ID,Prc.Acceptance_Date,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name,prc.godown";
+                //string query2 = "SELECT distinct prc.IssueCenter_ID,convert(varchar(10),Prc.Created_Date,103) as 'Acceptance_Date',prc.godown,sum(prc.Acpt_Bags) as Recd_Bags, sum(Prc.Accept_Qty) AS Recd_Qty,Prc.CommodityId,Prc.WHR_ReqGdn as WHR_Request,cm.Commodity_Name FROM MPSCSC.dbo.Final_DepositerForm_CSM2018 as Prc join tbl_MetaData_STORAGE_COMMODITY as cm on cm.Commodity_Id=Prc.CommodityId inner join MPSCSC.dbo.SCSC_Procurement_CSM as sp on Prc.IssueID=sp.Receipt_Id and Prc.Acceptance_No=sp.Acceptance_No  where Prc.WHR_ReqGdn is not null  and  sp.Branch_Id='" + Session["BranchId"].ToString() + "' and Prc.WHR_ReqGdn='" + Session["whrreq"].ToString() + "' and convert(varchar(10),Prc.Created_Date,103)='" + Session["AccepDate"].ToString() + "' group by WHR_ReqGdn,prc.IssueCenter_ID,Prc.Created_Date,Prc.CommodityId,Prc.WHR_ReqGdn,cm.Commodity_Name,prc.godown";
+                string query2 = "SELECT distinct prc.IssueCenter_ID,convert(varchar(10),sp.Acceptance_Date,103) as 'Acceptance_Date',prc.godown,sum(prc.Acpt_Bags) as Recd_Bags, sum(Prc.Accept_Qty) AS Recd_Qty,Prc.CommodityId,Prc.WHR_ReqGdn as WHR_Request,cm.Commodity_Name FROM MPSCSC.dbo.Final_DepositerForm_CSM2018 as Prc join tbl_MetaData_STORAGE_COMMODITY as cm on cm.Commodity_Id=Prc.CommodityId inner join MPSCSC.dbo.SCSC_Procurement_CSM as sp on Prc.IssueID=sp.Receipt_Id and Prc.Acceptance_No=sp.Acceptance_No  where Prc.WHR_ReqGdn is not null  and  sp.Branch_Id='" + Session["BranchId"].ToString() + "' and Prc.WHR_ReqGdn='" + Session["whrreq"].ToString() + "' and convert(varchar(10),sp.Acceptance_Date,103)='" + Session["AccepDate"].ToString() + "' group by WHR_ReqGdn,prc.IssueCenter_ID,sp.Acceptance_Date,Prc.CommodityId,Prc.WHR_ReqGdn,cm.Commodity_Name,prc.godown";
+
+                SqlCommand cmd2 = new SqlCommand(query2, Con);
+                SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
+                DataSet ds2 = new DataSet();
+                da2.Fill(ds2);
+                if (ds2.Tables[0].Rows.Count == 1)
+                {
+                    // lbl_societyname.Text = ds.Tables[0].Rows[0]["Society_Name"].ToString();
+                    // ddlSourceS.Items.Add(new ListItem(ds.Tables[0].Rows[0][9].ToString(), ds.Tables[0].Rows[0][0].ToString()));
+                    //txtProcTruckNo.Text = ds.Tables[0].Rows[0]["Truck_Number"].ToString();
+                    lblSourcesociety.Visible = false;
+                    lblAcceptanceNote.Text = "Depositor Form No:";
+                    lblProcTCNo.Visible = true;
+                    lblProcTruckNo.Visible = false;
+                    txtProcTruckNo.Visible = false;
+                    txtProcTCNo.Visible = true;
+                    txtProcTCNo.Text = ds2.Tables[0].Rows[0]["WHR_Request"].ToString();
+                    txtProcTCNo.Enabled = false;
+                    ddlProcCommodity.SelectedValue = ds2.Tables[0].Rows[0]["CommodityId"].ToString();
+                    ddlProcCommodity.Enabled = false;
+                    txtProcQtyDeposit.Text = ds2.Tables[0].Rows[0]["Recd_Qty"].ToString();
+                    txtProcQtyDeposit.Enabled = false;
+                    txtProcBags.Text = ds2.Tables[0].Rows[0]["Recd_Bags"].ToString();
+                    txtProcBags.Enabled = false;
+
+                    txtProcBagsAcceptable.Text = ds2.Tables[0].Rows[0]["Recd_Bags"].ToString();
+                    txtProcQtyAcceptable.Text = ds2.Tables[0].Rows[0]["Recd_Qty"].ToString();
+                    //
+                    hfAcptDate.Value = ds2.Tables[0].Rows[0]["Acceptance_Date"].ToString();
+                    txtAcceptanceNote.Text = ds2.Tables[0].Rows[0]["WHR_Request"].ToString();
+                    txtAcceptanceNote.Enabled = false;
+                    // hfSending_Dist.Value = ds.Tables[0].Rows[0]["sending_district"].ToString();
+                    FillGodown();
+                    string godownid = ds2.Tables[0].Rows[0]["godown"].ToString();
+                    if (godownid != "")
+                    {
+                        ddlGodownNo.SelectedValue = ds2.Tables[0].Rows[0]["godown"].ToString();
+                    }
+
+
+                    fillStack();
+                }
+            }
+            else
+            {
+                //06-05-without acceptancedate filter string query = "SELECT distinct prc.IssueCenter_ID,convert(varchar(10),Prc.Acceptance_Date,103) as 'Acceptance_Date',prc.godown,sum(prc.Bags) as Recd_Bags,sum(Prc.Accept_Qty) AS Recd_Qty,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name FROM MPSCSC.dbo.[Acceptance_Note_Detail] as Prc join tbl_MetaData_STORAGE_COMMODITY as cm on cm.Commodity_Id=Prc.CommodityId where Prc.WHR_Request='" + Session["whrreq"].ToString() + "' group by WHR_Request,prc.IssueCenter_ID,Prc.Acceptance_Date,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name,prc.godown";
+                //local string query = "SELECT distinct prc.IssueCenter_ID,convert(varchar(10),Prc.Acceptance_Date,103) as 'Acceptance_Date',prc.godown,sum(prc.Bags) as Recd_Bags,sum(Prc.Accept_Qty) AS Recd_Qty,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name FROM MPSCSC.dbo.[Acceptance_Note_Detail] as Prc join tbl_MetaData_STORAGE_COMMODITY as cm on cm.Commodity_Id=Prc.CommodityId where Prc.WHR_Request='" + Session["whrreq"].ToString() + "' group by WHR_Request,prc.IssueCenter_ID,Prc.Acceptance_Date,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name,prc.godown";
+                //19-05-15   string query = "SELECT distinct prc.IssueCenter_ID,convert(varchar(10),Prc.Acceptance_Date,103) as 'Acceptance_Date',prc.godown,sum(prc.Bags) as Recd_Bags,sum(Prc.Accept_Qty) AS Recd_Qty,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name FROM MPSCSC.dbo.[Acceptance_Note_Detail] as Prc join tbl_MetaData_STORAGE_COMMODITY as cm on cm.Commodity_Id=Prc.CommodityId where Prc.WHR_Request='" + Session["whrreq"].ToString() + "' and convert(varchar(10),Prc.Acceptance_Date,103)='" + Session["AccepDate"].ToString() + "' group by WHR_Request,prc.IssueCenter_ID,Prc.Acceptance_Date,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name,prc.godown";
+                string query = "SELECT distinct prc.IssueCenter_ID,convert(varchar(10),Prc.Acceptance_Date,103) as 'Acceptance_Date',prc.godown,sum(prc.Bags) as Recd_Bags, sum(Prc.Accept_Qty) AS Recd_Qty,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name FROM MPSCSC.dbo.[Acceptance_Note_Detail] as Prc join tbl_MetaData_STORAGE_COMMODITY as cm on cm.Commodity_Id=Prc.CommodityId inner join MPSCSC.dbo.SCSC_Procurement as sp on Prc.IssueID=sp.Receipt_Id and Prc.Acceptance_No=sp.Acceptance_No  where Prc.WHR_Request is not null  and  sp.Branch_Id='" + Session["BranchId"].ToString() + "' and Prc.WHR_Request='" + Session["whrreq"].ToString() + "' and convert(varchar(10),Prc.Acceptance_Date,103)='" + Session["AccepDate"].ToString() + "' group by WHR_Request,prc.IssueCenter_ID,Prc.Acceptance_Date,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name,prc.godown";
+
+                SqlCommand cmd = new SqlCommand(query, Con);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                if (ds.Tables[0].Rows.Count == 1)
+                {
+                    // lbl_societyname.Text = ds.Tables[0].Rows[0]["Society_Name"].ToString();
+                    // ddlSourceS.Items.Add(new ListItem(ds.Tables[0].Rows[0][9].ToString(), ds.Tables[0].Rows[0][0].ToString()));
+                    //txtProcTruckNo.Text = ds.Tables[0].Rows[0]["Truck_Number"].ToString();
+                    lblSourcesociety.Visible = false;
+                    lblAcceptanceNote.Text = "Depositor Form No:";
+                    lblProcTCNo.Visible = true;
+                    lblProcTruckNo.Visible = false;
+                    txtProcTruckNo.Visible = false;
+                    txtProcTCNo.Visible = true;
+                    txtProcTCNo.Text = ds.Tables[0].Rows[0]["WHR_Request"].ToString();
+                    txtProcTCNo.Enabled = false;
+                    ddlProcCommodity.SelectedValue = ds.Tables[0].Rows[0]["CommodityId"].ToString();
+                    ddlProcCommodity.Enabled = false;
+                    txtProcQtyDeposit.Text = ds.Tables[0].Rows[0]["Recd_Qty"].ToString();
+                    txtProcQtyDeposit.Enabled = false;
+                    txtProcBags.Text = ds.Tables[0].Rows[0]["Recd_Bags"].ToString();
+                    txtProcBags.Enabled = false;
+
+                    txtProcBagsAcceptable.Text = ds.Tables[0].Rows[0]["Recd_Bags"].ToString();
+                    txtProcQtyAcceptable.Text = ds.Tables[0].Rows[0]["Recd_Qty"].ToString();
+                    //
+                    hfAcptDate.Value = ds.Tables[0].Rows[0]["Acceptance_Date"].ToString();
+                    txtAcceptanceNote.Text = ds.Tables[0].Rows[0]["WHR_Request"].ToString();
+                    txtAcceptanceNote.Enabled = false;
+                    // hfSending_Dist.Value = ds.Tables[0].Rows[0]["sending_district"].ToString();
+                    FillGodown();
+                    string godownid = ds.Tables[0].Rows[0]["godown"].ToString();
+                    if (godownid != "")
+                    {
+                        ddlGodownNo.SelectedValue = ds.Tables[0].Rows[0]["godown"].ToString();
+                    }
+
+
+                    fillStack();
+                }
+                else if (Session["Depot_DistID"] != null)
+                {
+
+                    string query2 = "SELECT distinct prc.IssueCenter_ID,convert(varchar(10),Prc.Acceptance_Date,103) as 'Acceptance_Date',prc.godown,sum(prc.Bags) as Recd_Bags, sum(Prc.Accept_Qty) AS Recd_Qty,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name FROM MPSCSC.dbo.[Acceptance_Note_Detail2016] as Prc join tbl_MetaData_STORAGE_COMMODITY as cm on cm.Commodity_Id=Prc.CommodityId inner join MPSCSC.dbo.SCSC_Procurement2016 as sp on Prc.IssueID=sp.Receipt_Id and Prc.Acceptance_No=sp.Acceptance_No  where Prc.WHR_Request is not null  and  sp.Branch_Id='" + Session["BranchId"].ToString() + "' and Prc.WHR_Request='" + Session["whrreq"].ToString() + "' and convert(varchar(10),Prc.Acceptance_Date,103)='" + Session["AccepDate"].ToString() + "' group by WHR_Request,prc.IssueCenter_ID,Prc.Acceptance_Date,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name,prc.godown";
+
+                    SqlCommand cmd2 = new SqlCommand(query2, Con);
+                    SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
+                    DataSet ds2 = new DataSet();
+                    da2.Fill(ds2);
+                    if (ds2.Tables[0].Rows.Count == 1)
+                    {
+                        // lbl_societyname.Text = ds.Tables[0].Rows[0]["Society_Name"].ToString();
+                        // ddlSourceS.Items.Add(new ListItem(ds.Tables[0].Rows[0][9].ToString(), ds.Tables[0].Rows[0][0].ToString()));
+                        //txtProcTruckNo.Text = ds.Tables[0].Rows[0]["Truck_Number"].ToString();
+                        lblSourcesociety.Visible = false;
+                        lblAcceptanceNote.Text = "Depositor Form No:";
+                        lblProcTCNo.Visible = true;
+                        lblProcTruckNo.Visible = false;
+                        txtProcTruckNo.Visible = false;
+                        txtProcTCNo.Visible = true;
+                        txtProcTCNo.Text = ds2.Tables[0].Rows[0]["WHR_Request"].ToString();
+                        txtProcTCNo.Enabled = false;
+                        ddlProcCommodity.SelectedValue = ds2.Tables[0].Rows[0]["CommodityId"].ToString();
+                        ddlProcCommodity.Enabled = false;
+                        txtProcQtyDeposit.Text = ds2.Tables[0].Rows[0]["Recd_Qty"].ToString();
+                        txtProcQtyDeposit.Enabled = false;
+                        txtProcBags.Text = ds2.Tables[0].Rows[0]["Recd_Bags"].ToString();
+                        txtProcBags.Enabled = false;
+
+                        txtProcBagsAcceptable.Text = ds2.Tables[0].Rows[0]["Recd_Bags"].ToString();
+                        txtProcQtyAcceptable.Text = ds2.Tables[0].Rows[0]["Recd_Qty"].ToString();
+                        //
+                        hfAcptDate.Value = ds2.Tables[0].Rows[0]["Acceptance_Date"].ToString();
+                        txtAcceptanceNote.Text = ds2.Tables[0].Rows[0]["WHR_Request"].ToString();
+                        txtAcceptanceNote.Enabled = false;
+                        // hfSending_Dist.Value = ds.Tables[0].Rows[0]["sending_district"].ToString();
+                        FillGodown();
+                        string godownid = ds2.Tables[0].Rows[0]["godown"].ToString();
+                        if (godownid != "")
+                        {
+                            ddlGodownNo.SelectedValue = ds2.Tables[0].Rows[0]["godown"].ToString();
+                        }
+
+
+                        fillStack();
+                    }
+
+                }
+                else
+                {
+                    ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Invalid Record')", true);
+                    Response.Redirect("~/IssueCenterLevel/Storage/WLC_Deposit_From.aspx?PopMsg=" + "Invalid Record!" + "");
+
+                }
+            }
+
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Error in FillProcData has occured, try again')", true);
+        }
+    }
+    protected void FillProcKharif2016()
+    {
+        try
+        {
+            if (Session["Depot_DistID"] != null && Session["ProcComm"] != "22")
+            {
+                string query2 = "SELECT distinct prc.IssueCenter_ID,convert(varchar(10),Prc.Acceptance_Date,103) as 'Acceptance_Date',prc.godown,sum(prc.Bags) as Recd_Bags, sum(Prc.Accept_Qty) AS Recd_Qty,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name FROM MPSCSC.dbo.[Acceptance_Note_Kharif2016] as Prc join tbl_MetaData_STORAGE_COMMODITY as cm on cm.Commodity_Id=Prc.CommodityId inner join MPSCSC.dbo.SCSC_Procurement_Kharif2016 as sp on Prc.IssueID=sp.Receipt_Id and Prc.Acceptance_No=sp.Acceptance_No  where Prc.WHR_Request is not null  and  sp.Branch_Id='" + Session["BranchId"].ToString() + "' and Prc.WHR_Request='" + Session["whrreq"].ToString() + "' and convert(varchar(10),Prc.Acceptance_Date,103)='" + Session["AccepDate"].ToString() + "' and Prc.CommodityId='" + Session["ProcComm"].ToString() + "' group by WHR_Request,prc.IssueCenter_ID,Prc.Acceptance_Date,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name,prc.godown";
+
+                SqlCommand cmd2 = new SqlCommand(query2, Con);
+                SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
+                DataSet ds2 = new DataSet();
+                da2.Fill(ds2);
+                if (ds2.Tables[0].Rows.Count == 1)
+                {
+                    lblSourcesociety.Visible = false;
+                    lblAcceptanceNote.Text = "Depositor Form No:";
+                    lblProcTCNo.Visible = true;
+                    lblProcTruckNo.Visible = false;
+                    txtProcTruckNo.Visible = false;
+                    txtProcTCNo.Visible = true;
+                    txtProcTCNo.Text = ds2.Tables[0].Rows[0]["WHR_Request"].ToString();
+                    txtProcTCNo.Enabled = false;
+                    ddlProcCommodity.SelectedValue = ds2.Tables[0].Rows[0]["CommodityId"].ToString();
+                    ddlProcCommodity.Enabled = false;
+                    txtProcQtyDeposit.Text = ds2.Tables[0].Rows[0]["Recd_Qty"].ToString();
+                    txtProcQtyDeposit.Enabled = false;
+                    txtProcBags.Text = ds2.Tables[0].Rows[0]["Recd_Bags"].ToString();
+                    txtProcBags.Enabled = false;
+
+                    txtProcBagsAcceptable.Text = ds2.Tables[0].Rows[0]["Recd_Bags"].ToString();
+                    txtProcQtyAcceptable.Text = ds2.Tables[0].Rows[0]["Recd_Qty"].ToString();
+                    //
+                    hfAcptDate.Value = ds2.Tables[0].Rows[0]["Acceptance_Date"].ToString();
+                    txtAcceptanceNote.Text = ds2.Tables[0].Rows[0]["WHR_Request"].ToString();
+                    txtAcceptanceNote.Enabled = false;
+                    // hfSending_Dist.Value = ds.Tables[0].Rows[0]["sending_district"].ToString();
+                    FillGodown();
+                    string godownid = ds2.Tables[0].Rows[0]["godown"].ToString();
+                    if (godownid != "")
+                    {
+                        ddlGodownNo.SelectedValue = ds2.Tables[0].Rows[0]["godown"].ToString();
+                    }
+                    fillStack();
+                }
+
+            }
+            else
+            {
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Invalid Record')", true);
+                Response.Redirect("~/IssueCenterLevel/Storage/WLC_Deposit_From.aspx?PopMsg=" + "Invalid Record!" + "");
+
+            }
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Error in FillProcData has occured, try again')", true);
+        }
+    }
+
+    protected void FillProcKharif2017()
+    {
+        try
+        {
+            if (Session["Depot_DistID"] != null && Session["ProcComm"] != "22")
+            {
+                //string query2 = "SELECT distinct prc.IssueCenter_ID,convert(varchar(10),Prc.Acceptance_Date,103) as 'Acceptance_Date',prc.godown,sum(prc.Bags) as Recd_Bags, sum(Prc.Accept_Qty) AS Recd_Qty,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name FROM MPSCSC.dbo.[Acceptance_Note_Kharif2016] as Prc join tbl_MetaData_STORAGE_COMMODITY as cm on cm.Commodity_Id=Prc.CommodityId inner join MPSCSC.dbo.SCSC_Procurement_Kharif2016 as sp on Prc.IssueID=sp.Receipt_Id and Prc.Acceptance_No=sp.Acceptance_No  where Prc.WHR_Request is not null  and  sp.Branch_Id='" + Session["BranchId"].ToString() + "' and Prc.WHR_Request='" + Session["whrreq"].ToString() + "' and convert(varchar(10),Prc.Acceptance_Date,103)='" + Session["AccepDate"].ToString() + "' and Prc.CommodityId='" + Session["ProcComm"].ToString() + "' group by WHR_Request,prc.IssueCenter_ID,Prc.Acceptance_Date,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name,prc.godown";
+                string query2 = "SELECT distinct prc.IssueCenter_ID,convert(varchar(10),Prc.Acceptance_Date,103) as 'Acceptance_Date',prc.godown,sum(prc.Bags) as Recd_Bags, sum(Prc.Accept_Qty) AS Recd_Qty,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name FROM MPSCSC.dbo.[Acceptance_Note_Kharif2017] as Prc join tbl_MetaData_STORAGE_COMMODITY as cm on cm.Commodity_Id=Prc.CommodityId inner join MPSCSC.dbo.SCSC_Procurement_Kharif2017 as sp on Prc.IssueID=sp.Receipt_Id and Prc.Acceptance_No=sp.Acceptance_No  where Prc.WHR_Request is not null  and  sp.Branch_Id='" + Session["BranchId"].ToString() + "' and Prc.WHR_Request='" + Session["whrreq"].ToString() + "' and convert(varchar(10),Prc.Acceptance_Date,103)='" + Session["AccepDate"].ToString() + "' and Prc.CommodityId='" + Session["ProcComm"].ToString() + "' group by WHR_Request,prc.IssueCenter_ID,Prc.Acceptance_Date,Prc.CommodityId,Prc.WHR_Request,cm.Commodity_Name,prc.godown";
+                SqlCommand cmd2 = new SqlCommand(query2, Con);
+                SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
+                DataSet ds2 = new DataSet();
+                da2.Fill(ds2);
+                if (ds2.Tables[0].Rows.Count == 1)
+                {
+                    lblSourcesociety.Visible = false;
+                    lblAcceptanceNote.Text = "Depositor Form No:";
+                    lblProcTCNo.Visible = true;
+                    lblProcTruckNo.Visible = false;
+                    txtProcTruckNo.Visible = false;
+                    txtProcTCNo.Visible = true;
+                    txtProcTCNo.Text = ds2.Tables[0].Rows[0]["WHR_Request"].ToString();
+                    txtProcTCNo.Enabled = false;
+                    ddlProcCommodity.SelectedValue = ds2.Tables[0].Rows[0]["CommodityId"].ToString();
+                    ddlProcCommodity.Enabled = false;
+                    txtProcQtyDeposit.Text = ds2.Tables[0].Rows[0]["Recd_Qty"].ToString();
+                    txtProcQtyDeposit.Enabled = false;
+                    txtProcBags.Text = ds2.Tables[0].Rows[0]["Recd_Bags"].ToString();
+                    txtProcBags.Enabled = false;
+
+                    txtProcBagsAcceptable.Text = ds2.Tables[0].Rows[0]["Recd_Bags"].ToString();
+                    txtProcQtyAcceptable.Text = ds2.Tables[0].Rows[0]["Recd_Qty"].ToString();
+                    //
+                    hfAcptDate.Value = ds2.Tables[0].Rows[0]["Acceptance_Date"].ToString();
+                    txtAcceptanceNote.Text = ds2.Tables[0].Rows[0]["WHR_Request"].ToString();
+                    txtAcceptanceNote.Enabled = false;
+                    // hfSending_Dist.Value = ds.Tables[0].Rows[0]["sending_district"].ToString();
+                    FillGodown();
+                    string godownid = ds2.Tables[0].Rows[0]["godown"].ToString();
+                    if (godownid != "")
+                    {
+                        ddlGodownNo.SelectedValue = ds2.Tables[0].Rows[0]["godown"].ToString();
+                    }
+                    fillStack();
+                }
+
+            }
+            else
+            {
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Invalid Record')", true);
+                Response.Redirect("~/IssueCenterLevel/Storage/WLC_Deposit_From.aspx?PopMsg=" + "Invalid Record!" + "");
+
+            }
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Error in FillProcData has occured, try again')", true);
+        }
+    }
+
+    protected void FillGodown()
+    {
+        if ((Session["Depot_DistID"] != null) && (Session["Depot_DepotID"] != null))
+        {
+            try
+            {
+                ddlGodownNo.Items.Clear();
+                string query = "";
+                query = "SELECT [Godown_Name], [Godown_ID] FROM [tbl_MetaData_GODOWN] WHERE BranchId = '" + Session["BranchId"].ToString() + "' and Remarks='Y' and Godown_ID in (select distinct Godown_ID from tbl_MetaData_STACK where BranchID ='" + Session["BranchId"].ToString() + "' and Commodity_Id='" + ddlProcCommodity.SelectedValue + "')  ORDER BY [Godown_Name] ";
+                SqlCommand cmd = new SqlCommand(query, Con);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    ddlGodownNo.DataSource = ds.Tables[0];
+                    ddlGodownNo.DataTextField = "Godown_Name";
+                    ddlGodownNo.DataValueField = "Godown_ID";
+                    ddlGodownNo.DataBind();
+                    ddlGodownNo.Items.Insert(0, " --select--");
+                }
+                else
+                {
+                    ddlGodownNo.DataSource = null;
+                    ddlGodownNo.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Error in FillGodown has occurred , try again!')", true);
+            }
+        }
+        else
+        {
+            Response.Redirect("~/SessionExpired.htm");
+        }
+    }
+
+    protected void fillCropYear()
+    {
+        ListItem[] items = new ListItem[7];
+        items[0] = new ListItem((DateTime.Now.Year) + "-" + (DateTime.Now.Year + 1).ToString().Substring(2, 2), (DateTime.Now.Year) + "-" + (DateTime.Now.Year + 1).ToString());
+        items[1] = new ListItem((DateTime.Now.Year - 1) + "-" + DateTime.Now.Year.ToString().Substring(2, 2), (DateTime.Now.Year - 1) + "-" + DateTime.Now.Year.ToString());
+        items[2] = new ListItem((DateTime.Now.Year - 2) + "-" + (DateTime.Now.Year - 1).ToString().Substring(2, 2), (DateTime.Now.Year - 2) + "-" + (DateTime.Now.Year - 1).ToString());
+        items[3] = new ListItem((DateTime.Now.Year - 3) + "-" + (DateTime.Now.Year - 2).ToString().Substring(2, 2), (DateTime.Now.Year - 3) + "-" + (DateTime.Now.Year - 2).ToString());
+        items[4] = new ListItem((DateTime.Now.Year - 4) + "-" + (DateTime.Now.Year - 3).ToString().Substring(2, 2), (DateTime.Now.Year - 4) + "-" + (DateTime.Now.Year - 3).ToString());
+        items[5] = new ListItem((DateTime.Now.Year - 5) + "-" + (DateTime.Now.Year - 4).ToString().Substring(2, 2), (DateTime.Now.Year - 5) + "-" + (DateTime.Now.Year - 4).ToString());
+        items[6] = new ListItem((DateTime.Now.Year - 6) + "-" + (DateTime.Now.Year - 5).ToString().Substring(2, 2), (DateTime.Now.Year - 6) + "-" + (DateTime.Now.Year - 5).ToString());
+        ddlcropyear.Items.Insert(0, "All");
+        ddlcropyear.SelectedIndex = 1;
+        //ddlcropyr.SelectedIndex = 2;
+        ddlcropyear.Items.AddRange(items);
+        ddlcropyear.DataBind();
+    }
+
+    protected void Printcurrentdate()
+    {
+        string query = "SELECT  convert(varchar(10),getdate(),103) as 'Date1'";
+        SqlCommand cmd = new SqlCommand(query, Con);
+        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        DataSet ds = new DataSet();
+        da.Fill(ds);
+        if (ds.Tables[0].Rows.Count > 0)
+        {
+            txtProcDepostiDate.Text = ds.Tables[0].Rows[0]["Date1"].ToString();
+        }
+    }
+
+    protected void FillDefaultsForUpdate()
+    {
+        try
+        {
+            string Arrivalid = Session["WLC_StorageReceipt_Id"].ToString();
+            //string query = "select DISTINCT AST.ArrivalStock_Id,AST.Receipt_ID,AST.Commodity_Id,AST.Challan_No,AST.Truck_No,SRD.Acpt_FCIRO_No,convert(nvarchar(10),SRD.Acpt_FCIRO_Date,103) AS AcceptDate,(SRD.Qty_Rvd_No_of_Bags) AS Bags,CONVERT(DECIMAL(18,2),SRD.Qty_Rvd_Weight) AS Weight,AST.Qty_No_of_Bags,CONVERT(DECIMAL(18,2),AST.Qty_Wt) as Qty_Wt,convert(nvarchar(10),AST.DepositDate,103) AS DepositDate,AST.Remarks,AST.Quality_Moisture,AST.Crop_Year,SOC.Society_Name from tbl_Storage_Arrival_Stock as AST join tbl_Storage_Receipt_Details AS SRD on AST.Receipt_ID = SRD.StorageReceipt_Id join MPSCSC.dbo.Society AS SOC on AST.PurchasCentre = SOC.Society_Id where SRD.WHR_Flag='N' and SRD.WHR_Id is null AND AST.DepotId = '" + Session["Depot_DepotID"].ToString() + "' AND AST.District_Id = '" + Session["Depot_DistID"].ToString() + "' and AST.ArrivalStock_Id = '" + Arrivalid + "' ORDER BY AST.ArrivalStock_Id";
+            string query = "select DISTINCT AST.ArrivalStock_Id,AST.Receipt_ID,AST.Commodity_Id,AST.Challan_No,AST.Truck_No,SRD.Acpt_FCIRO_No,convert(nvarchar(10),SRD.Acpt_FCIRO_Date,103) AS AcceptDate,(SRD.Qty_Rvd_No_of_Bags) AS Bags,CONVERT(DECIMAL(18,2),SRD.Qty_Rvd_Weight) AS Weight,AST.Qty_No_of_Bags,CONVERT(DECIMAL(18,2),AST.Qty_Wt) as Qty_Wt,convert(nvarchar(10),AST.DepositDate,103) AS DepositDate,AST.Remarks,AST.Quality_Moisture,AST.Crop_Year from tbl_Storage_Arrival_Stock as AST join tbl_Storage_Receipt_Details AS SRD on AST.Receipt_ID = SRD.StorageReceipt_Id where SRD.WHR_Flag='N' and SRD.WHR_Id is null AND AST.BranchId = '" + Session["BranchId"].ToString() + "' AND AST.District_Id = '" + Session["Depot_DistID"].ToString() + "' and AST.ArrivalStock_Id = '" + Arrivalid + "' ORDER BY AST.ArrivalStock_Id";
+            SqlCommand cmd = new SqlCommand(query, Con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            if (ds.Tables[0].Rows.Count == 1)
+            {
+                txtAcceptanceNote.Text = ds.Tables[0].Rows[0]["Acpt_FCIRO_No"].ToString();
+                //lbl_societyname.Text = ds.Tables[0].Rows[0]["Society_Name"].ToString();
+                txtProcTCNo.Text = ds.Tables[0].Rows[0]["Challan_No"].ToString();
+                txtProcTCNo.Enabled = false;
+                txtProcTruckNo.Text = ds.Tables[0].Rows[0]["Truck_No"].ToString();
+                txtProcTruckNo.Enabled = false;
+                ddlProcCommodity.SelectedValue = ds.Tables[0].Rows[0]["Commodity_Id"].ToString();
+                ddlProcCommodity.Enabled = false;
+                txtProcQtyAcceptable.Text = ds.Tables[0].Rows[0]["Weight"].ToString();
+                txtProcBagsAcceptable.Text = ds.Tables[0].Rows[0]["Bags"].ToString();
+                txtProcQtyDeposit.Text = ds.Tables[0].Rows[0]["Qty_Wt"].ToString();
+                txtProcQtyDeposit.Enabled = false;
+                txtProcBags.Text = ds.Tables[0].Rows[0]["Qty_No_of_Bags"].ToString();
+                txtProcBags.Enabled = false;
+                txtProcDepostiDate.Text = ds.Tables[0].Rows[0]["DepositDate"].ToString();
+                txtProcDepostiDate.Enabled = true;
+                txtRemarks.Text = ds.Tables[0].Rows[0]["Quality_Moisture"].ToString();
+                ddlcropyear.SelectedItem.Text = ds.Tables[0].Rows[0]["Crop_Year"].ToString();
+                ddlcropyear.Enabled = true;
+                txtRemarks.Text = ds.Tables[0].Rows[0]["Remarks"].ToString();
+                FillGodown();
+                fillStack();
+                ddlGodownNo.Enabled = false;
+                ddlStackNo.Enabled = false;
+
+                if (ds.Tables[0].Rows[0]["Receipt_ID"].ToString() != "")
+                {
+                    string Receiptid = ds.Tables[0].Rows[0]["Receipt_ID"].ToString();
+                    qry = "select ssd.Godown_ID as 'Godownid',ssd.Stack_ID as 'Stackid',Godown_Name as 'GodownName',Stack_Name as 'StackName',ssd.Bags,ssd.Weight FROM tbl_storage_Stacking_Details ssd join tbl_MetaData_GODOWN on tbl_MetaData_GODOWN.Godown_ID=ssd.Godown_ID join tbl_MetaData_STACK on tbl_MetaData_STACK.Stack_ID=ssd.Stack_ID where ssd.StorageReceipt_Id='" + Receiptid + "'";
+                    cmd = new SqlCommand(qry, Con);
+                    SqlDataAdapter da1 = new SqlDataAdapter(cmd);
+                    DataSet ds1 = new DataSet();
+                    da1.Fill(ds1);
+                    if (ds1.Tables[0].Rows.Count > 0)
+                    {
+                        Session["EditStack"] = ds1.Tables[0];
+                        gdEditStackingDetails.DataSource = (DataTable)Session["EditStack"];
+                        gdEditStackingDetails.DataBind();
+                    }
+                }
+            }
+            else
+            {
+                Page.RegisterClientScriptBlock("mymsg2", "<script language=javascript> alert('Invalid Record, Can not be edited !'); </script> ");
+               // Response.Redirect("Edit_WLC_Deposit_From.aspx?PopMsg=" + "Invalid Record, Can not be edited!" + "");
+            }
+        }
+        catch (Exception ex)
+        {
+            Page.RegisterClientScriptBlock("mymsg2", "<script language=javascript> alert('Error FillDefaultsforUpdate has occurred , try again!'); </script> ");
+        }
+        finally
+        {
+            Con.Close();
+        }
+    }
+
+    //Onion insert
+    protected void FillProcOnion()
+    {
+        try
+        {
+            string query2 = "";
+            string DepoNo = Session["whrreq"].ToString();
+            if (Session["ProcComm"] == "106")
+            {
+                //query2 = "SELECT distinct '' as IssueCenter_ID,convert(varchar(10),Prc.DepositerDate,103) as 'Acceptance_Date',prc.godown,sum(prc.Recd_Bags) as Recd_Bags, sum(Prc.Recd_Qty) AS Recd_Qty,Prc.Commodity as CommodityId,Prc.DepositerNumber as WHR_Request,cm.Commodity_Name FROM MPSCSC.dbo.[Onion_Depositer] as Prc join tbl_MetaData_STORAGE_COMMODITY as cm on cm.Commodity_Id=Prc.Commodity where Prc.DepositerNumber is not null  and  Prc.branch='" + Session["BranchId"].ToString() + "' and Prc.DepositerNumber='" + Session["whrreq"].ToString() + "' and convert(varchar(10),Prc.DepositerDate,103)='" + Session["AccepDate"].ToString() + "' group by DepositerNumber,Prc.DepositerDate,Prc.Commodity,cm.Commodity_Name,prc.godown";
+                query2 = "SELECT distinct '' as IssueCenter_ID,convert(varchar(10),Prc.DepositerDate,103) as 'Acceptance_Date',prc.godown,sum(prc.Recd_Bags) as Recd_Bags, sum(Prc.Recd_Qty) AS Recd_Qty,Prc.Commodity as CommodityId,Prc.DepositerNumber as WHR_Request,cm.Commodity_Name FROM MPSCSC.dbo.[Onion_Depositer] as Prc join tbl_MetaData_STORAGE_COMMODITY as cm on cm.Commodity_Id=Prc.Commodity where Prc.DepositerNumber is not null  and  Prc.branch='" + Session["BranchId"].ToString() + "' and Prc.DepositerNumber='" + Session["whrreq"].ToString() + "' and convert(varchar(10),Prc.DepositerDate,103)='" + Session["AccepDate"].ToString() + "' group by DepositerNumber,convert(varchar(10),Prc.DepositerDate,103),Prc.Commodity,cm.Commodity_Name,prc.godown";
+            }
+            else if (Session["ProcComm"] == "52")
+            {
+                query2 = "SELECT distinct IssueCenter_ID,convert(varchar(10),Prc.Acceptance_Date,103) as 'Acceptance_Date',prc.godown,sum(prc.RecievedBags) as Recd_Bags, sum(Prc.Accept_Qty) AS Recd_Qty,Prc.CommodityId as CommodityId,Prc.WHR_Request as WHR_Request,cm.Commodity_Name FROM MPSCSC.dbo.Pulse_Acceptance_Detail as Prc join tbl_MetaData_STORAGE_COMMODITY as cm on cm.Commodity_Id=Prc.CommodityId where Prc.WHR_Request is not null and Prc.Branch_Id='" + Session["BranchId"].ToString() + "' and Prc.WHR_Request='" + Session["whrreq"].ToString() + "' and Prc.CommodityId='52' and convert(varchar(10),Prc.Acceptance_Date,103)='" + Session["AccepDate"].ToString() + "' group by WHR_Request,Prc.Acceptance_Date,Prc.CommodityId,cm.Commodity_Name,prc.godown,IssueCenter_ID";
+            }
+            else if (Session["ProcComm"] == "92")
+            {
+                query2 = "SELECT distinct IssueCenter_ID,convert(varchar(10),Prc.Acceptance_Date,103) as 'Acceptance_Date',prc.godown,sum(prc.RecievedBags) as Recd_Bags, sum(Prc.Accept_Qty) AS Recd_Qty,Prc.CommodityId as CommodityId,Prc.WHR_Request as WHR_Request,cm.Commodity_Name FROM MPSCSC.dbo.Pulse_Acceptance_Detail as Prc join tbl_MetaData_STORAGE_COMMODITY as cm on cm.Commodity_Id=Prc.CommodityId where Prc.WHR_Request is not null and Prc.Branch_Id='" + Session["BranchId"].ToString() + "' and Prc.WHR_Request='" + Session["whrreq"].ToString() + "' and Prc.CommodityId='92' and convert(varchar(10),Prc.Acceptance_Date,103)='" + Session["AccepDate"].ToString() + "' group by WHR_Request,Prc.Acceptance_Date,Prc.CommodityId,cm.Commodity_Name,prc.godown,IssueCenter_ID";
+            }
+            else if (Session["ProcComm"] == "27")
+            {
+                query2 = "SELECT distinct IssueCenter_ID,convert(varchar(10),Prc.Acceptance_Date,103) as 'Acceptance_Date',prc.godown,sum(prc.RecievedBags) as Recd_Bags, sum(Prc.Accept_Qty) AS Recd_Qty,Prc.CommodityId as CommodityId,Prc.WHR_Request as WHR_Request,cm.Commodity_Name FROM MPSCSC.dbo.Pulse_Acceptance_Detail as Prc join tbl_MetaData_STORAGE_COMMODITY as cm on cm.Commodity_Id=Prc.CommodityId where Prc.WHR_Request is not null and Prc.Branch_Id='" + Session["BranchId"].ToString() + "' and Prc.WHR_Request='" + Session["whrreq"].ToString() + "' and Prc.CommodityId='27' and convert(varchar(10),Prc.Acceptance_Date,103)='" + Session["AccepDate"].ToString() + "' group by WHR_Request,Prc.Acceptance_Date,Prc.CommodityId,cm.Commodity_Name,prc.godown,IssueCenter_ID";
+            }
+
+                SqlCommand cmd2 = new SqlCommand(query2, Con);
+                SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
+                DataSet ds2 = new DataSet();
+                da2.Fill(ds2);
+                if (ds2.Tables[0].Rows.Count == 1)
+                {
+                    lblSourcesociety.Visible = false;
+                    lblAcceptanceNote.Text = "Depositor Form No:";
+                    lblProcTCNo.Visible = true;
+                    lblProcTruckNo.Visible = false;
+                    txtProcTruckNo.Visible = false;
+                    txtProcTCNo.Visible = true;
+                    txtProcTCNo.Text = ds2.Tables[0].Rows[0]["WHR_Request"].ToString();
+                    txtProcTCNo.Enabled = false;
+                    ddlProcCommodity.SelectedValue = ds2.Tables[0].Rows[0]["CommodityId"].ToString();
+                    ddlProcCommodity.Enabled = false;
+                    txtProcQtyDeposit.Text = ds2.Tables[0].Rows[0]["Recd_Qty"].ToString();
+                    txtProcQtyDeposit.Enabled = false;
+                    txtProcBags.Text = ds2.Tables[0].Rows[0]["Recd_Bags"].ToString();
+                    txtProcBags.Enabled = false;
+                    txtProcBagsAcceptable.Text = ds2.Tables[0].Rows[0]["Recd_Bags"].ToString();
+                    txtProcQtyAcceptable.Text = ds2.Tables[0].Rows[0]["Recd_Qty"].ToString();
+                    hfAcptDate.Value = ds2.Tables[0].Rows[0]["Acceptance_Date"].ToString();
+                    txtAcceptanceNote.Text = ds2.Tables[0].Rows[0]["WHR_Request"].ToString();
+                    txtAcceptanceNote.Enabled = false;
+                    // hfSending_Dist.Value = ds.Tables[0].Rows[0]["sending_district"].ToString();
+                    FillGodown();
+                    string godownid = ds2.Tables[0].Rows[0]["godown"].ToString();
+                    if (godownid != "")
+                    {
+                        ddlGodownNo.SelectedValue = ds2.Tables[0].Rows[0]["godown"].ToString();
+                    }
+                    fillStack();
+                }
+            //}
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Error in FillProcData has occured, try again')", true);
+        }
+    }
+}

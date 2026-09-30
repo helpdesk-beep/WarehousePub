@@ -1,0 +1,756 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutUs" xml:space="preserve">
+    <value>About Us</value>
+  </data>
+  <data name="ConstitutionalRole" xml:space="preserve">
+    <value>Constitutional Role</value>
+  </data>
+  <data name="Governor" xml:space="preserve">
+    <value>The Governor</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="langEnglish" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="langHindi" xml:space="preserve">
+    <value>हिंदी</value>
+  </data>
+  <data name="RoleOfGovernor" xml:space="preserve">
+    <value>Role of The Governor</value>
+  </data>
+  <data name="Speeches" xml:space="preserve">
+    <value>Speeches</value>
+  </data>
+  <data name="Anecdotes" xml:space="preserve">
+    <value>Anecdotes</value>
+  </data>
+  <data name="Association" xml:space="preserve">
+    <value>Association</value>
+  </data>
+  <data name="AwadheshPratapSinghUniversity" xml:space="preserve">
+    <value>Awadhesh Pratap Singh University, Rewa</value>
+  </data>
+  <data name="BarkatullahUniversity" xml:space="preserve">
+    <value>Barkatullah University, Bhopal</value>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>Contact Us</value>
+  </data>
+  <data name="DeviAhilyaUniversity" xml:space="preserve">
+    <value>Devi Ahilya University, Indore</value>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>Events</value>
+  </data>
+  <data name="FirstAddress" xml:space="preserve">
+    <value>First Address</value>
+  </data>
+  <data name="JiwajiUniversity" xml:space="preserve">
+    <value>Jiwaji University, Gwalior</value>
+  </data>
+  <data name="LatestNews" xml:space="preserve">
+    <value>Latest News</value>
+  </data>
+  <data name="LatestPhotos" xml:space="preserve">
+    <value>Latest Photos</value>
+  </data>
+  <data name="LatestVideos" xml:space="preserve">
+    <value>Latest Videos</value>
+  </data>
+  <data name="Media" xml:space="preserve">
+    <value>Media</value>
+  </data>
+  <data name="Miscellany" xml:space="preserve">
+    <value>Miscellanceous</value>
+  </data>
+  <data name="Past" xml:space="preserve">
+    <value>Past</value>
+  </data>
+  <data name="Present" xml:space="preserve">
+    <value>Present</value>
+  </data>
+  <data name="RajBhavan" xml:space="preserve">
+    <value>Raj Bhavan</value>
+  </data>
+  <data name="RaniDurgavatiUniversity" xml:space="preserve">
+    <value>Rani Durgavati University, Jabalpur</value>
+  </data>
+  <data name="RoleOfChancellor" xml:space="preserve">
+    <value>Chancellor's Role</value>
+  </data>
+  <data name="RTI" xml:space="preserve">
+    <value>RTI</value>
+  </data>
+  <data name="Secretaries" xml:space="preserve">
+    <value>Secretaries</value>
+  </data>
+  <data name="StatisticalOverview" xml:space="preserve">
+    <value>Statistical Overview</value>
+  </data>
+  <data name="UniversitiesAtGlance" xml:space="preserve">
+    <value>Universities At-A-Glance</value>
+  </data>
+  <data name="UniversityOfMP" xml:space="preserve">
+    <value>MP Universities</value>
+  </data>
+  <data name="VcAdvt" xml:space="preserve">
+    <value>VC Advertiesment</value>
+  </data>
+  <data name="VikramUniversity" xml:space="preserve">
+    <value>Vikram University, Ujjain</value>
+  </data>
+  <data name="WhatsNew" xml:space="preserve">
+    <value>What's New?</value>
+  </data>
+  <data name="BharatScoutGuide" xml:space="preserve">
+    <value>Bharat Scouts and Guides Madhya Pradesh</value>
+  </data>
+  <data name="BhojUniversity" xml:space="preserve">
+    <value>Madhya Pradesh Bhoj (Open) University, Bhopal</value>
+  </data>
+  <data name="BlindReliefAssociation" xml:space="preserve">
+    <value>Madhya Pradesh Welfare Association for The Blind</value>
+  </data>
+  <data name="CampaignCommitteeMP" xml:space="preserve">
+    <value>National Language Campaign Committee Madhya Pradesh</value>
+  </data>
+  <data name="ChildWelfare" xml:space="preserve">
+    <value>Child Welfare Council, Madhya Pradesh</value>
+  </data>
+  <data name="EPCO" xml:space="preserve">
+    <value>Environmental Planning &amp; Coordination Organisation (EPCO)</value>
+  </data>
+  <data name="JawaharlalNehruUniversity" xml:space="preserve">
+    <value>Jawaharlal Nehru Agriculture University, Jabalpur</value>
+  </data>
+  <data name="MGCGramodayaUniversity" xml:space="preserve">
+    <value>Mahatma Gandhi Chitrakoot Gramodaya University, Chitrakoot</value>
+  </data>
+  <data name="MPScoutGuide" xml:space="preserve">
+    <value>Madhya Pradesh Scout &amp; Guides</value>
+  </data>
+  <data name="RedCross" xml:space="preserve">
+    <value>Indian Red Cross Society Madhya Pradesh</value>
+  </data>
+  <data name="RGPV" xml:space="preserve">
+    <value>Rajiv Gandhi Proudyougiki University, Bhopal</value>
+  </data>
+  <data name="SainikWelfare" xml:space="preserve">
+    <value>Directorate of Sainik Welfare, Madhya Pradesh</value>
+  </data>
+  <data name="TBAssociation" xml:space="preserve">
+    <value>T B Association, Madhya Pradesh</value>
+  </data>
+  <data name="TulsiManas" xml:space="preserve">
+    <value>Tulsi Manas Establishment, Madhya Pradesh</value>
+  </data>
+  <data name="AccessibilityStatement" xml:space="preserve">
+    <value>Accessibility Statement</value>
+  </data>
+  <data name="Article" xml:space="preserve">
+    <value>Articles</value>
+  </data>
+  <data name="BegumsAndNawabs" xml:space="preserve">
+    <value>Begums And Nawabs</value>
+  </data>
+  <data name="Bhopal" xml:space="preserve">
+    <value>Bhopal</value>
+  </data>
+  <data name="CityHistory" xml:space="preserve">
+    <value>City History</value>
+  </data>
+  <data name="CommissionerPeriod" xml:space="preserve">
+    <value>Commissioner Period</value>
+  </data>
+  <data name="Disclaimer" xml:space="preserve">
+    <value>Disclaimer</value>
+  </data>
+  <data name="FlagHoistingAtRB" xml:space="preserve">
+    <value>Flag hoisting on the Independence Day and the Republic Day</value>
+  </data>
+  <data name="Footer1" xml:space="preserve">
+    <value>Website Designed &amp; Developed By National Informatics Centre (NIC).</value>
+  </data>
+  <data name="Footer2" xml:space="preserve">
+    <value>Copyright �2017-  All Rights Reserved - Raj Bhavan, Madhya Pradesh.</value>
+  </data>
+  <data name="Footer3" xml:space="preserve">
+    <value>Content on this website is published, managed &amp; maintained by Governor's Secretariat Bhopal, Madhya Pradesh.</value>
+  </data>
+  <data name="Footer4" xml:space="preserve">
+    <value>The desired screen resolution is 1024x768 or above. Site Best Viewed In Microsoft IE-6+, Mozilla Firefox, Google Chrome, Safari etc...</value>
+  </data>
+  <data name="GovernorPhotoGallery" xml:space="preserve">
+    <value>Governor's Photo Gallery</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="HomeFunction" xml:space="preserve">
+    <value>AT Home Function</value>
+  </data>
+  <data name="LastUpdatedOn" xml:space="preserve">
+    <value>Last Updated On</value>
+  </data>
+  <data name="LatestNewsClipping" xml:space="preserve">
+    <value>Latest News Clipping</value>
+  </data>
+  <data name="MPFormation" xml:space="preserve">
+    <value>M.P. Formation</value>
+  </data>
+  <data name="NawabsAnecdotes" xml:space="preserve">
+    <value>Nawab's Anecdotes</value>
+  </data>
+  <data name="NewsBetweenTwoDates" xml:space="preserve">
+    <value>News Between Two Dates</value>
+  </data>
+  <data name="NewsClipping" xml:space="preserve">
+    <value>News Clipping</value>
+  </data>
+  <data name="NewsDateWise" xml:space="preserve">
+    <value>Date Wise News</value>
+  </data>
+  <data name="NewsGallery" xml:space="preserve">
+    <value>News Gallery</value>
+  </data>
+  <data name="OrganizationStructure" xml:space="preserve">
+    <value>Organization Structure</value>
+  </data>
+  <data name="OtherFunctionsAtRB" xml:space="preserve">
+    <value>Other Functions at the Raj Bhavan</value>
+  </data>
+  <data name="OutsideFunctionRB" xml:space="preserve">
+    <value>Functions outside the Raj Bhavan</value>
+  </data>
+  <data name="PhotoGallery" xml:space="preserve">
+    <value>Photo Gallery</value>
+  </data>
+  <data name="PhotosBetweenTwoDates" xml:space="preserve">
+    <value>Photos Between Two Dates</value>
+  </data>
+  <data name="PhotosDateWise" xml:space="preserve">
+    <value>Date Wise Photos</value>
+  </data>
+  <data name="PostIndependencePeriod" xml:space="preserve">
+    <value>Post-Independence Period</value>
+  </data>
+  <data name="PostIndependance" xml:space="preserve">
+    <value>Post-Independence Visitors</value>
+  </data>
+  <data name="PostMPFormation" xml:space="preserve">
+    <value>Post-M.P. Formation Visitors</value>
+  </data>
+  <data name="PreIndependence" xml:space="preserve">
+    <value>Pre-Independence Visitors</value>
+  </data>
+  <data name="PresidentRule" xml:space="preserve">
+    <value>President's Rule</value>
+  </data>
+  <data name="PresidentRuleAdvisor" xml:space="preserve">
+    <value>President's Rule Advisors</value>
+  </data>
+  <data name="PropertyDetails" xml:space="preserve">
+    <value>Immovable Property Details</value>
+  </data>
+  <data name="RajBhavanHistory" xml:space="preserve">
+    <value>Raj Bhavan History</value>
+  </data>
+  <data name="RajBhavanPachmarhi" xml:space="preserve">
+    <value>Raj Bhavan Pachmarhi</value>
+  </data>
+  <data name="RBPhotoGallery" xml:space="preserve">
+    <value>Raj Bhavan Photo Gallery</value>
+  </data>
+  <data name="Sitemap" xml:space="preserve">
+    <value>Site Map</value>
+  </data>
+  <data name="StateHistory" xml:space="preserve">
+    <value>State History</value>
+  </data>
+  <data name="SwearingCeremony" xml:space="preserve">
+    <value>Swearing-in-ceremony</value>
+  </data>
+  <data name="TermsAndConditions" xml:space="preserve">
+    <value>Terms &amp; Conditions</value>
+  </data>
+  <data name="VideoGallery" xml:space="preserve">
+    <value>Video Gallery</value>
+  </data>
+  <data name="VisitorCounter" xml:space="preserve">
+    <value>Visitor Counter</value>
+  </data>
+  <data name="VisitorsAnecdotes" xml:space="preserve">
+    <value>Visitors Anecdotes</value>
+  </data>
+  <data name="ViewMore" xml:space="preserve">
+    <value>View More</value>
+  </data>
+  <data name="IndipendanceVisitor" xml:space="preserve">
+    <value>Visitors</value>
+  </data>
+  <data name="Acting" xml:space="preserve">
+    <value>Acting</value>
+  </data>
+  <data name="AnandibenPatel" xml:space="preserve">
+    <value>Smt. Anandiben Patel</value>
+  </data>
+  <data name="BDSharma" xml:space="preserve">
+    <value>Dr. Bhagwat Dayal Sharma</value>
+  </data>
+  <data name="BPSitaramayya" xml:space="preserve">
+    <value>Dr. Bhogaraju Pattabhi Sitaramayya</value>
+  </data>
+  <data name="CMPunacha" xml:space="preserve">
+    <value>Shri Cheppudira Muthana Poonacha</value>
+  </data>
+  <data name="GPSIngh" xml:space="preserve">
+    <value>Justice G. P. Singh</value>
+  </data>
+  <data name="HVPataskar" xml:space="preserve">
+    <value>Hari Vinayak Pataskar</value>
+  </data>
+  <data name="KCReddy" xml:space="preserve">
+    <value>Shri Kyasamballi Chengalaraya Reddy</value>
+  </data>
+  <data name="NNWanchoo" xml:space="preserve">
+    <value>Shri Niranjan Nath Wanchoo</value>
+  </data>
+  <data name="PadmaVibhushan" xml:space="preserve">
+    <value>Padma Vibhushan</value>
+  </data>
+  <data name="Period" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="PVDixit" xml:space="preserve">
+    <value>Justice P.V. Dixit</value>
+  </data>
+  <data name="Shri" xml:space="preserve">
+    <value>Shri</value>
+  </data>
+  <data name="SNo" xml:space="preserve">
+    <value>S. No.</value>
+  </data>
+  <data name="SNSinha" xml:space="preserve">
+    <value>Shri Satya Narayan Sinha</value>
+  </data>
+  <data name="to" xml:space="preserve">
+    <value>to</value>
+  </data>
+  <data name="ActingGovernor" xml:space="preserve">
+    <value>Acting Governor</value>
+  </data>
+  <data name="OPKohli" xml:space="preserve">
+    <value>Shri Om Prakash Kohli</value>
+  </data>
+  <data name="ClickHere" xml:space="preserve">
+    <value>Click Here</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Speech" xml:space="preserve">
+    <value>Speech</value>
+  </data>
+  <data name="SpeechesOfGov" xml:space="preserve">
+    <value>Speeches of Governors</value>
+  </data>
+  <data name="AARTI" xml:space="preserve">
+    <value>&amp; First Appealate Authority (RTI)</value>
+  </data>
+  <data name="ADC" xml:space="preserve">
+    <value>A.D.C. to Governor</value>
+  </data>
+  <data name="APO" xml:space="preserve">
+    <value>Assistant Protocol Officer</value>
+  </data>
+  <data name="DevendraPalSinghGour" xml:space="preserve">
+    <value>Shri Devendra Pal Singh Gaur</value>
+  </data>
+  <data name="ComptrollerHousehold" xml:space="preserve">
+    <value>Comptroller, Household</value>
+  </data>
+  <data name="EmailID" xml:space="preserve">
+    <value>E-Mail ID</value>
+  </data>
+  <data name="Fax" xml:space="preserve">
+    <value>Fax</value>
+  </data>
+  <data name="JitendraParashar" xml:space="preserve">
+    <value>Shri Jitendra Kumar Parashar</value>
+  </data>
+  <data name="SurbhiTiwari" xml:space="preserve">
+    <value>Mrs Surbhi Tiwari</value>
+  </data>
+  <data name="LawOfficer" xml:space="preserve">
+    <value>Law Officer to Governor</value>
+  </data>
+  <data name="MMohanRao" xml:space="preserve">
+    <value>Dr. M. Mohan Rao</value>
+  </data>
+  <data name="NameOfOfficer" xml:space="preserve">
+    <value>Name Of Officer</value>
+  </data>
+  <data name="OICIT" xml:space="preserve">
+    <value>&amp; Scientist -'C'</value>
+  </data>
+  <data name="PAToGovernor" xml:space="preserve">
+    <value>Personal Assistant to Governor</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="PhoneOffice" xml:space="preserve">
+    <value>Phone (Office)</value>
+  </data>
+  <data name="PhoneRes" xml:space="preserve">
+    <value>Phone (Residence)</value>
+  </data>
+  <data name="PIO" xml:space="preserve">
+    <value>Complaint /Representation/Demand / RTI</value>
+  </data>
+  <data name="PressOfficer" xml:space="preserve">
+    <value>Press Officer to Governor</value>
+  </data>
+  <data name="PsToGov" xml:space="preserve">
+    <value>Principal Secretary to Governor</value>
+  </data>
+  <data name="RajendraRajput" xml:space="preserve">
+    <value>Shri Rajendra Rajput</value>
+  </data>
+  <data name="RajeshGupta" xml:space="preserve">
+    <value>Shri Rajesh Barsainyan Gupta</value>
+  </data>
+  <data name="RamRatanSharma" xml:space="preserve">
+    <value>Shri Ram Ratan Sharma</value>
+  </data>
+  <data name="SAToGovernor" xml:space="preserve">
+    <value>Special Assistant to Governor</value>
+  </data>
+  <data name="ScientistNIC" xml:space="preserve">
+    <value>OIC NIC </value>
+  </data>
+  <data name="SecToGovernor" xml:space="preserve">
+    <value>Secretary to Governor </value>
+  </data>
+  <data name="ShailendraKiyawat" xml:space="preserve">
+    <value>Shri Shailendra Kiyawat</value>
+  </data>
+  <data name="ShilpiDiwaker" xml:space="preserve">
+    <value>Smt. Shilpi Diwaker</value>
+  </data>
+  <data name="VijayRana" xml:space="preserve">
+    <value>Sqn. Ldr. Vijay Rana</value>
+  </data>
+  <data name="VinayakVerma" xml:space="preserve">
+    <value>Shri Vinayak Verma</value>
+  </data>
+  <data name="AlokDubey" xml:space="preserve">
+    <value>Shri Alok Dubey</value>
+  </data>
+  <data name="AO" xml:space="preserve">
+    <value>Account Officer</value>
+  </data>
+  <data name="AshokDesai" xml:space="preserve">
+    <value>Shri Ashok Desai</value>
+  </data>
+  <data name="OSD" xml:space="preserve">
+    <value>Officer on Special Duty</value>
+  </data>
+  <data name="EmployeeCorner" xml:space="preserve">
+    <value>Employee Corner</value>
+  </data>
+  <data name="Form" xml:space="preserve">
+    <value>Forms</value>
+  </data>
+  <data name="GradationList" xml:space="preserve">
+    <value>Gradation List</value>
+  </data>
+  <data name="LatestVideo" xml:space="preserve">
+    <value>Latest Video</value>
+  </data>
+  <data name="RecruitmentRules" xml:space="preserve">
+    <value>Recruitment Rules</value>
+  </data>
+  <data name="HouseholdRecruitmentRule" xml:space="preserve">
+    <value>Madhya Pradesh Governor's Secretariat and Household (Non-Gazetted) Third and Fourth Class Service Recruitment Rules</value>
+  </data>
+  <data name="HouseholdRecruitmentRuleFirst" xml:space="preserve">
+    <value>Madhya Pradesh Governor's Secretariat and Household (Non-Gazetted) Third and Fourth Class Service Recruitment Rule - (First Amendment)</value>
+  </data>
+  <data name="HouseholdRecruitmentRuleSecond" xml:space="preserve">
+    <value>Madhya Pradesh Governor's Secretariat and Household (Non-Gazetted) Third and Fourth Class Service Recruitment Rule - (Second Amendment)</value>
+  </data>
+  <data name="HouseholdRecruitmentRuleThird" xml:space="preserve">
+    <value>Madhya Pradesh Governor's Secretariat and Household (Non-Gazetted) Third and Fourth Class Service Recruitment Rule - (Third Amendment)</value>
+  </data>
+  <data name="AchalSampatti" xml:space="preserve">
+    <value>Achal Sampatti</value>
+  </data>
+  <data name="PaySlip" xml:space="preserve">
+    <value>Pay Slip</value>
+  </data>
+  <data name="RecruitmentServiceRules" xml:space="preserve">
+    <value>Recruitment and Service Rules</value>
+  </data>
+  <data name="VikasSahwal" xml:space="preserve">
+    <value>IPS  Vikash Kumar Shahwal</value>
+  </data>
+  <data name="VeeraRana" xml:space="preserve">
+    <value>Smt. Veera Rana</value>
+  </data>
+  <data name="VideoBetweenTwoDates" xml:space="preserve">
+    <value>Videos Between Two Dates</value>
+  </data>
+  <data name="VideoDateWise" xml:space="preserve">
+    <value>Date Wise Videos</value>
+  </data>
+  <data name="rt" xml:space="preserve">
+    <value>123</value>
+  </data>
+  <data name="DypSecretary" xml:space="preserve">
+    <value>Additional Secretary to Governor</value>
+  </data>
+  <data name="AbhayVerma" xml:space="preserve">
+    <value>Shri Abhay Verma</value>
+  </data>
+  <data name="DDAgrawal" xml:space="preserve">
+    <value>Shri Dayal Das Agrawal</value>
+  </data>
+  <data name="CSO" xml:space="preserve">
+    <value>Chief Security Officer</value>
+  </data>
+  <data name="NirajThakur" xml:space="preserve">
+    <value>Shri Niraj Thakur</value>
+  </data>
+  <data name="KarunaRajorkar" xml:space="preserve">
+    <value>Smt. Karuna Rajorkar</value>
+  </data>
+  <data name="HonGovOfMp" xml:space="preserve">
+    <value>Hon'ble Governor of Madhya Pradesh</value>
+  </data>
+  <data name="FlagHoistingOnTheIndeDay" xml:space="preserve">
+    <value>Flag Hoisting on the Independence Day</value>
+  </data>
+  <data name="FlagHoistingOnTheRepDay" xml:space="preserve">
+    <value>Flag Hoisting on the Republic Day</value>
+  </data>
+  <data name="News" xml:space="preserve">
+    <value>News</value>
+  </data>
+  <data name="PastGovSweringCer" xml:space="preserve">
+    <value>Past Governor's Swering Ceremony</value>
+  </data>
+  <data name="Photos" xml:space="preserve">
+    <value>Photos</value>
+  </data>
+  <data name="PressReleases" xml:space="preserve">
+    <value>Press Releases</value>
+  </data>
+  <data name="SweringCeremonies" xml:space="preserve">
+    <value>Swering in Ceremonies</value>
+  </data>
+  <data name="UpCommingEvent" xml:space="preserve">
+    <value>Up Comming Event</value>
+  </data>
+  <data name="Videos" xml:space="preserve">
+    <value>Videos</value>
+  </data>
+  <data name="AtHomeParty" xml:space="preserve">
+    <value>'At Home Party' at the Raj Bhavan</value>
+  </data>
+  <data name="GovMessages" xml:space="preserve">
+    <value>Governor's Messages</value>
+  </data>
+  <data name="GovUpcommingEvents" xml:space="preserve">
+    <value>Governor's Upcomming Events</value>
+  </data>
+  <data name="LatestSpeech" xml:space="preserve">
+    <value>Latest speech</value>
+  </data>
+  <data name="ORVMpRajBhavan" xml:space="preserve">
+    <value>Online Registration to Visit the Madhya Pradesh Raj Bhavan, Bhopal</value>
+  </data>
+  <data name="ORVMpRajBhavanGL" xml:space="preserve">
+    <value>Click Here to View General Guidline to Visit the Madhya Pradesh Raj Bhavan, Bhopal</value>
+  </data>
+  <data name="PrivateUniversities" xml:space="preserve">
+    <value>Private Universities</value>
+  </data>
+  <data name="StateUniversities" xml:space="preserve">
+    <value>State Universities</value>
+  </data>
+  <data name="NewsClippingBetweenTwoDates" xml:space="preserve">
+    <value>News Clipping Between Two Dates</value>
+  </data>
+  <data name="NewsClippingDateWise" xml:space="preserve">
+    <value>Date Wise News Clipping</value>
+  </data>
+  <data name="Advertiesment" xml:space="preserve">
+    <value>Advertiesment</value>
+  </data>
+  <data name="AjayVarma" xml:space="preserve">
+    <value>Shri Ajay Varma</value>
+  </data>
+  <data name="AshutoshGupta" xml:space="preserve">
+    <value>IPS Ashutosh Gupta</value>
+  </data>
+  <data name="ManoharDubey" xml:space="preserve">
+    <value>Shri Manohar Dubey</value>
+  </data>
+  <data name="EmpDetail" xml:space="preserve">
+    <value>Employee Details</value>
+  </data>
+  <data name="LalJiTandon" xml:space="preserve">
+    <value>Shri Lal Ji Tandon</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="AIDM" xml:space="preserve">
+    <value>All India Shasthra Sabha Registration</value>
+  </data>
+  <data name="AIDMR" xml:space="preserve">
+    <value>Registration</value>
+  </data>
+  <data name="AIDMRR" xml:space="preserve">
+    <value>All India Shasthra Sabha Registration</value>
+  </data>
+  <data name="AIDMP" xml:space="preserve">
+    <value>Download Entry Pass</value>
+  </data>
+  <data name="ORformettingwithOfficerMpRajBhavan" xml:space="preserve">
+    <value>मध्य प्रदेश राजभवन में अधिकारी से मिलने के लिए ऑनलाइन पंजीकरण</value>
+  </data>
+  <data name="Akhilpatel" xml:space="preserve">
+    <value>IPS Shri Akhil Patel</value>
+  </data>
+  <data name="Announcements" xml:space="preserve">
+    <value>Announcements</value>
+  </data>
+  <data name="HonGovOfMponleave" xml:space="preserve">
+    <value>Hon'ble Governor of Madhya Pradesh (on Leave)</value>
+  </data>
+  <data name="DPAhuja" xml:space="preserve">
+    <value>Shri D.P. Ahuja</value>
+  </data>
+</root>

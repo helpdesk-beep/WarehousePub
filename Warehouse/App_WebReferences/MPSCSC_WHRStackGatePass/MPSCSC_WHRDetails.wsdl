@@ -1,0 +1,1187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="InsertWHRStorageDepositorDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="varDepositorWHRId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varStateId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDistrictId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDepotid" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varCommodityId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="varCategoryId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varWhrNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDepositorName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDateofDeposit" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varTotalBagsReceived" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varTotalQtyReceived" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="varModeofweighment" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varBeamScaleLWB" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varAvgMoistureContent" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="varLotNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varMktValueofCommodity" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="varArrivalSource" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varWHRIssueDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="varCreatedBy" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varCreatedDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="varMadeUpBags" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="varClientIP" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varAvgMoistureContentTo" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="varDid" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="varCropYear" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varRemark" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varSangrahadDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varLicenseNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varLicenseDate" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varwday" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="varwmon" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="varwyear" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="varBranchID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDepositorID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varGodownID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varGid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertWHRStorageDepositorDetailsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UpdateWHRStorageDepositorDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="varDepositorWHRId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDepositorName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varMktValueofCommodity" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="varClientIP" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDepositorID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateWHRStorageDepositorDetailsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DeleteWHRStorageDepositorDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="varDepositorWHRId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varClientIP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteWHRStorageDepositorDetailsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="InsertStackMaster">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="varStackID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varStateId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDistrictID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDepotID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varGodownID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varCommodityID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varCategoryId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varStackName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varStackCapacity" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="varStorage_Type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varHired_type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varCreatedBy" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varBranchId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varParentStackID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varRemarks" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varMarketingSeason" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varBagType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varCropYear" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertStackMasterResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UpdateStackMaster">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="varStackID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varStateId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDistrictID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDepotID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varGodownID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varCommodityID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varCategoryId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varStackName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varStackCapacity" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="varStorage_Type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varHired_type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varUpdatedBy" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varBranchId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varParentStackID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varRemarks" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varMarketingSeason" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varBagType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varCropYear" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateStackMasterResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DeleteStackMaster">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="varStackID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDepotID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDeletedBy" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varBranchId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteStackMasterResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="InsertGatePass">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="varGatePassNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varState_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDistrictID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDepotID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varGodownID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varStackID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDepositorName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varCommodityID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="varSchemeID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varVehicleType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varVehicleNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDriverName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varNOofBage" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="varWeight" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="varIssueSource" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varIssueSourceID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varCreatedBy" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varIssueDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="varStatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varPrinted" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varLicenseNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varValidUpto" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varArrivalDepTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varRemarks" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varMillerId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varGPSLNo" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="varOGatePass_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varBranchID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varGodownNam" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varTruckChit" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varBagType" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="varCropYear" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertGatePassResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="InsertFinalStockDeliveryGatePass">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="varStockDeliveryOrderGatePassId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDistrictID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDepotID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varCommodityID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="varQtyIssueBags" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="varQtyIssueWeight" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="varBranchID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varMoistureContent" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varPurposeOfIssue" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varCreatedBy" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varTransporterId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varFPS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varFPSId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varGatePassNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDeliverdAgent" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varRecipientDistrict" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varRecipientDepot" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varTransid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertFinalStockDeliveryGatePassResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="InsertRODetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="varTransID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDistrictId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varDepotId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varCommodityId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="varReleaseOrderNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varReleaseOrderDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="varROQuantity" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="varFPSId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varFPS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varTruckno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varGatePassNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varROQuantityIssued" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="varAllotmentMonth" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="varAllotmentYear" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="varCreatedBy" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varCreatedDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="varBranchID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertRODetailsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="InsertOtherDepoChallanDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="varSendingDist" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varSendingDepot" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varTONum_RailHead" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varChallanNum" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varTruckNum" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varChallanDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varTransporter" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varCreatedDate" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="varBags" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="varQty" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="varGodown" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varCommodity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varSendToDist" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varSendToDepot" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varGatepass" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="varBranchID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertOtherDepoChallanDetailsResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="InsertWHRStorageDepositorDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertWHRStorageDepositorDetails" />
+  </wsdl:message>
+  <wsdl:message name="InsertWHRStorageDepositorDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertWHRStorageDepositorDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateWHRStorageDepositorDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateWHRStorageDepositorDetails" />
+  </wsdl:message>
+  <wsdl:message name="UpdateWHRStorageDepositorDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateWHRStorageDepositorDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteWHRStorageDepositorDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteWHRStorageDepositorDetails" />
+  </wsdl:message>
+  <wsdl:message name="DeleteWHRStorageDepositorDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteWHRStorageDepositorDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertStackMasterSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertStackMaster" />
+  </wsdl:message>
+  <wsdl:message name="InsertStackMasterSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertStackMasterResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateStackMasterSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateStackMaster" />
+  </wsdl:message>
+  <wsdl:message name="UpdateStackMasterSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateStackMasterResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteStackMasterSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteStackMaster" />
+  </wsdl:message>
+  <wsdl:message name="DeleteStackMasterSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteStackMasterResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertGatePassSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertGatePass" />
+  </wsdl:message>
+  <wsdl:message name="InsertGatePassSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertGatePassResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertFinalStockDeliveryGatePassSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertFinalStockDeliveryGatePass" />
+  </wsdl:message>
+  <wsdl:message name="InsertFinalStockDeliveryGatePassSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertFinalStockDeliveryGatePassResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertRODetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertRODetails" />
+  </wsdl:message>
+  <wsdl:message name="InsertRODetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertRODetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertOtherDepoChallanDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertOtherDepoChallanDetails" />
+  </wsdl:message>
+  <wsdl:message name="InsertOtherDepoChallanDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertOtherDepoChallanDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertWHRStorageDepositorDetailsHttpGetIn">
+    <wsdl:part name="varDepositorWHRId" type="s:string" />
+    <wsdl:part name="varStateId" type="s:string" />
+    <wsdl:part name="varDistrictId" type="s:string" />
+    <wsdl:part name="varDepotid" type="s:string" />
+    <wsdl:part name="varCommodityId" type="s:string" />
+    <wsdl:part name="varCategoryId" type="s:string" />
+    <wsdl:part name="varWhrNo" type="s:string" />
+    <wsdl:part name="varDepositorName" type="s:string" />
+    <wsdl:part name="varDateofDeposit" type="s:string" />
+    <wsdl:part name="varTotalBagsReceived" type="s:string" />
+    <wsdl:part name="varTotalQtyReceived" type="s:string" />
+    <wsdl:part name="varModeofweighment" type="s:string" />
+    <wsdl:part name="varBeamScaleLWB" type="s:string" />
+    <wsdl:part name="varAvgMoistureContent" type="s:string" />
+    <wsdl:part name="varLotNo" type="s:string" />
+    <wsdl:part name="varMktValueofCommodity" type="s:string" />
+    <wsdl:part name="varArrivalSource" type="s:string" />
+    <wsdl:part name="varWHRIssueDate" type="s:string" />
+    <wsdl:part name="varCreatedBy" type="s:string" />
+    <wsdl:part name="varCreatedDate" type="s:string" />
+    <wsdl:part name="varMadeUpBags" type="s:string" />
+    <wsdl:part name="varClientIP" type="s:string" />
+    <wsdl:part name="varAvgMoistureContentTo" type="s:string" />
+    <wsdl:part name="varDid" type="s:string" />
+    <wsdl:part name="varCropYear" type="s:string" />
+    <wsdl:part name="varRemark" type="s:string" />
+    <wsdl:part name="varSangrahadDate" type="s:string" />
+    <wsdl:part name="varLicenseNo" type="s:string" />
+    <wsdl:part name="varLicenseDate" type="s:string" />
+    <wsdl:part name="varwday" type="s:string" />
+    <wsdl:part name="varwmon" type="s:string" />
+    <wsdl:part name="varwyear" type="s:string" />
+    <wsdl:part name="varBranchID" type="s:string" />
+    <wsdl:part name="varDepositorID" type="s:string" />
+    <wsdl:part name="varGodownID" type="s:string" />
+    <wsdl:part name="varGid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertWHRStorageDepositorDetailsHttpGetOut" />
+  <wsdl:message name="UpdateWHRStorageDepositorDetailsHttpGetIn">
+    <wsdl:part name="varDepositorWHRId" type="s:string" />
+    <wsdl:part name="varDepositorName" type="s:string" />
+    <wsdl:part name="varMktValueofCommodity" type="s:string" />
+    <wsdl:part name="varClientIP" type="s:string" />
+    <wsdl:part name="varDepositorID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateWHRStorageDepositorDetailsHttpGetOut" />
+  <wsdl:message name="DeleteWHRStorageDepositorDetailsHttpGetIn">
+    <wsdl:part name="varDepositorWHRId" type="s:string" />
+    <wsdl:part name="varClientIP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteWHRStorageDepositorDetailsHttpGetOut" />
+  <wsdl:message name="InsertStackMasterHttpGetIn">
+    <wsdl:part name="varStackID" type="s:string" />
+    <wsdl:part name="varStateId" type="s:string" />
+    <wsdl:part name="varDistrictID" type="s:string" />
+    <wsdl:part name="varDepotID" type="s:string" />
+    <wsdl:part name="varGodownID" type="s:string" />
+    <wsdl:part name="varCommodityID" type="s:string" />
+    <wsdl:part name="varCategoryId" type="s:string" />
+    <wsdl:part name="varStackName" type="s:string" />
+    <wsdl:part name="varStackCapacity" type="s:string" />
+    <wsdl:part name="varStorage_Type" type="s:string" />
+    <wsdl:part name="varHired_type" type="s:string" />
+    <wsdl:part name="varCreatedBy" type="s:string" />
+    <wsdl:part name="varBranchId" type="s:string" />
+    <wsdl:part name="varParentStackID" type="s:string" />
+    <wsdl:part name="varRemarks" type="s:string" />
+    <wsdl:part name="varMarketingSeason" type="s:string" />
+    <wsdl:part name="varBagType" type="s:string" />
+    <wsdl:part name="varCropYear" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertStackMasterHttpGetOut" />
+  <wsdl:message name="UpdateStackMasterHttpGetIn">
+    <wsdl:part name="varStackID" type="s:string" />
+    <wsdl:part name="varStateId" type="s:string" />
+    <wsdl:part name="varDistrictID" type="s:string" />
+    <wsdl:part name="varDepotID" type="s:string" />
+    <wsdl:part name="varGodownID" type="s:string" />
+    <wsdl:part name="varCommodityID" type="s:string" />
+    <wsdl:part name="varCategoryId" type="s:string" />
+    <wsdl:part name="varStackName" type="s:string" />
+    <wsdl:part name="varStackCapacity" type="s:string" />
+    <wsdl:part name="varStorage_Type" type="s:string" />
+    <wsdl:part name="varHired_type" type="s:string" />
+    <wsdl:part name="varUpdatedBy" type="s:string" />
+    <wsdl:part name="varBranchId" type="s:string" />
+    <wsdl:part name="varParentStackID" type="s:string" />
+    <wsdl:part name="varRemarks" type="s:string" />
+    <wsdl:part name="varMarketingSeason" type="s:string" />
+    <wsdl:part name="varBagType" type="s:string" />
+    <wsdl:part name="varCropYear" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateStackMasterHttpGetOut" />
+  <wsdl:message name="DeleteStackMasterHttpGetIn">
+    <wsdl:part name="varStackID" type="s:string" />
+    <wsdl:part name="varDepotID" type="s:string" />
+    <wsdl:part name="varDeletedBy" type="s:string" />
+    <wsdl:part name="varBranchId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteStackMasterHttpGetOut" />
+  <wsdl:message name="InsertGatePassHttpGetIn">
+    <wsdl:part name="varGatePassNo" type="s:string" />
+    <wsdl:part name="varState_ID" type="s:string" />
+    <wsdl:part name="varDistrictID" type="s:string" />
+    <wsdl:part name="varDepotID" type="s:string" />
+    <wsdl:part name="varGodownID" type="s:string" />
+    <wsdl:part name="varStackID" type="s:string" />
+    <wsdl:part name="varDepositorName" type="s:string" />
+    <wsdl:part name="varCommodityID" type="s:string" />
+    <wsdl:part name="varSchemeID" type="s:string" />
+    <wsdl:part name="varVehicleType" type="s:string" />
+    <wsdl:part name="varVehicleNo" type="s:string" />
+    <wsdl:part name="varDriverName" type="s:string" />
+    <wsdl:part name="varNOofBage" type="s:string" />
+    <wsdl:part name="varWeight" type="s:string" />
+    <wsdl:part name="varIssueSource" type="s:string" />
+    <wsdl:part name="varIssueSourceID" type="s:string" />
+    <wsdl:part name="varCreatedBy" type="s:string" />
+    <wsdl:part name="varIssueDate" type="s:string" />
+    <wsdl:part name="varStatus" type="s:string" />
+    <wsdl:part name="varPrinted" type="s:string" />
+    <wsdl:part name="varLicenseNo" type="s:string" />
+    <wsdl:part name="varValidUpto" type="s:string" />
+    <wsdl:part name="varArrivalDepTime" type="s:string" />
+    <wsdl:part name="varRemarks" type="s:string" />
+    <wsdl:part name="varMillerId" type="s:string" />
+    <wsdl:part name="varGPSLNo" type="s:string" />
+    <wsdl:part name="varOGatePass_No" type="s:string" />
+    <wsdl:part name="varBranchID" type="s:string" />
+    <wsdl:part name="varGodownNam" type="s:string" />
+    <wsdl:part name="varTruckChit" type="s:string" />
+    <wsdl:part name="varBagType" type="s:string" />
+    <wsdl:part name="varCropYear" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertGatePassHttpGetOut" />
+  <wsdl:message name="InsertFinalStockDeliveryGatePassHttpGetIn">
+    <wsdl:part name="varStockDeliveryOrderGatePassId" type="s:string" />
+    <wsdl:part name="varDistrictID" type="s:string" />
+    <wsdl:part name="varDepotID" type="s:string" />
+    <wsdl:part name="varCommodityID" type="s:string" />
+    <wsdl:part name="varQtyIssueBags" type="s:string" />
+    <wsdl:part name="varQtyIssueWeight" type="s:string" />
+    <wsdl:part name="varBranchID" type="s:string" />
+    <wsdl:part name="varMoistureContent" type="s:string" />
+    <wsdl:part name="varPurposeOfIssue" type="s:string" />
+    <wsdl:part name="varCreatedBy" type="s:string" />
+    <wsdl:part name="varTransporterId" type="s:string" />
+    <wsdl:part name="varFPS" type="s:string" />
+    <wsdl:part name="varFPSId" type="s:string" />
+    <wsdl:part name="varGatePassNo" type="s:string" />
+    <wsdl:part name="varDeliverdAgent" type="s:string" />
+    <wsdl:part name="varRecipientDistrict" type="s:string" />
+    <wsdl:part name="varRecipientDepot" type="s:string" />
+    <wsdl:part name="varTransid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertFinalStockDeliveryGatePassHttpGetOut" />
+  <wsdl:message name="InsertRODetailsHttpGetIn">
+    <wsdl:part name="varTransID" type="s:string" />
+    <wsdl:part name="varDistrictId" type="s:string" />
+    <wsdl:part name="varDepotId" type="s:string" />
+    <wsdl:part name="varCommodityId" type="s:string" />
+    <wsdl:part name="varReleaseOrderNo" type="s:string" />
+    <wsdl:part name="varReleaseOrderDate" type="s:string" />
+    <wsdl:part name="varROQuantity" type="s:string" />
+    <wsdl:part name="varFPSId" type="s:string" />
+    <wsdl:part name="varFPS" type="s:string" />
+    <wsdl:part name="varTruckno" type="s:string" />
+    <wsdl:part name="varGatePassNo" type="s:string" />
+    <wsdl:part name="varROQuantityIssued" type="s:string" />
+    <wsdl:part name="varAllotmentMonth" type="s:string" />
+    <wsdl:part name="varAllotmentYear" type="s:string" />
+    <wsdl:part name="varCreatedBy" type="s:string" />
+    <wsdl:part name="varCreatedDate" type="s:string" />
+    <wsdl:part name="varBranchID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertRODetailsHttpGetOut" />
+  <wsdl:message name="InsertOtherDepoChallanDetailsHttpGetIn">
+    <wsdl:part name="varSendingDist" type="s:string" />
+    <wsdl:part name="varSendingDepot" type="s:string" />
+    <wsdl:part name="varTONum_RailHead" type="s:string" />
+    <wsdl:part name="varChallanNum" type="s:string" />
+    <wsdl:part name="varTruckNum" type="s:string" />
+    <wsdl:part name="varChallanDate" type="s:string" />
+    <wsdl:part name="varTransporter" type="s:string" />
+    <wsdl:part name="varCreatedDate" type="s:string" />
+    <wsdl:part name="varBags" type="s:string" />
+    <wsdl:part name="varQty" type="s:string" />
+    <wsdl:part name="varGodown" type="s:string" />
+    <wsdl:part name="varCommodity" type="s:string" />
+    <wsdl:part name="varSendToDist" type="s:string" />
+    <wsdl:part name="varSendToDepot" type="s:string" />
+    <wsdl:part name="varGatepass" type="s:string" />
+    <wsdl:part name="varBranchID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertOtherDepoChallanDetailsHttpGetOut" />
+  <wsdl:message name="InsertWHRStorageDepositorDetailsHttpPostIn">
+    <wsdl:part name="varDepositorWHRId" type="s:string" />
+    <wsdl:part name="varStateId" type="s:string" />
+    <wsdl:part name="varDistrictId" type="s:string" />
+    <wsdl:part name="varDepotid" type="s:string" />
+    <wsdl:part name="varCommodityId" type="s:string" />
+    <wsdl:part name="varCategoryId" type="s:string" />
+    <wsdl:part name="varWhrNo" type="s:string" />
+    <wsdl:part name="varDepositorName" type="s:string" />
+    <wsdl:part name="varDateofDeposit" type="s:string" />
+    <wsdl:part name="varTotalBagsReceived" type="s:string" />
+    <wsdl:part name="varTotalQtyReceived" type="s:string" />
+    <wsdl:part name="varModeofweighment" type="s:string" />
+    <wsdl:part name="varBeamScaleLWB" type="s:string" />
+    <wsdl:part name="varAvgMoistureContent" type="s:string" />
+    <wsdl:part name="varLotNo" type="s:string" />
+    <wsdl:part name="varMktValueofCommodity" type="s:string" />
+    <wsdl:part name="varArrivalSource" type="s:string" />
+    <wsdl:part name="varWHRIssueDate" type="s:string" />
+    <wsdl:part name="varCreatedBy" type="s:string" />
+    <wsdl:part name="varCreatedDate" type="s:string" />
+    <wsdl:part name="varMadeUpBags" type="s:string" />
+    <wsdl:part name="varClientIP" type="s:string" />
+    <wsdl:part name="varAvgMoistureContentTo" type="s:string" />
+    <wsdl:part name="varDid" type="s:string" />
+    <wsdl:part name="varCropYear" type="s:string" />
+    <wsdl:part name="varRemark" type="s:string" />
+    <wsdl:part name="varSangrahadDate" type="s:string" />
+    <wsdl:part name="varLicenseNo" type="s:string" />
+    <wsdl:part name="varLicenseDate" type="s:string" />
+    <wsdl:part name="varwday" type="s:string" />
+    <wsdl:part name="varwmon" type="s:string" />
+    <wsdl:part name="varwyear" type="s:string" />
+    <wsdl:part name="varBranchID" type="s:string" />
+    <wsdl:part name="varDepositorID" type="s:string" />
+    <wsdl:part name="varGodownID" type="s:string" />
+    <wsdl:part name="varGid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertWHRStorageDepositorDetailsHttpPostOut" />
+  <wsdl:message name="UpdateWHRStorageDepositorDetailsHttpPostIn">
+    <wsdl:part name="varDepositorWHRId" type="s:string" />
+    <wsdl:part name="varDepositorName" type="s:string" />
+    <wsdl:part name="varMktValueofCommodity" type="s:string" />
+    <wsdl:part name="varClientIP" type="s:string" />
+    <wsdl:part name="varDepositorID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateWHRStorageDepositorDetailsHttpPostOut" />
+  <wsdl:message name="DeleteWHRStorageDepositorDetailsHttpPostIn">
+    <wsdl:part name="varDepositorWHRId" type="s:string" />
+    <wsdl:part name="varClientIP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteWHRStorageDepositorDetailsHttpPostOut" />
+  <wsdl:message name="InsertStackMasterHttpPostIn">
+    <wsdl:part name="varStackID" type="s:string" />
+    <wsdl:part name="varStateId" type="s:string" />
+    <wsdl:part name="varDistrictID" type="s:string" />
+    <wsdl:part name="varDepotID" type="s:string" />
+    <wsdl:part name="varGodownID" type="s:string" />
+    <wsdl:part name="varCommodityID" type="s:string" />
+    <wsdl:part name="varCategoryId" type="s:string" />
+    <wsdl:part name="varStackName" type="s:string" />
+    <wsdl:part name="varStackCapacity" type="s:string" />
+    <wsdl:part name="varStorage_Type" type="s:string" />
+    <wsdl:part name="varHired_type" type="s:string" />
+    <wsdl:part name="varCreatedBy" type="s:string" />
+    <wsdl:part name="varBranchId" type="s:string" />
+    <wsdl:part name="varParentStackID" type="s:string" />
+    <wsdl:part name="varRemarks" type="s:string" />
+    <wsdl:part name="varMarketingSeason" type="s:string" />
+    <wsdl:part name="varBagType" type="s:string" />
+    <wsdl:part name="varCropYear" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertStackMasterHttpPostOut" />
+  <wsdl:message name="UpdateStackMasterHttpPostIn">
+    <wsdl:part name="varStackID" type="s:string" />
+    <wsdl:part name="varStateId" type="s:string" />
+    <wsdl:part name="varDistrictID" type="s:string" />
+    <wsdl:part name="varDepotID" type="s:string" />
+    <wsdl:part name="varGodownID" type="s:string" />
+    <wsdl:part name="varCommodityID" type="s:string" />
+    <wsdl:part name="varCategoryId" type="s:string" />
+    <wsdl:part name="varStackName" type="s:string" />
+    <wsdl:part name="varStackCapacity" type="s:string" />
+    <wsdl:part name="varStorage_Type" type="s:string" />
+    <wsdl:part name="varHired_type" type="s:string" />
+    <wsdl:part name="varUpdatedBy" type="s:string" />
+    <wsdl:part name="varBranchId" type="s:string" />
+    <wsdl:part name="varParentStackID" type="s:string" />
+    <wsdl:part name="varRemarks" type="s:string" />
+    <wsdl:part name="varMarketingSeason" type="s:string" />
+    <wsdl:part name="varBagType" type="s:string" />
+    <wsdl:part name="varCropYear" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateStackMasterHttpPostOut" />
+  <wsdl:message name="DeleteStackMasterHttpPostIn">
+    <wsdl:part name="varStackID" type="s:string" />
+    <wsdl:part name="varDepotID" type="s:string" />
+    <wsdl:part name="varDeletedBy" type="s:string" />
+    <wsdl:part name="varBranchId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteStackMasterHttpPostOut" />
+  <wsdl:message name="InsertGatePassHttpPostIn">
+    <wsdl:part name="varGatePassNo" type="s:string" />
+    <wsdl:part name="varState_ID" type="s:string" />
+    <wsdl:part name="varDistrictID" type="s:string" />
+    <wsdl:part name="varDepotID" type="s:string" />
+    <wsdl:part name="varGodownID" type="s:string" />
+    <wsdl:part name="varStackID" type="s:string" />
+    <wsdl:part name="varDepositorName" type="s:string" />
+    <wsdl:part name="varCommodityID" type="s:string" />
+    <wsdl:part name="varSchemeID" type="s:string" />
+    <wsdl:part name="varVehicleType" type="s:string" />
+    <wsdl:part name="varVehicleNo" type="s:string" />
+    <wsdl:part name="varDriverName" type="s:string" />
+    <wsdl:part name="varNOofBage" type="s:string" />
+    <wsdl:part name="varWeight" type="s:string" />
+    <wsdl:part name="varIssueSource" type="s:string" />
+    <wsdl:part name="varIssueSourceID" type="s:string" />
+    <wsdl:part name="varCreatedBy" type="s:string" />
+    <wsdl:part name="varIssueDate" type="s:string" />
+    <wsdl:part name="varStatus" type="s:string" />
+    <wsdl:part name="varPrinted" type="s:string" />
+    <wsdl:part name="varLicenseNo" type="s:string" />
+    <wsdl:part name="varValidUpto" type="s:string" />
+    <wsdl:part name="varArrivalDepTime" type="s:string" />
+    <wsdl:part name="varRemarks" type="s:string" />
+    <wsdl:part name="varMillerId" type="s:string" />
+    <wsdl:part name="varGPSLNo" type="s:string" />
+    <wsdl:part name="varOGatePass_No" type="s:string" />
+    <wsdl:part name="varBranchID" type="s:string" />
+    <wsdl:part name="varGodownNam" type="s:string" />
+    <wsdl:part name="varTruckChit" type="s:string" />
+    <wsdl:part name="varBagType" type="s:string" />
+    <wsdl:part name="varCropYear" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertGatePassHttpPostOut" />
+  <wsdl:message name="InsertFinalStockDeliveryGatePassHttpPostIn">
+    <wsdl:part name="varStockDeliveryOrderGatePassId" type="s:string" />
+    <wsdl:part name="varDistrictID" type="s:string" />
+    <wsdl:part name="varDepotID" type="s:string" />
+    <wsdl:part name="varCommodityID" type="s:string" />
+    <wsdl:part name="varQtyIssueBags" type="s:string" />
+    <wsdl:part name="varQtyIssueWeight" type="s:string" />
+    <wsdl:part name="varBranchID" type="s:string" />
+    <wsdl:part name="varMoistureContent" type="s:string" />
+    <wsdl:part name="varPurposeOfIssue" type="s:string" />
+    <wsdl:part name="varCreatedBy" type="s:string" />
+    <wsdl:part name="varTransporterId" type="s:string" />
+    <wsdl:part name="varFPS" type="s:string" />
+    <wsdl:part name="varFPSId" type="s:string" />
+    <wsdl:part name="varGatePassNo" type="s:string" />
+    <wsdl:part name="varDeliverdAgent" type="s:string" />
+    <wsdl:part name="varRecipientDistrict" type="s:string" />
+    <wsdl:part name="varRecipientDepot" type="s:string" />
+    <wsdl:part name="varTransid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertFinalStockDeliveryGatePassHttpPostOut" />
+  <wsdl:message name="InsertRODetailsHttpPostIn">
+    <wsdl:part name="varTransID" type="s:string" />
+    <wsdl:part name="varDistrictId" type="s:string" />
+    <wsdl:part name="varDepotId" type="s:string" />
+    <wsdl:part name="varCommodityId" type="s:string" />
+    <wsdl:part name="varReleaseOrderNo" type="s:string" />
+    <wsdl:part name="varReleaseOrderDate" type="s:string" />
+    <wsdl:part name="varROQuantity" type="s:string" />
+    <wsdl:part name="varFPSId" type="s:string" />
+    <wsdl:part name="varFPS" type="s:string" />
+    <wsdl:part name="varTruckno" type="s:string" />
+    <wsdl:part name="varGatePassNo" type="s:string" />
+    <wsdl:part name="varROQuantityIssued" type="s:string" />
+    <wsdl:part name="varAllotmentMonth" type="s:string" />
+    <wsdl:part name="varAllotmentYear" type="s:string" />
+    <wsdl:part name="varCreatedBy" type="s:string" />
+    <wsdl:part name="varCreatedDate" type="s:string" />
+    <wsdl:part name="varBranchID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertRODetailsHttpPostOut" />
+  <wsdl:message name="InsertOtherDepoChallanDetailsHttpPostIn">
+    <wsdl:part name="varSendingDist" type="s:string" />
+    <wsdl:part name="varSendingDepot" type="s:string" />
+    <wsdl:part name="varTONum_RailHead" type="s:string" />
+    <wsdl:part name="varChallanNum" type="s:string" />
+    <wsdl:part name="varTruckNum" type="s:string" />
+    <wsdl:part name="varChallanDate" type="s:string" />
+    <wsdl:part name="varTransporter" type="s:string" />
+    <wsdl:part name="varCreatedDate" type="s:string" />
+    <wsdl:part name="varBags" type="s:string" />
+    <wsdl:part name="varQty" type="s:string" />
+    <wsdl:part name="varGodown" type="s:string" />
+    <wsdl:part name="varCommodity" type="s:string" />
+    <wsdl:part name="varSendToDist" type="s:string" />
+    <wsdl:part name="varSendToDepot" type="s:string" />
+    <wsdl:part name="varGatepass" type="s:string" />
+    <wsdl:part name="varBranchID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertOtherDepoChallanDetailsHttpPostOut" />
+  <wsdl:portType name="MPSCSC_WHRDetailsSoap">
+    <wsdl:operation name="InsertWHRStorageDepositorDetails">
+      <wsdl:input message="tns:InsertWHRStorageDepositorDetailsSoapIn" />
+      <wsdl:output message="tns:InsertWHRStorageDepositorDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWHRStorageDepositorDetails">
+      <wsdl:input message="tns:UpdateWHRStorageDepositorDetailsSoapIn" />
+      <wsdl:output message="tns:UpdateWHRStorageDepositorDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteWHRStorageDepositorDetails">
+      <wsdl:input message="tns:DeleteWHRStorageDepositorDetailsSoapIn" />
+      <wsdl:output message="tns:DeleteWHRStorageDepositorDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertStackMaster">
+      <wsdl:input message="tns:InsertStackMasterSoapIn" />
+      <wsdl:output message="tns:InsertStackMasterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStackMaster">
+      <wsdl:input message="tns:UpdateStackMasterSoapIn" />
+      <wsdl:output message="tns:UpdateStackMasterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStackMaster">
+      <wsdl:input message="tns:DeleteStackMasterSoapIn" />
+      <wsdl:output message="tns:DeleteStackMasterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertGatePass">
+      <wsdl:input message="tns:InsertGatePassSoapIn" />
+      <wsdl:output message="tns:InsertGatePassSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertFinalStockDeliveryGatePass">
+      <wsdl:input message="tns:InsertFinalStockDeliveryGatePassSoapIn" />
+      <wsdl:output message="tns:InsertFinalStockDeliveryGatePassSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertRODetails">
+      <wsdl:input message="tns:InsertRODetailsSoapIn" />
+      <wsdl:output message="tns:InsertRODetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertOtherDepoChallanDetails">
+      <wsdl:input message="tns:InsertOtherDepoChallanDetailsSoapIn" />
+      <wsdl:output message="tns:InsertOtherDepoChallanDetailsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MPSCSC_WHRDetailsHttpGet">
+    <wsdl:operation name="InsertWHRStorageDepositorDetails">
+      <wsdl:input message="tns:InsertWHRStorageDepositorDetailsHttpGetIn" />
+      <wsdl:output message="tns:InsertWHRStorageDepositorDetailsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWHRStorageDepositorDetails">
+      <wsdl:input message="tns:UpdateWHRStorageDepositorDetailsHttpGetIn" />
+      <wsdl:output message="tns:UpdateWHRStorageDepositorDetailsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteWHRStorageDepositorDetails">
+      <wsdl:input message="tns:DeleteWHRStorageDepositorDetailsHttpGetIn" />
+      <wsdl:output message="tns:DeleteWHRStorageDepositorDetailsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertStackMaster">
+      <wsdl:input message="tns:InsertStackMasterHttpGetIn" />
+      <wsdl:output message="tns:InsertStackMasterHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStackMaster">
+      <wsdl:input message="tns:UpdateStackMasterHttpGetIn" />
+      <wsdl:output message="tns:UpdateStackMasterHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStackMaster">
+      <wsdl:input message="tns:DeleteStackMasterHttpGetIn" />
+      <wsdl:output message="tns:DeleteStackMasterHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertGatePass">
+      <wsdl:input message="tns:InsertGatePassHttpGetIn" />
+      <wsdl:output message="tns:InsertGatePassHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertFinalStockDeliveryGatePass">
+      <wsdl:input message="tns:InsertFinalStockDeliveryGatePassHttpGetIn" />
+      <wsdl:output message="tns:InsertFinalStockDeliveryGatePassHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertRODetails">
+      <wsdl:input message="tns:InsertRODetailsHttpGetIn" />
+      <wsdl:output message="tns:InsertRODetailsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertOtherDepoChallanDetails">
+      <wsdl:input message="tns:InsertOtherDepoChallanDetailsHttpGetIn" />
+      <wsdl:output message="tns:InsertOtherDepoChallanDetailsHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MPSCSC_WHRDetailsHttpPost">
+    <wsdl:operation name="InsertWHRStorageDepositorDetails">
+      <wsdl:input message="tns:InsertWHRStorageDepositorDetailsHttpPostIn" />
+      <wsdl:output message="tns:InsertWHRStorageDepositorDetailsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWHRStorageDepositorDetails">
+      <wsdl:input message="tns:UpdateWHRStorageDepositorDetailsHttpPostIn" />
+      <wsdl:output message="tns:UpdateWHRStorageDepositorDetailsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteWHRStorageDepositorDetails">
+      <wsdl:input message="tns:DeleteWHRStorageDepositorDetailsHttpPostIn" />
+      <wsdl:output message="tns:DeleteWHRStorageDepositorDetailsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertStackMaster">
+      <wsdl:input message="tns:InsertStackMasterHttpPostIn" />
+      <wsdl:output message="tns:InsertStackMasterHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStackMaster">
+      <wsdl:input message="tns:UpdateStackMasterHttpPostIn" />
+      <wsdl:output message="tns:UpdateStackMasterHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStackMaster">
+      <wsdl:input message="tns:DeleteStackMasterHttpPostIn" />
+      <wsdl:output message="tns:DeleteStackMasterHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertGatePass">
+      <wsdl:input message="tns:InsertGatePassHttpPostIn" />
+      <wsdl:output message="tns:InsertGatePassHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertFinalStockDeliveryGatePass">
+      <wsdl:input message="tns:InsertFinalStockDeliveryGatePassHttpPostIn" />
+      <wsdl:output message="tns:InsertFinalStockDeliveryGatePassHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertRODetails">
+      <wsdl:input message="tns:InsertRODetailsHttpPostIn" />
+      <wsdl:output message="tns:InsertRODetailsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertOtherDepoChallanDetails">
+      <wsdl:input message="tns:InsertOtherDepoChallanDetailsHttpPostIn" />
+      <wsdl:output message="tns:InsertOtherDepoChallanDetailsHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MPSCSC_WHRDetailsSoap" type="tns:MPSCSC_WHRDetailsSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InsertWHRStorageDepositorDetails">
+      <soap:operation soapAction="http://tempuri.org/InsertWHRStorageDepositorDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWHRStorageDepositorDetails">
+      <soap:operation soapAction="http://tempuri.org/UpdateWHRStorageDepositorDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteWHRStorageDepositorDetails">
+      <soap:operation soapAction="http://tempuri.org/DeleteWHRStorageDepositorDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertStackMaster">
+      <soap:operation soapAction="http://tempuri.org/InsertStackMaster" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStackMaster">
+      <soap:operation soapAction="http://tempuri.org/UpdateStackMaster" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStackMaster">
+      <soap:operation soapAction="http://tempuri.org/DeleteStackMaster" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertGatePass">
+      <soap:operation soapAction="http://tempuri.org/InsertGatePass" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertFinalStockDeliveryGatePass">
+      <soap:operation soapAction="http://tempuri.org/InsertFinalStockDeliveryGatePass" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertRODetails">
+      <soap:operation soapAction="http://tempuri.org/InsertRODetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertOtherDepoChallanDetails">
+      <soap:operation soapAction="http://tempuri.org/InsertOtherDepoChallanDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MPSCSC_WHRDetailsSoap12" type="tns:MPSCSC_WHRDetailsSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InsertWHRStorageDepositorDetails">
+      <soap12:operation soapAction="http://tempuri.org/InsertWHRStorageDepositorDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWHRStorageDepositorDetails">
+      <soap12:operation soapAction="http://tempuri.org/UpdateWHRStorageDepositorDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteWHRStorageDepositorDetails">
+      <soap12:operation soapAction="http://tempuri.org/DeleteWHRStorageDepositorDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertStackMaster">
+      <soap12:operation soapAction="http://tempuri.org/InsertStackMaster" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStackMaster">
+      <soap12:operation soapAction="http://tempuri.org/UpdateStackMaster" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStackMaster">
+      <soap12:operation soapAction="http://tempuri.org/DeleteStackMaster" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertGatePass">
+      <soap12:operation soapAction="http://tempuri.org/InsertGatePass" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertFinalStockDeliveryGatePass">
+      <soap12:operation soapAction="http://tempuri.org/InsertFinalStockDeliveryGatePass" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertRODetails">
+      <soap12:operation soapAction="http://tempuri.org/InsertRODetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertOtherDepoChallanDetails">
+      <soap12:operation soapAction="http://tempuri.org/InsertOtherDepoChallanDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MPSCSC_WHRDetailsHttpGet" type="tns:MPSCSC_WHRDetailsHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="InsertWHRStorageDepositorDetails">
+      <http:operation location="/InsertWHRStorageDepositorDetails" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWHRStorageDepositorDetails">
+      <http:operation location="/UpdateWHRStorageDepositorDetails" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteWHRStorageDepositorDetails">
+      <http:operation location="/DeleteWHRStorageDepositorDetails" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="InsertStackMaster">
+      <http:operation location="/InsertStackMaster" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStackMaster">
+      <http:operation location="/UpdateStackMaster" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStackMaster">
+      <http:operation location="/DeleteStackMaster" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="InsertGatePass">
+      <http:operation location="/InsertGatePass" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="InsertFinalStockDeliveryGatePass">
+      <http:operation location="/InsertFinalStockDeliveryGatePass" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="InsertRODetails">
+      <http:operation location="/InsertRODetails" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="InsertOtherDepoChallanDetails">
+      <http:operation location="/InsertOtherDepoChallanDetails" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MPSCSC_WHRDetailsHttpPost" type="tns:MPSCSC_WHRDetailsHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="InsertWHRStorageDepositorDetails">
+      <http:operation location="/InsertWHRStorageDepositorDetails" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWHRStorageDepositorDetails">
+      <http:operation location="/UpdateWHRStorageDepositorDetails" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteWHRStorageDepositorDetails">
+      <http:operation location="/DeleteWHRStorageDepositorDetails" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="InsertStackMaster">
+      <http:operation location="/InsertStackMaster" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStackMaster">
+      <http:operation location="/UpdateStackMaster" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStackMaster">
+      <http:operation location="/DeleteStackMaster" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="InsertGatePass">
+      <http:operation location="/InsertGatePass" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="InsertFinalStockDeliveryGatePass">
+      <http:operation location="/InsertFinalStockDeliveryGatePass" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="InsertRODetails">
+      <http:operation location="/InsertRODetails" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="InsertOtherDepoChallanDetails">
+      <http:operation location="/InsertOtherDepoChallanDetails" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MPSCSC_WHRDetails">
+    <wsdl:port name="MPSCSC_WHRDetailsSoap" binding="tns:MPSCSC_WHRDetailsSoap">
+      <soap:address location="http://164.100.196.62/csmsnew/Android_Ws/MPSCSC_WHRDetails.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MPSCSC_WHRDetailsSoap12" binding="tns:MPSCSC_WHRDetailsSoap12">
+      <soap12:address location="http://164.100.196.62/csmsnew/Android_Ws/MPSCSC_WHRDetails.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MPSCSC_WHRDetailsHttpGet" binding="tns:MPSCSC_WHRDetailsHttpGet">
+      <http:address location="http://164.100.196.62/csmsnew/Android_Ws/MPSCSC_WHRDetails.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MPSCSC_WHRDetailsHttpPost" binding="tns:MPSCSC_WHRDetailsHttpPost">
+      <http:address location="http://164.100.196.62/csmsnew/Android_Ws/MPSCSC_WHRDetails.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

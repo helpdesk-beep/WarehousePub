@@ -1,0 +1,4 @@
+Record Type	Corporte Id	e-PayOrder No.	Account Number	Branch Code	MMID	Mobile Number	Debit Amount	Credit Amount	Corporate Reference Number	Description	Payment Type	Transaction Status	Transaction Date	Transaction Time	Status Description	UTR Number	UTR Posted Date	UTR Status	Maker	Authorizer1	Authorizer1 Date	Authorizer2	Authorizer2 Date	
+Debit leg	'329338	'CTL5933272	'00000038906616113	'30343	'null	'null	'0.0	'null	7232700420111	'Godown Rent Payment	'null	'Unknown	'null	'null	'null	-	-	'null	MPWLCROBPL	-	-	-	-
+Credit leg	'329338	'CTL593327200001	'00000032541533344	'30078	'null	'null	'0.0	'41879	7232700420111	'Smt. Jyoti Dubey10470GRP232700400820081112	'null	'Unknown	'25/11/2020	'16:51	'null	-	-	'null	null	-	-	-	-
+Credit leg	'329338	'CTL593327200002	'00000037482115204	'30514	'null	'null	'0.0	'3793	7232700420111	'Dr. Mohan Sharma10480GRP232700400920081115	'null	'Unknown	'25/11/2020	'16:51	'null	-	-	'null	null	-	-	-	-

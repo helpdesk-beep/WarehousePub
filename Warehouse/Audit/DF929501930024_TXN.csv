@@ -1,0 +1,7 @@
+Record Type	Corporte Id	e-PayOrder No.	Account Number	Branch Code	MMID	Mobile Number	Debit Amount	Credit Amount	Corporate Reference Number	Description	Payment Type	Transaction Status	Transaction Date	Transaction Time	Status Description	UTR Number	UTR Posted Date	UTR Status	Maker	Authorizer1	Authorizer1 Date	Authorizer2	Authorizer2 Date	
+Debit leg	'329338	'CNABHLZDK1	'00000038906616113	'30343	'null	'null	'36470.0	'null	7233800521013	'Godown Rent Payment	'NEFT	'Unknown	'null	'null	'null	-	-	'null	MPWLCROJBP	-	-	-	-
+Credit leg	'329338	'CNABHLZDK100001	'50185649144	'ALLA0210554	'null	'null	'0.0	'85144	7233800521013	'ARUNA BOTHRA11752GRP23380050562008125	'NEFT	'Unknown	'13/01/2021	'12:51	'null	-	-	'Pending	null	-	-	-	-
+Credit leg	'329338	'CNABHLZDK100002	'3246187362	'CBIN0281039	'null	'null	'0.0	'16382	7233800521013	'SHANKAR ISHRANI11738GRP23380050662008186	'NEFT	'Unknown	'13/01/2021	'12:51	'null	-	-	'Pending	null	-	-	-	-
+Credit leg	'329338	'CNABHLZDK100003	'3246187362	'CBIN0281039	'null	'null	'0.0	'7532	7233800521013	'SHANKAR ISHRANI11738GRP23380050092008188	'NEFT	'Unknown	'13/01/2021	'12:51	'null	-	-	'Pending	null	-	-	-	-
+Credit leg	'329338	'CNABHLZDK100004	'3246192156	'CBIN0281039	'null	'null	'0.0	'12556	7233800521013	'AJAY JAIN11736GRP23380050632008183	'NEFT	'Unknown	'13/01/2021	'12:51	'null	-	-	'Pending	null	-	-	-	-
+Credit leg	'329338	'CNABHLZDK100005	'3351688290	'CBIN0281039	'null	'null	'0.0	'5182	7233800521013	'SUNITA BAGHRECHA11753GRP23380050762008130	'NEFT	'Unknown	'13/01/2021	'12:51	'null	-	-	'Pending	null	-	-	-	-

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://164.100.196.62/csmsnew/Android_Ws/MPSCSC_WHRDetails.asmx?wsdl" filename="MPSCSC_WHRDetails.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://164.100.196.62/csmsnew/Android_Ws/MPSCSC_WHRDetails.asmx?disco" filename="MPSCSC_WHRDetails.disco" />
+  </Results>
+</DiscoveryClientResultsFile>

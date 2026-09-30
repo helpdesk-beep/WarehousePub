@@ -1,0 +1,150 @@
+﻿using System;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+public partial class Accounting_VacantCapacity_Bill_Details : System.Web.UI.Page
+{
+    public SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["FCIConnectionString"].ToString());
+    SqlCommand cmd = new SqlCommand();
+    DataTable dt = new DataTable();
+    DataSet ds = new DataSet();
+    SqlDataAdapter da = new SqlDataAdapter();
+    string qry = "";
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            if ((Session["BranchID"] != null))
+            {
+            }
+        }
+    }
+    public void GetGodown()
+    {
+        string Dist_id = Session["Depot_DistID"].ToString().Substring(2, 2);
+        string sid = Session["BranchID"].ToString();
+        DDLGodown.Items.Clear();
+        qry = "select Godown_Name,Godown_ID from dbo.tbl_MetaData_GODOWN_2018 where BranchID='" + Session["BranchID"].ToString() + "' AND Hired_Type='" + ddlGodownType.SelectedItem.ToString() + "' and IsActive='Y'";
+        da = new SqlDataAdapter(qry, con);
+        ds = new DataSet();
+        da.Fill(ds);
+        if (ds == null)
+        {
+            DDLGodown.Items.Insert(0, "--Select--");
+        }
+        else
+        {
+            DDLGodown.DataSource = ds.Tables[0];
+            DDLGodown.DataTextField = "Godown_Name";
+            DDLGodown.DataValueField = "Godown_ID";
+            DDLGodown.DataBind();
+            //ddlgodown.SelectedIndex = 1;
+        }
+    }
+    protected void fillgrid()
+    {
+        string constr = ConfigurationManager.ConnectionStrings["FCIConnectionString"].ConnectionString;
+        using (SqlConnection con = new SqlConnection(constr))
+        {
+            using (SqlCommand cmd = new SqlCommand("[dbo].[Get_Vacant_Capacity_Bill_Details]", con))
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@GodownID", DDLGodown.SelectedValue.ToString());
+                cmd.Parameters.AddWithValue("@TypeID", ddlBillType.SelectedValue);
+                using (SqlDataAdapter sda = new SqlDataAdapter())
+                {
+                    cmd.Connection = con;
+                    sda.SelectCommand = cmd;
+                    using (DataTable dt = new DataTable())
+                    {
+                        sda.Fill(dt);
+                        if (dt.Rows.Count > 0)
+                        {
+                            gvIStorageCharge.DataSource = dt;
+                            gvIStorageCharge.DataBind();
+                            gvIStorageCharge.FooterRow.Style.Add("text-align", "right");
+                            gvIStorageCharge.FooterRow.Cells[8].Text = "Total";
+                            gvIStorageCharge.FooterRow.Cells[9].Text = dt.AsEnumerable().Sum(row => row.Field<decimal>("Net_Amount")).ToString();
+
+                        }
+                        else
+                        {
+                            gvIStorageCharge.DataSource = null;
+                            gvIStorageCharge.DataBind();
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public static string Base64Encode(string plainText)
+    {
+        var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+        return System.Convert.ToBase64String(plainTextBytes);
+    }
+
+    protected void ddlBillType_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (ddlGodownType.SelectedItem.Text == "--Select--")
+        {
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "mymsg2", "<script language=javascript> alert('Please Select Godown Type...'); </script> ");
+        }
+        else if (DDLGodown.SelectedItem.Text == "--Select--")
+        {
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "mymsg2", "<script language=javascript> alert('Please Select Godown...'); </script> ");
+        }
+        else
+        {
+            fillgrid();
+        }
+    }
+
+    protected void gvIStorageCharge_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "Print")
+        {
+            hdnBillNumber.Value = e.CommandArgument.ToString();
+            GridViewRow gvr = (GridViewRow)((Control)e.CommandSource).NamingContainer;
+            int rowIndex = gvr.RowIndex;
+            hdnBillCategory.Value = (gvIStorageCharge.Rows[rowIndex].FindControl("hdnBillCategoryID") as HiddenField).Value;
+            if (hdnBillCategory.Value.Equals("1"))
+            {
+                Response.Redirect("Print_Filld_Godown_Rent_Bill.aspx?BN=" + Base64Encode(hdnBillNumber.Value));
+            }
+            else if (hdnBillCategory.Value.Equals("2"))
+            {
+                Response.Redirect("Print_Vacant_Godown_Rent_Bill.aspx?BN=" + Base64Encode(hdnBillNumber.Value));
+            }
+            else if (hdnBillCategory.Value.Equals("3"))
+            {
+                Response.Redirect("Print_Service_Charges_Godown_Rent_Bill.aspx?BN=" + Base64Encode(hdnBillNumber.Value));
+            }
+            else if (hdnBillCategory.Value.Equals("4"))
+            {
+                Response.Redirect("Print_Procurment_Vacant_Godown_Rent_Bill.aspx?BN=" + Base64Encode(hdnBillNumber.Value));
+            }
+            else if (hdnBillCategory.Value.Equals("5"))
+            {
+                Response.Redirect("Print_Variable_Procurment_Godown_Rent_Bill.aspx?BN=" + Base64Encode(hdnBillNumber.Value));
+            }
+            else if (hdnBillCategory.Value.Equals("6"))
+            {
+                Response.Redirect("Print_MPSCSC_Filled_Godown_Storage_Charges_Bill.aspx?BN=" + Base64Encode(hdnBillNumber.Value));
+            }
+            else if (hdnBillCategory.Value.Equals("7"))
+            {
+                Response.Redirect("Print_MPSCSC_Vacant_Capacity_Godown_Storage_Charges_Bill.aspx?BN=" + Base64Encode(hdnBillNumber.Value));
+            }
+
+        }
+    }
+
+    protected void ddlGodownType_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        GetGodown();
+    }
+}

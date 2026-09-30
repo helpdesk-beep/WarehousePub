@@ -1,0 +1,100 @@
+.navbar-default {
+	background:#d90406 !important;
+	margin-bottom:0 !important;
+	border:none 0 !important;
+	border-radius:0 !important;
+}
+.navbar
+{
+    min-height:0 !important;
+}
+@media (min-width: 1200px)
+{
+    .container
+    {
+        width:95% !important;
+    }
+    
+}
+
+
+@media (min-width: 768px)
+{
+    .navbar-nav > li > a {
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+}
+.navbar-default .navbar-nav>li>a {
+	color:#fff !important;
+	text-transform: uppercase;
+	font-size: 16px !important;
+}
+.bg-danger{background-color: #d90406;color: #fff;}
+
+.list-group-item.active, .list-group-item.active:hover, 
+.list-group-item.active:focus
+{
+    background-image:none !important;
+    background-color:#169DB2;
+    border-color:#4cc5f2;
+    text-shadow:none !important;
+    }
+.list-group-item{letter-spacing:1px;}    
+
+.jumbotron
+{
+    background-color:#f7f6f5 !important;
+    color:#666;
+}
+
+
+.well-danger
+{
+    background-image:none !important;
+    background-color:#d90406 !important;
+    
+}
+
+.well-danger label
+{
+    color:#fff;
+    font-weight:400;
+}
+
+.well-info{background:-webkit-linear-gradient(top, #d9edf7 0%, #c4e3f3 100%) !important}
+
+.nav-tabs > li > a {
+    
+    background: #169DB2 !important;
+    color:#fff !important;
+    text-transform:uppercase;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus
+{
+    border:1px solid #169DB2;
+    background: #f7f6f5 !important;
+    color:#169DB2 !important;
+    border-bottom:transparent !important;
+}
+.tab-content
+{
+    background: #f7f6f5 !important;
+    border:1px solid #169DB2 !important;
+    color:#000 !important;
+    padding:5px;
+   /* min-height:20em;*/
+    border: 1px solid #ebeaea;
+}
+
+.table
+{
+    margin-top:1em;
+    margin-bottom:0 !important;
+    border:0 !important;
+    background:#fff;
+}
+.table tr th{background:#5bc0de;color:#fff;font-weight:normal;text-transform:uppercase;}
+
+
+#side-menu li a{letter-spacing:1px;text-transform:uppercase}

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Insert_WHR_CSMS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WHR_Request" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DistrictId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="WHR_Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="WHR_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Commodity" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Insert_WHR_CSMSResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="Insert_WHR_CSMSSoapIn">
+    <wsdl:part name="parameters" element="tns:Insert_WHR_CSMS" />
+  </wsdl:message>
+  <wsdl:message name="Insert_WHR_CSMSSoapOut">
+    <wsdl:part name="parameters" element="tns:Insert_WHR_CSMSResponse" />
+  </wsdl:message>
+  <wsdl:message name="Insert_WHR_CSMSHttpGetIn">
+    <wsdl:part name="WHR_Request" type="s:string" />
+    <wsdl:part name="DistrictId" type="s:string" />
+    <wsdl:part name="WHR_Number" type="s:string" />
+    <wsdl:part name="WHR_Date" type="s:string" />
+    <wsdl:part name="Commodity" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Insert_WHR_CSMSHttpGetOut" />
+  <wsdl:message name="Insert_WHR_CSMSHttpPostIn">
+    <wsdl:part name="WHR_Request" type="s:string" />
+    <wsdl:part name="DistrictId" type="s:string" />
+    <wsdl:part name="WHR_Number" type="s:string" />
+    <wsdl:part name="WHR_Date" type="s:string" />
+    <wsdl:part name="Commodity" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Insert_WHR_CSMSHttpPostOut" />
+  <wsdl:portType name="UpdateWhr_Kharif2017Soap">
+    <wsdl:operation name="Insert_WHR_CSMS">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For insert WHR in CSMS Only</wsdl:documentation>
+      <wsdl:input message="tns:Insert_WHR_CSMSSoapIn" />
+      <wsdl:output message="tns:Insert_WHR_CSMSSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="UpdateWhr_Kharif2017HttpGet">
+    <wsdl:operation name="Insert_WHR_CSMS">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For insert WHR in CSMS Only</wsdl:documentation>
+      <wsdl:input message="tns:Insert_WHR_CSMSHttpGetIn" />
+      <wsdl:output message="tns:Insert_WHR_CSMSHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="UpdateWhr_Kharif2017HttpPost">
+    <wsdl:operation name="Insert_WHR_CSMS">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used For insert WHR in CSMS Only</wsdl:documentation>
+      <wsdl:input message="tns:Insert_WHR_CSMSHttpPostIn" />
+      <wsdl:output message="tns:Insert_WHR_CSMSHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UpdateWhr_Kharif2017Soap" type="tns:UpdateWhr_Kharif2017Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Insert_WHR_CSMS">
+      <soap:operation soapAction="http://tempuri.org/Insert_WHR_CSMS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="UpdateWhr_Kharif2017Soap12" type="tns:UpdateWhr_Kharif2017Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Insert_WHR_CSMS">
+      <soap12:operation soapAction="http://tempuri.org/Insert_WHR_CSMS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="UpdateWhr_Kharif2017HttpGet" type="tns:UpdateWhr_Kharif2017HttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="Insert_WHR_CSMS">
+      <http:operation location="/Insert_WHR_CSMS" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="UpdateWhr_Kharif2017HttpPost" type="tns:UpdateWhr_Kharif2017HttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Insert_WHR_CSMS">
+      <http:operation location="/Insert_WHR_CSMS" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UpdateWhr_Kharif2017">
+    <wsdl:port name="UpdateWhr_Kharif2017Soap" binding="tns:UpdateWhr_Kharif2017Soap">
+      <soap:address location="http://www.mpsc.mp.nic.in/csms/UpdateWhr_Kharif2017.asmx" />
+    </wsdl:port>
+    <wsdl:port name="UpdateWhr_Kharif2017Soap12" binding="tns:UpdateWhr_Kharif2017Soap12">
+      <soap12:address location="http://www.mpsc.mp.nic.in/csms/UpdateWhr_Kharif2017.asmx" />
+    </wsdl:port>
+    <wsdl:port name="UpdateWhr_Kharif2017HttpGet" binding="tns:UpdateWhr_Kharif2017HttpGet">
+      <http:address location="http://www.mpsc.mp.nic.in/csms/UpdateWhr_Kharif2017.asmx" />
+    </wsdl:port>
+    <wsdl:port name="UpdateWhr_Kharif2017HttpPost" binding="tns:UpdateWhr_Kharif2017HttpPost">
+      <http:address location="http://www.mpsc.mp.nic.in/csms/UpdateWhr_Kharif2017.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

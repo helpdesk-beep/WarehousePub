@@ -1,0 +1,6 @@
+Record Type	Corporte Id	e-PayOrder No.	Account Number	Branch Code	MMID	Mobile Number	Debit Amount	Credit Amount	Corporate Reference Number	Description	Payment Type	Transaction Status	Transaction Date	Transaction Time	Status Description	UTR Number	UTR Posted Date	UTR Status	Maker	Authorizer1	Authorizer1 Date	Authorizer2	Authorizer2 Date	
+Debit leg	'329338	'CTM2636600	'00000038906616113	'30343	'null	'null	'308374.0	'null	7232800303210121	'Godown Rent Payment	'null	'Unknown	'null	'null	'null	-	-	'null	MPWLCROBPL	-	-	-	-
+Credit leg	'329338	'CTM263660000001	'00000032891591908	'00383	'null	'null	'0.0	'236016	7232800303210121	'Sahyog ware house10039GRP232800103320091114	'null	'Unknown	'15/01/2021	'11:11	'null	-	-	'null	null	-	-	-	-
+Credit leg	'329338	'CTM263660000002	'00000032891591908	'00383	'null	'null	'0.0	'60478	7232800303210121	'Sahyog ware house10039GRP23280010332009186	'null	'Unknown	'15/01/2021	'11:11	'null	-	-	'null	null	-	-	-	-
+Credit leg	'329338	'CTM263660000003	'00000032891599544	'00383	'null	'null	'0.0	'11880	7232800303210121	'Suvidha ware house10037GRP23280010282009192	'null	'Unknown	'15/01/2021	'11:11	'null	-	-	'null	null	-	-	-	-
+Credit leg	'329338	'CTM263660000004	'00000020123192193	'A0144	'null	'null	'0.0	'50088	7232800303210121	'Mrs.Vimla devi10034GRP232800100520091109	'null	'Unknown	'15/01/2021	'11:11	'null	-	-	'null	null	-	-	-	-

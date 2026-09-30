@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://mpsc.mp.nic.in/csms/Update_WHR_CSMS.asmx?wsdl" docRef="http://mpsc.mp.nic.in/csms/Update_WHR_CSMS.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://mpsc.mp.nic.in/csms/Update_WHR_CSMS.asmx" xmlns:q1="http://microsoft.co.in/" binding="q1:Update_WHR_CSMSSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://mpsc.mp.nic.in/csms/Update_WHR_CSMS.asmx" xmlns:q2="http://microsoft.co.in/" binding="q2:Update_WHR_CSMSSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

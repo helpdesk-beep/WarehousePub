@@ -1,0 +1,101 @@
+﻿using System;
+using System.Web;
+using System.Data.SqlClient;
+using System.Data;
+using System.IO;
+using System.Configuration;
+using System.Web.UI.WebControls;
+
+public partial class Admin_InsertSubCategory : System.Web.UI.Page
+{
+    string constr = ConfigurationManager.ConnectionStrings["RajCon"].ConnectionString;
+    SqlConnection con;
+    SqlCommand cmd;
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        Response.Cache.SetAllowResponseInBrowserHistory(false);
+        Response.Cache.SetCacheability(HttpCacheability.NoCache);
+        Response.Cache.SetNoStore();
+        Response.Expires = 0;
+
+        dvErr.Visible = false;
+        lblErr.Visible = false;
+
+        if (Session["username"] == null)
+        {
+            Response.Redirect("/Login/Login.aspx");
+        }
+        if (!IsPostBack)
+        {
+            fillProgram();
+        }
+
+    }
+    public void fillProgram()
+    {
+        using (SqlConnection con = new SqlConnection(constr))
+        {
+            SqlCommand cmd = new SqlCommand("select_Inventry_program", con);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            con.Open();
+            ddlProgram.DataSource = cmd.ExecuteReader();
+            ddlProgram.DataTextField = "CategoryNameE";
+            ddlProgram.DataValueField = "id";
+            ddlProgram.DataBind();
+            ddlProgram.Items.Insert(0, new ListItem("-- Select Category --", "0"));
+            con.Close();
+        }
+    }
+    protected override void OnInit(System.EventArgs e)
+    {
+        base.OnInit(e);
+        ViewStateUserKey = Session.SessionID;
+    }
+
+
+    protected void btnSave_Click(object sender, EventArgs e)
+    {
+        string constr = ConfigurationManager.ConnectionStrings["RajCon"].ConnectionString;
+
+        try
+        {
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                SqlCommand cmd = new SqlCommand("insert_Inventry_Sub_category", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add("@CategoryID", SqlDbType.Int).Value = Convert.ToInt32(ddlProgram.SelectedValue);
+                cmd.Parameters.Add("@CategoryE", SqlDbType.VarChar).Value = txtCategoryE.Text;
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+                dvErr.Visible = true;
+                lblErr.Visible = true;
+                lblErr.ForeColor = System.Drawing.Color.Green;
+                lblErr.Text = "Category Inserted Successfully!!!";
+
+               // ddlProgram.SelectedValue = "0";
+                txtCategoryE.Text = "";
+            }
+
+        }
+        catch (Exception ex)
+        {
+            dvErr.Visible = true;
+            lblErr.Visible = true;
+            lblErr.Text = "Error: " + ex.Message.ToString();
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+

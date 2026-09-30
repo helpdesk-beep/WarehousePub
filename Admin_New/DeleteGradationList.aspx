@@ -1,0 +1,53 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="../MasterPages/adminMaster.master" AutoEventWireup="true" CodeFile="DeleteGradationList.aspx.cs" Inherits="Admin_DeleteGradationList" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="PM" runat="Server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="../css/jquery-ui.css" rel="stylesheet" />
+    <script src="../js/jquery-1.12.4.js"></script>
+    <script src="../js/jquery-ui.js"></script>
+
+    <div class="alert-warning img-thumbnail" style="margin-bottom: 10px!important;">
+        <b style="font-size: large; font-family: 'Times New Roman', Times, serif">Delete Gradation List</b>
+    </div>
+    <br />
+    <div>
+        <center>
+            <asp:Label ID="lblErr" runat="server" CssClass="alert-danger" Font-Bold="true" Font-Size="Large"></asp:Label>
+        </center>
+    </div>
+    <br />
+    <div>
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="6" AllowPaging="true" PageSize="30"
+            OnPageIndexChanging="GridView1_PageIndexChanging"
+            CssClass="alert-heading">
+            <Columns>
+                <asp:TemplateField HeaderText="S.No.">
+                    <ItemTemplate>
+                        <%# Container.DataItemIndex + 1 %>
+                        <asp:HiddenField ID="hdnID" runat="server" Value='<%# HttpUtility.HtmlEncode(Convert.ToString(Eval("id"))) %>'></asp:HiddenField>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Title">
+                    <ItemTemplate>
+                        <asp:Label ID="lblTitle" runat="server" Text='<%# HttpUtility.HtmlEncode(Convert.ToString(Eval("title"))) %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:BoundField DataField="fileName" HeaderText="File Name" HtmlEncode="true" />
+                <asp:TemplateField ItemStyle-HorizontalAlign="Center">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="lnkDownload" runat="server" Text="Download" OnClick="DownloadFile"
+                            CommandArgument='<%# Eval("Id") %>'></asp:LinkButton>
+                        <asp:LinkButton ID="lnkView" runat="server" Text="View" OnClick="View" CommandArgument='<%# Eval("Id") %>'></asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:Button ID="btn_Delete" CssClass="btn-danger" OnClick="Delete" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Delete" CommandName="Delete" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+            <HeaderStyle CssClass="alert-warning" />
+            <AlternatingRowStyle CssClass=" alert-danger" />
+        </asp:GridView>
+    </div>
+</asp:Content>

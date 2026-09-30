@@ -1,0 +1,504 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="~/MasterPages/Nccf_Master.master.cs" Inherits="MasterPages_Nccf_Master" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MP Warehousing & Logistics Corporation</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+
+
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f2f4f8;
+            margin: 0;
+        }
+
+        /* HEADER */
+        .main-header {
+            /*background: linear-gradient(347deg,#56e81a78,#4facfe);*/
+            background: #068def;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1001;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+            .main-header .logo {
+                display: flex;
+                align-items: center;
+            }
+
+                .main-header .logo img {
+                    height: 50px;
+                    margin-right: 15px;
+                }
+
+            .main-header .title {
+                font-weight: 700;
+                font-size: 20px;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            }
+
+        /* SIDEBAR */
+        #sidebar {
+            /*background:linear-gradient(97deg,#2c3e50,#9de69d);*/
+            background: #e3edec;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 220px; /* default expanded */
+            height: calc(100% - 70px);
+            padding-top: 20px;
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+            #sidebar.collapsed {
+                width: 60px;
+            }
+
+            #sidebar.hover-expanded {
+                width: 220px;
+            }
+
+            /* Sidebar menu */
+            #sidebar ul {
+                list-style: none;
+                padding-left: 0;
+                margin: 0;
+            }
+
+                #sidebar ul li {
+                    margin-bottom: 5px;
+                }
+
+                    #sidebar ul li a {
+                        display: flex;
+                        align-items: center;
+                        color: #000;
+                        padding: 12px 10px;
+                        text-decoration: none;
+                        border-radius: 4px;
+                        font-weight: 500;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        transition: all 0.3s ease;
+                    }
+
+                        #sidebar ul li a i {
+                            width: 25px;
+                            margin-right: 10px;
+                            text-align: center;
+                        }
+
+                        #sidebar ul li a span {
+                            opacity: 1;
+                            transition: opacity 0.3s ease;
+                        }
+
+            /* Collapsed text hidden */
+            #sidebar.collapsed ul li a span {
+                opacity: 0;
+            }
+
+            #sidebar.collapsed.hover-expanded ul li a span {
+                opacity: 1;
+            }
+
+            /* Submenu */
+            #sidebar ul li ul.submenu {
+                display: none;
+                padding-left: 15px;
+            }
+
+            #sidebar ul li.open > ul.submenu {
+                display: block;
+            }
+
+        /* PAGE WRAPPER */
+        #page-wrapper {
+            margin-left: 220px;
+            padding: 90px 20px 20px 20px;
+            min-height: calc(100vh - 70px);
+            transition: margin-left 0.3s ease;
+        }
+
+        #sidebar.collapsed ~ #page-wrapper {
+            margin-left: 60px;
+        }
+
+        #sidebar.collapsed.hover-expanded ~ #page-wrapper {
+            margin-left: 220px;
+        }
+
+        /* TOGGLE BUTTON */
+        #sidebarToggle {
+            background: #fff;
+            border: none;
+            color: #1b75bb;
+            font-size: 20px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
+
+            #sidebarToggle:hover {
+                background: #1b75bb;
+                color: #fff;
+            }
+
+        /* USER DROPDOWN */
+        .user-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+            .user-dropdown .user-avatar {
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                cursor: pointer;
+                border: 2px solid #fff;
+                transition: transform 0.2s;
+            }
+
+                .user-dropdown .user-avatar:hover {
+                    transform: scale(1.1);
+                }
+
+        .user-dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 55px;
+            background: #fff;
+            min-width: 180px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            z-index: 1002;
+        }
+
+            .user-dropdown-content a, .user-dropdown-content span, .user-dropdown-content .dropdown-header {
+                color: #333;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                font-size: 14px;
+                transition: 0.2s;
+            }
+
+                .user-dropdown-content a i, .user-dropdown-content .dropdown-header i {
+                    margin-right: 10px;
+                    color: #007bff;
+                }
+
+                .user-dropdown-content a:hover {
+                    background-color: #f5f5f5;
+                }
+
+            .user-dropdown-content .dropdown-header {
+                font-weight: bold;
+                cursor: default;
+                background: #f0f0f0;
+            }
+
+            .user-dropdown-content .dropdown-logout {
+                color: #e74c3c !important;
+                font-weight: 600;
+            }
+
+                .user-dropdown-content .dropdown-logout:hover {
+                    background-color: #fcecec;
+                }
+
+        @media(max-width:768px) {
+            #sidebar {
+                left: -220px;
+            }
+
+            #page-wrapper {
+                margin-left: 0 !important;
+            }
+
+            #sidebar.active {
+                left: 0;
+                z-index: 1000;
+            }
+        }
+    </style>
+
+    <style>
+        /* Fix for dropdown clipping inside DataTable */
+        .table-container {
+            position: relative;
+            overflow-x: auto; /* horizontal scroll maintain */
+            overflow-y: visible; /* dropdown visible rahe vertically */
+            padding: 5px;
+        }
+
+        fieldset {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-top: 10px;
+        }
+
+        legend {
+            font-weight: bold;
+            font-size: 14px;
+            color: #333;
+        }
+
+        table.dataTable {
+            width: 100% !important;
+        }
+
+            table.dataTable td, table.dataTable th {
+                white-space: nowrap !important;
+            }
+
+        .dataTables_wrapper {
+            overflow: hidden; /* wrapper control */
+            position: relative;
+        }
+
+        /* Dropdown look */
+        select.form-control {
+            min-width: 130px;
+            height: 30px;
+            font-size: 13px;
+            padding: 2px 6px;
+        }
+
+        /* Update button */
+        .btn-sm {
+            padding: 2px 8px;
+            font-size: 13px;
+        }
+
+        /* Fix overflow bug causing table to leak out of fieldset */
+        .content_wrapper {
+            overflow: hidden;
+        }
+    </style>
+    <%--Data Table Footer END--%>
+    <%--Data Table Footer END--%>
+
+    <%--Ashutosh--%>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" />
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+
+    <script type="text/javascript">
+        // For normal full page postbacks
+        window.onload = function () {
+            document.getElementById("loader-overlay").style.display = "none";
+        };
+
+        window.onbeforeunload = function () {
+            document.getElementById("loader-overlay").style.display = "block";
+        };
+
+        // For partial postbacks (UpdatePanel AJAX)
+        if (typeof (Sys) !== "undefined") {
+            Sys.WebForms.PageRequestManager.getInstance().add_beginRequest(function () {
+                document.getElementById("loader-overlay").style.display = "block";
+            });
+
+            Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function () {
+                document.getElementById("loader-overlay").style.display = "none";
+            });
+        }
+    </script>
+
+
+    <style>
+        fieldset {
+            border: 1px solid #2095A1;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px;
+        }
+
+        legend {
+            font-weight: bold;
+            font-size: 17px;
+            border: 1px solid #2095A1;
+            padding: 5px 10px;
+            border-radius: 5px;
+            width: auto;
+        }
+    </style>
+    <%--END--%>
+
+
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <!-- HEADER -->
+        <div class="main-header">
+            <button type="button" id="sidebarToggle" class="ml-2">☰</button>
+            <div class="logo">
+                <img src="../Images/LOGO-removebg-preview.png" alt="Logo" />
+                <div class="title">Madhya Pradesh Warehousing & Logistics Corporation</div>
+            </div>
+
+            <div class="d-flex align-items-center">
+                <div class="user-dropdown" id="userDropdown">
+                    <img src="../Images/user.png" alt="User" class="user-avatar" />
+                    <div class="user-dropdown-content">
+                        <div class="dropdown-header">
+                            <i class="fa fa-user-circle"></i>
+                            <label id="lblusername" runat="server"></label>
+                        </div>
+                        <asp:LinkButton ID="LinkButton1" runat="server" OnClick="lnkLogout_Click" CssClass="dropdown-logout">
+                    <i class="fa fa-power-off"></i> Logout
+                        </asp:LinkButton>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SIDEBAR -->
+        <div id="sidebar">
+            <ul class="nav flex-column">
+                <li><a href="../NCCF/Welcome_Page.aspx"><i class="fa fa-home"></i><span>Home</span></a></li>
+                <li runat="server" visible="false" id="divwhr">
+                    <a class="has-submenu"><i class="fa fa-bullhorn"></i><span>Pending Bills Details</span><i class="fa fa-caret-down ml-auto"></i></a>
+                    <ul class="submenu">
+                        <li><a href="../NCCF/RM_Submit_Bill_TO_NCCF.aspx">Pending Bills For Processing</a></li>
+                        <li><a href="../NCCF/Bill_Approved_By_Business_Section.aspx">Approved Bills For Print</a></li>
+                    </ul>
+                </li>
+                <li runat="server" visible="false" id="divbill">
+                    <a class="has-submenu"><i class="fa fa-bullhorn"></i><span>Online Billing</span><i class="fa fa-caret-down ml-auto"></i></a>
+                    <ul class="submenu">
+                        <li><a href="../NCCF/NCCF_Bill_Approved_By_Bussiness.aspx">Bill Approved By Bussiness section</a></li>
+                    </ul>
+                    <ul class="submenu">
+                        <li><a href="../NCCF/NCCF_Bill_Approved_By_Acoount_For_Payment.aspx">Bill Approved By Acoount For Payment</a></li>
+                    </ul>
+                    <ul class="submenu">
+                        <li><a href="../NCCF/NCCF_Deduction_For_Final_Storage_Bill.aspx">NCCF Deduction For Storage Bill</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+
+        <!-- PAGE CONTENT -->
+        <div id="page-wrapper">
+            <asp:ContentPlaceHolder ID="body" runat="server"></asp:ContentPlaceHolder>
+        </div>
+
+    </form>
+
+    <%--<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>--%>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var sidebar = $('#sidebar');
+
+            // Default expanded
+            sidebar.removeClass('collapsed');
+
+            // Toggle collapse
+            $('#sidebarToggle').click(function () {
+                sidebar.toggleClass('collapsed');
+                sidebar.removeClass('width: 60px');
+            });
+
+            // Hover expand when collapsed
+            sidebar.hover(
+                function () {
+                    if (sidebar.hasClass('collapsed')) {
+                        sidebar.addClass('hover-expanded');
+                        sidebar.removeClass('width: 60px');
+                    }
+                },
+                function () {
+                    if (sidebar.hasClass('collapsed')) {
+                        sidebar.removeClass('hover-expanded');
+                        sidebar.removeClass('width: 60px');
+                    }
+                }
+            );
+
+            // Submenu toggle
+            //$('#sidebar .has-submenu').click(function () {
+            //    $(this).parent().addClass('open');
+            //    $(this).next('.submenu').slideDown(250);
+            //});
+            $('#sidebar .has-submenu').click(function () {
+                var parent = $(this).parent();
+                var submenu = $(this).next('.submenu');
+
+                if (submenu.is(':visible')) {
+                    submenu.slideUp(250);
+                    parent.removeClass('open');
+                } else {
+                    submenu.slideDown(250);
+                    parent.addClass('open');
+                }
+            });
+
+            // Active link highlight
+            var path = window.location.pathname.split("/").pop();
+            $('#sidebar ul li a').each(function () {
+                var href = $(this).attr('href') ? $(this).attr('href').split("/").pop() : '';
+                if (href === path) { $(this).parent().addClass('active'); }
+            });
+
+            // User dropdown toggle
+            $('#userDropdown .user-avatar').click(function (e) {
+                e.stopPropagation();
+                $('#userDropdown .user-dropdown-content').slideToggle(250);
+            });
+            $(document).click(function () {
+                $('#userDropdown .user-dropdown-content').slideUp(250);
+            });
+        });
+    </script>
+</body>
+</html>

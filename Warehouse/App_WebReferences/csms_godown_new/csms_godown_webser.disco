@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://164.100.96.13/csms/csms_godown_webser.ASMX?wsdl" docRef="http://164.100.96.13/csms/csms_godown_webser.ASMX" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://164.100.96.13/csms/csms_godown_webser.ASMX" xmlns:q1="http://microsoft.co.in/" binding="q1:csms_godown_webserSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://164.100.96.13/csms/csms_godown_webser.ASMX" xmlns:q2="http://microsoft.co.in/" binding="q2:csms_godown_webserSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

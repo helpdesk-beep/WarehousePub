@@ -1,0 +1,464 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Inspection_BO.master.cs" Inherits="Masters_Inspection_BO" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>MP Warehouse Online Inspection</title>
+
+    <style type="text/css">
+        header, nav, section, article, aside, footer {
+            display: block;
+        }
+    </style>
+    <%--Changes on 12-05-2026--%>
+    <style>
+        /* 1. Hide the top Google Translate frame/banner */
+        .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon {
+            display: none !important;
+        }
+
+        body {
+            top: 0px !important;
+        }
+
+        /* 2. Hide the Google logo and branding in the dropdown */
+        .goog-te-gadget {
+            font-family: 'Arial', sans-serif !important;
+            color: transparent !important; /* Hides the "Powered by" text */
+        }
+
+            .goog-te-gadget .goog-te-combo {
+                color: #333 !important; /* Keeps the dropdown text visible */
+                padding: 8px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                background-color: #fff;
+            }
+
+        /* 3. Remove the tooltip popups when hovering over translated text */
+        #goog-gt-tt, .goog-te-balloon-frame {
+            display: none !important;
+        }
+
+        .goog-text-highlight {
+            background: none !important;
+            box-shadow: none !important;
+        }
+    </style>
+    <style>
+        /* Dropdown ke andar ke text ko hamesha readable rakhne ke liye */
+        .goog-te-combo {
+            text-transform: none !important;
+        }
+        /* Targeted fix for the iframe class you mentioned */
+        .VIpgJd-ZVi9od-ORHb-OEVmcd,
+        .goog-te-banner-frame,
+        #goog-gt-tt,
+        .goog-te-balloon-frame,
+        #\:2\.container {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+        /* Prevent the page from shifting down */
+        body {
+            top: 0px !important;
+        }
+
+        /* Remove the hover highlight effect */
+        .goog-text-highlight {
+            background: none !important;
+            box-shadow: none !important;
+        }
+    </style>
+    <%--END--%>
+
+    <!--[if lt IE 9]>
+   <script>
+      document.createElement('header');
+      document.createElement('nav');
+      document.createElement('section');
+      document.createElement('article');
+      document.createElement('aside');
+      document.createElement('footer');
+   </script>
+<![endif]-->
+    <link href="../assets/css/style.css" rel="stylesheet" />
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- font awesome -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="../assets/css/style.css" rel="stylesheet" type="text/css">
+    <link href="../assets/css/custome.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link href="../CSS/style.css" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        .wrap {
+            width: 1200;
+            margin: auto;
+        }
+
+        .navtop {
+            /*background: #333;*/
+            height: 30px;
+            color: #fff;
+        }
+
+            .navtop > ul {
+                position: relative;
+                z-index: 1;
+            }
+
+                .navtop > ul > li {
+                    float: left;
+                    border-left: 1px solid #fff;
+                }
+
+            .navtop ul li a {
+                display: block;
+                padding: 10px 20px;
+                color: #ccc;
+            }
+
+                .navtop ul li a:hover {
+                    background: #1e364a;
+                    color: #fff;
+                }
+
+            .navtop ul li:first-child {
+                border: none;
+            }
+
+            .navtop > ul > li:hover > ul {
+                display: block;
+            }
+
+            .navtop > ul > li > ul > li:hover ul {
+                display: block;
+            }
+
+            .navtop > ul > li > ul li {
+                height: 41px;
+            }
+
+            .navtop > ul > li > ul {
+                display: none;
+                position: absolute;
+                background: #333;
+            }
+
+                .navtop > ul > li > ul > li > ul {
+                    display: none;
+                    position: relative;
+                    left: 132px;
+                    top: -41px;
+                    background: #333;
+                }
+
+            .navtop ul ul li {
+                border-top: 1px solid #fff;
+            }
+    </style>
+    <style type="text/css">
+        #popupwin {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 90%;
+            height: 90%;
+            background-color: #000;
+            filter: alpha(opacity=65);
+            -moz-opacity: 0.7;
+            display: none;
+            opacity: 0.7;
+            z-index: 100;
+        }
+
+        .pop a {
+            text-decoration: none;
+        }
+
+        .popup {
+            width: 100%;
+            height: 98%;
+            margin: 0 auto;
+            position: fixed;
+            z-index: 101;
+        }
+
+        .pop {
+            min-width: 900px;
+            width: 900px;
+            min-height: 150px;
+            margin: 0px auto;
+            background: #FFFFFF;
+            position: relative;
+            z-index: 103;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 5px 10px #000;
+            margin-top: 200px;
+        }
+
+            .pop p {
+                color: #555555;
+                text-align: justify;
+                font-size: medium;
+            }
+
+                .pop p a {
+                    color: #d91900;
+                }
+
+            .pop .x {
+                float: right;
+                height: 35px;
+                left: 22px;
+                position: relative;
+                top: -20px;
+                width: 35px;
+            }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <cc1:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
+        </cc1:ToolkitScriptManager>
+        <header>
+            <div class="logo_bar">
+                <div class="">
+                    <img src="../../images/insp.jpg" style="width: 100%" alt="" height="140" />
+                </div>
+            </div>
+
+        </header>
+        <nav class="navbar">
+            <div class="">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- <a class="navbar-brand" href="#">Human Resource Management System</a> -->
+                </div>
+
+
+                <div class="">
+                    <div class="navtop">
+                        <ul>
+                            <li><a href="../BO/BO_Welcome.aspx">Home</a></li>
+
+                            <li><a href="../BO/Owned_Godown_wise_Stock_Details.aspx">Create Gadna Patrak</a></li>
+                            <%--<li><a href="/Warehouse/Inspections/RO/Add_New_Insp_Officer.aspx">Add Inspection Officer</a></li>
+                            <li><a href="/Warehouse/Inspections/RO/ScheduleInspection.aspx">Schedule Inspection</a></li>
+                            <li><a href="/Warehouse/Inspections/RO/State_ViewPVSummary.aspx">View Filled Inspection Summary</a></li>
+                            <li><a href="/Warehouse/Inspections/RO/State_ViewFillAnexB.aspx">View Filled Annexure B</a></li>
+                            <li><a href="/Warehouse/Inspections/RO/State_ViewAnexBFillStock_AvlStock_.aspx">Comparision of PV Bags</a></li>--%>
+                            <li><a href="../BO/Dead_Stock_Entry_New.aspx"><b class="caret"></b>Dead Stock Entry</a></li>
+                            <li><a href="../BO/Dunnage_Stock_Entry.aspx"><b class="caret"></b>Dunnage Stock Entry</a></li>
+                            <li><a href="#"><b class="caret"></b>View Gadna Patrak</a>
+                                <ul>
+                                    <li><a href="../BO/Godown_wise_Stock_Details.aspx" target="_blank">Verify Gadna Patrak</a> </li>
+                                    <li><a href="../BO/Edit_Remove_Gadna_Patrak.aspx" target="_blank">Update Remove Gadna Patrak</a> </li>
+                                </ul>
+                            </li>
+                            <%--<li><a href="#"><b class="caret"></b>Holder Register</a>
+                                <ul>
+                                    <li><a href="../BO/Holder_Register_Entry.aspx" target="_blank">Holder Register Entry</a> </li>
+                                </ul>
+                            </li>--%>
+                            <li><a href="#"><b class="caret"></b>Financed WHR</a>
+                                <ul>
+                                    <li><a href="../BO/Financed_WHR_Entry.aspx" target="_blank">Financed WHR Entry</a> </li>
+                                </ul>
+                            </li>
+                            <%--<li><a href="#"><b class="caret"></b>Insecticide Balance</a>
+                                <ul>
+                                    <li><a href="../BO/frm_AddInsecticide_opning_balance.aspx" target="_blank">Opening Balance Entry</a> </li>
+                                    <li><a href="../BO/frm_AddInsecticide_receipt_during.aspx" target="_blank">Receipt During Entry</a> </li>
+                                    <li><a href="../BO/frm_AddInsecticide_Consumption_During.aspx" target="_blank">Consumption Entry</a> </li>
+                                    <li><a href="../BO/frm_AddInsecticide_Transfer_Entry.aspx" target="_blank">Transfer Entry</a> </li>
+                                </ul>
+                            </li>--%>
+                            <li><a href="#"><b class="caret"></b>Insecticide Balance</a>
+                                <ul>
+                                    <%--<li><a href="../BO/frm_AddInsecticide_opning_balance.aspx" target="_blank">Opening Balance Entry</a> </li>--%>
+                                    <li><a href="../BO/Insert_Openning_Blance_From_Branch.aspx" target="_blank">Opening Balance Entry</a> </li>
+                                    <li><a href="../BO/Bm_Received_Insecticide_Entry.aspx" target="_blank">Receipt From RM</a> </li>
+                                    <li><a href="../BO/frm_AddInsecticide_receipt_during.aspx" target="_blank">Receipt From BM</a> </li>
+                                    <li><a href="../BO/frm_AddInsecticide_Consumption_During.aspx" target="_blank">Consumption Entry</a> </li>
+                                    <li><a href="../BO/frm_AddInsecticide_Transfer_Entry.aspx" target="_blank">Transfer to JVS Entry</a> </li>
+                                    <li><a href="../BO/frm_AddInsecticide_Transfer_Branch.aspx" target="_blank">Transfer to Other Branch Entry</a> </li>
+                                    <li><a href="../BO/Branch_Wise_Month_Wise_Insecticide_report.aspx" target="_blank">Branch Wise Month Wise Insecticide Report</a> </li>
+                                </ul>
+                            </li>
+                            <li><a href="#"><b class="caret"></b>Offline Statck Entry</a>
+                                <ul>
+                                    <li><a href="../BO/Offline_Stack_Wise_Entry.aspx" target="_blank">ऐसे स्टैक जो ऑनलाइन में नहीं दिख रहे है किन्तु भौतिक रूप से गोदाम में हैं </a></li>
+                                </ul>
+                            </li>
+                            <%-- <li><a href="#"><b class="caret"></b>Final Submit</a>
+                                <ul>
+                                    <li><a href="../BO/Truti_Anupalan_Prativedan.aspx" target="_blank">Final Submit</a> </li>
+                                </ul>
+                            </li>--%>
+                            <li><a href="#"><b class="caret"></b>Fill Anupalan</a>
+                                <ul>
+                                    <%-- <li><a href="../BO/Truti_Anupalan_Prativedan.aspx" target="_blank">Fill Anupalan by BM</a> </li>--%>
+                                    <li><a href="../BO/View_Branch_Truti_Patrak.aspx" target="_blank">Fill Anupalan by BM</a> </li>
+                                </ul>
+                            </li>
+
+                            <li><a href="#"><b class="caret"></b>Mobile App Report</a>
+                                <ul>
+                                    <li><a href="/Warehouse/Inspections/BO/Mobile_App_Godown_Wise_Moisture_Report_For_BO.aspx">Godown Wise Mobile App Moisture Report</a></li>
+                                    <li><a href="/Warehouse/Inspections/BO/Mobile_App_Branch_Summary_Fumigation_Report_BO.aspx">Godown Wise Mobile App Fumigation Report</a></li>
+                                    <li><a href="/Warehouse/Inspections/BO/Mobile_App_Branch_Summary_Fumigation_Report_BO.aspx">Godown Wise Mobile App Fumigation Report</a></li>
+                                    <li><a href="/Warehouse/Inspections/BO/Godown_Wise_Online_Offline_Fumigation_Report_For_BO.aspx">Godown Wise online & offline Fumigation Report</a></li>
+                                    <li><a href="/Warehouse/Inspections/BO/Godown_Wise_Online_Offline_Fumigation_Percentage_Report_BO.aspx">Godown Wise online & offline Fumigation Percentage Report</a></li>
+                                    <li><a href="/Warehouse/Inspections/BO/Godown_Wise_OnlineOffline_Moisture_Details_For_BO.aspx">Godown Wise online/offline Moisture Report</a></li>
+
+
+
+                                    <li><a href="/Warehouse/Inspections/BO/Godown_Wise_Moisture_Inspected_by_FCI_With_Percent_BO.aspx">Godown Wise Moisture Inspected by FCI With Percent</a></li>
+                                    <li><a href="/Warehouse/Inspections/BO/rpt_Get_Schedule_Inspection_Pendency_BO.aspx">Get Schedule Inspection Pendency</a></li>
+
+                                    <li><a href="/Warehouse/Inspections/BO/Mobile_Inspection_Summary_Report_For_BO.aspx">Mobile Ispection Summary Report</a></li>
+                                    <%-- <li><a href="../BO/Truti_Anupalan_Prativedan.aspx" target="_blank">Fill Anupalan by BM</a> </li>--%>
+                                    <%--<li><a href="../BO/Branch_Change_Password.aspx" target="_blank">Change Password</a> </li>--%>
+                                    <%--<li><a href="#" target="_blank">Change Password</a> </li>--%>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <asp:LinkButton ID="lb_logout" OnClick="lb_logout_Click"
+                                    runat="server" CssClass="dropdown-item">Logout </asp:LinkButton></li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <!--Nav Ends-->
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+        <table align="center" style="width: 100%;">
+            <tr>
+                <td colspan="4" style="font-size: medium;">
+                    <table style="width: 100%; height: 30px; font-size: medium;">
+                        <tr>
+                            <td style="background-color: #E6C79D; width: 100PX; font-size: medium; color: #cb4e48; font-weight: bolder;"
+                                align="center">
+                                <asp:Label ID="lbl_date" runat="server"></asp:Label>
+                            </td>
+                            <td colspan="2" style="background-color: #D69758; font-size: medium; color: White; width: 100px; font-weight: bolder;" align="center">Welcome&nbsp;<asp:Label ID="lbl_user" runat="server" ForeColor="White"></asp:Label></td>
+                            <%--Changes on 12-05-2026--%>
+                            <td class="col-md-3 col-sm-6 text-center">
+                                <div id="google_translate_element"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <div style="min-height: 400px;">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <footer>
+
+            <div class="footer-bottom">
+                <div class="container">
+
+                    <p style="text-align: center;">
+                        Copyright &copy; 2020 MPWLC - All Rights Reserved | Madhya Pradesh Warehousing and Logistics Corporation
+                    </p>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </footer>
+    </form>
+
+
+    <!--Java Script -->
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/custom.js"></script>
+    <script src="scripts/jquery-1.3.2.min.js" type="text/javascript"></script>
+    <script src="scripts/jquery.blockUI.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <%--changes On 12-05-2026--%>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+        // Dropdown fix ke liye naya logic
+        $(window).load(function () {
+            // Jab dropdown change ho, toh hum check karenge
+            $('.goog-te-combo').on('change', function () {
+                var lang = $(this).val();
+                // Agar language Hindi select hui hai toh ensure karein ki wo dikhe
+                if (lang === 'hi') {
+                    console.log("Hindi Selected");
+                }
+            });
+
+            // Interval check: Kabhi-kabhi Google Translate der se load hota hai
+            var checkInterval = setInterval(function () {
+                var combo = document.querySelector('.goog-te-combo');
+                if (combo) {
+                    // Agar cookie mein Hindi saved hai par dropdown me nahi dikh raha
+                    var langCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+                    if (langCookie && langCookie.includes('/en/hi')) {
+                        combo.value = 'en';
+                    }
+                    clearInterval(checkInterval);
+                }
+            }, 500);
+        });
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <%--END--%>
+</body>
+</html>

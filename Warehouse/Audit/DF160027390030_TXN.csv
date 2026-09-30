@@ -1,0 +1,3 @@
+Record Type	Corporte Id	e-PayOrder No.	Account Number	Branch Code	MMID	Mobile Number	Debit Amount	Credit Amount	Corporate Reference Number	Description	Payment Type	Transaction Status	Transaction Date	Transaction Time	Status Description	UTR Number	UTR Posted Date	UTR Status	Maker	Authorizer1	Authorizer1 Date	Authorizer2	Authorizer2 Date	
+Debit leg	'329338	'CTM0907770	'00000038906616113	'30343	'null	'null	'0.0	'null	723290050321011	'Godown Rent Payment	'null	'Unknown	'null	'null	'null	-	-	'null	MPWLCROBPL	-	-	-	-
+Credit leg	'329338	'CTM090777000001	'00000039175409185	'07731	'null	'null	'0.0	'161958	723290050321011	'vindheshwar warehouse11347GRP23290050310320081166	'null	'Unknown	'04/01/2021	'12:57	'null	-	-	'null	null	-	-	-	-

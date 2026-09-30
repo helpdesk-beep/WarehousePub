@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetTruckchitData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Godown_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Commodity_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Challan_Month" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Challan_Year" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Truck_Chit_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Truck_No" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTruckchitDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTruckchitDataResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMilleretData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Godown_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="delivery_order_no" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Trans_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Otype" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMilleretDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMilleretDataResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertMilleretandOtherData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="State_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="District_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Depot_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Commodity_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="delivery_order_no" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="trans_id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GatePass_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Truckno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Quantity_Dispatch" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="No_Of_bags" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BranchID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Godown_ID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Qty_Issued_No_Bag" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Qty_Issued_Weight" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="Crop_Year" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Entry_type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Insert_By" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertMilleretandOtherDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InsertMilleretandOtherDataResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertTruckChitData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="State_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Truck_chit_no" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="District_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Depot_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Commodity_Id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Truck_Chit_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Truck_Chalan_no" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Truck_Chalan_Month" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Truck_Chalan_year" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FPSId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GatePass_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Truckno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Quantity_Dispatch" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="No_Of_bags" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BranchID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Godown_ID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Qty_Issued_No_Bag" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Qty_Issued_Weight" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="W_Commudity_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Insert_By" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertTruckChitDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InsertTruckChitDataResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DataSet" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="s:schema" />
+            <s:any />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetTruckchitDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTruckchitData" />
+  </wsdl:message>
+  <wsdl:message name="GetTruckchitDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTruckchitDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMilleretDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMilleretData" />
+  </wsdl:message>
+  <wsdl:message name="GetMilleretDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMilleretDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertMilleretandOtherDataSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertMilleretandOtherData" />
+  </wsdl:message>
+  <wsdl:message name="InsertMilleretandOtherDataSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertMilleretandOtherDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertTruckChitDataSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertTruckChitData" />
+  </wsdl:message>
+  <wsdl:message name="InsertTruckChitDataSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertTruckChitDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTruckchitDataHttpGetIn">
+    <wsdl:part name="Godown_Id" type="s:string" />
+    <wsdl:part name="Commodity_Id" type="s:string" />
+    <wsdl:part name="Challan_Month" type="s:string" />
+    <wsdl:part name="Challan_Year" type="s:string" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="Truck_Chit_Date" type="s:string" />
+    <wsdl:part name="Truck_No" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTruckchitDataHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetMilleretDataHttpGetIn">
+    <wsdl:part name="Godown_Id" type="s:string" />
+    <wsdl:part name="delivery_order_no" type="s:string" />
+    <wsdl:part name="Trans_ID" type="s:string" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="Otype" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMilleretDataHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="InsertMilleretandOtherDataHttpGetIn">
+    <wsdl:part name="State_ID" type="s:string" />
+    <wsdl:part name="District_Id" type="s:string" />
+    <wsdl:part name="Depot_Id" type="s:string" />
+    <wsdl:part name="Commodity_Id" type="s:string" />
+    <wsdl:part name="delivery_order_no" type="s:string" />
+    <wsdl:part name="trans_id" type="s:string" />
+    <wsdl:part name="GatePass_No" type="s:string" />
+    <wsdl:part name="Truckno" type="s:string" />
+    <wsdl:part name="Quantity_Dispatch" type="s:string" />
+    <wsdl:part name="No_Of_bags" type="s:string" />
+    <wsdl:part name="BranchID" type="s:string" />
+    <wsdl:part name="Godown_ID" type="s:string" />
+    <wsdl:part name="Qty_Issued_No_Bag" type="s:string" />
+    <wsdl:part name="Qty_Issued_Weight" type="s:string" />
+    <wsdl:part name="Crop_Year" type="s:string" />
+    <wsdl:part name="Entry_type" type="s:string" />
+    <wsdl:part name="Insert_By" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertMilleretandOtherDataHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="InsertTruckChitDataHttpGetIn">
+    <wsdl:part name="State_ID" type="s:string" />
+    <wsdl:part name="Truck_chit_no" type="s:string" />
+    <wsdl:part name="District_Id" type="s:string" />
+    <wsdl:part name="Depot_Id" type="s:string" />
+    <wsdl:part name="Commodity_Id" type="s:string" />
+    <wsdl:part name="Truck_Chit_Date" type="s:string" />
+    <wsdl:part name="Truck_Chalan_no" type="s:string" />
+    <wsdl:part name="Truck_Chalan_Month" type="s:string" />
+    <wsdl:part name="Truck_Chalan_year" type="s:string" />
+    <wsdl:part name="FPSId" type="s:string" />
+    <wsdl:part name="GatePass_No" type="s:string" />
+    <wsdl:part name="Truckno" type="s:string" />
+    <wsdl:part name="Quantity_Dispatch" type="s:string" />
+    <wsdl:part name="No_Of_bags" type="s:string" />
+    <wsdl:part name="BranchID" type="s:string" />
+    <wsdl:part name="Godown_ID" type="s:string" />
+    <wsdl:part name="Qty_Issued_No_Bag" type="s:string" />
+    <wsdl:part name="Qty_Issued_Weight" type="s:string" />
+    <wsdl:part name="W_Commudity_ID" type="s:string" />
+    <wsdl:part name="Insert_By" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertTruckChitDataHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetTruckchitDataHttpPostIn">
+    <wsdl:part name="Godown_Id" type="s:string" />
+    <wsdl:part name="Commodity_Id" type="s:string" />
+    <wsdl:part name="Challan_Month" type="s:string" />
+    <wsdl:part name="Challan_Year" type="s:string" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="Truck_Chit_Date" type="s:string" />
+    <wsdl:part name="Truck_No" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTruckchitDataHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetMilleretDataHttpPostIn">
+    <wsdl:part name="Godown_Id" type="s:string" />
+    <wsdl:part name="delivery_order_no" type="s:string" />
+    <wsdl:part name="Trans_ID" type="s:string" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="Otype" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMilleretDataHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="InsertMilleretandOtherDataHttpPostIn">
+    <wsdl:part name="State_ID" type="s:string" />
+    <wsdl:part name="District_Id" type="s:string" />
+    <wsdl:part name="Depot_Id" type="s:string" />
+    <wsdl:part name="Commodity_Id" type="s:string" />
+    <wsdl:part name="delivery_order_no" type="s:string" />
+    <wsdl:part name="trans_id" type="s:string" />
+    <wsdl:part name="GatePass_No" type="s:string" />
+    <wsdl:part name="Truckno" type="s:string" />
+    <wsdl:part name="Quantity_Dispatch" type="s:string" />
+    <wsdl:part name="No_Of_bags" type="s:string" />
+    <wsdl:part name="BranchID" type="s:string" />
+    <wsdl:part name="Godown_ID" type="s:string" />
+    <wsdl:part name="Qty_Issued_No_Bag" type="s:string" />
+    <wsdl:part name="Qty_Issued_Weight" type="s:string" />
+    <wsdl:part name="Crop_Year" type="s:string" />
+    <wsdl:part name="Entry_type" type="s:string" />
+    <wsdl:part name="Insert_By" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertMilleretandOtherDataHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="InsertTruckChitDataHttpPostIn">
+    <wsdl:part name="State_ID" type="s:string" />
+    <wsdl:part name="Truck_chit_no" type="s:string" />
+    <wsdl:part name="District_Id" type="s:string" />
+    <wsdl:part name="Depot_Id" type="s:string" />
+    <wsdl:part name="Commodity_Id" type="s:string" />
+    <wsdl:part name="Truck_Chit_Date" type="s:string" />
+    <wsdl:part name="Truck_Chalan_no" type="s:string" />
+    <wsdl:part name="Truck_Chalan_Month" type="s:string" />
+    <wsdl:part name="Truck_Chalan_year" type="s:string" />
+    <wsdl:part name="FPSId" type="s:string" />
+    <wsdl:part name="GatePass_No" type="s:string" />
+    <wsdl:part name="Truckno" type="s:string" />
+    <wsdl:part name="Quantity_Dispatch" type="s:string" />
+    <wsdl:part name="No_Of_bags" type="s:string" />
+    <wsdl:part name="BranchID" type="s:string" />
+    <wsdl:part name="Godown_ID" type="s:string" />
+    <wsdl:part name="Qty_Issued_No_Bag" type="s:string" />
+    <wsdl:part name="Qty_Issued_Weight" type="s:string" />
+    <wsdl:part name="W_Commudity_ID" type="s:string" />
+    <wsdl:part name="Insert_By" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertTruckChitDataHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:portType name="MpscscTrickchitmillerandOtherSoap">
+    <wsdl:operation name="GetTruckchitData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used to GetTruckchitData</wsdl:documentation>
+      <wsdl:input message="tns:GetTruckchitDataSoapIn" />
+      <wsdl:output message="tns:GetTruckchitDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMilleretData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used to GetMillerData</wsdl:documentation>
+      <wsdl:input message="tns:GetMilleretDataSoapIn" />
+      <wsdl:output message="tns:GetMilleretDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertMilleretandOtherData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used to InsretData For MPSCSC</wsdl:documentation>
+      <wsdl:input message="tns:InsertMilleretandOtherDataSoapIn" />
+      <wsdl:output message="tns:InsertMilleretandOtherDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertTruckChitData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used to InsretData For TruckChit Data MPSCSC</wsdl:documentation>
+      <wsdl:input message="tns:InsertTruckChitDataSoapIn" />
+      <wsdl:output message="tns:InsertTruckChitDataSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MpscscTrickchitmillerandOtherHttpGet">
+    <wsdl:operation name="GetTruckchitData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used to GetTruckchitData</wsdl:documentation>
+      <wsdl:input message="tns:GetTruckchitDataHttpGetIn" />
+      <wsdl:output message="tns:GetTruckchitDataHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMilleretData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used to GetMillerData</wsdl:documentation>
+      <wsdl:input message="tns:GetMilleretDataHttpGetIn" />
+      <wsdl:output message="tns:GetMilleretDataHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertMilleretandOtherData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used to InsretData For MPSCSC</wsdl:documentation>
+      <wsdl:input message="tns:InsertMilleretandOtherDataHttpGetIn" />
+      <wsdl:output message="tns:InsertMilleretandOtherDataHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertTruckChitData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used to InsretData For TruckChit Data MPSCSC</wsdl:documentation>
+      <wsdl:input message="tns:InsertTruckChitDataHttpGetIn" />
+      <wsdl:output message="tns:InsertTruckChitDataHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MpscscTrickchitmillerandOtherHttpPost">
+    <wsdl:operation name="GetTruckchitData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used to GetTruckchitData</wsdl:documentation>
+      <wsdl:input message="tns:GetTruckchitDataHttpPostIn" />
+      <wsdl:output message="tns:GetTruckchitDataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMilleretData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used to GetMillerData</wsdl:documentation>
+      <wsdl:input message="tns:GetMilleretDataHttpPostIn" />
+      <wsdl:output message="tns:GetMilleretDataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertMilleretandOtherData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used to InsretData For MPSCSC</wsdl:documentation>
+      <wsdl:input message="tns:InsertMilleretandOtherDataHttpPostIn" />
+      <wsdl:output message="tns:InsertMilleretandOtherDataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertTruckChitData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This Method Is Used to InsretData For TruckChit Data MPSCSC</wsdl:documentation>
+      <wsdl:input message="tns:InsertTruckChitDataHttpPostIn" />
+      <wsdl:output message="tns:InsertTruckChitDataHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MpscscTrickchitmillerandOtherSoap" type="tns:MpscscTrickchitmillerandOtherSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetTruckchitData">
+      <soap:operation soapAction="http://tempuri.org/GetTruckchitData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMilleretData">
+      <soap:operation soapAction="http://tempuri.org/GetMilleretData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertMilleretandOtherData">
+      <soap:operation soapAction="http://tempuri.org/InsertMilleretandOtherData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertTruckChitData">
+      <soap:operation soapAction="http://tempuri.org/InsertTruckChitData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MpscscTrickchitmillerandOtherSoap12" type="tns:MpscscTrickchitmillerandOtherSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetTruckchitData">
+      <soap12:operation soapAction="http://tempuri.org/GetTruckchitData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMilleretData">
+      <soap12:operation soapAction="http://tempuri.org/GetMilleretData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertMilleretandOtherData">
+      <soap12:operation soapAction="http://tempuri.org/InsertMilleretandOtherData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertTruckChitData">
+      <soap12:operation soapAction="http://tempuri.org/InsertTruckChitData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MpscscTrickchitmillerandOtherHttpGet" type="tns:MpscscTrickchitmillerandOtherHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetTruckchitData">
+      <http:operation location="/GetTruckchitData" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMilleretData">
+      <http:operation location="/GetMilleretData" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertMilleretandOtherData">
+      <http:operation location="/InsertMilleretandOtherData" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertTruckChitData">
+      <http:operation location="/InsertTruckChitData" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MpscscTrickchitmillerandOtherHttpPost" type="tns:MpscscTrickchitmillerandOtherHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetTruckchitData">
+      <http:operation location="/GetTruckchitData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMilleretData">
+      <http:operation location="/GetMilleretData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertMilleretandOtherData">
+      <http:operation location="/InsertMilleretandOtherData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertTruckChitData">
+      <http:operation location="/InsertTruckChitData" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MpscscTrickchitmillerandOther">
+    <wsdl:port name="MpscscTrickchitmillerandOtherSoap" binding="tns:MpscscTrickchitmillerandOtherSoap">
+      <soap:address location="http://164.100.96.13/csmsNew/Android_WS/MpscscTrickchitmillerandOther.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MpscscTrickchitmillerandOtherSoap12" binding="tns:MpscscTrickchitmillerandOtherSoap12">
+      <soap12:address location="http://164.100.96.13/csmsNew/Android_WS/MpscscTrickchitmillerandOther.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MpscscTrickchitmillerandOtherHttpGet" binding="tns:MpscscTrickchitmillerandOtherHttpGet">
+      <http:address location="http://164.100.96.13/csmsNew/Android_WS/MpscscTrickchitmillerandOther.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MpscscTrickchitmillerandOtherHttpPost" binding="tns:MpscscTrickchitmillerandOtherHttpPost">
+      <http:address location="http://164.100.96.13/csmsNew/Android_WS/MpscscTrickchitmillerandOther.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

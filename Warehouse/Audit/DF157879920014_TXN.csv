@@ -1,0 +1,6 @@
+Record Type	Corporte Id	e-PayOrder No.	Account Number	Branch Code	MMID	Mobile Number	Debit Amount	Credit Amount	Corporate Reference Number	Description	Payment Type	Transaction Status	Transaction Date	Transaction Time	Status Description	UTR Number	UTR Posted Date	UTR Status	Maker	Authorizer1	Authorizer1 Date	Authorizer2	Authorizer2 Date	
+Debit leg	'329338	'CNABHBWLP1	'00000038906616113	'30343	'null	'null	'240865.0	'null	7232900421012	'Godown Rent Payment	'NEFT	'Unknown	'null	'null	'null	-	-	'null	MPWLCROBPL	-	-	-	-
+Credit leg	'329338	'CNABHBWLP100001	'034220110000021	'BKID0NAMRGB	'null	'null	'0.0	'197909	7232900421012	'kamla shree Warehouse10641GRP23290040242010131	'NEFT	'Unknown	'04/01/2021	'13:21	'null	-	-	'Pending	null	-	-	-	-
+Credit leg	'329338	'CNABHBWLP100002	'034220110000021	'BKID0NAMRGB	'null	'null	'0.0	'42956	7232900421012	'VINOD JAIN10641GRP23290040212010130	'NEFT	'Unknown	'04/01/2021	'13:21	'null	-	-	'Pending	null	-	-	-	-
+Credit leg	'329338	'CNABHBWLP100003	'3224307164	'CBIN0281013	'null	'null	'0.0	'110512	7232900421012	'SHIKHA GARG12426GRP23290040122010128	'NEFT	'Unknown	'04/01/2021	'13:21	'null	-	-	'Pending	null	-	-	-	-
+Credit leg	'329338	'CNABHBWLP100004	'3224307164	'CBIN0281013	'null	'null	'0.0	'167715	7232900421012	'SHIKHA GARG12426GRP23290040202010129	'NEFT	'Unknown	'04/01/2021	'13:21	'null	-	-	'Pending	null	-	-	-	-

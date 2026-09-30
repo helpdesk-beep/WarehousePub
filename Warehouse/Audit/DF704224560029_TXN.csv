@@ -1,0 +1,4 @@
+Record Type	Corporte Id	e-PayOrder No.	Account Number	Branch Code	MMID	Mobile Number	Debit Amount	Credit Amount	Corporate Reference Number	Description	Payment Type	Transaction Status	Transaction Date	Transaction Time	Status Description	UTR Number	UTR Posted Date	UTR Status	Maker	Authorizer1	Authorizer1 Date	Authorizer2	Authorizer2 Date	
+Debit leg	'329338	'CTM5065766	'00000038906616113	'30343	'null	'null	'0.0	'null	723030060121023	'Godown Rent Payment	'null	'Unknown	'null	'null	'null	-	-	'null	MPWLCROSGR	-	-	-	-
+Credit leg	'329338	'CTM506576600001	'00000035765126286	'02856	'null	'null	'0.0	'29659	723030060121023	'2020-2021GRP2303006010182008171	'null	'Unknown	'03/02/2021	'14:46	'null	-	-	'null	null	-	-	-	-
+Credit leg	'329338	'CTM506576600002	'00000035765126286	'02856	'null	'null	'0.0	'29670	723030060121023	'2020-2021GRP2303006010192008179	'null	'Unknown	'03/02/2021	'14:46	'null	-	-	'null	null	-	-	-	-

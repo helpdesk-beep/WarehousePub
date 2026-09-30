@@ -1,0 +1,4 @@
+Record Type	Corporte Id	e-PayOrder No.	Account Number	Branch Code	MMID	Mobile Number	Debit Amount	Credit Amount	Corporate Reference Number	Description	Payment Type	Transaction Status	Transaction Date	Transaction Time	Status Description	UTR Number	UTR Posted Date	UTR Status	Maker	Authorizer1	Authorizer1 Date	Authorizer2	Authorizer2 Date	
+Debit leg	'329338	'CNABIDKEF7	'00000038906616113	'30343	'null	'null	'0.0	'null	7233400221028	'Godown Rent Payment	'NEFT	'Unknown	'null	'null	'null	-	-	'null	MPWLCROJBP	-	-	-	-
+Credit leg	'329338	'CNABIDKEF700001	'447701010035176	'UBIN0544779	'null	'null	'0.0	'129520	7233400221028	'2020-2021GRP233400209820081189	'NEFT	'Unknown	'02/02/2021	'17:08	'null	-	-	'Pending	null	-	-	-	-
+Credit leg	'329338	'CNABIDKEF700002	'447701010035289	'UBIN0544779	'null	'null	'0.0	'183778	7233400221028	'2020-2021GRP233400211720081193	'NEFT	'Unknown	'02/02/2021	'17:08	'null	-	-	'Pending	null	-	-	-	-

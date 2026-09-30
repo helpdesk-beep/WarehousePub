@@ -1,0 +1,446 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="State_FCIHO.master.cs" Inherits="Inspections_Masters_State_FCIHO" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="MP Warehouse Online Inspection System">
+    <meta name="author" content="MPWLC">
+    <title>MP Warehouse Online Inspection</title>
+
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+
+    <!-- Bootstrap 5 + Icons + jQuery UI -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/smoothness/jquery-ui.css">
+
+    <!-- Custom Styles -->
+    <link href="../assets/css/style.css" rel="stylesheet" />
+    <link href="../assets/css/custome.css" rel="stylesheet" />
+    <link href="../CSS/style.css" rel="stylesheet" />
+
+    <style>
+        /* Global Reset & Base - CONDENSED & COMPACT */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            /* Standard base size for a tighter look */
+            font-size: 15px;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background-color: #f4f7fc;
+            color: #2c3e50;
+            line-height: 1.4;
+        }
+
+        /* Condensed Headings */
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e3c4a;
+            margin-bottom: 12px;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* Compact Header */
+        .logo_bar img {
+            width: 100%;
+            height: auto;
+            max-height: 110px; /* Shorter header */
+            border-bottom: 3px solid #d69758;
+        }
+
+        /* Sleek Navbar - SMALLER TEXT */
+        .navbar-custom {
+            background: linear-gradient(135deg, #1e3c4a 0%, #16313d 100%);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            padding: 0.2rem 1rem; /* Very thin navbar */
+        }
+
+            .navbar-custom .navbar-nav .nav-link {
+                color: #f8f9fa !important;
+                font-weight: 600;
+                font-size: 0.95rem;
+                transition: all 0.2s ease;
+                padding: 0.5rem 1rem !important;
+            }
+
+                .navbar-custom .navbar-nav .nav-link i {
+                    margin-right: 5px;
+                    font-size: 1rem;
+                }
+
+        /* Small Dropdown */
+        .dropdown-menu {
+            border-radius: 6px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 5px 0;
+            min-width: 200px;
+        }
+
+        .dropdown-item {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #1e3c4a;
+        }
+
+        /* Tight Info Bar */
+        .info-bar {
+            background: #fdf2e2;
+            border-radius: 8px;
+            margin: 8px 15px;
+            padding: 6px 15px;
+            display: flex;
+            justify-content: space-between;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid #f1dec1;
+        }
+
+        .date-badge, .welcome-badge {
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .date-badge {
+            background-color: #cb4e48;
+            color: white;
+        }
+
+        .welcome-badge {
+            background-color: #d69758;
+            color: white;
+        }
+
+        /* Condensed Main Content */
+        .main-content {
+            min-height: 400px;
+            background: white;
+            margin: 8px 15px;
+            padding: 15px; /* Reduced from 30px */
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        /* Small Form Elements */
+        .form-control, .form-select, .btn {
+            font-size: 0.9rem !important;
+            padding: 6px 10px; /* Thinner inputs */
+        }
+
+        label {
+            font-size: 0.85rem;
+            margin-bottom: 3px;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer-bottom {
+            background: #1e2f36;
+            color: #e0e0e0;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 0.85rem;
+            border-top: 3px solid #d69758;
+        }
+
+        /* Mobile scaling */
+        @media (max-width: 768px) {
+            html {
+                font-size: 14px;
+            }
+
+            .info-bar {
+                margin: 5px;
+                padding: 5px;
+            }
+
+            .main-content {
+                margin: 5px;
+                padding: 10px;
+            }
+        }
+    </style>
+
+    <style>
+        fieldset {
+            border: 1px solid #2095A1;
+            padding: 0.35em 0.625em 0.75em;
+            margin: 10px;
+            border-radius: 5px;
+            padding-left: 20px;
+        }
+
+        legend {
+            padding: 2px 8px;
+            border-radius: 10px;
+            width: auto;
+            border: 1px solid #2095A1;
+            font-size: 17px;
+            font-weight: bold;
+            color: #030203;
+        }
+
+        .content-wrapper {
+            padding: 1.75rem 1.25rem;
+        }
+
+        .table-bordered th, .table-bordered td {
+            border: 1px solid #030203;
+        }
+
+        .form-control {
+            border: 1px solid #767B83;
+            border-radius: 8px;
+        }
+
+        .table th {
+            text-align: center;
+        }
+
+        .form-inline {
+            display: block !important;
+        }
+
+        th.sorting, th.sorting_asc, th.sorting_desc {
+            background: #647e68 !important;
+            color: black !important;
+        }
+
+        .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+            padding: 8px 5px;
+            color: black !important;
+        }
+
+        element.style {
+            font-size: medium !important;
+        }
+    </style>
+    <%--Changes on 12-05-2026--%>
+    <style>
+        /* 1. Hide the top Google Translate frame/banner */
+        .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon {
+            display: none !important;
+        }
+
+        body {
+            top: 0px !important;
+        }
+
+        /* 2. Hide the Google logo and branding in the dropdown */
+        .goog-te-gadget {
+            font-family: 'Arial', sans-serif !important;
+            color: transparent !important; /* Hides the "Powered by" text */
+        }
+
+            .goog-te-gadget .goog-te-combo {
+                color: #333 !important; /* Keeps the dropdown text visible */
+                padding: 8px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                background-color: #fff;
+            }
+
+        /* 3. Remove the tooltip popups when hovering over translated text */
+        #goog-gt-tt, .goog-te-balloon-frame {
+            display: none !important;
+        }
+
+        .goog-text-highlight {
+            background: none !important;
+            box-shadow: none !important;
+        }
+    </style>
+    <style>
+        /* Dropdown ke andar ke text ko hamesha readable rakhne ke liye */
+        .goog-te-combo {
+            text-transform: none !important;
+        }
+        /* Targeted fix for the iframe class you mentioned */
+        .VIpgJd-ZVi9od-ORHb-OEVmcd,
+        .goog-te-banner-frame,
+        #goog-gt-tt,
+        .goog-te-balloon-frame,
+        #\:2\.container {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+        /* Prevent the page from shifting down */
+        body {
+            top: 0px !important;
+        }
+
+        /* Remove the hover highlight effect */
+        .goog-text-highlight {
+            background: none !important;
+            box-shadow: none !important;
+        }
+    </style>
+    <%--END--%>
+
+    <script type="text/javascript">
+        // JavaScript to set current year dynamically
+        function setCurrentYear() {
+            var yearElement = document.getElementById("currentYear");
+            if (yearElement) {
+                yearElement.innerText = new Date().getFullYear();
+            }
+        }
+    </script>
+</head>
+<body onload="setCurrentYear();">
+    <form id="form1" runat="server">
+        <cc1:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></cc1:ToolkitScriptManager>
+
+        <!-- Header with logo -->
+        <header>
+            <div class="logo_bar">
+                <img src="../../images/insp.jpg" alt="MP Warehouse Inspection Banner" />
+            </div>
+        </header>
+
+        <!-- Modern Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-custom">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="/Warehouse/Inspections/TQHO/RO_Welcome.aspx"><i class="fas fa-home"></i>Home</a></li>
+
+                        <!-- Truti Patrak Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-users"></i>FCI Employee
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="../FCIHO/AddEmployee.aspx"><i class="fas fa-user"></i>Add Employee</a></li>
+                                <li><a class="dropdown-item" href="../FCIHO/AddEmployeeForNAN.aspx"><i class="fas fa-user"></i>Add NAN Employee</a></li>
+                                <li><a class="dropdown-item" href="../FCIHO/ScheduleInspection_For_FCIHO.aspx"><i class="fas fa-user"></i>Schedule Inspection</a></li>
+                                <li><a class="dropdown-item" href="../FCIHO/ScheduleInspection_For_FCIHO_For_NAN.aspx"><i class="fas fa-user"></i>Schedule Inspection For NAN</a></li>
+                            </ul>
+                        </li>
+                        <%--Changes on 12-05-2026--%>
+                        <li class="col-md-3 col-sm-6 text-center">
+                            <div id="google_translate_element"></div>
+                        </li>
+
+
+
+                        <!-- Logout Button -->
+                        <li class="nav-item">
+                            <asp:LinkButton ID="lb_logout" runat="server" OnClick="lb_logout_Click" CssClass="nav-link">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </asp:LinkButton>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Info Bar: Date & User -->
+        <div class="info-bar">
+            <div class="date-badge">
+                <i class="far fa-calendar-alt"></i>
+                <asp:Label ID="lbl_date" runat="server"></asp:Label>
+            </div>
+            <div class="welcome-badge">
+                <i class="fas fa-user-check"></i>Welcome 
+                <asp:Label ID="lbl_user" runat="server" ForeColor="White"></asp:Label>
+            </div>
+        </div>
+
+        <!-- Main Dynamic Content -->
+        <div class="main-content">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+        </div>
+
+        <!-- Footer with Dynamic Current Year -->
+        <footer class="footer-bottom">
+            <div class="container">
+                <p>© <span id="currentYear" class="copyright-year">2025</span> MPWLC - Madhya Pradesh Warehousing and Logistics Corporation | All Rights Reserved</p>
+                <p class="mt-2"><i class="fas fa-microphone-alt"></i>Online Inspection System | Empowering Transparency & Efficiency</p>
+            </div>
+        </footer>
+
+        <!-- Popup Overlay (optional) -->
+        <div id="popupwin" style="display: none;"></div>
+        <div class="popup" style="display: none;">
+            <div class="pop">
+                <span class="x" onclick="document.getElementById('popupwin').style.display='none'; this.parentElement.parentElement.style.display='none';">&times;</span>
+                <asp:ContentPlaceHolder ID="popupContent" runat="server">
+                    <p>Default popup content</p>
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+    </form>
+
+    <!-- Scripts (optimized, no duplication) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../assets/js/custom.js"></script>
+    <script type="text/javascript" src="scripts/jquery.blockUI.js"></script>
+    <script>
+        $(document).ready(function () {
+            console.log("Master page loaded - MP Warehouse");
+            // Ensure current year is set even if onload fails
+            if (document.getElementById("currentYear")) {
+                document.getElementById("currentYear").innerText = new Date().getFullYear();
+            }
+        });
+    </script>
+    <%--changes On 12-05-2026--%>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+        // Dropdown fix ke liye naya logic
+        $(window).load(function () {
+            // Jab dropdown change ho, toh hum check karenge
+            $('.goog-te-combo').on('change', function () {
+                var lang = $(this).val();
+                // Agar language Hindi select hui hai toh ensure karein ki wo dikhe
+                if (lang === 'hi') {
+                    console.log("Hindi Selected");
+                }
+            });
+
+            // Interval check: Kabhi-kabhi Google Translate der se load hota hai
+            var checkInterval = setInterval(function () {
+                var combo = document.querySelector('.goog-te-combo');
+                if (combo) {
+                    // Agar cookie mein Hindi saved hai par dropdown me nahi dikh raha
+                    var langCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+                    if (langCookie && langCookie.includes('/en/hi')) {
+                        combo.value = 'en';
+                    }
+                    clearInterval(checkInterval);
+                }
+            }, 500);
+        });
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <%--END--%>
+</body>
+</html>

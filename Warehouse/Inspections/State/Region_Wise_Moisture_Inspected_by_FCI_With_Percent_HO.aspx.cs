@@ -1,0 +1,215 @@
+﻿using System;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
+using System.Text;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+public partial class Inspections_State_Region_Wise_Moisture_Inspected_by_FCI_With_Percent_HO : System.Web.UI.Page
+{
+    SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["WLCGodownGatePass"].ConnectionString);
+
+    // Summary Aggregators
+    int totGdwn = 0, totFciGdwn = 0, totPendGdwn = 0, totMoist = 0, totSentDm = 0, totInspStack = 0;
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (Session["UserName"] == null)
+        {
+            Response.Redirect("~/Login.aspx");
+            return;
+        }
+
+        if (!IsPostBack)
+        {
+            BindHOOverviewReport();
+        }
+    }
+
+    private DataTable FetchHOOverviewDataset()
+    {
+        DataTable dt = new DataTable();
+        try
+        {
+            using (SqlCommand cmd = new SqlCommand("rpt_District_Wise_Moisture_Inspected_by_FCI_With_Percent_HO", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Region_Id", 0);
+
+                using (SqlDataAdapter da = new SqlDataAdapter(cmd)) { da.Fill(dt); }
+            }
+        }
+        catch (Exception ex)
+        {
+            Response.Write("<script>alert('Execution Engine Fault: " + ex.Message.Replace("'", "\\'") + "');</script>");
+        }
+        return dt;
+    }
+
+    private void BindHOOverviewReport()
+    {
+        totGdwn = 0; totFciGdwn = 0; totPendGdwn = 0; totMoist = 0; totSentDm = 0; totInspStack = 0;
+
+        DataTable dt = FetchHOOverviewDataset();
+        gvDetails.DataSource = dt;
+        gvDetails.DataBind();
+
+        if (dt.Rows.Count > 0)
+        {
+            gvDetails.UseAccessibleHeader = true;
+            gvDetails.HeaderRow.TableSection = TableRowSection.TableHeader;
+        }
+    }
+
+    protected void gvDetails_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            totGdwn += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "Total_Godown"));
+            totFciGdwn += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "FCI_Inspected_Godowns"));
+            totPendGdwn += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "PendingGodownForInspectbyFCI"));
+            totMoist += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "Total_Moisture"));
+            totSentDm += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "Total_Stack_Send_TO_DM_FCI"));
+            totInspStack += Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "Total_Inspected_Stack"));
+
+            for (int i = 3; i < e.Row.Cells.Count; i++)
+            {
+                string alignmentStyle = (i == 5 || i == 10) ? "text-align:right !important; font-weight:bold; mso-number-format:'0.00%';" : "text-align:right !important; mso-number-format:\\#\\,\\#\\#0;";
+                e.Row.Cells[i].Attributes.Add("style", alignmentStyle);
+            }
+        }
+    }
+
+    protected void gvDetails_DataBound(object sender, EventArgs e)
+    {
+        if (gvDetails.Rows.Count > 0)
+        {
+            Table tbl = (Table)gvDetails.Controls[0];
+
+            GridViewRow grandTotalRow = new GridViewRow(0, 0, DataControlRowType.DataRow, DataControlRowState.Normal);
+            grandTotalRow.CssClass = "grandtotal-row";
+
+            TableCell mainCell = new TableCell { Text = "State Grand Total Summary :", ColumnSpan = 2 };
+            mainCell.HorizontalAlign = HorizontalAlign.Right;
+            mainCell.Attributes.Add("style", "text-align:right !important; padding-right:15px !important; font-weight:bold !important; border:1px solid #cbd5e1;");
+            grandTotalRow.Cells.Add(mainCell);
+
+            grandTotalRow.Cells.Add(CreateSummaryCell(totGdwn.ToString("N0")));
+            grandTotalRow.Cells.Add(CreateSummaryCell(totFciGdwn.ToString("N0")));
+            grandTotalRow.Cells.Add(CreateSummaryCell(totPendGdwn.ToString("N0")));
+
+            decimal totalGdnPerc = totGdwn > 0 ? ((decimal)totFciGdwn / (decimal)totGdwn) * 100 : 0;
+            grandTotalRow.Cells.Add(CreateSummaryCell(totalGdnPerc.ToString("0.00") + "%"));
+
+            grandTotalRow.Cells.Add(CreateSummaryCell(totMoist.ToString("N0")));
+            grandTotalRow.Cells.Add(CreateSummaryCell(totSentDm.ToString("N0")));
+            grandTotalRow.Cells.Add(CreateSummaryCell(totInspStack.ToString("N0")));
+
+            decimal totalStackPerc = totSentDm > 0 ? ((decimal)totInspStack / (decimal)totSentDm) * 100 : 0;
+            grandTotalRow.Cells.Add(CreateSummaryCell(totalStackPerc.ToString("0.00") + "%"));
+
+            tbl.Rows.Add(grandTotalRow);
+        }
+    }
+
+    private TableCell CreateSummaryCell(string textDisplay)
+    {
+        TableCell cell = new TableCell { Text = textDisplay, HorizontalAlign = HorizontalAlign.Right };
+        cell.Attributes.Add("style", "text-align:right !important; font-weight:bold !important; padding-right:12px !important; border:1px solid #cbd5e1;");
+        return cell;
+    }
+
+    protected void gvDetails_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "DrillToDistrict")
+        {
+            string regionId = e.CommandArgument.ToString().Trim();
+            Response.Redirect(string.Format("District_Wise_Moisture_Inspected_by_FCI_With_Percent_HO.aspx?RegID={0}", Server.UrlEncode(regionId)));
+        }
+        else if (e.CommandName == "DrillToPendingGodowns")
+        {
+            string regionId = e.CommandArgument.ToString().Trim();
+
+            // Formulating dynamic secure URL parameters query sequence
+            string targetUrl = string.Format("All_Pending_Godowns_for_FCI_HO.aspx?RegID={0}", Server.UrlEncode(regionId));
+
+            // JavaScript injection execution framework to force native target blank window load
+            string script = string.Format("window.open('{0}', '_blank');", targetUrl);
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "RedirectToPendingGodownsTab", script, true);
+        }
+    }
+
+    protected void btnExcel_Click(object sender, EventArgs e)
+    {
+        DataTable dt = FetchHOOverviewDataset();
+        if (dt == null || dt.Rows.Count == 0) return;
+
+        Response.Clear();
+        Response.Buffer = true;
+        Response.AddHeader("content-disposition", "attachment;filename=Region_Wise_FCI_Moisture_Inspection_Report.xls");
+        Response.ContentType = "application/vnd.ms-excel";
+        Response.Charset = "";
+
+        StringBuilder sb = new StringBuilder();
+
+        // CSS Styles Stylesheet Mapping
+        sb.Append("<style>");
+        sb.Append("th { background-color:#1e3a8a !important; color:#ffffff !important; font-weight:bold !important; text-align:center !important; border:1px solid #172554; text-transform:uppercase; font-size:10px; }");
+        sb.Append("td { border:1px solid #cbd5e1; font-size:11px; font-family: 'Segoe UI', Arial; } .text-right { text-align:right !important; mso-number-format:\\#\\,\\#\\#0; } .text-center { text-align:center !important; }");
+        sb.Append(".grandtotal-row td { background-color: #eff6ff !important; font-weight:bold !important; color:#1e3a8a !important; border-top:2px solid #2563eb; border-bottom:2px solid #1e3a8a; }");
+        sb.Append("</style>");
+
+        // FIXED: Replaced unsafe AppendFormat static text blocks with pure sb.Append
+        sb.Append("<table cellspacing='0' cellpadding='4' border='1'>");
+        sb.Append("<tr><th colspan='11' style='font-size:16pt; background-color:#1e3a8a; color:#ffffff;'>MADHYA PRADESH WAREHOUSING AND LOGISTICS CORPORATION</th></tr>");
+        sb.Append("<tr><th colspan='11' style='font-size:12pt; background-color:#f1f5f9; color:#1e3a8a;'>Region-Wise Quality Moisture Clearance & FCI Inspection Ledger</th></tr>");
+
+        // Single explicit parametric mapping call
+        sb.AppendFormat("<tr><td colspan='11' style='text-align:right; font-weight:bold;'>Generated On: {0}</td></tr>", DateTime.Now.ToString("dd-MM-yyyy hh:mm tt"));
+        sb.Append("<tr><td colspan='11' style='border:none;'>&nbsp;</td></tr>");
+
+        sb.Append("<tr><th>S.No.</th><th>Region Name</th><th>District Scope</th><th>Total Godowns</th><th>FCI Inspected Godowns</th><th>Pending Godowns for FCI</th><th>Godown Pending %</th><th>Total Moisture Stacks</th><th>Moisture Sent To DM/FCI</th><th>FCI Inspected Stacks</th><th>Inspection Clearance %</th></tr>");
+
+        int sNo = 1;
+        int tG = 0, tFi = 0, tP = 0, tM = 0, tS = 0, tIs = 0;
+
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            DataRow r = dt.Rows[i];
+            int g = Convert.ToInt32(r["Total_Godown"]);
+            int fi = Convert.ToInt32(r["FCI_Inspected_Godowns"]);
+            int p = Convert.ToInt32(r["PendingGodownForInspectbyFCI"]);
+            int m = Convert.ToInt32(r["Total_Moisture"]);
+            int s = Convert.ToInt32(r["Total_Stack_Send_TO_DM_FCI"]);
+            int isStk = Convert.ToInt32(r["Total_Inspected_Stack"]);
+
+            tG += g; tFi += fi; tP += p; tM += m; tS += s; tIs += isStk;
+
+            decimal gPct = Convert.ToDecimal(r["GodownPendingPercantage"]);
+            decimal sPct = Convert.ToDecimal(r["Percantage"]);
+
+            // FIXED: Merged rows data streams into a single comprehensive AppendFormat block to match arguments indexes strictly
+            sb.AppendFormat("<tr><td class='text-center'>{0}</td><td>{1}</td><td class='text-center'>ALL</td>" +
+                            "<td class='text-right'>{2}</td><td class='text-right'>{3}</td><td class='text-right'>{4}</td><td class='text-right' style='mso-number-format:\"0.00%\";'>{5}%</td>" +
+                            "<td class='text-right'>{6}</td><td class='text-right'>{7}</td><td class='text-right'>{8}</td><td class='text-right' style='font-weight:bold; mso-number-format:\"0.00%\";'>{9}%</td></tr>",
+                            sNo++, r["Region Name"], g, fi, p, gPct.ToString("F2"), m, s, isStk, sPct.ToString("F2"));
+        }
+
+        decimal finalGPct = tG > 0 ? ((decimal)tFi / (decimal)tG) * 100 : 0;
+        decimal finalSPct = tS > 0 ? ((decimal)tIs / (decimal)tS) * 100 : 0;
+
+        // FIXED: Grand Total string formatting block fully consolidated
+        sb.Append("<tr class='grandtotal-row'><td colspan='3' style='text-align:right; font-weight:bold;'>State Grand Total Summary :</td>");
+        sb.AppendFormat("<td class='text-right'>{0}</td><td class='text-right'>{1}</td><td class='text-right'>{2}</td><td class='text-right' style='mso-number-format:\"0.00%\";'>{3}%</td>" +
+                        "<td class='text-right'>{4}</td><td class='text-right'>{5}</td><td class='text-right'>{6}</td><td class='text-right' style='mso-number-format:\"0.00%\";'>{7}%</td></tr></table>",
+                        tG, tFi, tP, finalGPct.ToString("F2"), tM, tS, tIs, finalSPct.ToString("F2"));
+
+        Response.Write(sb.ToString());
+        Response.Flush();
+        Response.End();
+    }
+
+    public override void VerifyRenderingInServerForm(Control control) { }
+}
