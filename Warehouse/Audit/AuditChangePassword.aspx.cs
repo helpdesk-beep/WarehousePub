@@ -25,77 +25,77 @@ public partial class Audit_AuditChangePassword : System.Web.UI.Page
     DataTable Dt2 = new DataTable();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(!IsPostBack)
+        if (!HasAuthorizedSession())
         {
-            if (Session["UserID"] != null || Session["RegionId"] != null || Session["LoginType"]!=null)
-            {
-
-            }
+            Response.Redirect("InspectionLogin.aspx");
         }
     }
     protected void btn_Change_Pass_Click(object sender, EventArgs e)
     {
+        if (!HasAuthorizedSession())
+        {
+            Response.Redirect("InspectionLogin.aspx");
+            return;
+        }
+
         try
         {
             if (txt_Pass_New.Text.Trim() == txt_Pass_Confirm.Text.Trim())
             {
-                string RoleID = "";
-                string Logid = "";
-                RoleID = Session["LoginType"].ToString();
-                if (RoleID == "B")
+                string roleId = Convert.ToString(Session["LoginType"]);
+                string logId;
+                if (roleId == "B")
                 {
-
-                    Logid = Session["UserID"].ToString();
-
+                    logId = Convert.ToString(Session["UserID"]);
                 }
-                else if (RoleID == "R")
+                else if (roleId == "R")
                 {
-
-                    Logid = Session["RegionId"].ToString();
-
+                    logId = Convert.ToString(Session["RegionId"]);
                 }
                 else
                 {
-
-                    //
-
+                    Response.Redirect("InspectionLogin.aspx");
+                    return;
                 }
 
-                //bool _valind = false;
-                string User_Name = string.Empty;
-                string Old_Pass = string.Empty;
-                string Pass_New = txt_Pass_New.Text.Trim().ToString();
-                string OldPass = txt_Old_Pass.Text.Trim().ToString();
-                string M_Pass = string.Empty;
+                string userName;
+                string oldPassword;
+                string newPassword = txt_Pass_New.Text.Trim();
                 Con.Open();
-                string str = "select [UserID],[UserName],[InsPwd] from InspectionLogin where UserID ='" + Session["UserID"].ToString() + "' ";
-                SqlCommand cmd = new SqlCommand(str, Con);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                da.Fill(ds, "Storage_Login");
-                if (ds.Tables[0].Rows.Count > 0)
+                using (SqlCommand command = new SqlCommand("select [UserID],[UserName],[InsPwd] from InspectionLogin where UserID=@UserID", Con))
                 {
-                    User_Name = ds.Tables[0].Rows[0]["UserName"].ToString();
-                    Old_Pass = ds.Tables[0].Rows[0]["InsPwd"].ToString();
-                  
+                    command.Parameters.AddWithValue("@UserID", logId);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (!reader.Read())
+                        {
+                            Uxmsg.Visible = true;
+                            Uxmsg.Text = "User account was not found.";
+                            return;
+                        }
+                        userName = Convert.ToString(reader["UserName"]);
+                        oldPassword = Convert.ToString(reader["InsPwd"]);
+                    }
                 }
-                cmd.Dispose();
-                // con.Close();
 
-                if (Old_Pass == OldPass)
+                if (oldPassword == txt_Old_Pass.Text.Trim())
                 {
-
                     string ClientIP = Request.ServerVariables["REMOTE_ADDR"];
+                    using (SqlCommand logCommand = new SqlCommand("Insert into [InspectionLogin_Log] ([UserID],[UserName],[InsPwd],[ModifiedDate],[ModifiedBy]) Values (@UserID,@UserName,'',GETDATE(),@ModifiedBy)", Con))
+                    {
+                        logCommand.Parameters.AddWithValue("@UserID", logId);
+                        logCommand.Parameters.AddWithValue("@UserName", userName);
+                        logCommand.Parameters.AddWithValue("@ModifiedBy", ClientIP ?? String.Empty);
+                        logCommand.ExecuteNonQuery();
+                    }
 
-                    // Insert Log For password updation
-                    string updatelog = "Insert into [InspectionLogin_Log] ([UserID],[UserName],[InsPwd],[ModifiedDate],[ModifiedBy]) Values ('" + Session["UserID"].ToString() + "','" + User_Name + "','" + Old_Pass + "',getdate(),'" + ClientIP + "')";
-                    cmd = new SqlCommand(updatelog, Con);
-                    cmd.ExecuteNonQuery();
-
-                    // Update password in storage login table
-                    string updateTable = "Update  [InspectionLogin] set InsPwd = '" + Pass_New + "' where UserID= '" + Session["UserID"].ToString() + "'";
-                    cmd = new SqlCommand(updateTable, Con);
-                    int req = cmd.ExecuteNonQuery();
+                    int req;
+                    using (SqlCommand updateCommand = new SqlCommand("Update [InspectionLogin] set InsPwd=@NewPassword where UserID=@UserID", Con))
+                    {
+                        updateCommand.Parameters.AddWithValue("@NewPassword", newPassword);
+                        updateCommand.Parameters.AddWithValue("@UserID", logId);
+                        req = updateCommand.ExecuteNonQuery();
+                    }
                     if (req > 0)
                     {
                         Uxmsg.Visible = true;
@@ -141,5 +141,12 @@ public partial class Audit_AuditChangePassword : System.Web.UI.Page
         {
             Con.Close();
         }
+    }
+
+    private bool HasAuthorizedSession()
+    {
+        string loginType = Convert.ToString(Session["LoginType"]);
+        return (loginType == "B" && !String.IsNullOrWhiteSpace(Convert.ToString(Session["UserID"]))) ||
+               (loginType == "R" && !String.IsNullOrWhiteSpace(Convert.ToString(Session["RegionId"])));
     }
 }

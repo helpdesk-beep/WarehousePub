@@ -136,8 +136,21 @@ public partial class NCCF_NCCF_Deduction_For_Final_Storage_Bill : System.Web.UI.
                     {
                         File_Upload = "File not Available";
                     }
-                    qry = "INSERT INTO tbl_NCCF_Deduction_On_Processed_Bill(Bill_Number,Commodity_Id,Crop_Year,Bill_Count,Total_Bill_Amount,Process_Amount,Deduction_Amount,Final_Amount,Deduction_Doc,UTR_No,Payment_Date,Created_By,CreatedBy_Ip,Created_On) values('" + Bill_Number.Value + "','" + CommodityID + "','" + Crop_Year + "','" + Bill_Count + "','" + Net_Amount + "','" + Pass_Amount + "','" + Deduction_Amount + "','" + Final_Amount.Value + "',N'" + File_Upload + "','" + UTR_No + "','" + getDate_MDY(Bank_Date) + "','" + Session["UserID"].ToString() + "','" + ip + "',getdate())";
+                    qry = "INSERT INTO tbl_NCCF_Deduction_On_Processed_Bill(Bill_Number,Commodity_Id,Crop_Year,Bill_Count,Total_Bill_Amount,Process_Amount,Deduction_Amount,Final_Amount,Deduction_Doc,UTR_No,Payment_Date,Created_By,CreatedBy_Ip,Created_On) values(@Bill_Number,@Commodity_Id,@Crop_Year,@Bill_Count,@Total_Bill_Amount,@Process_Amount,@Deduction_Amount,@Final_Amount,@Deduction_Doc,@UTR_No,@Payment_Date,@Created_By,@CreatedBy_Ip,getdate())";
                     SqlCommand cmd2 = new SqlCommand(qry, con);
+                    cmd2.Parameters.AddWithValue("@Bill_Number", Bill_Number.Value);
+                    cmd2.Parameters.AddWithValue("@Commodity_Id", CommodityID);
+                    cmd2.Parameters.AddWithValue("@Crop_Year", Crop_Year);
+                    cmd2.Parameters.AddWithValue("@Bill_Count", Bill_Count);
+                    cmd2.Parameters.AddWithValue("@Total_Bill_Amount", Net_Amount);
+                    cmd2.Parameters.AddWithValue("@Process_Amount", Pass_Amount);
+                    cmd2.Parameters.AddWithValue("@Deduction_Amount", Deduction_Amount);
+                    cmd2.Parameters.AddWithValue("@Final_Amount", Final_Amount.Value);
+                    cmd2.Parameters.AddWithValue("@Deduction_Doc", File_Upload);
+                    cmd2.Parameters.AddWithValue("@UTR_No", UTR_No);
+                    cmd2.Parameters.AddWithValue("@Payment_Date", getDate_MDY(Bank_Date));
+                    cmd2.Parameters.AddWithValue("@Created_By", Session["UserID"].ToString());
+                    cmd2.Parameters.AddWithValue("@CreatedBy_Ip", ip);
                     int i = cmd2.ExecuteNonQuery();
                     ICount = ICount + i;
                     ViewState["ingvdata"] = null;

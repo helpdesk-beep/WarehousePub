@@ -93,7 +93,7 @@ using System.Web.Services;
             SqlCommand cmd = new SqlCommand();
             string status = "";
             bool isSuccess = false;
-            if (username == "MPWLC" && password == "BukH446ywF9r")
+            if (WarehouseApiSecurity.AreCredentialsValid(username, password, "FciMssUsername", "FciMssPassword"))
             {
 
             //string FromDate = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");

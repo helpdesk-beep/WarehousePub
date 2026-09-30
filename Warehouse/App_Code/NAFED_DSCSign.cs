@@ -36,7 +36,7 @@ public class NAFED_DSCSign : System.Web.Services.WebService
         DataSet ds = new DataSet();
         try
         {
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Mode == "N" && User_Type == "B" && Godown_Type == "MPWLC")
                 {
@@ -77,7 +77,7 @@ public class NAFED_DSCSign : System.Web.Services.WebService
         DataSet ds = new DataSet();
         try
         {
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Mode == "N" && User_Type == "B" && Bill_Type == "MPWLC")
                 {
@@ -131,7 +131,7 @@ public class NAFED_DSCSign : System.Web.Services.WebService
         DataSet ds = new DataSet();
         try
         {
-            if (Cred == "WLC2019DSCNicv30" && Bill_Type == "MPWLC")
+            if (WarehouseApiSecurity.IsCredentialValid(Cred, "LegacyWlcBillCredential") && Bill_Type == "MPWLC")
             {
                 string query = @"SELECT B.Bill_Number, B.District_Id AS District_Id, B.Branch_Id, B.Depositor_Id, 
                                         B.Commodity_Id, B.Financial_Year, B.Commodity_Rate, B.Per_Day_Rate, 
@@ -180,7 +180,7 @@ public class NAFED_DSCSign : System.Web.Services.WebService
 
         try
         {
-            if (Cred == "WLC2019DSCNicv30" && Is_Verify == "Y" && !string.IsNullOrEmpty(Client_IP) && !string.IsNullOrEmpty(User_Type))
+            if (WarehouseApiSecurity.IsCredentialValid(Cred, "LegacyWlcBillCredential") && Is_Verify == "Y" && !string.IsNullOrEmpty(Client_IP) && !string.IsNullOrEmpty(User_Type))
             {
                 string SubValue = "";
                 string[] Split_result = Subject.Split(',');

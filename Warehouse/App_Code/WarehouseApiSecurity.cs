@@ -36,6 +36,42 @@ public static class WarehouseApiSecurity
         }
     }
 
+    public static bool IsCredentialValid(string suppliedCredential, string settingName)
+    {
+        string expectedCredential;
+        try
+        {
+            expectedCredential = GetRequiredSetting(settingName);
+        }
+        catch (ConfigurationErrorsException)
+        {
+            throw new SoapException("Service authentication is not configured. Set appSetting '" + settingName + "'.", SoapException.ServerFaultCode);
+        }
+
+        return !String.IsNullOrEmpty(suppliedCredential) &&
+               String.Equals(suppliedCredential, expectedCredential, StringComparison.Ordinal);
+    }
+
+    public static bool AreCredentialsValid(string suppliedUsername, string suppliedPassword, string usernameSettingName, string passwordSettingName)
+    {
+        string expectedUsername;
+        string expectedPassword;
+        try
+        {
+            expectedUsername = GetRequiredSetting(usernameSettingName);
+            expectedPassword = GetRequiredSetting(passwordSettingName);
+        }
+        catch (ConfigurationErrorsException)
+        {
+            throw new SoapException("Service authentication is not configured. Set appSettings '" + usernameSettingName + "' and '" + passwordSettingName + "'.", SoapException.ServerFaultCode);
+        }
+
+        return !String.IsNullOrEmpty(suppliedUsername) &&
+               !String.IsNullOrEmpty(suppliedPassword) &&
+               String.Equals(suppliedUsername, expectedUsername, StringComparison.Ordinal) &&
+               String.Equals(suppliedPassword, expectedPassword, StringComparison.Ordinal);
+    }
+
     public static void RequireApiKey()
     {
         string expectedKey;

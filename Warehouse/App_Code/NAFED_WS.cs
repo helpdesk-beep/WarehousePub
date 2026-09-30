@@ -130,7 +130,7 @@ public class NAFED_WS : System.Web.Services.WebService
         SqlCommand cmd = new SqlCommand();
         string status = "";
         bool isSuccess = false;
-        if (username == "MPWLC_UAT" && password == "MPWLC_UAT")
+        if (WarehouseApiSecurity.AreCredentialsValid(username, password, "NafedWsUsername", "NafedWsPassword"))
         {
             List<MasterStateData> listMSD = new List<MasterStateData>();
             con.ConnectionString = str;
@@ -163,7 +163,7 @@ public class NAFED_WS : System.Web.Services.WebService
         SqlCommand cmd = new SqlCommand();
         string status = "";
         bool isSuccess = false;
-        if (username == "MPWLC_UAT" && password == "MPWLC_UAT")
+        if (WarehouseApiSecurity.AreCredentialsValid(username, password, "NafedWsUsername", "NafedWsPassword"))
         {
             List<MasterDistrictData> listMDD = new List<MasterDistrictData>();
             con.ConnectionString = str;
@@ -196,7 +196,7 @@ public class NAFED_WS : System.Web.Services.WebService
         SqlCommand cmd = new SqlCommand();
         string status = "";
         bool isSuccess = false;
-        if (username == "MPWLC_UAT" && password == "MPWLC_UAT")
+        if (WarehouseApiSecurity.AreCredentialsValid(username, password, "NafedWsUsername", "NafedWsPassword"))
         {
             List<MasterGodownWarehouseData> listMWGD = new List<MasterGodownWarehouseData>();
             con.ConnectionString = str;
@@ -240,7 +240,7 @@ public class NAFED_WS : System.Web.Services.WebService
         SqlCommand cmd = new SqlCommand();
         string status = "";
         bool isSuccess = false;
-        if (username == "MPWLC_UAT" && password == "MPWLC_UAT")
+        if (WarehouseApiSecurity.AreCredentialsValid(username, password, "NafedWsUsername", "NafedWsPassword"))
         {
             List<MasterCommodityData> listMCD = new List<MasterCommodityData>();
             con.ConnectionString = str;
@@ -274,7 +274,7 @@ public class NAFED_WS : System.Web.Services.WebService
         SqlCommand cmd = new SqlCommand();
         string status = "";
         bool isSuccess = false;
-        if (username == "MPWLC_UAT" && password == "MPWLC_UAT")
+        if (WarehouseApiSecurity.AreCredentialsValid(username, password, "NafedWsUsername", "NafedWsPassword"))
         {
             List<MasterDepositorData> listMCDD = new List<MasterDepositorData>();
             con.ConnectionString = str;
@@ -372,7 +372,7 @@ public class NAFED_WS : System.Web.Services.WebService
     //public void eWHRDataAPI(string username, string password, DateTime FromDate, DateTime ToDate)
     //{
         
-    //    if (username == "MPWLC_UAT" && password == "MPWLC_UAT")
+    //    if (WarehouseApiSecurity.AreCredentialsValid(username, password, "NafedWsUsername", "NafedWsPassword"))
     //    {
     //        //DateTime FromDate;
     //        //DateTime ToDate;

@@ -48,7 +48,7 @@ public class Insert_DSWHR_Data_Rabi_Wheat2019 : System.Web.Services.WebService
 
         try
         {
-            if (Credential == "WLC2019DSCNicv24" && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcWhrCredential") && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
             {
                 string SValue = "";
                 string SubValue = "";
@@ -258,7 +258,7 @@ public class Insert_DSWHR_Data_Rabi_Wheat2019 : System.Web.Services.WebService
 
         try
         {
-            if (Credential == "WLC2019DSCNicv24" && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcWhrCredential") && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
             {
                 string SValue = "";
                 string SubValue = "";
@@ -431,7 +431,7 @@ public class Insert_DSWHR_Data_Rabi_Wheat2019 : System.Web.Services.WebService
 
         try
         {
-            if (Credential == "WLC2019DSCNicv24" && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcWhrCredential") && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
             {
                 string SValue = "";
                 string SubValue = "";
@@ -605,7 +605,7 @@ public class Insert_DSWHR_Data_Rabi_Wheat2019 : System.Web.Services.WebService
 
         try
         {
-            if (Credential == "WLC2019DSCNicv24" && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcWhrCredential") && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
             {
                 string SValue = "";
                 string SubValue = "";
@@ -779,7 +779,7 @@ public class Insert_DSWHR_Data_Rabi_Wheat2019 : System.Web.Services.WebService
 
         try
         {
-            if (Credential == "WLC2019DSCNicv24" && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcWhrCredential") && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
             {
                 string SValue = "";
                 string SubValue = "";

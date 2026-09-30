@@ -261,8 +261,10 @@ public partial class Inspection_BranchInspection : System.Web.UI.Page
                     Dt2 = CreateTablewhr();
                     Session["dt2"] = Dt2;
                 }
-                string query = "SELECT  [Depositor_WHR_Id],[Depotid],[Commodity_Id],(select Commodity_Name from dbo.tbl_MetaData_STORAGE_COMMODITY where Commodity_Id=[tbl_storage_Depositor_WHR_Relation].Commodity_Id) as comm,[Depositor_Name],[TotalBags_Received],[Total_Qty_Received] ,[MktValue_of_Commodity],convert(varchar(20),[WHR_Issue_Date],103) as whrdate FROM [Intergrated_MP_STORAGE].[dbo].[tbl_storage_Depositor_WHR_Relation] where Whr_No='" + txtwhrnum.Value + "' and BranchID='" + Session["UserID"].ToString() + "'";
+                string query = "SELECT  [Depositor_WHR_Id],[Depotid],[Commodity_Id],(select Commodity_Name from dbo.tbl_MetaData_STORAGE_COMMODITY where Commodity_Id=[tbl_storage_Depositor_WHR_Relation].Commodity_Id) as comm,[Depositor_Name],[TotalBags_Received],[Total_Qty_Received] ,[MktValue_of_Commodity],convert(varchar(20),[WHR_Issue_Date],103) as whrdate FROM [Intergrated_MP_STORAGE].[dbo].[tbl_storage_Depositor_WHR_Relation] where Whr_No=@WhrNo and BranchID=@BranchId";
             SqlCommand cmd = new SqlCommand(query, Con);
+            cmd.Parameters.AddWithValue("@WhrNo", txtwhrnum.Value);
+            cmd.Parameters.AddWithValue("@BranchId", Session["UserID"].ToString());
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);
@@ -322,8 +324,9 @@ public partial class Inspection_BranchInspection : System.Web.UI.Page
 
     protected void owncapacity()
     {
-        string query = "SELECT sum([Godown_Scientific_Capacity])/10 as owncapacity FROM [Intergrated_MP_STORAGE].[dbo].[tbl_MetaData_GODOWN] where Hired_Type='Owned' and BranchID='" + Session["UserID"].ToString() + "' and Storage_Type not in ('Permanent(CAP)','Temporary(CAP)','Open(CAP)') and Remarks='Y'";
+        const string query = "SELECT sum([Godown_Scientific_Capacity])/10 as owncapacity FROM [Intergrated_MP_STORAGE].[dbo].[tbl_MetaData_GODOWN] where Hired_Type='Owned' and BranchID=@BranchId and Storage_Type not in ('Permanent(CAP)','Temporary(CAP)','Open(CAP)') and Remarks='Y'";
         SqlCommand cmd = new SqlCommand(query, Con);
+        cmd.Parameters.AddWithValue("@BranchId", Session["UserID"].ToString());
         SqlDataAdapter da = new SqlDataAdapter(cmd);
         DataSet ds = new DataSet();
         da.Fill(ds);
@@ -341,8 +344,9 @@ public partial class Inspection_BranchInspection : System.Web.UI.Page
 
     protected void owngwnnum()
     {
-        string query = "SELECT  count(isnull([Godown_ID],0)) as owngodown FROM [Intergrated_MP_STORAGE].[dbo].[tbl_MetaData_GODOWN] where Hired_Type='Owned' and BranchID='" + Session["UserID"].ToString() + "'";
+        const string query = "SELECT  count(isnull([Godown_ID],0)) as owngodown FROM [Intergrated_MP_STORAGE].[dbo].[tbl_MetaData_GODOWN] where Hired_Type='Owned' and BranchID=@BranchId";
         SqlCommand cmd = new SqlCommand(query, Con);
+        cmd.Parameters.AddWithValue("@BranchId", Session["UserID"].ToString());
         SqlDataAdapter da = new SqlDataAdapter(cmd);
         DataSet ds = new DataSet();
         da.Fill(ds);
@@ -363,8 +367,9 @@ public partial class Inspection_BranchInspection : System.Web.UI.Page
 
     protected void capcapacity()
     {
-        string query = "SELECT isnull(sum([Godown_Scientific_Capacity])/10,0) as capcapacity FROM [Intergrated_MP_STORAGE].[dbo].[tbl_MetaData_GODOWN] where Hired_Type='Owned' and BranchID='" + Session["UserID"].ToString() + "' and Storage_Type  in ('Permanent(CAP)','Temporary(CAP)','Open(CAP)') and Remarks='Y'";
+        const string query = "SELECT isnull(sum([Godown_Scientific_Capacity])/10,0) as capcapacity FROM [Intergrated_MP_STORAGE].[dbo].[tbl_MetaData_GODOWN] where Hired_Type='Owned' and BranchID=@BranchId and Storage_Type  in ('Permanent(CAP)','Temporary(CAP)','Open(CAP)') and Remarks='Y'";
         SqlCommand cmd = new SqlCommand(query, Con);
+        cmd.Parameters.AddWithValue("@BranchId", Session["UserID"].ToString());
         SqlDataAdapter da = new SqlDataAdapter(cmd);
         DataSet ds = new DataSet();
         da.Fill(ds);
@@ -382,8 +387,9 @@ public partial class Inspection_BranchInspection : System.Web.UI.Page
 
     protected void Branchmgname()
     {
-        string query = "SELECT [DepotName],[NodalOfficeName] FROM [Intergrated_MP_STORAGE].[dbo].[tbl_MetaData_DEPOT] where BranchId='" + Session["UserID"].ToString() + "'";
+        const string query = "SELECT [DepotName],[NodalOfficeName] FROM [Intergrated_MP_STORAGE].[dbo].[tbl_MetaData_DEPOT] where BranchId=@BranchId";
         SqlCommand cmd = new SqlCommand(query, Con);
+        cmd.Parameters.AddWithValue("@BranchId", Session["UserID"].ToString());
         SqlDataAdapter da = new SqlDataAdapter(cmd);
         DataSet ds = new DataSet();
         da.Fill(ds);
@@ -400,8 +406,9 @@ public partial class Inspection_BranchInspection : System.Web.UI.Page
     }
     protected void owncapacityuses()
     {
-        string query = "SELECT (sum([RecQty])-sum([DelQty]))/10 as ownuses FROM [Intergrated_MP_STORAGE].[dbo].[View_WHRcurrentstock] where BranchID='" + Session["UserID"].ToString() + "' and Godown_ID in ( select Godown_ID FROM [Intergrated_MP_STORAGE].[dbo].[tbl_MetaData_GODOWN] where Hired_Type='Owned' and BranchID='" + Session["UserID"].ToString() + "' and Storage_Type not in ('Permanent(CAP)','Temporary(CAP)','Open(CAP)') and Remarks='Y')";
+        const string query = "SELECT (sum([RecQty])-sum([DelQty]))/10 as ownuses FROM [Intergrated_MP_STORAGE].[dbo].[View_WHRcurrentstock] where BranchID=@BranchId and Godown_ID in ( select Godown_ID FROM [Intergrated_MP_STORAGE].[dbo].[tbl_MetaData_GODOWN] where Hired_Type='Owned' and BranchID=@BranchId and Storage_Type not in ('Permanent(CAP)','Temporary(CAP)','Open(CAP)') and Remarks='Y')";
         SqlCommand cmd = new SqlCommand(query, Con);
+        cmd.Parameters.AddWithValue("@BranchId", Session["UserID"].ToString());
         SqlDataAdapter da = new SqlDataAdapter(cmd);
         DataSet ds = new DataSet();
         da.Fill(ds);
@@ -416,8 +423,9 @@ public partial class Inspection_BranchInspection : System.Web.UI.Page
 
     protected void capcapacityuses()
     {
-        string query = "SELECT isnull((sum([RecQty])-sum([DelQty]))/10,0) as capuses FROM [Intergrated_MP_STORAGE].[dbo].[View_WHRcurrentstock] where BranchID='" + Session["UserID"].ToString() + "' and Godown_ID in ( select Godown_ID FROM [Intergrated_MP_STORAGE].[dbo].[tbl_MetaData_GODOWN] where Hired_Type='Owned' and BranchID='" + Session["UserID"].ToString() + "' and Storage_Type  in ('Permanent(CAP)','Temporary(CAP)','Open(CAP)') and Remarks='Y')";
+        const string query = "SELECT isnull((sum([RecQty])-sum([DelQty]))/10,0) as capuses FROM [Intergrated_MP_STORAGE].[dbo].[View_WHRcurrentstock] where BranchID=@BranchId and Godown_ID in ( select Godown_ID FROM [Intergrated_MP_STORAGE].[dbo].[tbl_MetaData_GODOWN] where Hired_Type='Owned' and BranchID=@BranchId and Storage_Type  in ('Permanent(CAP)','Temporary(CAP)','Open(CAP)') and Remarks='Y')";
         SqlCommand cmd = new SqlCommand(query, Con);
+        cmd.Parameters.AddWithValue("@BranchId", Session["UserID"].ToString());
         SqlDataAdapter da = new SqlDataAdapter(cmd);
         DataSet ds = new DataSet();
         da.Fill(ds);
@@ -452,10 +460,11 @@ public partial class Inspection_BranchInspection : System.Web.UI.Page
     {
         try
         {
-            string query = "SELECT  [EmpName],[EmpPost],[EMPPostingdate] FROM [Intergrated_MP_STORAGE].[dbo].[BranchAuditEmp] where AuditID in (select MAX(AuId) from dbo.BranchAudit where BranchId='" + Session["UserID"].ToString() + "')";
+            const string query = "SELECT  [EmpName],[EmpPost],[EMPPostingdate] FROM [Intergrated_MP_STORAGE].[dbo].[BranchAuditEmp] where AuditID in (select MAX(AuId) from dbo.BranchAudit where BranchId=@BranchId)";
             //string query = "SELECT  [AuditID],[EmpName],[EmpPost] FROM [Intergrated_MP_STORAGE].[dbo].[BranchAuditEmp] where AuditID='23010021512'";
 
             SqlCommand cmd = new SqlCommand(query, Con);
+            cmd.Parameters.AddWithValue("@BranchId", Session["UserID"].ToString());
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
 
@@ -522,8 +531,9 @@ public partial class Inspection_BranchInspection : System.Web.UI.Page
             else
             {
                 string auid = "";
-                string QueryMax = "select isnull(Max(InId),0)+1 from BranchAudit where  BranchId='" + Session["UserID"].ToString() + "' ";
+                const string QueryMax = "select isnull(Max(InId),0)+1 from BranchAudit where BranchId=@BranchId";
                 SqlCommand cmd2 = new SqlCommand(QueryMax, Con); // check WhrId present in whr_status table
+                cmd2.Parameters.AddWithValue("@BranchId", Session["UserID"].ToString());
                 Con.Open();
                 string str3 = cmd2.ExecuteScalar().ToString();
                 if ((str3 == String.Empty) || str3 == "")
@@ -965,8 +975,9 @@ public partial class Inspection_BranchInspection : System.Web.UI.Page
     protected void Hiredcapacity()
     {
         //string query = "SELECT sum([Godown_Scientific_Capacity])/10 as owncapacity FROM [Intergrated_MP_STORAGE].[dbo].[tbl_MetaData_GODOWN] where Hired_Type='Owned' and BranchID='" + Session["UserID"].ToString() + "' and Storage_Type not in ('Permanent(CAP)','Temporary(CAP)','Open(CAP)') and Remarks='Y'";
-        string query = "SELECT sum([Godown_Scientific_Capacity])/10 as Hiredcapacity FROM [Intergrated_MP_STORAGE].[dbo].[tbl_MetaData_GODOWN] where Hired_Type in('Joint Venture(JV)','JointVenture(JV)','Hired') and BranchID='" + Session["UserID"].ToString() + "' and Storage_Type not in ('Permanent(CAP)','Temporary(CAP)','Open(CAP)') and Remarks='Y'";
+        const string query = "SELECT sum([Godown_Scientific_Capacity])/10 as Hiredcapacity FROM [Intergrated_MP_STORAGE].[dbo].[tbl_MetaData_GODOWN] where Hired_Type in('Joint Venture(JV)','JointVenture(JV)','Hired') and BranchID=@BranchId and Storage_Type not in ('Permanent(CAP)','Temporary(CAP)','Open(CAP)') and Remarks='Y'";
         SqlCommand cmd = new SqlCommand(query, Con);
+        cmd.Parameters.AddWithValue("@BranchId", Session["UserID"].ToString());
         SqlDataAdapter da = new SqlDataAdapter(cmd);
         DataSet ds = new DataSet();
         da.Fill(ds);
@@ -981,8 +992,9 @@ public partial class Inspection_BranchInspection : System.Web.UI.Page
     }
     protected void Hiredcapacityuses()
     {
-        string query = "SELECT (sum([RecQty])-sum([DelQty]))/10 as Hireduses FROM [Intergrated_MP_STORAGE].[dbo].[View_WHRcurrentstock] where BranchID='" + Session["UserID"].ToString() + "' and Godown_ID in (select Godown_ID FROM [Intergrated_MP_STORAGE].[dbo].[tbl_MetaData_GODOWN] where Hired_Type in('Joint Venture(JV)','JointVenture(JV)','Hired') and BranchID='2301002' and Storage_Type not in ('Permanent(CAP)','Temporary(CAP)','Open(CAP)') and Remarks='Y')";
+        const string query = "SELECT (sum([RecQty])-sum([DelQty]))/10 as Hireduses FROM [Intergrated_MP_STORAGE].[dbo].[View_WHRcurrentstock] where BranchID=@BranchId and Godown_ID in (select Godown_ID FROM [Intergrated_MP_STORAGE].[dbo].[tbl_MetaData_GODOWN] where Hired_Type in('Joint Venture(JV)','JointVenture(JV)','Hired') and BranchID='2301002' and Storage_Type not in ('Permanent(CAP)','Temporary(CAP)','Open(CAP)') and Remarks='Y')";
         SqlCommand cmd = new SqlCommand(query, Con);
+        cmd.Parameters.AddWithValue("@BranchId", Session["UserID"].ToString());
         SqlDataAdapter da = new SqlDataAdapter(cmd);
         DataSet ds = new DataSet();
         da.Fill(ds);
