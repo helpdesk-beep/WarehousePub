@@ -37,8 +37,10 @@ public class AndroidWebservice : System.Web.Services.WebService {
             {
                 con.Open();
             }
-            string str = "SELECT Godown_Name,Password  FROM [Pvt_Warehouse_Login] WHERE Godown_Name='" + Userid + "' AND Password='" + Pwd + "'";
-            SqlDataAdapter da = new SqlDataAdapter(str, con);
+            SqlCommand cmd = new SqlCommand("SELECT Godown_Name,Password FROM [Pvt_Warehouse_Login] WHERE Godown_Name=@Userid AND Password=@Password", con);
+            cmd.Parameters.AddWithValue("@Userid", Userid);
+            cmd.Parameters.AddWithValue("@Password", Pwd);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);
 
@@ -57,9 +59,9 @@ public class AndroidWebservice : System.Web.Services.WebService {
                 return false;
             }
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            throw ex;
+            throw new SoapException("Authentication service unavailable.", SoapException.ServerFaultCode);
         }
 
     }
@@ -74,8 +76,10 @@ public class AndroidWebservice : System.Web.Services.WebService {
         {
             try
             {
-                string str = "SELECT * FROM [tbl_Android_ReceivingStock] WHERE DistrictId='" + DistrictId + "' AND BranchId='" + BranchId + "' AND ReceiptID='" + ReceiptID + "'";
-                SqlCommand cmd = new SqlCommand(str, con);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM [tbl_Android_ReceivingStock] WHERE DistrictId=@DistrictId AND BranchId=@BranchId AND ReceiptID=@ReceiptID", con);
+                cmd.Parameters.AddWithValue("@DistrictId", DistrictId);
+                cmd.Parameters.AddWithValue("@BranchId", BranchId);
+                cmd.Parameters.AddWithValue("@ReceiptID", ReceiptID);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 cmd.CommandTimeout = 0;
                 DataSet ds = new DataSet();
@@ -178,8 +182,10 @@ public class AndroidWebservice : System.Web.Services.WebService {
         {
             try
             {
-                string str = "SELECT * FROM [tbl_Android_ReceivingStockProcurement] WHERE DistrictId='" + DistrictId + "' AND BranchId='" + BranchId + "' AND DepositorNo='" + DepositorNo + "'";
-                SqlCommand cmd = new SqlCommand(str, con);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM [tbl_Android_ReceivingStockProcurement] WHERE DistrictId=@DistrictId AND BranchId=@BranchId AND DepositorNo=@DepositorNo", con);
+                cmd.Parameters.AddWithValue("@DistrictId", DistrictId);
+                cmd.Parameters.AddWithValue("@BranchId", BranchId);
+                cmd.Parameters.AddWithValue("@DepositorNo", DepositorNo);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 cmd.CommandTimeout = 0;
                 DataSet ds = new DataSet();
@@ -278,6 +284,7 @@ public class AndroidWebservice : System.Web.Services.WebService {
     [WebMethod]
     public XmlElement GetDetailsAndroid_ReceivingStockProcurement(string Godown_Id, string Whr_No, string BranchId)
     {
+        WarehouseApiSecurity.RequireApiKey();
         try
         {
             XmlElement xmlElement = null;
@@ -332,8 +339,10 @@ public class AndroidWebservice : System.Web.Services.WebService {
         {
             try
             {
-                string str = "SELECT * FROM [tbl_Storage_Android_Stock_Delivery_Order] WHERE District_Id ='" + District_Id + "' AND DepotId='" + DepotId + "' AND WHR_Id='" + WHR_Id + "'";
-                SqlCommand cmd = new SqlCommand(str, con);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM [tbl_Storage_Android_Stock_Delivery_Order] WHERE District_Id=@District_Id AND DepotId=@DepotId AND WHR_Id=@WHR_Id", con);
+                cmd.Parameters.AddWithValue("@District_Id", District_Id);
+                cmd.Parameters.AddWithValue("@DepotId", DepotId);
+                cmd.Parameters.AddWithValue("@WHR_Id", WHR_Id);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 cmd.CommandTimeout = 0;
                 DataSet ds = new DataSet();
@@ -413,6 +422,7 @@ public class AndroidWebservice : System.Web.Services.WebService {
     [WebMethod]
     public XmlElement GetDetailsForReceivingStockProcurement(string Godown_Id, string DepositorNo, string BranchId)
     {
+        WarehouseApiSecurity.RequireApiKey();
         try
         {
             XmlElement xmlElement = null;
@@ -461,6 +471,7 @@ public class AndroidWebservice : System.Web.Services.WebService {
     [WebMethod]
     public XmlElement GetDetailsForDeliveryOrder(string Godown_Id, string WHR_Id, string BranchID)
     {
+        WarehouseApiSecurity.RequireApiKey();
         try
         {
             XmlElement xmlElement = null;
@@ -509,6 +520,7 @@ public class AndroidWebservice : System.Web.Services.WebService {
     [WebMethod]
     public XmlElement GetNotificationForTotstockProcurmentQtyAmt(string Godown_Id,string BranchId)
     {
+        WarehouseApiSecurity.RequireApiKey();
         try
         {
             XmlElement xmlElement = null;
@@ -557,6 +569,7 @@ public class AndroidWebservice : System.Web.Services.WebService {
     [WebMethod]
     public XmlElement GetNotificationForTotstockQtyAmt(string Godown_Id, string BranchId)
     {
+        WarehouseApiSecurity.RequireApiKey();
         try
         {
             XmlElement xmlElement = null;
@@ -648,4 +661,3 @@ public class AndroidWebservice : System.Web.Services.WebService {
         }
     }
 }
-

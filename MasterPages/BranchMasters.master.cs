@@ -5,18 +5,18 @@ public partial class MasterPage_BranchMasters : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        string username = Convert.ToString(Session["Username"]);
+        if (String.IsNullOrWhiteSpace(username))
+        {
+            Response.Redirect("~/Login/Login.aspx");
+            return;
+        }
+
         if (!IsPostBack)
         {
-            if (Session["Username"].ToString() != "")
-            {
-                lblUserName.ForeColor = System.Drawing.Color.Green;
-                lblUserName.Font.Size = FontUnit.Point(15);
-                lblUserName.Text = "Welcome " + Session["Username"].ToString();
-            }
-            else
-            {
-                Response.Redirect("~/Login/Login.aspx");
-            }
+            lblUserName.ForeColor = System.Drawing.Color.Green;
+            lblUserName.Font.Size = FontUnit.Point(15);
+            lblUserName.Text = "Welcome " + username;
         }
     }
     protected void lnkLogout_Click(object sender, EventArgs e)

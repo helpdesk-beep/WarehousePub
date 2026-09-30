@@ -36,6 +36,7 @@ namespace ExportImportData
          int Sent_Jute_bags, int Sent_OU_bags,
          int Sent_PP_bags, string whr, string StackNumber, string stackName, string Stacknum, string slogin_name, string slogin_mob, string slogin_des, string Updated_LgnName, string updated_LgnMobile, string updated_LgnDesgn)
         {
+            WarehouseApiSecurity.RequireApiKey();
             string ResponseMsg = null;
             SqlDataAdapter da = new SqlDataAdapter();
             String str = ConfigurationManager.ConnectionStrings["MPSCSCConnectionString"].ConnectionString.ToString();
@@ -124,6 +125,7 @@ namespace ExportImportData
          int Rec_PP_bags, int Rec_Jute_bags, int Rec_OU_bags, int Sent_Jute_bags, int Sent_OU_bags, int Sent_PP_bags, string whr, string StackNumber, string stackName, string Stacknum, 
          string slogin_name, string slogin_mob, string slogin_des, string Updated_LgnName, string updated_LgnMobile, string updated_LgnDesgn)
         {
+            WarehouseApiSecurity.RequireApiKey();
             string ResponseMsg = null;
             SqlDataAdapter da = new SqlDataAdapter();
             String str = ConfigurationManager.ConnectionStrings["MPSCSCConnectionString"].ConnectionString.ToString();
@@ -204,6 +206,7 @@ namespace ExportImportData
         [WebMethod]
         public void EDDeleteReceiptDetails(string Receipt_id, string challan_no, string Godown) 
         {
+            WarehouseApiSecurity.RequireApiKey();
             string ResponseMsg = null;
             SqlDataAdapter da = new SqlDataAdapter();
             String str = ConfigurationManager.ConnectionStrings["MPSCSCConnectionString"].ConnectionString.ToString();
@@ -229,4 +232,3 @@ namespace ExportImportData
         }
     }
 }
-

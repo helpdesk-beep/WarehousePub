@@ -31,11 +31,12 @@ public class Login_Inspection : System.Web.Services.WebService
         {
 
             if (con.State == ConnectionState.Closed){con.Open();}
-            SqlCommand cmd = new SqlCommand("select User_Mobile_No,Password from tbl_Insp_login where User_Mobile_No='"+ Mobile_No + "' and Password='"+ password + "' ", con);
+            SqlCommand cmd = new SqlCommand("select User_Mobile_No,Password from tbl_Insp_login where User_Mobile_No=@Mobile_No and Password=@Password", con);
+            cmd.Parameters.AddWithValue("@Mobile_No", Mobile_No);
+            cmd.Parameters.AddWithValue("@Password", password);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             cmd.CommandTimeout = 0;           
             da.Fill(dt);
-            cmd.ExecuteNonQuery();
             if (con.State == ConnectionState.Open){con.Close();}
             if (dt.Tables[0].Rows.Count > 0)
             {
@@ -44,9 +45,9 @@ public class Login_Inspection : System.Web.Services.WebService
             }
             //return dt;
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            throw new SoapException(ex.Message, SoapException.ClientFaultCode);
+            throw new SoapException("Unable to authenticate inspection user.", SoapException.ServerFaultCode);
         }
         finally
         {
