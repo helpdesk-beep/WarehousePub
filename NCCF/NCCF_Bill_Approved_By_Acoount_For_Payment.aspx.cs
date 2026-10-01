@@ -359,8 +359,16 @@ public partial class NCCF_NCCF_Bill_Approved_By_Acoount_For_Payment : System.Web
             dbCon.Open();
             transaction = dbCon.BeginTransaction();
 
-            string qryMaster = "INSERT INTO tbl_NCCF_acknowledgement_No(Bill_Number,Depositor_Id,Commodity_ID,Crop_Year,Bill_Count,Total_Amount,BId,CreateBy,Createdby_Ip,CreatedOn) values('" + Bill_No + "','15478','" + Commodity + "','" + Crop_Year + "','" + TotalCount + "','" + TotalAmount + "','" + BID + "','" + Session["UserID"].ToString() + "','" + ip + "',getdate())";
+            const string qryMaster = "INSERT INTO tbl_NCCF_acknowledgement_No(Bill_Number,Depositor_Id,Commodity_ID,Crop_Year,Bill_Count,Total_Amount,BId,CreateBy,Createdby_Ip,CreatedOn) values(@Bill_Number,'15478',@Commodity_ID,@Crop_Year,@Bill_Count,@Total_Amount,@BId,@CreateBy,@Createdby_Ip,getdate())";
             SqlCommand cmdMaster = new SqlCommand(qryMaster, dbCon, transaction);
+            cmdMaster.Parameters.AddWithValue("@Bill_Number", Bill_No);
+            cmdMaster.Parameters.AddWithValue("@Commodity_ID", Commodity);
+            cmdMaster.Parameters.AddWithValue("@Crop_Year", Crop_Year);
+            cmdMaster.Parameters.AddWithValue("@Bill_Count", TotalCount);
+            cmdMaster.Parameters.AddWithValue("@Total_Amount", TotalAmount);
+            cmdMaster.Parameters.AddWithValue("@BId", BID);
+            cmdMaster.Parameters.AddWithValue("@CreateBy", Session["UserID"].ToString());
+            cmdMaster.Parameters.AddWithValue("@Createdby_Ip", ip);
             int n = cmdMaster.ExecuteNonQuery();
 
             if (n > 0)

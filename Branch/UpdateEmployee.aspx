@@ -93,7 +93,7 @@
                 <HeaderStyle CssClass="alert-warning" />
                 <AlternatingRowStyle CssClass="alert-success" />
             </asp:GridView>
+            <asp:Label ID="lblUploadError" runat="server" ForeColor="Red" />
         </div>
     </div>
 </asp:Content>
-

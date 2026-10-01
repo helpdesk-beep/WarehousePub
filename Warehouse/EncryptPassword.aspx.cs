@@ -1,89 +1,149 @@
 using System;
-using System.Data;
 using System.Configuration;
-using System.Collections;
+using System.Data;
+using System.Data.SqlClient;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
-using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
-using System.Data.SqlClient;
-using System.Text;
-
 
 public partial class EncryptPassword : System.Web.UI.Page
 {
-    SqlConnection _sqlCon = new System.Data.SqlClient.SqlConnection(ConfigurationManager.ConnectionStrings["FCIConnectionString"].ConnectionString.ToString());
-    
-    DataTable dt = new DataTable();
+    private readonly string connectionString = ConfigurationManager.ConnectionStrings["FCIConnectionString"].ConnectionString;
+
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!HasAuthenticatedSession())
+        {
+            Response.Redirect("~/Login/Login.aspx");
+            return;
+        }
+
         if (!IsPostBack)
         {
-            string str = "SELECT [User_Name],convert(varchar(20),[login_id])+'nicF$9' as 'pwd',[login_id]  FROM [Storage_Login] ";
-            SqlDataAdapter da = new SqlDataAdapter(str, _sqlCon);
-            da.Fill(dt);
-
-            if (dt.Rows.Count > 0)
-            {
-                for (int a = 0; a < dt.Rows.Count; a++)
-                {
-                    gvPwdEN.DataSource = dt;
-                    gvPwdEN.DataBind();
-                }
-
-            }
-        }
-    }
-    protected void btnEncrypt_Click(object sender, EventArgs e)
-    {
-        //for (int i = 0; i < gvPwdEN.Rows.Count; i++)
-        //{
-        //    string pwd = gvPwdEN.Rows[i].Cells[2].Text;
-        //    //string ep = "MD5('" + pwd + "'";
-        //    //string str = "<script language='javascript'>MD5(pwd);</Script>";
-        //    //RegisterStartupScript("str", str);
-
-
-        //    StringBuilder str = new StringBuilder();
-        //    str.Append("<script>");
-        //    str.Append("MD5('" + pwd.ToString() + "');</script>");
-        //    this.Page.ClientScript.RegisterClientScriptBlock(Page.GetType(), "ClientScript", str.ToString());
-        //}
-    }
-    protected void btnUpdate_Click(object sender, EventArgs e)
-    {
-        
+            string passwordSuffix;
             try
             {
+                passwordSuffix = WarehouseApiSecurity.GetRequiredSetting("EncryptPasswordDefaultPasswordSuffix");
+            }
+            catch (ConfigurationErrorsException)
+            {
+                lblStatus.Text = "Required appSetting 'EncryptPasswordDefaultPasswordSuffix' is not configured.";
+                return;
+            }
+
+            const string query = "SELECT [User_Name],convert(varchar(20),[login_id])+@PasswordSuffix as [pwd],[login_id] FROM [Storage_Login]";
+            DataTable users = new DataTable();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand(query, connection))
+            using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+            {
+                command.Parameters.AddWithValue("@PasswordSuffix", passwordSuffix);
+                adapter.Fill(users);
+            }
+
+            gvPwdEN.DataSource = users;
+            gvPwdEN.DataBind();
+        }
+    }
+
+    protected override void OnInit(EventArgs e)
+    {
+        base.OnInit(e);
+        if (Session != null)
+        {
+            ViewStateUserKey = Session.SessionID;
+        }
+    }
+
+    protected void btnEncrypt_Click(object sender, EventArgs e)
+    {
+    }
+
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        if (!HasAuthenticatedSession())
+        {
+            Response.Redirect("~/Login/Login.aspx");
+            return;
+        }
+
+        try
+        {
+            string masterSecret = WarehouseApiSecurity.GetRequiredSetting("EncryptPasswordMasterSecret");
+            for (int i = 0; i < gvPwdEN.Rows.Count; i++)
+            {
+                string password = ((TextBox)gvPwdEN.Rows[i].FindControl("txtPwd")).Text.Trim();
+                string loginId = ((TextBox)gvPwdEN.Rows[i].FindControl("txtUID")).Text.Trim();
+                if (String.IsNullOrWhiteSpace(password) || String.IsNullOrWhiteSpace(loginId))
+                {
+                    lblStatus.Text = "Login ID and password are required for every row.";
+                    return;
+                }
+            }
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
                 for (int i = 0; i < gvPwdEN.Rows.Count; i++)
                 {
-                    //Response.Write(((TextBox)gvPwdEN.Rows[1].FindControl("txtEncrypted")).Text);
-                    //Response.Write("  -  ");
-                    //Response.Write(((TextBox)gvPwdEN.Rows[1].FindControl("txtUID")).Text);
-                    //Response.Write("  -  ");
-                    //Response.Write(((TextBox)gvPwdEN.Rows[1].FindControl("txtMEncrypted")).Text);
-                    if (_sqlCon.State == ConnectionState.Closed)
-                        _sqlCon.Open();
+                    string password = ((TextBox)gvPwdEN.Rows[i].FindControl("txtPwd")).Text.Trim();
+                    string loginId = ((TextBox)gvPwdEN.Rows[i].FindControl("txtUID")).Text.Trim();
+                    string passwordHash = CreateMd5Hash(password);
+                    string masterPasswordHash = CreateMd5Hash(loginId + masterSecret);
 
-                    string str_upadte = "update Storage_Login set Password=convert(varbinary(300),'" + ((TextBox)gvPwdEN.Rows[i].FindControl("txtEncrypted")).Text.Trim() + "') ,MasterPassword=convert(varbinary(300),'" + ((TextBox)gvPwdEN.Rows[i].FindControl("txtMEncrypted")).Text.Trim() + "') where login_id='" + ((TextBox)gvPwdEN.Rows[i].FindControl("txtUID")).Text.Trim() + "'";
-
-                    SqlCommand cmd = new SqlCommand(str_upadte, _sqlCon);
-                    int ax = cmd.ExecuteNonQuery();
-                    
-
+                    const string update = @"update Storage_Login
+                        set Password=convert(varbinary(300),@PasswordHash),
+                            MasterPassword=convert(varbinary(300),@MasterPasswordHash)
+                        where login_id=@LoginId";
+                    using (SqlCommand command = new SqlCommand(update, connection))
+                    {
+                        command.Parameters.AddWithValue("@PasswordHash", passwordHash);
+                        command.Parameters.AddWithValue("@MasterPasswordHash", masterPasswordHash);
+                        command.Parameters.AddWithValue("@LoginId", loginId);
+                        command.ExecuteNonQuery();
+                    }
                 }
-
             }
 
-            catch (Exception esa)
+            lblStatus.ForeColor = System.Drawing.Color.ForestGreen;
+            lblStatus.Text = "Password values updated.";
+        }
+        catch (ConfigurationErrorsException)
+        {
+            lblStatus.Text = "Required appSetting 'EncryptPasswordMasterSecret' is not configured.";
+        }
+        catch (Exception)
+        {
+            lblStatus.Text = "Unable to update password values.";
+        }
+    }
+
+    private static bool HasAuthenticatedSession()
+    {
+        if (HttpContext.Current == null || HttpContext.Current.Session == null)
+        {
+            return false;
+        }
+
+        return !String.IsNullOrWhiteSpace(Convert.ToString(HttpContext.Current.Session["UserID"])) ||
+               !String.IsNullOrWhiteSpace(Convert.ToString(HttpContext.Current.Session["Username"])) ||
+               !String.IsNullOrWhiteSpace(Convert.ToString(HttpContext.Current.Session["username"]));
+    }
+
+    private static string CreateMd5Hash(string value)
+    {
+        using (MD5 md5 = MD5.Create())
+        {
+            byte[] hash = md5.ComputeHash(Encoding.UTF8.GetBytes(value));
+            StringBuilder result = new StringBuilder(hash.Length * 2);
+            for (int i = 0; i < hash.Length; i++)
             {
-                StringBuilder str = new StringBuilder();
-                str.Append("<script>");
-                str.Append("alert('" + "There are some error occured" + esa.Message.ToString() + "');</script>");
-                this.Page.ClientScript.RegisterClientScriptBlock(Page.GetType(), "ClientScript", str.ToString());
-
+                result.Append(hash[i].ToString("x2"));
             }
-     }
+
+            return result.ToString();
+        }
+    }
 }

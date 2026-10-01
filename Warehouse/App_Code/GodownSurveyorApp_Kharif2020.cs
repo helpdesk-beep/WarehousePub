@@ -27,7 +27,7 @@ public class GodownSurveyorApp_Kharif2020 : System.Web.Services.WebService
     {
         XmlElement xmlElement = null;
         string respas = "";
-        if (userid == "nic" && password == "nicgdn#insp@2020")
+        if (WarehouseApiSecurity.AreCredentialsValid(userid, password, "GodownSurveyorUsername", "GodownSurveyorPassword2020"))
         {
             try
             {
@@ -35,10 +35,12 @@ public class GodownSurveyorApp_Kharif2020 : System.Web.Services.WebService
                 //string query = "SELECT [SurveyorID],[SurveyorName],[Designation] ,[MobileNumber],[District],Branch FROM [tbl_Registration_Inspection_officer] where District='" + dist + "' and MobileNumber='" + Mobile_No + "' and Password='" + srvPass + "' and IsActive='Y' ";
                 // string query = "SELECT ol.OfficerName,ol.PF_ID,ol.O_Password FROM JointVentureScheme2018.dbo.Insp_Officer_login as ol join JointVentureScheme2018.dbo.tbl_metadata_Inspection_officer as mi on mi.PF_ID = ol.PF_ID where  mi.Per_MobileNo = '" + Mobile_No + "' and ol.O_Password = '" + srvPass + "'  and mi.IsActive = 'Y'";
               // string query = "SELECT ol.OfficerName as [SurveyorName],ol.PF_ID as [SurveyorID],Designation,Per_MobileNo as [MobileNumber] FROM Intergrated_MP_STORAGE.dbo.Insp_Officer_login as ol join Intergrated_MP_STORAGE.dbo.tbl_metadata_Inspection_officer as mi on mi.PF_ID = ol.PF_ID where mi.Per_MobileNo = '" + Mobile_No + "' and ol.O_Password = '" + srvPass + "'  and mi.IsActive = 'Y'";
-               string query = "SELECT ol.OfficerName as [SurveyorName],ol.PF_ID as [SurveyorID],Designation,Per_MobileNo as [MobileNumber] FROM JointVentureScheme2018.dbo.Insp_Officer_login as ol join JointVentureScheme2018.dbo.tbl_metadata_Inspection_officer as mi on mi.PF_ID = ol.PF_ID where mi.Per_MobileNo = '" + Mobile_No + "' and ol.O_Password = '" + srvPass + "'  and mi.IsActive = 'Y'";
+                const string query = "SELECT ol.OfficerName as [SurveyorName],ol.PF_ID as [SurveyorID],Designation,Per_MobileNo as [MobileNumber] FROM JointVentureScheme2018.dbo.Insp_Officer_login as ol join JointVentureScheme2018.dbo.tbl_metadata_Inspection_officer as mi on mi.PF_ID = ol.PF_ID where mi.Per_MobileNo = @Mobile_No and ol.O_Password = @Password and mi.IsActive = 'Y'";
                 //XmlElement xmlElement = null;
 
                 SqlCommand cmd = new SqlCommand(query, conjvs);
+                cmd.Parameters.AddWithValue("@Mobile_No", Mobile_No);
+                cmd.Parameters.AddWithValue("@Password", srvPass);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 if (conjvs.State == ConnectionState.Closed)
@@ -76,7 +78,7 @@ public class GodownSurveyorApp_Kharif2020 : System.Web.Services.WebService
     public XmlElement Get_Branch_GdnInsp_Kharif2020(string userid, string password, string SurveyorID)
     {
         XmlElement xmlElement = null;
-        if (userid == "nic" && password == "nicgdn#insp@2020")
+        if (WarehouseApiSecurity.AreCredentialsValid(userid, password, "GodownSurveyorUsername", "GodownSurveyorPassword2020"))
         {
             try
             {
@@ -84,10 +86,11 @@ public class GodownSurveyorApp_Kharif2020 : System.Web.Services.WebService
                 //string query = "select Inspection_ID,PF_ID,(select Officer_Name  from tbl_metadata_Inspection_officer where PF_ID = ISD.PF_ID) as Officer_Name,(select district_name from tbl_metadata_district as MDDIS where MDDIS.District_id = ISD.District_ID) as distirct_name,(select Depotname from tbl_metadata_depot as MDD where MDD.branchID = ISD.Branch_ID) as Depotname, Inspection_Status,Insp_Period,Convert(varchar(10), Order_Date, 103) as Order_Date,ISD.District_ID,ISD.Branch_ID  from tbl_Inpection_Scheduled_Date as ISD where PF_ID = '" + SurveyorID + "'";
                 //string query = "select Inspection_ID,PF_ID as SurveyorID,(select Officer_Name  from JointVentureScheme2018.dbo.tbl_metadata_Inspection_officer where PF_ID = ISD.PF_ID) as SurveyorName,(select district_name from JointVentureScheme2018.dbo.tbl_metadata_district as MDDIS where MDDIS.District_id = ISD.District_ID) as distirct_name,(select Depotname from JointVentureScheme2018.dbo.tbl_metadata_depot as MDD where MDD.branchID = ISD.Branch_ID) as Depotname,Inspection_Status,Insp_Period,Convert(varchar(10), Order_Date, 103) as Order_Date,ISD.District_ID,ISD.Branch_ID from JointVentureScheme2018.dbo.tbl_Inpection_Scheduled_Date as ISD where PF_ID = '" + SurveyorID + "'";
                 //string query = "select isd.ID as Inspection_ID, isd.Employee_ID as SurveyorID,(select Officer_Name from JointVentureScheme2018.dbo.tbl_metadata_Inspection_officer where PF_ID = ISD.Employee_ID) as SurveyorName,(select district_name from JointVentureScheme2018.dbo.tbl_metadata_district as MDDIS where MDDIS.District_id = ISD.District_ID) as distirct_name,(select Depotname from JointVentureScheme2018.dbo.tbl_metadata_depot as MDD where MDD.branchID = ISD.Branch_ID) as Depotname,isd.Inspection_Status,convert(varchar(15), mn.MonthName) + '_' + convert(varchar(15), year(isd.Order_Date)) as Insp_Period,Convert(varchar(10), Order_Date, 103) as Order_Date,ISD.District_ID,ISD.Branch_ID from JointVentureScheme2018.dbo.Inspection_Scheduled_For_Officer as ISD join JointVentureScheme2018.dbo.Mst_Month_Name as mn on mn.MonthID = isd.Inspection_month_ID where isd.Employee_ID = '" + SurveyorID + "'";
-                string query = "select isd.ID as Inspection_ID, isd.Employee_ID as SurveyorID,(select Officer_Name from JointVentureScheme2018.dbo.tbl_metadata_Inspection_officer where PF_ID = ISD.Employee_ID) as SurveyorName,(select district_name from JointVentureScheme2018.dbo.tbl_metadata_district as MDDIS where MDDIS.District_id = ISD.District_ID) as distirct_name,(select Depotname from JointVentureScheme2018.dbo.tbl_metadata_depot as MDD where MDD.branchID = ISD.Branch_ID) as Depotname,isd.Status as Inspection_Status,convert(varchar(15), mn.Month_Name) + '_' + convert(varchar(15), year(isd.Order_Date)) as Insp_Period,Convert(varchar(10), Order_Date, 103) as Order_Date,ISD.District_ID,ISD.Branch_ID from JointVentureScheme2018.dbo.Inspection_Scheduled_For_Officer as ISD join JointVentureScheme2018.dbo.Mst_Month_Name as mn on mn.ID = isd.Inspection_month_ID where isd.Employee_ID = '" + SurveyorID + "'";
+                const string query = "select isd.ID as Inspection_ID, isd.Employee_ID as SurveyorID,(select Officer_Name from JointVentureScheme2018.dbo.tbl_metadata_Inspection_officer where PF_ID = ISD.Employee_ID) as SurveyorName,(select district_name from JointVentureScheme2018.dbo.tbl_metadata_district as MDDIS where MDDIS.District_id = ISD.District_ID) as distirct_name,(select Depotname from JointVentureScheme2018.dbo.tbl_metadata_depot as MDD where MDD.branchID = ISD.Branch_ID) as Depotname,isd.Status as Inspection_Status,convert(varchar(15), mn.Month_Name) + '_' + convert(varchar(15), year(isd.Order_Date)) as Insp_Period,Convert(varchar(10), Order_Date, 103) as Order_Date,ISD.District_ID,ISD.Branch_ID from JointVentureScheme2018.dbo.Inspection_Scheduled_For_Officer as ISD join JointVentureScheme2018.dbo.Mst_Month_Name as mn on mn.ID = isd.Inspection_month_ID where isd.Employee_ID = @SurveyorID";
                 //XmlElement xmlElement = null;
 
                 SqlCommand cmd = new SqlCommand(query, conjvs);
+                cmd.Parameters.AddWithValue("@SurveyorID", SurveyorID);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 if (conjvs.State == ConnectionState.Closed)
@@ -120,7 +123,7 @@ public class GodownSurveyorApp_Kharif2020 : System.Web.Services.WebService
     //public XmlElement Get_Branch_GdnInsp_Kharif2020(string userid, string password, string SurveyorID)
     //{
     //    XmlElement xmlElement = null;
-    //    if (userid == "nic" && password == "nicgdn#insp@2020")
+    //    if (WarehouseApiSecurity.AreCredentialsValid(userid, password, "GodownSurveyorUsername", "GodownSurveyorPassword2020"))
     //    {
     //        try
     //        {
@@ -163,7 +166,7 @@ public class GodownSurveyorApp_Kharif2020 : System.Web.Services.WebService
     public XmlElement BindGodown_GdnInsp_Kharif2020(string userid, string password, string Branch, string SurveyorID)
     {
         XmlElement xmlElement = null;
-        if (userid == "nic" && password == "nicgdn#insp@2020")
+        if (WarehouseApiSecurity.AreCredentialsValid(userid, password, "GodownSurveyorUsername", "GodownSurveyorPassword2020"))
         {
             try
             {
@@ -173,10 +176,12 @@ public class GodownSurveyorApp_Kharif2020 : System.Web.Services.WebService
                 // string query = "SELECT distinct PF_ID,g18.Godown_ID,g18.Godown_Name FROM JointVentureScheme2018.dbo.tbl_Inpection_Scheduled_Date as si join JointVentureScheme2018.dbo.[tbl_MetaData_GODOWN_2018] as g18 on g18.BranchID = si.Branch_ID where si.Branch_ID = '"+Branch+"' and PF_ID = '"+ SurveyorID + "' group by g18.Godown_ID,g18.Godown_Name,PF_ID";
                 //string query = "SELECT distinct PF_ID as SurveyorID,g18.Godown_ID,g18.Godown_Name FROM Intergrated_MP_STORAGE.dbo.tbl_Inpection_Scheduled_Date as si join Intergrated_MP_STORAGE.dbo.[tbl_MetaData_GODOWN_2018] as g18 on g18.BranchID = si.Branch_ID where si.Branch_ID = '" + Branch + "' and PF_ID = '" + SurveyorID + "' group by g18.Godown_ID,g18.Godown_Name,PF_ID";
                // string query = "SELECT distinct PF_ID as SurveyorID,g18.Godown_ID,g18.Godown_Name FROM JointVentureScheme2018.dbo.tbl_Inpection_Scheduled_Date as si join JointVentureScheme2018.dbo.[tbl_MetaData_GODOWN_2018] as g18 on g18.BranchID = si.Branch_ID where si.Branch_ID = '" + Branch + "' and PF_ID = '" + SurveyorID + "' group by g18.Godown_ID,g18.Godown_Name,PF_ID";
-                string query = "SELECT distinct si.Employee_ID as SurveyorID,g18.Godown_ID,g18.Godown_Name FROM JointVentureScheme2018.dbo.Inspection_Scheduled_For_Officer as si join JointVentureScheme2018.dbo.[tbl_MetaData_GODOWN_2018] as g18 on g18.BranchID = si.Branch_ID where si.Branch_ID = '" + Branch + "' and si.Employee_ID = '" + SurveyorID + "' group by g18.Godown_ID,g18.Godown_Name,si.Employee_ID";
+                const string query = "SELECT distinct si.Employee_ID as SurveyorID,g18.Godown_ID,g18.Godown_Name FROM JointVentureScheme2018.dbo.Inspection_Scheduled_For_Officer as si join JointVentureScheme2018.dbo.[tbl_MetaData_GODOWN_2018] as g18 on g18.BranchID = si.Branch_ID where si.Branch_ID = @Branch and si.Employee_ID = @SurveyorID group by g18.Godown_ID,g18.Godown_Name,si.Employee_ID";
                 //XmlElement xmlElement = null;
 
                 SqlCommand cmd = new SqlCommand(query, conjvs);
+                cmd.Parameters.AddWithValue("@Branch", Branch);
+                cmd.Parameters.AddWithValue("@SurveyorID", SurveyorID);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 if (conjvs.State == ConnectionState.Closed)
@@ -211,7 +216,7 @@ public class GodownSurveyorApp_Kharif2020 : System.Web.Services.WebService
     {
 
         XmlElement xmlElement = null;
-        if (userid == "nic" && password == "nicgdn#insp@2020")
+        if (WarehouseApiSecurity.AreCredentialsValid(userid, password, "GodownSurveyorUsername", "GodownSurveyorPassword2020"))
         {
             // SqlCommand cmd = new SqlCommand();
             try
@@ -258,7 +263,7 @@ public class GodownSurveyorApp_Kharif2020 : System.Web.Services.WebService
     {
 
         XmlElement xmlElement = null;
-        if (userid == "nic" && password == "nicgdn#insp@2020")
+        if (WarehouseApiSecurity.AreCredentialsValid(userid, password, "GodownSurveyorUsername", "GodownSurveyorPassword2020"))
         {
             // SqlCommand cmd = new SqlCommand();
             try
@@ -307,7 +312,7 @@ public class GodownSurveyorApp_Kharif2020 : System.Web.Services.WebService
         string finalMassege = "";
         string SuccessFlag;
         string ApplicationID;
-        if (userid == "nic" && password == "nicgdn#insp@2020")
+        if (WarehouseApiSecurity.AreCredentialsValid(userid, password, "GodownSurveyorUsername", "GodownSurveyorPassword2020"))
         {
             try
             {
@@ -377,7 +382,7 @@ public class GodownSurveyorApp_Kharif2020 : System.Web.Services.WebService
         string finalMassege = "";
         string SuccessFlag;
         string ApplicationID;
-        if (userid == "nic" && password == "nicgdn#insp@2020")
+        if (WarehouseApiSecurity.AreCredentialsValid(userid, password, "GodownSurveyorUsername", "GodownSurveyorPassword2020"))
         {
             try
             {
@@ -454,7 +459,7 @@ public class GodownSurveyorApp_Kharif2020 : System.Web.Services.WebService
         string finalMassege = "";
         string SuccessFlag;
         //string ApplicationID;
-        if (userid == "nic" && password == "nicgdn#insp@2020")
+        if (WarehouseApiSecurity.AreCredentialsValid(userid, password, "GodownSurveyorUsername", "GodownSurveyorPassword2020"))
         {
             try
             {
@@ -501,7 +506,7 @@ public class GodownSurveyorApp_Kharif2020 : System.Web.Services.WebService
         string finalMassege = "";
         string SuccessFlag;
         //string ApplicationID;
-        if (userid == "nic" && password == "nicgdn#insp@2020")
+        if (WarehouseApiSecurity.AreCredentialsValid(userid, password, "GodownSurveyorUsername", "GodownSurveyorPassword2020"))
         {
             try
             {
@@ -549,16 +554,19 @@ public class GodownSurveyorApp_Kharif2020 : System.Web.Services.WebService
     {
         XmlElement xmlElement = null;
         string respas = "";
-        if (userid == "nic" && password == "nic2019")
+        if (WarehouseApiSecurity.AreCredentialsValid(userid, password, "GodownSurveyorUsername", "GodownSurveyorPassword2019"))
         {
             try
             {
                 // string query = "SELECT [SurveyorID],[SurveyorName],[Designation] ,[MobileNumber],[District],[agency],[Role] FROM [SurveyorRegistration_Rabi2020] where District='" + dist + "' and MobileNumber='" + Mobile_No + "' and Password='" + srvPass + "' ";
                 // string query = "SELECT [SurveyorID],[SurveyorName],[Designation] ,[MobileNumber],[District],[agency] FROM [tbl_Registration_Inspection_officer] where District='" + dist + "' and MobileNumber='" + Mobile_No + "' and Password='" + srvPass + "' and IsActive='Y' ";
-                string query = "SELECT [SurveyorID],[SurveyorName],[Designation] ,[MobileNumber],[District],Branch FROM [tbl_Registration_Inspection_officer] where District='" + dist + "' and MobileNumber='" + Mobile_No + "' and Password='" + srvPass + "' and IsActive='Y' ";
+                const string query = "SELECT [SurveyorID],[SurveyorName],[Designation] ,[MobileNumber],[District],Branch FROM [tbl_Registration_Inspection_officer] where District=@District and MobileNumber=@Mobile_No and Password=@Password and IsActive='Y' ";
                 //XmlElement xmlElement = null;
 
                 SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@District", dist);
+                cmd.Parameters.AddWithValue("@Mobile_No", Mobile_No);
+                cmd.Parameters.AddWithValue("@Password", srvPass);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 if (con.State == ConnectionState.Closed)
@@ -596,7 +604,7 @@ public class GodownSurveyorApp_Kharif2020 : System.Web.Services.WebService
     public XmlElement GetFAQPara(string cropcode, string userid, string password)
     {
         XmlElement xmlElement = null;
-        if (userid == "nic" && password == "nic2019")
+        if (WarehouseApiSecurity.AreCredentialsValid(userid, password, "GodownSurveyorUsername", "GodownSurveyorPassword2019"))
         {
             SqlCommand cmd = new SqlCommand();
             try
@@ -641,15 +649,17 @@ public class GodownSurveyorApp_Kharif2020 : System.Web.Services.WebService
     public XmlElement BindGodown(string dist, int SurveyorID, string userid, string password, string Branch)
     {
         XmlElement xmlElement = null;
-        if (userid == "nic" && password == "nic2019")
+        if (WarehouseApiSecurity.AreCredentialsValid(userid, password, "GodownSurveyorUsername", "GodownSurveyorPassword2019"))
         {
             try
             {
 
-                string query = "SELECT [Godown],SurveyorID, (Select Godown_name FROM[Intergrated_MP_STORAGE].[dbo].[tbl_MetaData_GODOWN_2018] where Godown_ID = Godown) as GodownName FROM[tbl_SurveyorGodownMapping_Inspection] as si where Dist = '" + dist + "'  and SurveyorID = '" + SurveyorID + "' group by Godown,SurveyorID";
+                const string query = "SELECT [Godown],SurveyorID, (Select Godown_name FROM[Intergrated_MP_STORAGE].[dbo].[tbl_MetaData_GODOWN_2018] where Godown_ID = Godown) as GodownName FROM[tbl_SurveyorGodownMapping_Inspection] as si where Dist = @District and SurveyorID = @SurveyorID group by Godown,SurveyorID";
                 //XmlElement xmlElement = null;
 
                 SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@District", dist);
+                cmd.Parameters.AddWithValue("@SurveyorID", SurveyorID);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 if (con.State == ConnectionState.Closed)
@@ -687,7 +697,7 @@ public class GodownSurveyorApp_Kharif2020 : System.Web.Services.WebService
     {
 
         XmlElement xmlElement = null;
-        if (userid == "nic" && password == "nic2019")
+        if (WarehouseApiSecurity.AreCredentialsValid(userid, password, "GodownSurveyorUsername", "GodownSurveyorPassword2019"))
         {
             // SqlCommand cmd = new SqlCommand();
             try
@@ -734,7 +744,7 @@ public class GodownSurveyorApp_Kharif2020 : System.Web.Services.WebService
     public XmlElement Get_Category(string userid, string password)
     {
         XmlElement xmlElement = null;
-        if (userid == "nic" && password == "nic2019")
+        if (WarehouseApiSecurity.AreCredentialsValid(userid, password, "GodownSurveyorUsername", "GodownSurveyorPassword2019"))
         {
             try
             {
@@ -779,7 +789,7 @@ public class GodownSurveyorApp_Kharif2020 : System.Web.Services.WebService
         string finalMassege = "";
         string SuccessFlag;
         string ApplicationID;
-        if (userid == "nic" && password == "nic2019")
+        if (WarehouseApiSecurity.AreCredentialsValid(userid, password, "GodownSurveyorUsername", "GodownSurveyorPassword2019"))
         {
             try
             {
@@ -847,5 +857,3 @@ public class GodownSurveyorApp_Kharif2020 : System.Web.Services.WebService
 
     
 }
-
-

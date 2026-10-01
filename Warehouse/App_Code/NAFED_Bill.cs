@@ -213,7 +213,7 @@ public class NAFED_Bill : System.Web.Services.WebService
         try
         {
             string query = "";
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Mode == "N")
                 {
@@ -558,7 +558,7 @@ public class NAFED_Bill : System.Web.Services.WebService
         {
             string query = "";
             string BillType = Bill_Type;
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Mode == "N")
                 {
@@ -707,7 +707,7 @@ public class NAFED_Bill : System.Web.Services.WebService
 
         try
         {
-            if (Credential == "WLC2019DSCNicv30" && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential") && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
             {
                 string SValue = "";
                 string SubValue = "";
@@ -979,7 +979,7 @@ public class NAFED_Bill : System.Web.Services.WebService
         string query = "";
         try
         {
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Type == "MPWLC")
                 {
@@ -1022,7 +1022,7 @@ public class NAFED_Bill : System.Web.Services.WebService
         try
         {
             string query = "";
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (User_Type == "R" || User_Type == "M")
                 {
@@ -1094,7 +1094,7 @@ public class NAFED_Bill : System.Web.Services.WebService
         try
         {
             string query = "";
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Mode == "N")
                 {
@@ -1446,7 +1446,7 @@ public class NAFED_Bill : System.Web.Services.WebService
         {
             string query = "";
             string BillType = Bill_Type;
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Mode == "N")
                 {
@@ -1607,7 +1607,7 @@ public class NAFED_Bill : System.Web.Services.WebService
 
         try
         {
-            if (Credential == "WLC2019DSCNicv30" && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential") && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
             {
                 string SValue = "";
                 string SubValue = "";
@@ -1958,7 +1958,7 @@ public class NAFED_Bill : System.Web.Services.WebService
 
         try
         {
-            if (Credential == "WLC2019DSCNicv30" && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential") && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
             {
                 string SValue = "";
                 string SubValue = "";
@@ -2232,7 +2232,7 @@ public class NAFED_Bill : System.Web.Services.WebService
         string query = "";
         try
         {
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Type == "MPWLC")
                 {
@@ -2343,7 +2343,7 @@ public class NAFED_Bill : System.Web.Services.WebService
 
         try
         {
-            if (Credential == "WLC2019DSCNicv30" && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential") && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
             {
                 string SValue = "";
                 string SubValue = "";
@@ -2624,7 +2624,7 @@ public class NAFED_Bill : System.Web.Services.WebService
         try
         {
             string query = "";
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Mode == "N")
                 {
@@ -2976,7 +2976,7 @@ public class NAFED_Bill : System.Web.Services.WebService
         {
             string query = "";
             string BillType = Bill_Type;
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Mode == "N")
                 {
@@ -3075,7 +3075,7 @@ public class NAFED_Bill : System.Web.Services.WebService
         string query = "";
         try
         {
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Type == "MPWLC")
                 {
@@ -3181,7 +3181,7 @@ public class NAFED_Bill : System.Web.Services.WebService
 
         try
         {
-            if (Credential == "WLC2019DSCNicv30" && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential") && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
             {
                 string SValue = "";
                 string SubValue = "";
@@ -3455,7 +3455,7 @@ public class NAFED_Bill : System.Web.Services.WebService
         try
         {
             string query = "";
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Mode == "N")
                 {
@@ -3769,7 +3769,7 @@ public class NAFED_Bill : System.Web.Services.WebService
         {
             string query = "";
             string BillType = Bill_Type;
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Mode == "N")
                 {
@@ -3874,7 +3874,7 @@ public class NAFED_Bill : System.Web.Services.WebService
         string query = "";
         try
         {
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Type == "MPWLC")
                 {
@@ -3978,7 +3978,7 @@ public class NAFED_Bill : System.Web.Services.WebService
 
         try
         {
-            if (Credential == "WLC2019DSCNicv30" && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential") && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
             {
                 string SValue = "";
                 string SubValue = "";
@@ -4260,7 +4260,7 @@ public class NAFED_Bill : System.Web.Services.WebService
         try
         {
             string query = "";
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Mode == "N")
                 {
@@ -4609,7 +4609,7 @@ public class NAFED_Bill : System.Web.Services.WebService
         {
             string query = "";
             string BillType = Bill_Type;
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Mode == "N")
                 {
@@ -4727,7 +4727,7 @@ public class NAFED_Bill : System.Web.Services.WebService
         string query = "";
         try
         {
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (User_Type == "B" && Bill_Type == "MPWLC")
                 {
@@ -4858,7 +4858,7 @@ public class NAFED_Bill : System.Web.Services.WebService
 
         try
         {
-            if (Credential == "WLC2019DSCNicv30" && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential") && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
             {
                 string SValue = "";
                 string SubValue = "";

@@ -42,13 +42,10 @@ public class Get_Godown_WMS : System.Web.Services.WebService
         try
         {
             string DistrictID = District_Id;
-            string query = "";
-            if (Credential == "WLC2012DSCNicv")
-            {
-                //query = "select Godown_Name,Godown_ID from tbl_MetaData_GODOWN_2018 where IsActive='Y' and Hired_Type not in ('Others','Virtual','Rack Point','FCI')";
-                query = "select Godown_Name,Godown_ID from tbl_MetaData_GODOWN_2018 where IsActive='Y' and Hired_Type not in ('Others','Virtual','Rack Point','FCI') and DistrictId='"+ DistrictID + "'";
-            }
+            WarehouseApiSecurity.RequireCredential(Credential, "LegacyWlcWmsCredential");
+            const string query = "select Godown_Name,Godown_ID from tbl_MetaData_GODOWN_2018 where IsActive='Y' and Hired_Type not in ('Others','Virtual','Rack Point','FCI') and DistrictId=@DistrictId";
             SqlCommand cmd = new SqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@DistrictId", DistrictID);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);

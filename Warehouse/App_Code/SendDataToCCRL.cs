@@ -60,7 +60,7 @@ public class SendDataToCCRL : System.Web.Services.WebService
     private bool IsValidUser(string user, string pass)
     {
         // Replace this with your actual DB lookup or Identity check
-        return (user == "admin" && pass == "secure123");
+        return (WarehouseApiSecurity.AreCredentialsValid(user, pass, "CcrlServiceUsername", "CcrlServicePassword"));
     }
 
     private string ExecuteStoredProcedure(string FromDate, string ToDate)

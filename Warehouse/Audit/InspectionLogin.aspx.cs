@@ -99,10 +99,16 @@ public partial class Inspection_InspectionLogin : System.Web.UI.Page
     {
         try
         {
-            string str = "SELECT mbi.BranchID,mbi.BranchName FROM [MetaDataBranchWithIssueCenter] as mbi  WHERE mbi.[DistrictId] = '" + distId.ToString() + "' and  mbi.BranchTypeID not in ('2','3','4','5','6','7','8','9','10') order by mbi.BranchID";
-            SqlDataAdapter da = new SqlDataAdapter(str, con);
+            const string sql = "SELECT mbi.BranchID,mbi.BranchName FROM [MetaDataBranchWithIssueCenter] as mbi WHERE mbi.[DistrictId]=@DistrictId and mbi.BranchTypeID not in ('2','3','4','5','6','7','8','9','10') order by mbi.BranchID";
             DataSet ds = new DataSet();
-            da.Fill(ds);
+            using (SqlCommand command = new SqlCommand(sql, con))
+            {
+                command.Parameters.AddWithValue("@DistrictId", distId);
+                using (SqlDataAdapter da = new SqlDataAdapter(command))
+                {
+                    da.Fill(ds);
+                }
+            }
             if (ds.Tables[0].Rows.Count > 0)
             {
                 DDL_Depot.DataSource = ds.Tables[0];
@@ -137,26 +143,46 @@ public partial class Inspection_InspectionLogin : System.Web.UI.Page
     {
         try
         {
+            string expectedLoginType = null;
             string Uname = "";
             string pwd = "";
             if (rbbranch.Checked == true)
             {
+                 expectedLoginType = "B";
                  Uname = DDL_Depot.SelectedValue.ToString();
                  pwd = txtlogpwd.Value;
             }
             else if (rbrm.Checked == true)
             {
+                expectedLoginType = "R";
                 Uname = ddlregion.SelectedValue.ToString();
                 pwd = txtlogpwd.Value;
             }
-               
-                string strsql = "SELECT [InspectionAuth],[InsPost],[UserID],[UserName],[InsPwd],[InsMobile],[Insemail],LoginType FROM [InspectionLogin] where [UserID]='" + Uname + "'  and [InsPwd]='" + pwd + "'";
-                SqlDataAdapter da = new SqlDataAdapter(strsql, con);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
+
+            if (expectedLoginType == null)
+            {
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Select a login type.')", true);
+                return;
+            }
+
+            DataSet ds = new DataSet();
+            using (SqlCommand command = new SqlCommand("SELECT [InspectionAuth],[InsPost],[UserID],[UserName],[InsPwd],[InsMobile],[Insemail],LoginType FROM [InspectionLogin] where [UserID]=@UserID and [InsPwd]=@Password", con))
+            {
+                command.Parameters.AddWithValue("@UserID", Uname);
+                command.Parameters.AddWithValue("@Password", pwd);
+                using (SqlDataAdapter da = new SqlDataAdapter(command))
+                {
+                    da.Fill(ds);
+                }
+            }
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     DataRow dr = ds.Tables[0].Rows[0];
+                    if (!String.Equals(Convert.ToString(dr["LoginType"]), expectedLoginType, StringComparison.Ordinal))
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this.Page, this.GetType(), "mymsg1", "alert('Your login type is not authorized.')", true);
+                        return;
+                    }
 
                     Session["login"] = "true";
                     Session["insname"] = dr["InspectionAuth"].ToString();

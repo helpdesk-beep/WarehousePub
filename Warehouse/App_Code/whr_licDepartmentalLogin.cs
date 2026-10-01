@@ -40,20 +40,29 @@ public class whr_licDepartmentalLogin
 
         try
         {
-
-            cmd = new SqlCommand("Select * from tbl_Department_Login where UserPost='" + post + "' and Dept_Username='" + username + "' and Dept_Pwd='" + pwd + "'", con, trans);
+            cmd = new SqlCommand("Select * from tbl_Department_Login where UserPost=@UserPost and Dept_Username=@Username and Dept_Pwd=@Password", con, trans);
+            cmd.Parameters.AddWithValue("@UserPost", post);
+            cmd.Parameters.AddWithValue("@Username", username);
+            cmd.Parameters.AddWithValue("@Password", pwd);
             da = new SqlDataAdapter(cmd);
             ds = new DataSet();
             da.Fill(ds);
             if (ds.Tables[0].Rows.Count > 0)
             {
-                cmd = new SqlCommand("update tbl_Department_Login set Ip='" + ip + "',Login_Date=Getdate() where UserPost='" + post + "' and Dept_Username='" + username + "' and Dept_Pwd='" + pwd + "'", con, trans);
+                cmd = new SqlCommand("update tbl_Department_Login set Ip=@Ip,Login_Date=Getdate() where UserPost=@UserPost and Dept_Username=@Username and Dept_Pwd=@Password", con, trans);
+                cmd.Parameters.AddWithValue("@Ip", ip);
+                cmd.Parameters.AddWithValue("@UserPost", post);
+                cmd.Parameters.AddWithValue("@Username", username);
+                cmd.Parameters.AddWithValue("@Password", pwd);
                 cmd.ExecuteNonQuery();
                 trans.Commit();
                 i = 1;
-
-
             }
+            else
+            {
+                trans.Rollback();
+            }
+
         }
         catch (Exception ex)
         {
@@ -80,21 +89,28 @@ public class whr_licDepartmentalLogin
 
         try
         {
-
-            cmd = new SqlCommand("SELECT * FROM [wh_license].[dbo].[tbl_ApplicantRegistration] where UserId='" + username + "' and Pwd='" + pwd + "' ", con, trans);
+            cmd = new SqlCommand("SELECT * FROM [wh_license].[dbo].[tbl_ApplicantRegistration] where UserId=@Username and Pwd=@Password", con, trans);
+            cmd.Parameters.AddWithValue("@Username", username);
+            cmd.Parameters.AddWithValue("@Password", pwd);
             da = new SqlDataAdapter(cmd);
             ds = new DataSet();
             da.Fill(ds);
             if (ds.Tables[0].Rows.Count > 0)
             {
                 string id = ds.Tables[0].Rows[0]["ApplicantID"].ToString();
-                cmd = new SqlCommand("update [tbl_ApplicantRegistration] set IP='" + ip + "',LoginDate=GETDATE() where ApplicantID='" + id + "' and Userid='" + username + "' and Pwd='" + pwd + "'", con, trans);
+                cmd = new SqlCommand("update [tbl_ApplicantRegistration] set IP=@Ip,LoginDate=GETDATE() where ApplicantID=@ApplicantID and Userid=@Username and Pwd=@Password", con, trans);
+                cmd.Parameters.AddWithValue("@Ip", ip);
+                cmd.Parameters.AddWithValue("@ApplicantID", id);
+                cmd.Parameters.AddWithValue("@Username", username);
+                cmd.Parameters.AddWithValue("@Password", pwd);
                 cmd.ExecuteNonQuery();
                 trans.Commit();
                 // i = 1;
 
-
-
+            }
+            else
+            {
+                trans.Rollback();
             }
         }
         catch (Exception ex)

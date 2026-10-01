@@ -3,8 +3,10 @@ using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Web;
 using System.Web.Services;
+using System.Web.Services.Protocols;
 
 namespace ReplicateService
 {
@@ -22,102 +24,54 @@ namespace ReplicateService
 
         public string FetchDataHere(string tbl, string noOfRecord, string fromDate, string toDate)
         {
-            
+            WarehouseApiSecurity.RequireApiKey();
+
+            int recordCount;
+            DateTime startDate;
+            DateTime endDate;
+            if (!Int32.TryParse(noOfRecord, NumberStyles.None, CultureInfo.InvariantCulture, out recordCount) ||
+                recordCount < 1 || recordCount > 10000 ||
+                !DateTime.TryParse(fromDate, CultureInfo.InvariantCulture, DateTimeStyles.AllowWhiteSpaces, out startDate) ||
+                !DateTime.TryParse(toDate, CultureInfo.InvariantCulture, DateTimeStyles.AllowWhiteSpaces, out endDate) ||
+                startDate.Date > endDate.Date)
+            {
+                throw new SoapException("Invalid record count or date range.", SoapException.ClientFaultCode);
+            }
+
+            string dateColumn;
+            switch (tbl)
+            {
+                case "tbl_Storage_GatePass_Enrty":
+                    dateColumn = "Issue_Date";
+                    break;
+                case "tbl_Truck_Chit_Getpass_Entry":
+                    dateColumn = "Insert_date";
+                    break;
+                case "tbl_Aepds_Truckchit_Data_DisGodown":
+                    dateColumn = "Created_Date";
+                    break;
+                default:
+                    throw new SoapException("Requested table is not available.", SoapException.ClientFaultCode);
+            }
+
             string constr = ConfigurationManager.ConnectionStrings["FCIConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
-                con.Open();
-                if (tbl == "tbl_Storage_GatePass_Enrty")
+                string query = "SELECT TOP (@RecordCount) * FROM [" + tbl + "] WHERE CONVERT(date, [" + dateColumn + "], 101) BETWEEN @FromDate AND @ToDate ORDER BY [" + dateColumn + "] DESC";
+                using (SqlCommand cmd = new SqlCommand(query, con))
                 {
-                    using (SqlCommand cmd = new SqlCommand("SELECT top "+noOfRecord+" * FROM " + tbl + " WHERE CONVERT(date, Issue_Date, 101) BETWEEN '"+fromDate+"' and '"+toDate+"' order by Issue_Date desc"))
+                    cmd.Parameters.Add("@RecordCount", SqlDbType.Int).Value = recordCount;
+                    cmd.Parameters.Add("@FromDate", SqlDbType.Date).Value = startDate.Date;
+                    cmd.Parameters.Add("@ToDate", SqlDbType.Date).Value = endDate.Date;
+                    DataSet ds = new DataSet();
+                    using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
                     {
-                        try
-                        {
-                            cmd.Connection = con;
-                            DataSet ds = new DataSet();
-                            using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
-                            {
-                                sda.Fill(ds, "" + tbl + "");
-                                con.Close();
-                            }
-                            HttpContext.Current.Response.Clear();
-                            HttpContext.Current.Response.ContentType = "application/json; charset=utf-8";
-                            return JsonConvert.SerializeObject(ds, Newtonsoft.Json.Formatting.Indented);
-                        }
-                        catch (Exception ex)
-                        {
-                            throw ex;
-                        }
+                        sda.Fill(ds, tbl);
                     }
-                }
-                else if(tbl == "tbl_Truck_Chit_Getpass_Entry")
-                {
-                    using (SqlCommand cmd = new SqlCommand("SELECT top "+noOfRecord+" * FROM " + tbl + " WHERE CONVERT(date, Insert_date, 101) BETWEEN '" + fromDate + "' and '" + toDate + "' order by Insert_date desc"))
-                    {
-                        try
-                        {
-                            cmd.Connection = con;
-                            DataSet ds = new DataSet();
-                            using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
-                            {
-                                sda.Fill(ds, "" + tbl + "");
-                                con.Close();
-                            }
-                            HttpContext.Current.Response.Clear();
-                            HttpContext.Current.Response.ContentType = "application/json; charset=utf-8";
-                            return JsonConvert.SerializeObject(ds, Newtonsoft.Json.Formatting.Indented);
-                        }
-                        catch (Exception ex)
-                        {
-                            throw ex;
-                        }
-                    }
-                }
-                else if(tbl == "tbl_Aepds_Truckchit_Data_DisGodown")
-                {
-                    using (SqlCommand cmd = new SqlCommand("SELECT top "+noOfRecord+" * FROM " + tbl + " WHERE CONVERT(date, Created_Date, 101) BETWEEN '"+fromDate+"' and '"+toDate+"' order by Created_Date desc"))
-                    {
-                        try
-                        {
-                            cmd.Connection = con;
-                            DataSet ds = new DataSet();
-                            using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
-                            {
-                                sda.Fill(ds, "" + tbl + "");
-                                con.Close();
-                            }
-                            HttpContext.Current.Response.Clear();
-                            HttpContext.Current.Response.ContentType = "application/json; charset=utf-8";
-                            return JsonConvert.SerializeObject(ds, Newtonsoft.Json.Formatting.Indented);
-                        }
-                        catch (Exception ex)
-                        {
-                            throw ex;
-                        }
-                    }
-                }
-                else
-                {
-                    using (SqlCommand cmd = new SqlCommand("SELECT top "+ noOfRecord +" * FROM " + tbl + " WHERE CONVERT(date, CreatedDate, 101) BETWEEN '"+fromDate+"' and '"+toDate+"' order by CreatedDate desc"))
-                    {
-                        try
-                        {
-                            cmd.Connection = con;
-                            DataSet ds = new DataSet();
-                            using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
-                            {
-                                sda.Fill(ds, "" + tbl + "");
-                                con.Close();
-                            }
-                            HttpContext.Current.Response.Clear();
-                            HttpContext.Current.Response.ContentType = "application/json; charset=utf-8";
-                            return JsonConvert.SerializeObject(ds, Newtonsoft.Json.Formatting.Indented);
-                        }
-                        catch (Exception ex)
-                        {
-                            throw ex;
-                        }
-                    }
+
+                    HttpContext.Current.Response.Clear();
+                    HttpContext.Current.Response.ContentType = "application/json; charset=utf-8";
+                    return JsonConvert.SerializeObject(ds, Newtonsoft.Json.Formatting.Indented);
                 }
             }
         }

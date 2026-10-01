@@ -69,7 +69,7 @@ public class WebService_for_FCI : System.Web.Services.WebService
         List<DepoProfile> list = new List<DepoProfile>();
         try
         {
-            if (Cred == "Cfsp@fci2022")
+            if (WarehouseApiSecurity.IsCredentialValid(Cred, "FciCfspApiCredential"))
             {
                 con.ConnectionString = str;
                 con.Open();
@@ -235,7 +235,7 @@ public class WebService_for_FCI : System.Web.Services.WebService
         List<StackProfile> list = new List<StackProfile>();
         try
         {
-            if (Cred == "Cfsp@fci2022")
+            if (WarehouseApiSecurity.IsCredentialValid(Cred, "FciCfspApiCredential"))
             {
                 con.ConnectionString = str;
                 con.Open();
@@ -383,7 +383,7 @@ public class WebService_for_FCI : System.Web.Services.WebService
         List<InflowProfile> list = new List<InflowProfile>();
         try
         {
-            if (Cred == "Cfsp@fci2022")
+            if (WarehouseApiSecurity.IsCredentialValid(Cred, "FciCfspApiCredential"))
             {
                 con.ConnectionString = str;
                 con.Open();
@@ -510,7 +510,7 @@ public class WebService_for_FCI : System.Web.Services.WebService
         List<OutflowProfile> list = new List<OutflowProfile>();
         try
         {
-            if (Cred == "Cfsp@fci2022")
+            if (WarehouseApiSecurity.IsCredentialValid(Cred, "FciCfspApiCredential"))
             {
                 con.ConnectionString = str;
                 con.Open();
@@ -641,7 +641,7 @@ public class WebService_for_FCI : System.Web.Services.WebService
         List<InfestationandTeatment> list = new List<InfestationandTeatment>();
         try
         {
-            if (Cred == "Cfsp@fci2022")
+            if (WarehouseApiSecurity.IsCredentialValid(Cred, "FciCfspApiCredential"))
             {
                 con.ConnectionString = str;
                 con.Open();

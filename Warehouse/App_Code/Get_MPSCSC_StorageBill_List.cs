@@ -1,165 +1,204 @@
-﻿using System;
-using System.Collections;
-using System.Linq;
-using System.Web;
-using System.Web.Services;
-using System.Web.Services.Protocols;
-using System.Xml.Linq;
+using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
+using System.Web.Services;
+using System.Web.Services.Protocols;
 
-/// <summary>
-/// Summary description for Get_MPSCSC_StorageBill_List
-/// </summary>
 [WebService(Namespace = "http://tempuri.org/")]
 [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
-// To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
-// [System.Web.Script.Services.ScriptService]
-public class Get_MPSCSC_StorageBill_List : System.Web.Services.WebService {
-    public SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["FCIConnectionString"].ToString());
-    private SqlCommand cmd = new SqlCommand();
+public class Get_MPSCSC_StorageBill_List : System.Web.Services.WebService
+{
+    private string ConnectionString
+    {
+        get
+        {
+            ConnectionStringSettings settings = ConfigurationManager.ConnectionStrings["FCIConnectionString"];
+            if (settings == null || String.IsNullOrWhiteSpace(settings.ConnectionString))
+            {
+                throw new SoapException("The storage bill database connection is not configured.", SoapException.ServerFaultCode);
+            }
 
-    private SqlCommand cmd1 = new SqlCommand();
-
-    private SqlDataAdapter dataAdapter;
-    private DataSet dataset;
-    private SqlTransaction trans = null;
-    private SqlCommand commandt = null;
-    string Query = "";
-    public Get_MPSCSC_StorageBill_List () {
-
-        //Uncomment the following line if using designed components 
-        //InitializeComponent(); 
+            return settings.ConnectionString;
+        }
     }
 
     [WebMethod(Description = "This Method Is Used to Get WHR List")]
     public DataSet Retrive_MPSCSC_Bill_List(string BG_Id, string District_Id, string User_Type, string Credential, string Commodity)
     {
-        try
+        WarehouseApiSecurity.RequireCredential(Credential, "MPSCSCStorageBillApiCredential");
+        ValidateRequest(BG_Id, User_Type, Commodity);
+        if (Commodity != "22")
         {
-            string query = "";
-            if (Credential == "WLC2019DSCNicv24")
-            {
-                if (Commodity == "22")
-                {
-                    if (User_Type == "B")
-                    {
-                        //query = "SELECT [Depositor_WHR_Id] from tbl_storage_Depositor_WHR_Relation as WHR where WHR.BranchID='" + BG_Id + "' and WHR.CropYear='2019-20' and WHR.Arrival_Source='01' and Commodity_Id='" + Commodity + "' and [Depositor_WHR_Id] not in (select DSC.Depositor_WHR_Id from tbl_Digitally_Signed_WHR_Wheat2019 as DSC where DSC.BranchID='" + BG_Id + "' and DSC.Commodity_Id='" + Commodity + "' and DSC.DSC_User_Type='B') order by [WHR_Issue_Date] desc";
-                        //query = "select Bill_Number from tbl_Storage_Bill_Details where Commodity_Id='22' and Branch_Id='" + BG_Id + "'";
-                        query = "select Bill_Number from tbl_Storage_Bill_Details where Commodity_Id='" + Commodity + "' and Branch_Id='" + BG_Id + "' and BO_Approval_Status='Y' and Bill_Number in (select distinct BillNo from mpscsc.dbo.[vwGetStorageVerifyStetus] where AproovedByIssue='1' or AproovedTypeDM='1')";
-
-
-                    }
-                    else if (User_Type == "G")
-                    {
-                        string GetBranchId = Get_BranchId(BG_Id);
-                        query = "SELECT [Depositor_WHR_Id] from tbl_storage_Depositor_WHR_Relation as WHR where WHR.GodownID='" + BG_Id + "' and WHR.CropYear='2019-20' and WHR.Arrival_Source='01' and Commodity_Id='" + Commodity + "' and Gid is not null and [Depositor_WHR_Id] not in (select DSC.Depositor_WHR_Id from tbl_Digitally_Signed_WHR_Wheat2019 as DSC where DSC.BranchID='" + GetBranchId + "' and DSC.Commodity_Id='" + Commodity + "' and DSC.DSC_User_Type='G') order by [WHR_Issue_Date] desc";
-
-                    }
-                }
-            }
-            SqlCommand cmd = new SqlCommand(query, con);
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-
-                //ds.WriteXml(DestPdfFileName);
-            }
-            else
-            {
-
-            }
-            return ds;
+            throw new SoapException("Unsupported commodity.", SoapException.ClientFaultCode);
         }
 
-        catch (Exception)
+        string query;
+        string branchId = null;
+        if (User_Type == "B")
         {
+            query = @"select Bill_Number
+                from tbl_Storage_Bill_Details
+                where Commodity_Id=@Commodity and Branch_Id=@BG_Id and BO_Approval_Status='Y'
+                  and Bill_Number in
+                    (select distinct BillNo from mpscsc.dbo.[vwGetStorageVerifyStetus]
+                     where AproovedByIssue='1' or AproovedTypeDM='1')";
+        }
+        else
+        {
+            branchId = Get_BranchId(BG_Id);
+            if (String.IsNullOrWhiteSpace(branchId))
+            {
+                throw new SoapException("Unknown godown.", SoapException.ClientFaultCode);
+            }
 
-            throw;
+            query = @"SELECT [Depositor_WHR_Id]
+                from tbl_storage_Depositor_WHR_Relation as WHR
+                where WHR.GodownID=@BG_Id and WHR.CropYear='2019-20' and WHR.Arrival_Source='01'
+                  and Commodity_Id=@Commodity and Gid is not null
+                  and [Depositor_WHR_Id] not in
+                    (select DSC.Depositor_WHR_Id from tbl_Digitally_Signed_WHR_Wheat2019 as DSC
+                     where DSC.BranchID=@BranchId and DSC.Commodity_Id=@Commodity and DSC.DSC_User_Type='G')
+                order by [WHR_Issue_Date] desc";
+        }
 
+        using (SqlConnection connection = new SqlConnection(ConnectionString))
+        using (SqlCommand command = new SqlCommand(query, connection))
+        {
+            command.Parameters.AddWithValue("@BG_Id", BG_Id);
+            command.Parameters.AddWithValue("@Commodity", Commodity);
+            if (branchId != null)
+            {
+                command.Parameters.AddWithValue("@BranchId", branchId);
+            }
+
+            DataSet result = new DataSet();
+            using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+            {
+                adapter.Fill(result);
+            }
+
+            return result;
         }
     }
+
     public string Get_BranchId(string GodownId)
     {
-        string Godown_ID = GodownId;
-        string Branch_Id = "";
-        string query = "";
-        try
+        if (!IsNumericIdentifier(GodownId))
         {
-            query = "select BranchID from tbl_MetaData_GODOWN_2018 where Godown_ID='" + Godown_ID + "'";
-            SqlCommand cmd = new SqlCommand(query, con);
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                Branch_Id = ds.Tables[0].Rows[0]["BranchID"].ToString();
-            }
-            else
-            {
-                Branch_Id = "";
-            }
-
-            return Branch_Id;
+            throw new SoapException("Invalid godown.", SoapException.ClientFaultCode);
         }
 
-        catch (Exception)
+        const string query = "select BranchID from tbl_MetaData_GODOWN_2018 where Godown_ID=@GodownId";
+        using (SqlConnection connection = new SqlConnection(ConnectionString))
+        using (SqlCommand command = new SqlCommand(query, connection))
         {
-
-            throw;
-
+            command.Parameters.AddWithValue("@GodownId", GodownId);
+            connection.Open();
+            object branchId = command.ExecuteScalar();
+            return branchId == null || branchId == DBNull.Value ? String.Empty : Convert.ToString(branchId);
         }
     }
+
     [WebMethod(Description = "This Method Is Used to Get WHR List")]
     public DataSet Retrive_MPSCSC_Bill_Detail(string BG_Id, string District_Id, string User_Type, string Credential, string Commodity, string Bill_No)
     {
-        try
+        WarehouseApiSecurity.RequireCredential(Credential, "MPSCSCStorageBillApiCredential");
+        ValidateRequest(BG_Id, User_Type, Commodity);
+
+        string query;
+        string branchId = null;
+        if (User_Type == "B")
         {
-            string query = "";
-            if (Credential == "WLC2019DSCNicv24")
+            if (String.IsNullOrWhiteSpace(Bill_No) || Bill_No.Length > 100)
             {
-                //if (Commodity == "22")
-                //{
-                    if (User_Type == "B")
-                    {
-                        //query = "SELECT [Depositor_WHR_Id] from tbl_storage_Depositor_WHR_Relation as WHR where WHR.BranchID='" + BG_Id + "' and WHR.CropYear='2019-20' and WHR.Arrival_Source='01' and Commodity_Id='" + Commodity + "' and [Depositor_WHR_Id] not in (select DSC.Depositor_WHR_Id from tbl_Digitally_Signed_WHR_Wheat2019 as DSC where DSC.BranchID='" + BG_Id + "' and DSC.Commodity_Id='" + Commodity + "' and DSC.DSC_User_Type='B') order by [WHR_Issue_Date] desc";
-                        //query = "select Bill_Number from tbl_Storage_Bill_Details where Commodity_Id='22' and Branch_Id='" + BG_Id + "'";
-                        query = "select Bill_Number,Commodity_Rate as Rate_PM,Per_Day_Rate,CONVERT(decimal(18,0),Net_Amount) as Net_Amount,CONVERT(decimal(18,0),Sub_Amount) as Sub_Amount,Service_Tax_Perc as GST_Per,CONVERT(decimal(18,0),Service_Tax_Amt) as GST_Amount,CONVERT(varchar(10),Created_Date,103) as Bill_Generated_Date,DateName( month , DateAdd( month , tbl_Storage_Bill_Details.Month , 0 ) - 1 ) as Bill_Month,Crop_Year,Financial_Year,(select Godown_Name from tbl_MetaData_GODOWN_2018 as G where G.Godown_ID=tbl_Storage_Bill_Details.Godown_Id)+'('+Godown_Id+')' as Godown from tbl_Storage_Bill_Details where Commodity_Id='"+ Commodity +"' and Branch_Id='"+ BG_Id +"' and BO_Approval_Status='Y' and Bill_Number in (select distinct BillNo from mpscsc.dbo.[vwGetStorageVerifyStetus] where AproovedByIssue='1' or AproovedTypeDM='1') and Bill_Number='"+ Bill_No +"'";
-
-                    }
-                    else if (User_Type == "G")
-                    {
-                        string GetBranchId = Get_BranchId(BG_Id);
-                        query = "SELECT [Depositor_WHR_Id] from tbl_storage_Depositor_WHR_Relation as WHR where WHR.GodownID='" + BG_Id + "' and WHR.CropYear='2019-20' and WHR.Arrival_Source='01' and Commodity_Id='" + Commodity + "' and Gid is not null and [Depositor_WHR_Id] not in (select DSC.Depositor_WHR_Id from tbl_Digitally_Signed_WHR_Wheat2019 as DSC where DSC.BranchID='" + GetBranchId + "' and DSC.Commodity_Id='" + Commodity + "' and DSC.DSC_User_Type='G') order by [WHR_Issue_Date] desc";
-
-                    }
-                //}
+                throw new SoapException("Invalid bill number.", SoapException.ClientFaultCode);
             }
-            SqlCommand cmd = new SqlCommand(query, con);
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            if (ds.Tables[0].Rows.Count > 0)
+
+            query = @"select Bill_Number,Commodity_Rate as Rate_PM,Per_Day_Rate,
+                    CONVERT(decimal(18,0),Net_Amount) as Net_Amount,
+                    CONVERT(decimal(18,0),Sub_Amount) as Sub_Amount,
+                    Service_Tax_Perc as GST_Per,
+                    CONVERT(decimal(18,0),Service_Tax_Amt) as GST_Amount,
+                    CONVERT(varchar(10),Created_Date,103) as Bill_Generated_Date,
+                    DateName(month, DateAdd(month, tbl_Storage_Bill_Details.Month, 0) - 1) as Bill_Month,
+                    Crop_Year,Financial_Year,
+                    (select Godown_Name from tbl_MetaData_GODOWN_2018 as G
+                     where G.Godown_ID=tbl_Storage_Bill_Details.Godown_Id)+'('+Godown_Id+')' as Godown
+                from tbl_Storage_Bill_Details
+                where Commodity_Id=@Commodity and Branch_Id=@BG_Id and BO_Approval_Status='Y'
+                  and Bill_Number in
+                    (select distinct BillNo from mpscsc.dbo.[vwGetStorageVerifyStetus]
+                     where AproovedByIssue='1' or AproovedTypeDM='1')
+                  and Bill_Number=@Bill_No";
+        }
+        else
+        {
+            branchId = Get_BranchId(BG_Id);
+            if (String.IsNullOrWhiteSpace(branchId))
             {
-
-                //ds.WriteXml(DestPdfFileName);
+                throw new SoapException("Unknown godown.", SoapException.ClientFaultCode);
             }
-            else
-            {
 
-            }
-            return ds;
+            query = @"SELECT [Depositor_WHR_Id]
+                from tbl_storage_Depositor_WHR_Relation as WHR
+                where WHR.GodownID=@BG_Id and WHR.CropYear='2019-20' and WHR.Arrival_Source='01'
+                  and Commodity_Id=@Commodity and Gid is not null
+                  and [Depositor_WHR_Id] not in
+                    (select DSC.Depositor_WHR_Id from tbl_Digitally_Signed_WHR_Wheat2019 as DSC
+                     where DSC.BranchID=@BranchId and DSC.Commodity_Id=@Commodity and DSC.DSC_User_Type='G')
+                order by [WHR_Issue_Date] desc";
         }
 
-        catch (Exception)
+        using (SqlConnection connection = new SqlConnection(ConnectionString))
+        using (SqlCommand command = new SqlCommand(query, connection))
         {
+            command.Parameters.AddWithValue("@BG_Id", BG_Id);
+            command.Parameters.AddWithValue("@Commodity", Commodity);
+            if (User_Type == "B")
+            {
+                command.Parameters.AddWithValue("@Bill_No", Bill_No);
+            }
+            if (branchId != null)
+            {
+                command.Parameters.AddWithValue("@BranchId", branchId);
+            }
 
-            throw;
+            DataSet result = new DataSet();
+            using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+            {
+                adapter.Fill(result);
+            }
 
+            return result;
         }
     }
-}
 
+    private static void ValidateRequest(string bgId, string userType, string commodity)
+    {
+        if (!IsNumericIdentifier(bgId) ||
+            (userType != "B" && userType != "G") ||
+            !IsNumericIdentifier(commodity))
+        {
+            throw new SoapException("Invalid storage bill request.", SoapException.ClientFaultCode);
+        }
+    }
+
+    private static bool IsNumericIdentifier(string value)
+    {
+        if (String.IsNullOrEmpty(value) || value.Length > 20)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < value.Length; i++)
+        {
+            if (!Char.IsDigit(value[i]))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}

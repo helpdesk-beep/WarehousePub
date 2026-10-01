@@ -12,34 +12,36 @@ public partial class MasterPages_Nccf_Master : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["UserID"] == null)
+        string userId = Convert.ToString(Session["UserID"]);
+        string userName = Convert.ToString(Session["UserName"]);
+        string username = Convert.ToString(Session["Username"]);
+        if (String.IsNullOrWhiteSpace(userId) || String.IsNullOrWhiteSpace(username))
         {
             // Redirect to Login page if session expired or not logged in
             Response.Redirect("~/Login/Login.aspx");
+            return;
         }
         else
         {
             if (!IsPostBack)
             {
-                string userId = Convert.ToString(Session["UserID"]);
-                string userName = Convert.ToString(Session["UserName"]);
                 lblusername.InnerText = userName;
-                if (Session["Username"].ToString() == "Indore Business")
+                if (username == "Indore Business")
                 {
                     divwhr.Visible = true;
                     divbill.Visible = false;
                 }
-                else if (Session["Username"].ToString() == "Bhopal Business")
+                else if (username == "Bhopal Business")
                 {
                     divwhr.Visible = true;
                     divbill.Visible = false;
                 }
-                else if (Session["Username"].ToString() == "Indore Account")
+                else if (username == "Indore Account")
                 {
                     divbill.Visible = true;
                     divwhr.Visible = false;
                 }
-                else if (Session["Username"].ToString() == "Bhopal Account")
+                else if (username == "Bhopal Account")
                 {
                     divbill.Visible = true;
                     divwhr.Visible = false;

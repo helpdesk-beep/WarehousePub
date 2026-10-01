@@ -50,27 +50,31 @@ public class SendDataToNEML : System.Web.Services.WebService
     [WebMethod(Description = "Securely fetches data from the stored procedure")]
     public string GetProcedureData(string username, string password, string FromDate, string ToDate)
     {
-        // 1. AUTHENTICATION FIRST
-        if (!IsValidUser(username, password))
-        {
-            return "Error: Authentication Failed. Invalid credentials.";
-        }
-
-        // 2. IF VALID, GET DATA
         try
         {
+            if (!IsValidUser(username, password))
+            {
+                return "Error: Authentication Failed. Invalid credentials.";
+            }
+
             return ExecuteStoredProcedure(FromDate, ToDate);
         }
-        catch (Exception ex)
+        catch (ConfigurationErrorsException)
         {
-            return "Error executing procedure: " + ex.Message;
+            return "Error: NEML service credentials are not configured.";
+        }
+        catch (Exception)
+        {
+            return "Error executing procedure.";
         }
     }
 
     private bool IsValidUser(string user, string pass)
     {
-        // Replace this with your actual DB lookup or Identity check
-        return (user == "admin" && pass == "secure123");
+        string expectedUser = WarehouseApiSecurity.GetRequiredSetting("NAFEDNEMLServiceUsername");
+        string expectedPassword = WarehouseApiSecurity.GetRequiredSetting("NAFEDNEMLServicePassword");
+        return String.Equals(user, expectedUser, StringComparison.Ordinal) &&
+               String.Equals(pass, expectedPassword, StringComparison.Ordinal);
     }
 
     private string ExecuteStoredProcedure(string FromDate, string ToDate)
@@ -353,6 +357,7 @@ public class SendDataToNEML : System.Web.Services.WebService
     [WebMethod(EnableSession = true)]
     public void DownloadWHRAsPDF(string whrNo)
     {
+        WarehouseApiSecurity.RequireAuthenticatedSession(Session);
         try
         {
             // 1. Generate the filled HTML string using your core logic
@@ -1227,6 +1232,7 @@ public class SendDataToNEML : System.Web.Services.WebService
     [WebMethod]
     public string GetTransactionData(string fromdate, string todate)   //(string username, string password, string fromdate, string todate)
     {
+        WarehouseApiSecurity.RequireApiKey();
         try
         {
             // 1. Force TLS 1.2 (Required for many modern APIs)
@@ -1239,16 +1245,24 @@ public class SendDataToNEML : System.Web.Services.WebService
             // 3. Fetch Dispatch Details using the Token
             return FetchDispatchDetails(token, fromdate, todate);
         }
-        catch (Exception ex)
+        catch (ConfigurationErrorsException)
         {
-            return "General Exception: " + ex.Message;
+            return "Error: NAFED NeML API credentials are not configured.";
+        }
+        catch (Exception)
+        {
+            return "Error fetching NeML transactions.";
         }
     }
 
     private string LoginAndGetToken() //(string user, string pass)
     {
         var loginUrl = "https://enwhr.esamridhi.in/api/v2/enwhr/auth/login";
-        var loginData = new { username = "ENWHRMPWLC", password = "@3MPeNWHR0426" };
+        var loginData = new
+        {
+            username = WarehouseApiSecurity.GetRequiredSetting("NAFEDNEMLApiUsername"),
+            password = WarehouseApiSecurity.GetRequiredSetting("NAFEDNEMLApiPassword")
+        };
         var content = new StringContent(JsonConvert.SerializeObject(loginData), Encoding.UTF8, "application/json");
 
         var response = client.PostAsync(loginUrl, content).GetAwaiter().GetResult();
@@ -1375,6 +1389,5 @@ public class SendDataToNEML : System.Web.Services.WebService
 
     }
 }
-
 
 

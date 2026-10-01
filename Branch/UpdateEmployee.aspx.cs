@@ -16,9 +16,10 @@ public partial class Admin_UpdateEmployee : System.Web.UI.Page
         Response.Cache.SetNoStore();
         Response.Expires = 0;
 
-        if (Session["username"] == null)
+        if (String.IsNullOrWhiteSpace(Convert.ToString(Session["username"])))
         {
             Response.Redirect("/Login/Login.aspx");
+            return;
         }
         if (!IsPostBack)
         {
@@ -59,6 +60,11 @@ public partial class Admin_UpdateEmployee : System.Web.UI.Page
     }
     protected void GridView1_RowUpdating(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
     {
+        if (String.IsNullOrWhiteSpace(Convert.ToString(Session["username"])))
+        {
+            Response.Redirect("/Login/Login.aspx");
+            return;
+        }
 
         //Finding the controls from Gridview for the row which is going to update  
         Label id = GridView1.Rows[e.RowIndex].FindControl("lbl_ID") as Label;
@@ -73,55 +79,35 @@ public partial class Admin_UpdateEmployee : System.Web.UI.Page
         HtmlInputText DOJ = (HtmlInputText)GridView1.Rows[e.RowIndex].FindControl("txtDOJ");
         FileUpload FileUpload1 = (FileUpload)GridView1.Rows[e.RowIndex].FindControl("FileUpload1");
 
-        string path = "~/Upload/";
-        if (FileUpload1.HasFile)
+        try
         {
+            string imagePath = FileUpload1.HasFile ? EmployeeImageUpload.Save(FileUpload1, "~/Upload/EmployeeImages/") : String.Empty;
+            using (SqlConnection connection = new SqlConnection(cs))
+            using (SqlCommand command = new SqlCommand("update_employee", connection))
+            {
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@EmpNameH", EmpNameH.Value);
+                command.Parameters.AddWithValue("@DOB", DOB.Value);
+                command.Parameters.AddWithValue("@DOJ", DOJ.Value);
+                command.Parameters.AddWithValue("@Mobile", Mobile.Value);
+                command.Parameters.AddWithValue("@Designation", Designation.Value);
+                command.Parameters.AddWithValue("@Image", imagePath);
+                command.Parameters.AddWithValue("@id", Convert.ToInt32(id.Text));
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
 
-            path += FileUpload1.FileName;
-            FileUpload1.SaveAs(MapPath(path));
-            con = new SqlConnection(cs);
-            con.Open();
-            //updating the record  
-
-            SqlCommand cmd = new SqlCommand("update_employee", con);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@EmpNameH", EmpNameH.Value);
-            cmd.Parameters.AddWithValue("@DOB", DOB.Value);
-            cmd.Parameters.AddWithValue("@DOJ", DOJ.Value);
-            cmd.Parameters.AddWithValue("@Mobile", Mobile.Value);
-            cmd.Parameters.AddWithValue("@Designation", Designation.Value);
-            cmd.Parameters.AddWithValue("@Image", path);
-            cmd.Parameters.AddWithValue("@id", Convert.ToInt32(id.Text));
-            cmd.ExecuteNonQuery();
-            con.Close();
-            //Setting the EditIndex property to -1 to cancel the Edit mode in Gridview  
             GridView1.EditIndex = -1;
-            //Call ShowData method for displaying updated data  
             ShowData();
         }
-        else
+        catch (ArgumentException ex)
         {
-            con = new SqlConnection(cs);
-            con.Open();
-            //updating the record  
-            SqlCommand cmd = new SqlCommand("update_employee", con);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-
-            cmd.Parameters.AddWithValue("@EmpNameH", EmpNameH.Value);
-            cmd.Parameters.AddWithValue("@DOB", DOB.Value);
-            cmd.Parameters.AddWithValue("@DOJ", DOJ.Value);
-            cmd.Parameters.AddWithValue("@Mobile", Mobile.Value);
-            cmd.Parameters.AddWithValue("@Designation", Designation.Value);
-            cmd.Parameters.AddWithValue("@Image", "");
-            cmd.Parameters.AddWithValue("@id", Convert.ToInt32(id.Text));
-
-            cmd.ExecuteNonQuery();
-            con.Close();
-            //Setting the EditIndex property to -1 to cancel the Edit mode in Gridview  
-            GridView1.EditIndex = -1;
-            //Call ShowData method for displaying updated data  
-            ShowData();
-        }      
+            lblUploadError.Text = Server.HtmlEncode(ex.Message);
+        }
+        catch (Exception)
+        {
+            lblUploadError.Text = "Unable to update employee details.";
+        }
     }
     protected void GridView1_RowCancelingEdit(object sender, System.Web.UI.WebControls.GridViewCancelEditEventArgs e)
     {

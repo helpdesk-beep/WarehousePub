@@ -50,7 +50,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
         string query = "";
         try
         {
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Type == "MPWLC")
                 {
@@ -104,7 +104,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
         string query = "";
         try
         {
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Type == "MPWLC")
                 {
@@ -143,7 +143,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
         string query = "";
         try
         {
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Type == "MPWLC")
                 {
@@ -189,7 +189,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
         string query = "";
         try
         {
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Type == "MPWLC")
                 {
@@ -234,7 +234,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
         string query = "";
         try
         {
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Type == "MPWLC")
                 {
@@ -279,7 +279,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
         string query = "";
         try
         {
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 //query = "select B.Bill_Number,B.District_Id as District_Id,B.Branch_Id,B.Depositor_Id,B.Commodity_Id,B.Financial_Year,B.Commodity_Rate,B.Per_Day_Rate,B.Net_Amount,B.Sub_Amount,B.Service_Tax_Perc as GST_Perc,B.Service_Tax_Amt as GST_Amt,B.Created_Date,B.Client_IP as Created_By,B.Month,B.Godown_Id,B.Crop_Year from tbl_Institution_Storage_Bill_Details as B where Bill_Number='" + Bill_No + "'";
                 query = "select B.Bill_Number,B.District_Id as District_Id,B.Branch_Id,B.Depositor_Id,B.Commodity_Id,B.Financial_Year,B.Commodity_Rate,B.Per_Day_Rate,B.Net_Amount,B.Sub_Amount,B.Service_Tax_Perc as GST_Perc,B.Service_Tax_Amt as GST_Amt,B.Created_Date,B.Client_IP as Created_By,B.Month,B.Godown_Id,B.Crop_Year from tbl_Institution_Storage_Bill_Details as B where Bill_Number='" + Bill_No + "' and B.BO_Approval_Status='Y'";
@@ -314,7 +314,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
         string query = "";
         try
         {
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 query = "select B.Bill_Number,B.District_Id as District_Id,B.Branch_Id,B.Depositor_Id,B.Commodity_Id,B.Financial_Year,B.Commodity_Rate,B.Per_Day_Rate,B.Net_Amount,B.Sub_Amount,B.Service_Tax_Perc as GST_Perc,B.Service_Tax_Amt as GST_Amt,B.Created_Date,B.Client_IP as Created_By,B.Month,B.Godown_Id,B.Crop_Year from tbl_Institution_Storage_Bill_Details as B where Bill_Number='" + Bill_No + "'";
                 //query = "select B.Bill_Number,B.District_Id as District_Id,B.Branch_Id,B.Depositor_Id,B.Commodity_Id,B.Financial_Year,B.Commodity_Rate,B.Per_Day_Rate,B.Net_Amount,B.Sub_Amount,B.Service_Tax_Perc as GST_Perc,B.Service_Tax_Amt as GST_Amt,B.Created_Date,B.Client_IP as Created_By,B.Month,B.Godown_Id,B.Crop_Year from tbl_Institution_Storage_Bill_Details as B where Bill_Number='" + Bill_No + "' and B.BO_Approval_Status='Y'";
@@ -349,7 +349,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
         {
             string query = "";
             string BillType = Bill_Type;
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Mode == "N")
                 {
@@ -580,7 +580,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
         try
         {
             string query = "";
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Mode == "N")
                 {
@@ -959,7 +959,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
         try
         {
             string query = "";
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Mode == "N")
                 {
@@ -1168,7 +1168,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
         try
         {
             string query = "";
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 //if (Commodity == "22")
                 //{
@@ -1345,7 +1345,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
         {
             string query = "";
             string BillType = Bill_Type;
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Mode == "N")
                 {
@@ -1636,7 +1636,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
         {
             string query = "";
             string BillType = Bill_Type;
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Mode == "N")
                 {
@@ -1725,7 +1725,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
         {
             string query = "";
             string BillType = Bill_Type;
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Mode == "N")
                 {
@@ -2014,7 +2014,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
 
         try
         {
-            if (Credential == "WLC2019DSCNicv30" && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential") && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
             {
                 string SValue = "";
                 string SubValue = "";
@@ -2349,7 +2349,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
 
         try
         {
-            if (Credential == "WLC2019DSCNicv30" && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential") && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
             {
                 string SValue = "";
                 string SubValue = "";
@@ -2665,7 +2665,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
 
         try
         {
-            if (Credential == "WLC2019DSCNicv30" && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential") && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
             {
                 string SValue = "";
                 string SubValue = "";
@@ -2929,7 +2929,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
 
         try
         {
-            if (Credential == "WLC2019DSCNicv30" && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential") && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
             {
                 string SValue = "";
                 string SubValue = "";
@@ -3183,7 +3183,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
 
         try
         {
-            if (Credential == "WLC2019DSCNicv30" && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential") && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
             {
                 string SValue = "";
                 string SubValue = "";
@@ -3431,7 +3431,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
         decimal DeductionAmt = Deduction_Amt;
         try
         {
-            if (Credential == "WLC2019DSCNicv30" && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential") && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
             {
                 string SValue = "";
                 string SubValue = "";
@@ -3749,7 +3749,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
         decimal DeductionAmt = Deduction_Amt;
         try
         {
-            if (Credential == "WLC2019DSCNicv30" && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential") && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
             {
                 string SValue = "";
                 string SubValue = "";
@@ -4178,7 +4178,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
         decimal DeductionAmt = Deduction_Amt;
         try
         {
-            if (Credential == "WLC2019DSCNicv30" && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential") && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
             {
                 string SValue = "";
                 string SubValue = "";
@@ -4452,7 +4452,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
         try
         {
             string query = "";
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Mode == "N")
                 {
@@ -4787,7 +4787,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
         {
             string query = "";
             string BillType = Bill_Type;
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Mode == "N")
                 {
@@ -4921,7 +4921,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
 
         try
         {
-            if (Credential == "WLC2019DSCNicv30" && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential") && Is_Verify == "Y" && Client_IP != "" && Client_IP != null && User_Type != "" && User_Type != null)
             {
                 string SValue = "";
                 string SubValue = "";
@@ -5194,7 +5194,7 @@ public class Retrive_MPSCSC_Storage_Bill : System.Web.Services.WebService
         string query = "";
         try
         {
-            if (Credential == "WLC2019DSCNicv30")
+            if (WarehouseApiSecurity.IsCredentialValid(Credential, "LegacyWlcBillCredential"))
             {
                 if (Bill_Type == "MPWLC")
                 {

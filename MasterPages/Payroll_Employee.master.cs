@@ -9,17 +9,24 @@ public partial class Masters_Payroll_Employee : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        string username = Convert.ToString(Session["Name"]);
+        string role = Convert.ToString(Session["Role"]);
+        if (String.IsNullOrWhiteSpace(username) || String.IsNullOrWhiteSpace(role))
+        {
+            Session.Abandon();
+            Response.Redirect("/Default.aspx");
+            return;
+        }
+        if (role != "employee")
+        {
+            Session.Abandon();
+            Response.Redirect("/Default.aspx");
+            return;
+        }
         if (!IsPostBack)
         {
-
-            lblusername.Text = Session["Name"].ToString();
-            lblrole.Text = Session["Role"].ToString();
-            if (lblrole.Text != "employee")
-            {
-                Session.Abandon();
-                Response.Redirect("/Default.aspx");
-            }
-
+            lblusername.Text = username;
+            lblrole.Text = role;
         }
     }
     protected void lb_logout_Click(object sender, EventArgs e)

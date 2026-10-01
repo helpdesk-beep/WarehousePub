@@ -139,7 +139,7 @@ public class FCI_CFSP_WS : System.Web.Services.WebService
         SqlCommand cmd = new SqlCommand();
         string status = "";
         bool isSuccess = false;
-        if (username == "MPWLC" && password == "BukH446ywF9r")
+        if (WarehouseApiSecurity.AreCredentialsValid(username, password, "FciCfspUsername", "FciCfspPassword"))
         {
             List<DepotMaster> listDepotMaster = new List<DepotMaster>();
             con.ConnectionString = str;
@@ -217,7 +217,7 @@ public class FCI_CFSP_WS : System.Web.Services.WebService
         SqlCommand cmd = new SqlCommand();
         string status = "";
         bool isSuccess = false;
-        if (username == "MPWLC" && password == "BukH446ywF9r")
+        if (WarehouseApiSecurity.AreCredentialsValid(username, password, "FciCfspUsername", "FciCfspPassword"))
         {
             DateTime FromDate = DateTime.ParseExact(DataDate, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture); //Convert.ToDateTime(DataDate);// = "2023-11-03";//DateTime.Now.AddDays(-140).ToString("yyyy-MM-dd");
             //string ToDate = "2023-11-04";//DateTime.Now.AddDays(-139).ToString("yyyy-MM-dd");
@@ -501,7 +501,7 @@ public class FCI_CFSP_WS : System.Web.Services.WebService
         SqlCommand cmd = new SqlCommand();
         string status = "";
         bool isSuccess = false;
-        if (username == "MPWLC" && password == "BukH446ywF9r")
+        if (WarehouseApiSecurity.AreCredentialsValid(username, password, "FciCfspUsername", "FciCfspPassword"))
         {
             DateTime FromDate = DateTime.ParseExact(DataDate, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture); //Convert.ToDateTime(DataDate);// = "2023-11-03";//DateTime.Now.AddDays(-140).ToString("yyyy-MM-dd");
             //string ToDate = "2023-11-04";//DateTime.Now.AddDays(-139).ToString("yyyy-MM-dd");
@@ -888,8 +888,8 @@ public class FCI_CFSP_WS : System.Web.Services.WebService
             client.BaseAddress = new Uri("http://cfsp.nic.in/cfsp/login");
             var content = new FormUrlEncodedContent(new[]
             {
-                new KeyValuePair<string, string>("username", "MPWLC"),
-                new KeyValuePair<string, string>("password", "BukH446ywF9r")
+                new KeyValuePair<string, string>("username", WarehouseApiSecurity.GetRequiredSetting("FciCfspExternalUsername")),
+                new KeyValuePair<string, string>("password", WarehouseApiSecurity.GetRequiredSetting("FciCfspExternalPassword"))
             });
 
             var result = await client.PostAsync("sign_in", content);
@@ -1285,7 +1285,7 @@ public class FCI_CFSP_WS : System.Web.Services.WebService
         SqlCommand cmd = new SqlCommand();
         string status = "";
         bool isSuccess = false;
-        //if (username == "MPWLC" && password == "BukH446ywF9r")
+        //if (WarehouseApiSecurity.AreCredentialsValid(username, password, "FciCfspUsername", "FciCfspPassword"))
         //{
         //DateTime FromDate = DateTime.ParseExact(DataDate, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture); //Convert.ToDateTime(DataDate);// = "2023-11-03";//DateTime.Now.AddDays(-140).ToString("yyyy-MM-dd");
                                                                                                                             //string ToDate = "2023-11-04";//DateTime.Now.AddDays(-139).ToString("yyyy-MM-dd");
