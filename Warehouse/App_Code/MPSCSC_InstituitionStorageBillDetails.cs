@@ -84,16 +84,48 @@ public class MPSCSC_InstituitionStorageBillDetails : System.Web.Services.WebServ
         //    "','" + Bill_Type + "','" + BId + "','" + Crop_Year + "','" + Month + "','" + Godown_Id +
         //    "','" + MPWLC_SC + "','" + GST_Perc_SC + "','" + GST_Amt_SC + "')";
         //SqlCommand cmd = new SqlCommand(qry, con);
-        string qry = "INSERT INTO tbl_Institution_Storage_Bill_Details(Bill_Number,District_Id,Branch_Id,Depositor_Type_Id,Depositor_Id,Commodity_Type_Id,Commodity_Id,From_Date,To_Date,Packing_Type,Weight,Financial_Year,Commodity_Rate,Net_Amount,Sub_Amount,Service_Tax_Perc,Service_Tax_Amt,Depositor_Category,Rebate_Perc,Rebate_Amt,Rebate_on_Unit,Khasra_Number,Is_Rebate,Created_Date,Modified_Date,Client_IP,Per_Day_Rate,Rin_Pustika_No,Cast_Certificate_No,Bill_Type,BId,Crop_Year,Month,Godown_Id,MPWLC_SC,GST_Perc_SC,GST_Amt_SC) " +
-           "values('" + Bill_Number + "','" + District_Id + "','" + Branch_Id + "','" + Depositor_Type_Id + "','" + Depositor_Id + "','" + Commodity_Type_Id + "','" + Commodity_Id + "','" + From_Date +
-           "','" + To_Date + "','" + Packing_Type + "','" + Weight + "','" + Financial_Year + "','" + Commodity_Rate +
-           "','" + Net_Amount + "','" + Sub_Amount + "','" + Service_Tax_Perc + "','" + Service_Tax_Amt +
-           "','" + Depositor_Category + "','" + Rebate_Perc + "','" + Rebate_Amt + "','" + Rebate_on_Unit + "','" + Khasra_Number + "','" + Is_Rebate +
-           "','" + Created_Date + "','" + Modified_Date + "','" + Client_IP + "','" + Per_Day_Rate + "','" + Rin_Pustika_No + "','" + Cast_Certificate_No +
-           "','" + Bill_Type + "','" + BId + "','" + Crop_Year + "','" + Month + "','" + Godown_Id +
-           "','" + MPWLC_SC + "','" + GST_Perc_SC + "','" + GST_Amt_SC + "')";
-        SqlCommand cmd = new SqlCommand(qry, con);
-        cmd.ExecuteNonQuery();
+        const string qry = "INSERT INTO tbl_Institution_Storage_Bill_Details(Bill_Number,District_Id,Branch_Id,Depositor_Type_Id,Depositor_Id,Commodity_Type_Id,Commodity_Id,From_Date,To_Date,Packing_Type,Weight,Financial_Year,Commodity_Rate,Net_Amount,Sub_Amount,Service_Tax_Perc,Service_Tax_Amt,Depositor_Category,Rebate_Perc,Rebate_Amt,Rebate_on_Unit,Khasra_Number,Is_Rebate,Created_Date,Modified_Date,Client_IP,Per_Day_Rate,Rin_Pustika_No,Cast_Certificate_No,Bill_Type,BId,Crop_Year,Month,Godown_Id,MPWLC_SC,GST_Perc_SC,GST_Amt_SC) VALUES (@Bill_Number,@District_Id,@Branch_Id,@Depositor_Type_Id,@Depositor_Id,@Commodity_Type_Id,@Commodity_Id,@From_Date,@To_Date,@Packing_Type,@Weight,@Financial_Year,@Commodity_Rate,@Net_Amount,@Sub_Amount,@Service_Tax_Perc,@Service_Tax_Amt,@Depositor_Category,@Rebate_Perc,@Rebate_Amt,@Rebate_on_Unit,@Khasra_Number,@Is_Rebate,@Created_Date,@Modified_Date,@Client_IP,@Per_Day_Rate,@Rin_Pustika_No,@Cast_Certificate_No,@Bill_Type,@BId,@Crop_Year,@Month,@Godown_Id,@MPWLC_SC,@GST_Perc_SC,@GST_Amt_SC)";
+        using (SqlCommand cmd = new SqlCommand(qry, con))
+        {
+            AddParameter(cmd, "@Bill_Number", Bill_Number);
+            AddParameter(cmd, "@District_Id", District_Id);
+            AddParameter(cmd, "@Branch_Id", Branch_Id);
+            AddParameter(cmd, "@Depositor_Type_Id", Depositor_Type_Id);
+            AddParameter(cmd, "@Depositor_Id", Depositor_Id);
+            AddParameter(cmd, "@Commodity_Type_Id", Commodity_Type_Id);
+            AddParameter(cmd, "@Commodity_Id", Commodity_Id);
+            AddParameter(cmd, "@From_Date", From_Date);
+            AddParameter(cmd, "@To_Date", To_Date);
+            AddParameter(cmd, "@Packing_Type", Packing_Type);
+            AddParameter(cmd, "@Weight", Weight);
+            AddParameter(cmd, "@Financial_Year", Financial_Year);
+            AddParameter(cmd, "@Commodity_Rate", Commodity_Rate);
+            AddParameter(cmd, "@Net_Amount", Net_Amount);
+            AddParameter(cmd, "@Sub_Amount", Sub_Amount);
+            AddParameter(cmd, "@Service_Tax_Perc", Service_Tax_Perc);
+            AddParameter(cmd, "@Service_Tax_Amt", Service_Tax_Amt);
+            AddParameter(cmd, "@Depositor_Category", Depositor_Category);
+            AddParameter(cmd, "@Rebate_Perc", Rebate_Perc);
+            AddParameter(cmd, "@Rebate_Amt", Rebate_Amt);
+            AddParameter(cmd, "@Rebate_on_Unit", Rebate_on_Unit);
+            AddParameter(cmd, "@Khasra_Number", Khasra_Number);
+            AddParameter(cmd, "@Is_Rebate", Is_Rebate);
+            AddParameter(cmd, "@Created_Date", Created_Date);
+            AddParameter(cmd, "@Modified_Date", Modified_Date);
+            AddParameter(cmd, "@Client_IP", Client_IP);
+            AddParameter(cmd, "@Per_Day_Rate", Per_Day_Rate);
+            AddParameter(cmd, "@Rin_Pustika_No", Rin_Pustika_No);
+            AddParameter(cmd, "@Cast_Certificate_No", Cast_Certificate_No);
+            AddParameter(cmd, "@Bill_Type", Bill_Type);
+            AddParameter(cmd, "@BId", BId);
+            AddParameter(cmd, "@Crop_Year", Crop_Year);
+            AddParameter(cmd, "@Month", Month);
+            AddParameter(cmd, "@Godown_Id", Godown_Id);
+            AddParameter(cmd, "@MPWLC_SC", MPWLC_SC);
+            AddParameter(cmd, "@GST_Perc_SC", GST_Perc_SC);
+            AddParameter(cmd, "@GST_Amt_SC", GST_Amt_SC);
+            cmd.ExecuteNonQuery();
+        }
         con.Close();
     }
 
@@ -150,18 +182,49 @@ public class MPSCSC_InstituitionStorageBillDetails : System.Web.Services.WebServ
         //   "','" + Is_Rebate + "','" + Created_Date + "','" + Modified_Date + "','" + Client_IP + "','" + Per_Day_Rate + "','" + Bill_Type + "','" + BId +
         //   "','" + Month + "','" + Year + "','" + Crop_Year + "','" + MPWLC_SC + "','" + GST_Perc_SC + "','" + GST_Amt_SC + "','" + Bill_Count + "')";
         //SqlCommand cmd = new SqlCommand(qry, con);
-        string qry = "INSERT INTO tbl_Institution_Storage_Bill_Summary(Bill_Number,District_Id,Branch_Id,Depositor_Type_Id,Depositor_Id,Commodity_Type_Id,Commodity_Id,From_Date,To_Date,Packing_Type," +
-           "Weight,Financial_Year,Commodity_Rate,Net_Amount,Sub_Amount,Service_Tax_Perc,Service_Tax_Amt,Depositor_Category,Rebate_Perc,Rebate_Amt,Rebate_on_Unit,Khasra_Number," +
-           "Rin_Pustika_No,Cast_Certificate_No,Is_Rebate,Created_Date,Modified_Date,Client_IP,Per_Day_Rate,Bill_Type,BId,Month,Year,Crop_Year,MPWLC_SC,GST_Perc_SC,GST_Amt_SC,Bill_Count) " +
-           "values('" + Bill_Number + "','" + District_Id + "','" + Branch_Id + "','" + Depositor_Type_Id + "','" + Depositor_Id + "','" + Commodity_Type_Id + "','" + Commodity_Id + "','" + From_Date.ToString() +
-           "','" + To_Date + "','" + Packing_Type + "','" + Weight + "','" + Financial_Year + "','" + Commodity_Rate +
-           "','" + Net_Amount + "','" + Sub_Amount + "','" + Service_Tax_Perc + "','" + Service_Tax_Amt +
-           "','" + Depositor_Category + "','" + Rebate_Perc + "','" + Rebate_Amt + "','" + Rebate_on_Unit + "','" + Khasra_Number + "','" + Rin_Pustika_No + "','" + Cast_Certificate_No +
-           "','" + Is_Rebate + "','" + Created_Date + "','" + Modified_Date + "','" + Client_IP + "','" + Per_Day_Rate + "','" + Bill_Type + "','" + BId +
-           "','" + Month + "','" + Year + "','" + Crop_Year + "','" + MPWLC_SC + "','" + GST_Perc_SC + "','" + GST_Amt_SC + "','" + Bill_Count + "')";
-        SqlCommand cmd = new SqlCommand(qry, con);
-
-        cmd.ExecuteNonQuery();
+        const string qry = "INSERT INTO tbl_Institution_Storage_Bill_Summary(Bill_Number,District_Id,Branch_Id,Depositor_Type_Id,Depositor_Id,Commodity_Type_Id,Commodity_Id,From_Date,To_Date,Packing_Type,Weight,Financial_Year,Commodity_Rate,Net_Amount,Sub_Amount,Service_Tax_Perc,Service_Tax_Amt,Depositor_Category,Rebate_Perc,Rebate_Amt,Rebate_on_Unit,Khasra_Number,Rin_Pustika_No,Cast_Certificate_No,Is_Rebate,Created_Date,Modified_Date,Client_IP,Per_Day_Rate,Bill_Type,BId,Month,Year,Crop_Year,MPWLC_SC,GST_Perc_SC,GST_Amt_SC,Bill_Count) VALUES (@Bill_Number,@District_Id,@Branch_Id,@Depositor_Type_Id,@Depositor_Id,@Commodity_Type_Id,@Commodity_Id,@From_Date,@To_Date,@Packing_Type,@Weight,@Financial_Year,@Commodity_Rate,@Net_Amount,@Sub_Amount,@Service_Tax_Perc,@Service_Tax_Amt,@Depositor_Category,@Rebate_Perc,@Rebate_Amt,@Rebate_on_Unit,@Khasra_Number,@Rin_Pustika_No,@Cast_Certificate_No,@Is_Rebate,@Created_Date,@Modified_Date,@Client_IP,@Per_Day_Rate,@Bill_Type,@BId,@Month,@Year,@Crop_Year,@MPWLC_SC,@GST_Perc_SC,@GST_Amt_SC,@Bill_Count)";
+        using (SqlCommand cmd = new SqlCommand(qry, con))
+        {
+            AddParameter(cmd, "@Bill_Number", Bill_Number);
+            AddParameter(cmd, "@District_Id", District_Id);
+            AddParameter(cmd, "@Branch_Id", Branch_Id);
+            AddParameter(cmd, "@Depositor_Type_Id", Depositor_Type_Id);
+            AddParameter(cmd, "@Depositor_Id", Depositor_Id);
+            AddParameter(cmd, "@Commodity_Type_Id", Commodity_Type_Id);
+            AddParameter(cmd, "@Commodity_Id", Commodity_Id);
+            AddParameter(cmd, "@From_Date", From_Date);
+            AddParameter(cmd, "@To_Date", To_Date);
+            AddParameter(cmd, "@Packing_Type", Packing_Type);
+            AddParameter(cmd, "@Weight", Weight);
+            AddParameter(cmd, "@Financial_Year", Financial_Year);
+            AddParameter(cmd, "@Commodity_Rate", Commodity_Rate);
+            AddParameter(cmd, "@Net_Amount", Net_Amount);
+            AddParameter(cmd, "@Sub_Amount", Sub_Amount);
+            AddParameter(cmd, "@Service_Tax_Perc", Service_Tax_Perc);
+            AddParameter(cmd, "@Service_Tax_Amt", Service_Tax_Amt);
+            AddParameter(cmd, "@Depositor_Category", Depositor_Category);
+            AddParameter(cmd, "@Rebate_Perc", Rebate_Perc);
+            AddParameter(cmd, "@Rebate_Amt", Rebate_Amt);
+            AddParameter(cmd, "@Rebate_on_Unit", Rebate_on_Unit);
+            AddParameter(cmd, "@Khasra_Number", Khasra_Number);
+            AddParameter(cmd, "@Rin_Pustika_No", Rin_Pustika_No);
+            AddParameter(cmd, "@Cast_Certificate_No", Cast_Certificate_No);
+            AddParameter(cmd, "@Is_Rebate", Is_Rebate);
+            AddParameter(cmd, "@Created_Date", Created_Date);
+            AddParameter(cmd, "@Modified_Date", Modified_Date);
+            AddParameter(cmd, "@Client_IP", Client_IP);
+            AddParameter(cmd, "@Per_Day_Rate", Per_Day_Rate);
+            AddParameter(cmd, "@Bill_Type", Bill_Type);
+            AddParameter(cmd, "@BId", BId);
+            AddParameter(cmd, "@Month", Month);
+            AddParameter(cmd, "@Year", Year);
+            AddParameter(cmd, "@Crop_Year", Crop_Year);
+            AddParameter(cmd, "@MPWLC_SC", MPWLC_SC);
+            AddParameter(cmd, "@GST_Perc_SC", GST_Perc_SC);
+            AddParameter(cmd, "@GST_Amt_SC", GST_Amt_SC);
+            AddParameter(cmd, "@Bill_Count", Bill_Count);
+            cmd.ExecuteNonQuery();
+        }
         con.Close();
     }
 
@@ -175,9 +238,14 @@ public class MPSCSC_InstituitionStorageBillDetails : System.Web.Services.WebServ
         con.ConnectionString = str;
         con.Open();
         //string qry = "UPDATE tbl_Institution_Storage_Bill_Details_Test SET Fin_Bill_No='" + Bill_No + "' where Bill_Number='" + Godown_Bill_No + "' and Godown_Id='" + Godown_ID + "'";
-        string qry = "UPDATE tbl_Institution_Storage_Bill_Details SET Fin_Bill_No='" + Bill_No + "' where Bill_Number='" + Godown_Bill_No + "' and Godown_Id='" + Godown_ID + "'";
-        SqlCommand cmd = new SqlCommand(qry, con);
-        cmd.ExecuteNonQuery();
+        const string qry = "UPDATE tbl_Institution_Storage_Bill_Details SET Fin_Bill_No=@Bill_No where Bill_Number=@Godown_Bill_No and Godown_Id=@Godown_ID";
+        using (SqlCommand cmd = new SqlCommand(qry, con))
+        {
+            AddParameter(cmd, "@Bill_No", Bill_No);
+            AddParameter(cmd, "@Godown_Bill_No", Godown_Bill_No);
+            AddParameter(cmd, "@Godown_ID", Godown_ID);
+            cmd.ExecuteNonQuery();
+        }
         con.Close();
     }
 
@@ -195,13 +263,15 @@ public class MPSCSC_InstituitionStorageBillDetails : System.Web.Services.WebServ
         //"AND Branch_Id='" + Branch_ID + "' " +
         //"AND District_Id='" + District_Id + "'";
         //SqlCommand cmd = new SqlCommand(qry, con);
-        string qry = "UPDATE tbl_Institution_Storage_Bill_Summary SET BO_Approval_Status='Y',BO_Approval_Date=GETDATE(),BO_Approval_IP='" + Client_IP + "'" +
-        "WHERE Bill_Number='" + Bill_Number + "' " +
-        "AND Branch_Id='" + Branch_ID + "' " +
-        "AND District_Id='" + District_Id + "'";
-        SqlCommand cmd = new SqlCommand(qry, con);
-        //cmd.CommandTimeout = 10;
-        cmd.ExecuteNonQuery();
+        const string qry = "UPDATE tbl_Institution_Storage_Bill_Summary SET BO_Approval_Status='Y',BO_Approval_Date=GETDATE(),BO_Approval_IP=@Client_IP WHERE Bill_Number=@Bill_Number AND Branch_Id=@Branch_ID AND District_Id=@District_Id";
+        using (SqlCommand cmd = new SqlCommand(qry, con))
+        {
+            AddParameter(cmd, "@Client_IP", Client_IP);
+            AddParameter(cmd, "@Bill_Number", Bill_Number);
+            AddParameter(cmd, "@Branch_ID", Branch_ID);
+            AddParameter(cmd, "@District_Id", District_Id);
+            cmd.ExecuteNonQuery();
+        }
         con.Close();
     }
 
@@ -219,12 +289,15 @@ public class MPSCSC_InstituitionStorageBillDetails : System.Web.Services.WebServ
         //"AND Branch_Id='" + Branch_ID + "' " +
         //"AND District_Id='" + District_Id + "'";
         //SqlCommand cmd = new SqlCommand(qry, con);
-        string qry = "UPDATE tbl_Institution_Storage_Bill_Details SET BO_Approval_Status='Y',BO_Approval_Date=GETDATE(),BO_Approval_IP='" + Client_IP + "'" +
-        "WHERE Fin_Bill_No='" + Bill_Number + "' " +
-        "AND Branch_Id='" + Branch_ID + "' " +
-        "AND District_Id='" + District_Id + "'";
-        SqlCommand cmd = new SqlCommand(qry, con);
-        cmd.ExecuteNonQuery();
+        const string qry = "UPDATE tbl_Institution_Storage_Bill_Details SET BO_Approval_Status='Y',BO_Approval_Date=GETDATE(),BO_Approval_IP=@Client_IP WHERE Fin_Bill_No=@Bill_Number AND Branch_Id=@Branch_ID AND District_Id=@District_Id";
+        using (SqlCommand cmd = new SqlCommand(qry, con))
+        {
+            AddParameter(cmd, "@Client_IP", Client_IP);
+            AddParameter(cmd, "@Bill_Number", Bill_Number);
+            AddParameter(cmd, "@Branch_ID", Branch_ID);
+            AddParameter(cmd, "@District_Id", District_Id);
+            cmd.ExecuteNonQuery();
+        }
         con.Close();
     }
 
@@ -307,10 +380,19 @@ public class MPSCSC_InstituitionStorageBillDetails : System.Web.Services.WebServ
         con.ConnectionString = str;
         con.Open();
         //string qry = "DELETE FROM tbl_Institution_Storage_Bill_Details_Test WHERE Bill_Number='" + Bill_Number + "'AND Branch_Id = '" + Branch_Id + "' AND Bill_Number NOT IN (SELECT CDS.Ref_Bill_No FROM MPSCSC.dbo.Digitally_Sign_StorageBill_IC as CDS WHERE Branch_Id = '" + Branch_Id + "' and CDS.Ref_Bill_No is not null)";
-        string qry = "DELETE FROM tbl_Institution_Storage_Bill_Details WHERE Bill_Number='" + Bill_Number + "'AND Branch_Id = '" + Branch_Id + "' AND Bill_Number NOT IN (SELECT CDS.Ref_Bill_No FROM MPSCSC.dbo.Digitally_Sign_StorageBill_IC as CDS WHERE Branch_Id = '" + Branch_Id + "' and CDS.Ref_Bill_No is not null)";
-        SqlCommand cmd = new SqlCommand(qry, con);
-        cmd.ExecuteNonQuery();
+        const string qry = "DELETE FROM tbl_Institution_Storage_Bill_Details WHERE Bill_Number=@Bill_Number AND Branch_Id=@Branch_Id AND Bill_Number NOT IN (SELECT CDS.Ref_Bill_No FROM MPSCSC.dbo.Digitally_Sign_StorageBill_IC as CDS WHERE Branch_Id=@Branch_Id and CDS.Ref_Bill_No is not null)";
+        using (SqlCommand cmd = new SqlCommand(qry, con))
+        {
+            AddParameter(cmd, "@Bill_Number", Bill_Number);
+            AddParameter(cmd, "@Branch_Id", Branch_Id);
+            cmd.ExecuteNonQuery();
+        }
         con.Close();
+    }
+
+    private static void AddParameter(SqlCommand command, string name, object value)
+    {
+        command.Parameters.AddWithValue(name, value ?? DBNull.Value);
     }
 
     [WebMethod]
@@ -685,6 +767,4 @@ public class MPSCSC_InstituitionStorageBillDetails : System.Web.Services.WebServ
     }
 
 }
-
-
 

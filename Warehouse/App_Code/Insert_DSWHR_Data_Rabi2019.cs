@@ -160,9 +160,35 @@ public class Insert_DSWHR_Data_Rabi2019 : System.Web.Services.WebService {
                 var hashstrs = System.BitConverter.ToString(hash).Replace("-", "");
                 //Generate CSum
                 //string query = "INSERT INTO [tbl_Digitally_Signed_WHR_Details]([Depositor_WHR_Id],[Depositor_Form_No],[District_Id],[Commodity_Id],[Category_Id],[Depositor_Name],[Date_of_Deposit],[TotalBags_Received],[Total_Qty_Received],[AvgMoisture_Content],AvgMoisture_Content_To,SangrahadDate,[MktValue_of_Commodity],[WHR_Issue_Date],[WHR_CreatedDate],[WHR_Client_IP],[CropYear],[Remark],[BranchID],[DepositorID],[GodownID],[WHR_Check_Sum],CreatedDate,CreatedBy,DSC_Serial_No,DSC_Holder_Name,Client_Ip) values ('" + Depositor_WHR_Id + "','" + Depositor_Form_No + "','" + District_Id + "','" + Commodity_Id + "','" + Grade + "','" + Depositor_Name + "','" + getDate_MDY(Date_of_Deposit.Trim().ToString()) + "','" + TotalBags_Received + "','" + Total_Qty_Received + "','" + AvgMoisture_Content + "','" + AvgMoisture_Content_To + "','" + SangrahadDate + "','" + MktValue_of_Commodity + "','" + getDate_MDY(WHR_Issue_Date.Trim().ToString()) + "','" + WHR_CreatedDate + "','" + WHR_Client_IP + "','" + CropYear + "','" + Remark + "','" + BranchID + "','" + DepositorID + "','" + GodownID + "','" + hashstrs + "',GETDATE(),'" + IpAdd + "','" + Serial_No + "','" + DSC_Holder + "','" + LocalIP + "')";
-                string query = "INSERT INTO [tbl_Digitally_Signed_WHR_Details]([Depositor_WHR_Id],[Depositor_Form_No],[District_Id],[Commodity_Id],[Category_Id],[Depositor_Name],[Date_of_Deposit],[TotalBags_Received],[Total_Qty_Received],[AvgMoisture_Content],AvgMoisture_Content_To,SangrahadDate,[MktValue_of_Commodity],[WHR_Issue_Date],[WHR_CreatedDate],[WHR_Client_IP],[CropYear],[Remark],[BranchID],[DepositorID],[GodownID],[WHR_Check_Sum],CreatedDate,CreatedBy,DSC_Serial_No,DSC_Holder_Name,Client_Ip,DSC_User_Type) values ('" + Depositor_WHR_Id + "','" + Depositor_Form_No + "','" + District_Id + "','" + Commodity_Id + "','" + Grade + "','" + Depositor_Name + "','" + getDate_MDY(Date_of_Deposit.Trim().ToString()) + "','" + TotalBags_Received + "','" + Total_Qty_Received + "','" + AvgMoisture_Content + "','" + AvgMoisture_Content_To + "','" + SangrahadDate + "','" + MktValue_of_Commodity + "','" + getDate_MDY(WHR_Issue_Date.Trim().ToString()) + "','" + WHR_CreatedDate + "','" + WHR_Client_IP + "','" + CropYear + "','" + Remark + "','" + BranchID + "','" + DepositorID + "','" + GodownID + "','" + hashstrs + "',GETDATE(),'" + IpAdd + "','" + Serial_No + "','" + DSC_Holder + "','" + LocalIP + "','" + DSC_User_Type + "')";
-
+                string query = "INSERT INTO [tbl_Digitally_Signed_WHR_Details]([Depositor_WHR_Id],[Depositor_Form_No],[District_Id],[Commodity_Id],[Category_Id],[Depositor_Name],[Date_of_Deposit],[TotalBags_Received],[Total_Qty_Received],[AvgMoisture_Content],AvgMoisture_Content_To,SangrahadDate,[MktValue_of_Commodity],[WHR_Issue_Date],[WHR_CreatedDate],[WHR_Client_IP],[CropYear],[Remark],[BranchID],[DepositorID],[GodownID],[WHR_Check_Sum],CreatedDate,CreatedBy,DSC_Serial_No,DSC_Holder_Name,Client_Ip,DSC_User_Type) VALUES (@Depositor_WHR_Id,@Depositor_Form_No,@District_Id,@Commodity_Id,@Grade,@Depositor_Name,@Date_of_Deposit,@TotalBags_Received,@Total_Qty_Received,@AvgMoisture_Content,@AvgMoisture_Content_To,@SangrahadDate,@MktValue_of_Commodity,@WHR_Issue_Date,@WHR_CreatedDate,@WHR_Client_IP,@CropYear,@Remark,@BranchID,@DepositorID,@GodownID,@WHR_Check_Sum,GETDATE(),@CreatedBy,@DSC_Serial_No,@DSC_Holder_Name,@Client_Ip,@DSC_User_Type)";
                 SqlCommand cmd = new SqlCommand(query, con);
+                AddParameter(cmd, "@Depositor_WHR_Id", Depositor_WHR_Id);
+                AddParameter(cmd, "@Depositor_Form_No", Depositor_Form_No);
+                AddParameter(cmd, "@District_Id", District_Id);
+                AddParameter(cmd, "@Commodity_Id", Commodity_Id);
+                AddParameter(cmd, "@Grade", Grade);
+                AddParameter(cmd, "@Depositor_Name", Depositor_Name);
+                AddParameter(cmd, "@Date_of_Deposit", getDate_MDY(Date_of_Deposit.Trim()));
+                AddParameter(cmd, "@TotalBags_Received", TotalBags_Received);
+                AddParameter(cmd, "@Total_Qty_Received", Total_Qty_Received);
+                AddParameter(cmd, "@AvgMoisture_Content", AvgMoisture_Content);
+                AddParameter(cmd, "@AvgMoisture_Content_To", AvgMoisture_Content_To);
+                AddParameter(cmd, "@SangrahadDate", SangrahadDate);
+                AddParameter(cmd, "@MktValue_of_Commodity", MktValue_of_Commodity);
+                AddParameter(cmd, "@WHR_Issue_Date", getDate_MDY(WHR_Issue_Date.Trim()));
+                AddParameter(cmd, "@WHR_CreatedDate", WHR_CreatedDate);
+                AddParameter(cmd, "@WHR_Client_IP", WHR_Client_IP);
+                AddParameter(cmd, "@CropYear", CropYear);
+                AddParameter(cmd, "@Remark", Remark);
+                AddParameter(cmd, "@BranchID", BranchID);
+                AddParameter(cmd, "@DepositorID", DepositorID);
+                AddParameter(cmd, "@GodownID", GodownID);
+                AddParameter(cmd, "@WHR_Check_Sum", hashstrs);
+                AddParameter(cmd, "@CreatedBy", IpAdd);
+                AddParameter(cmd, "@DSC_Serial_No", Serial_No);
+                AddParameter(cmd, "@DSC_Holder_Name", DSC_Holder);
+                AddParameter(cmd, "@Client_Ip", LocalIP);
+                AddParameter(cmd, "@DSC_User_Type", DSC_User_Type);
                 con.Open();
                 int a = cmd.ExecuteNonQuery();
                 con.Close();
@@ -170,9 +196,25 @@ public class Insert_DSWHR_Data_Rabi2019 : System.Web.Services.WebService {
                 {
                     //string query2 = "INSERT INTO [tbl_Digital_Signature_Details]([WHR_No],[Sig_SignatureValue],[Cano_Algorithm],[SM_Algorithm],[Ref_DigestValue],[TF_Algorithm],[DM_Algorithm],[KeyInfo_KeyName],[RSA_Modulus],[RSA_Exponent],[X509Certificate]) VALUES ('" + Depositor_WHR_Id + "','" + Sig_SignatureValue + "','" + Cano_Algorithm + "','" + SM_Algorithm + "','" + Ref_DigestValue + "','" + TF_Algorithm + "','" + DM_Algorithm + "','" + KeyInfo_KeyName + "','" + RSA_Modulus + "','" + RSA_Exponent + "','" + X509Certificate + "')";
                     //string query2 = "INSERT INTO [tbl_Digital_Signature_Details]([WHR_No],DSC_Serial_No,DSC_Holder_Name,DSC_Subject,[Sig_SignatureValue],[Cano_Algorithm],[SM_Algorithm],[Ref_DigestValue],[TF_Algorithm],[DM_Algorithm],[KeyInfo_KeyName],[RSA_Modulus],[RSA_Exponent],[X509Certificate]) VALUES ('" + Depositor_WHR_Id + "','" + Serial_No + "','" + DSC_Holder + "','" + DSC_Subject + "','" + Sig_SignatureValue + "','" + Cano_Algorithm + "','" + SM_Algorithm + "','" + Ref_DigestValue + "','" + TF_Algorithm + "','" + DM_Algorithm + "','" + KeyInfo_KeyName + "','" + RSA_Modulus + "','" + RSA_Exponent + "','" + X509Certificate + "')";
-                    string query2 = "INSERT INTO [tbl_Digital_Signature_Details]([WHR_No],DSC_Serial_No,DSC_Holder_Name,DSC_Subject,[Sig_SignatureValue],[Cano_Algorithm],[SM_Algorithm],[Ref_DigestValue],[TF_Algorithm],[DM_Algorithm],[KeyInfo_KeyName],[RSA_Modulus],[RSA_Exponent],[X509Certificate],[DSC_User_Type],[CreatedDate],[CreatedBy],[Client_Ip]) VALUES ('" + Depositor_WHR_Id + "','" + Serial_No + "','" + DSC_Holder + "','" + DSC_Subject + "','" + Sig_SignatureValue + "','" + Cano_Algorithm + "','" + SM_Algorithm + "','" + Ref_DigestValue + "','" + TF_Algorithm + "','" + DM_Algorithm + "','" + KeyInfo_KeyName + "','" + RSA_Modulus + "','" + RSA_Exponent + "','" + X509Certificate + "','" + DSC_User_Type + "',GETDATE(),'" + WHR_Client_IP + "','" + LocalIP + "')";
-
+                    string query2 = "INSERT INTO [tbl_Digital_Signature_Details]([WHR_No],DSC_Serial_No,DSC_Holder_Name,DSC_Subject,[Sig_SignatureValue],[Cano_Algorithm],[SM_Algorithm],[Ref_DigestValue],[TF_Algorithm],[DM_Algorithm],[KeyInfo_KeyName],[RSA_Modulus],[RSA_Exponent],[X509Certificate],[DSC_User_Type],[CreatedDate],[CreatedBy],[Client_Ip]) VALUES (@WHR_No,@DSC_Serial_No,@DSC_Holder_Name,@DSC_Subject,@Sig_SignatureValue,@Cano_Algorithm,@SM_Algorithm,@Ref_DigestValue,@TF_Algorithm,@DM_Algorithm,@KeyInfo_KeyName,@RSA_Modulus,@RSA_Exponent,@X509Certificate,@DSC_User_Type,GETDATE(),@CreatedBy,@Client_Ip)";
                     SqlCommand cmd2 = new SqlCommand(query2, con);
+                    AddParameter(cmd2, "@WHR_No", Depositor_WHR_Id);
+                    AddParameter(cmd2, "@DSC_Serial_No", Serial_No);
+                    AddParameter(cmd2, "@DSC_Holder_Name", DSC_Holder);
+                    AddParameter(cmd2, "@DSC_Subject", DSC_Subject);
+                    AddParameter(cmd2, "@Sig_SignatureValue", Sig_SignatureValue);
+                    AddParameter(cmd2, "@Cano_Algorithm", Cano_Algorithm);
+                    AddParameter(cmd2, "@SM_Algorithm", SM_Algorithm);
+                    AddParameter(cmd2, "@Ref_DigestValue", Ref_DigestValue);
+                    AddParameter(cmd2, "@TF_Algorithm", TF_Algorithm);
+                    AddParameter(cmd2, "@DM_Algorithm", DM_Algorithm);
+                    AddParameter(cmd2, "@KeyInfo_KeyName", KeyInfo_KeyName);
+                    AddParameter(cmd2, "@RSA_Modulus", RSA_Modulus);
+                    AddParameter(cmd2, "@RSA_Exponent", RSA_Exponent);
+                    AddParameter(cmd2, "@X509Certificate", X509Certificate);
+                    AddParameter(cmd2, "@DSC_User_Type", DSC_User_Type);
+                    AddParameter(cmd2, "@CreatedBy", WHR_Client_IP);
+                    AddParameter(cmd2, "@Client_Ip", LocalIP);
                     con.Open();
                     int b = cmd2.ExecuteNonQuery();
                     con.Close();
@@ -180,9 +222,15 @@ public class Insert_DSWHR_Data_Rabi2019 : System.Web.Services.WebService {
                     {
                          string XMLData = DSString;
                          //string query3 = "INSERT INTO [Intergrated_MP_STORAGE].[dbo].[tbl_DSC_WHR_XML_File] ([WHR_Id],[WHR_XML_File]) VALUES ('" + WHRID + "','" + XMLData + "')";
-                         string query3 = "INSERT INTO [Intergrated_MP_STORAGE].[dbo].[tbl_DSC_WHR_XML_File] ([WHR_Id],[WHR_XML_File],[DSC_Serial_No],[DSC_User_Type],[CreatedDate],[CreatedBy],[Client_Ip]) VALUES ('" + WHRID + "','" + XMLData + "','" + Serial_No + "','" + DSC_User_Type + "',GETDATE(),'" + WHR_Client_IP + "','" + LocalIP + "')";
+                         string query3 = "INSERT INTO [Intergrated_MP_STORAGE].[dbo].[tbl_DSC_WHR_XML_File] ([WHR_Id],[WHR_XML_File],[DSC_Serial_No],[DSC_User_Type],[CreatedDate],[CreatedBy],[Client_Ip]) VALUES (@WHR_Id,@WHR_XML_File,@DSC_Serial_No,@DSC_User_Type,GETDATE(),@CreatedBy,@Client_Ip)";
 
                          SqlCommand cmd3 = new SqlCommand(query3, con);
+                         AddParameter(cmd3, "@WHR_Id", WHRID);
+                         AddParameter(cmd3, "@WHR_XML_File", XMLData);
+                         AddParameter(cmd3, "@DSC_Serial_No", Serial_No);
+                         AddParameter(cmd3, "@DSC_User_Type", DSC_User_Type);
+                         AddParameter(cmd3, "@CreatedBy", WHR_Client_IP);
+                         AddParameter(cmd3, "@Client_Ip", LocalIP);
                          con.Open();
                          int c=cmd3.ExecuteNonQuery();
                          con.Close();
@@ -199,9 +247,7 @@ public class Insert_DSWHR_Data_Rabi2019 : System.Web.Services.WebService {
 
         catch (Exception)
         {
-
-            throw;
-
+            throw new SoapException("Unable to save signed WHR data.", SoapException.ServerFaultCode);
         }
         return Is_SuccessInsert;
     }
@@ -222,8 +268,10 @@ public class Insert_DSWHR_Data_Rabi2019 : System.Web.Services.WebService {
         {
                 //string query = "SELECT [Depositor_WHR_Id],[Commodity_Id],[Depositor_Name],CONVERT(varchar(10),[Date_of_Deposit],103) as Date_of_Deposit,[TotalBags_Received],[Total_Qty_Received],[AvgMoisture_Content],[MktValue_of_Commodity],CONVERT(varchar(10),[WHR_Issue_Date],103) as WHR_Issue_Date,[CreatedDate],[MadeUpBags],[Client_IP],[CropYear],[Remark],[BranchID],[DepositorID],[GodownID] FROM [tbl_storage_Depositor_WHR_Relation] where Depositor_WHR_Id='" + WHR_Id + "'";
             //query = "select * from [tbl_DSC_User_Upload_Detail] where SerialNumber='" + SerialNo + "' and Verification_Status='Approve' and NotAfter>=GETDATE() and NotBefore<=GETDATE()";
-            query = "select * from [tbl_DSC_User_Upload_Detail] where SerialNumber='" + SerialNo + "' and Verification_Status='Approve' and NotAfter>=GETDATE() and NotBefore<=GETDATE() AND User_Type='" + UType + "'";
+            query = "select * from [tbl_DSC_User_Upload_Detail] where SerialNumber=@SerialNumber and Verification_Status='Approve' and NotAfter>=GETDATE() and NotBefore<=GETDATE() AND User_Type=@User_Type";
             SqlCommand cmd = new SqlCommand(query, con);
+            AddParameter(cmd, "@SerialNumber", SerialNo);
+            AddParameter(cmd, "@User_Type", UType);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);
@@ -241,10 +289,12 @@ public class Insert_DSWHR_Data_Rabi2019 : System.Web.Services.WebService {
 
         catch (Exception)
         {
-
-            throw;
-
+            throw new SoapException("Unable to verify the digital signature.", SoapException.ServerFaultCode);
         }
+    }
+    private static void AddParameter(SqlCommand command, string name, object value)
+    {
+        command.Parameters.AddWithValue(name, value ?? DBNull.Value);
     }
     [WebMethod(Description = "This Method Is Used to Insert DS WHR Data with XML")]
     public string Insert_WHR_File_CMS2021(string WHR, DataSet ds, string IP, string Cred, string StrX, string Subject, string SerNo, string Client_IP, string User_Type)
@@ -1439,4 +1489,3 @@ public class Insert_DSWHR_Data_Rabi2019 : System.Web.Services.WebService {
         return Is_SuccessInsert;
     }
 }
-
