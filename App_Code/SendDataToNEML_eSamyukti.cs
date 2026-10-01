@@ -11,7 +11,6 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Text;
 using System.Web;
 using System.Web.Script.Serialization;
@@ -1024,15 +1023,13 @@ WHERE WHR.Depositor_WHR_Id = @whrNo --AND WHR.BranchID = @branchId";
     ///Get teh dispatch data from NeML
     ///
     // Static client to prevent socket exhaustion
-    private static readonly HttpClient client = new HttpClient();
-
     [WebMethod]
     public string GetTransactionData(string fromdate, string todate)   //(string username, string password, string fromdate, string todate)
     {
         try
         {
             // 1. Force TLS 1.2 (Required for many modern APIs)
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            ServicePointManager.SecurityProtocol = LegacyJsonHttpClient.Tls12Protocol;
 
             // 2. Perform Login to get the Token
             string token = LoginAndGetToken();  //(username, password);
@@ -1051,31 +1048,25 @@ WHERE WHR.Depositor_WHR_Id = @whrNo --AND WHR.BranchID = @branchId";
     {
         var loginUrl = "https://nccf-enwhr.neml.in/api/v2/enwhr/auth/login";
         var loginData = new { username = "ENWRMPNCCF", password = "mpwcl#Nccf2026" };
-        var content = new StringContent(JsonConvert.SerializeObject(loginData), Encoding.UTF8, "application/json");
-
-        var response = client.PostAsync(loginUrl, content).GetAwaiter().GetResult();
-
-        if (response.IsSuccessStatusCode)
+        HttpStatusCode statusCode;
+        string jsonResponse = LegacyJsonHttpClient.Post(loginUrl, JsonConvert.SerializeObject(loginData), null, out statusCode);
+        if ((int)statusCode >= 200 && (int)statusCode < 300)
         {
-            string jsonResponse = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             // Assuming the API returns a JSON object like { "token": "..." }
             dynamic result = JsonConvert.DeserializeObject(jsonResponse);
             string token = result.jwtToken;
             return token;
         }
 
-        return "Error during Login: " + response.StatusCode;
+        return "Error during Login: " + statusCode;
     }
 
     private string FetchDispatchDetails(string token, string fromdate, string todate)
     {
         var url = "https://nccf-enwhr.neml.in/api/v2/enwhr/transactions/mpwlc/getDispatchDetailsByDate";
 
-        var request = new HttpRequestMessage(HttpMethod.Post, url);
-        request.Headers.Add("Authorization", "Bearer " + token);
-
         // Optional: Only add Cookie if the API requires stateful sessions
-        // request.Headers.Add("Cookie", "JSESSIONID=..."); 
+        // Add a session cookie to the request only if the API requires one.
 
         var payload = new
         {
@@ -1084,10 +1075,8 @@ WHERE WHR.Depositor_WHR_Id = @whrNo --AND WHR.BranchID = @branchId";
             toDate = todate
         };
 
-        request.Content = new StringContent(JsonConvert.SerializeObject(payload), Encoding.UTF8, "application/json");
-
-        var response = client.SendAsync(request).GetAwaiter().GetResult();
-        string strJson = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+        HttpStatusCode statusCode;
+        string strJson = LegacyJsonHttpClient.Post(url, JsonConvert.SerializeObject(payload), "Bearer " + token, out statusCode);
         return ProcessAndInsert(strJson);
     }
 

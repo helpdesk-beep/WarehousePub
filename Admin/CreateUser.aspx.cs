@@ -8,6 +8,8 @@ using WLCBusinessLayer;
 using System.Drawing;
 using System.Xml;
 using System.Text;
+using System.Configuration;
+using System.Data.SqlClient;
 
 
 public partial class Admin_Agreement : System.Web.UI.Page
@@ -36,7 +38,7 @@ public partial class Admin_Agreement : System.Web.UI.Page
         ddlrole.Items.Clear();
         ddlrole.Items.Add(item);
 
-        DataTable dt = new Common().GetROLL();
+        DataTable dt = WebsiteLookups.GetRoles();
         if (dt.Rows.Count > 0)
         {
             for (int i = 0; i < dt.Rows.Count; i++)
@@ -59,7 +61,7 @@ public partial class Admin_Agreement : System.Web.UI.Page
         ddlregion.Items.Clear();
         ddlregion.Items.Add(item);
 
-        DataTable dt = new Common().GetRO();
+        DataTable dt = WebsiteLookups.GetRegions();
         if (dt.Rows.Count > 0)
         {
             for (int i = 0; i < dt.Rows.Count; i++)
@@ -83,7 +85,7 @@ public partial class Admin_Agreement : System.Web.UI.Page
         ddldistrict.Items.Clear();
         ddldistrict.Items.Add(item);
 
-        DataTable dt = new Common().GetDistrict(ddlregion.SelectedValue);
+        DataTable dt = WebsiteLookups.GetDistricts(ddlregion.SelectedValue);
         if (dt.Rows.Count > 0)
         {
             for (int i = 0; i < dt.Rows.Count; i++)
@@ -106,7 +108,7 @@ public partial class Admin_Agreement : System.Web.UI.Page
         ddlbranch.Items.Clear();
         ddlbranch.Items.Add(item);
 
-        DataTable dt = new Common().GetBranch(ddldistrict.SelectedValue);
+        DataTable dt = WebsiteLookups.GetBranches(ddldistrict.SelectedValue);
         if (dt.Rows.Count > 0)
         {
             for (int i = 0; i < dt.Rows.Count; i++)
@@ -129,7 +131,7 @@ public partial class Admin_Agreement : System.Web.UI.Page
         ddlgodown.Items.Clear();
         ddlgodown.Items.Add(item);
 
-        DataTable dt = new Common().GetGodown(ddlbranch.SelectedValue);
+        DataTable dt = WebsiteLookups.GetGodowns(ddlbranch.SelectedValue);
         if (dt.Rows.Count > 0)
         {
             for (int i = 0; i < dt.Rows.Count; i++)
@@ -140,8 +142,6 @@ public partial class Admin_Agreement : System.Web.UI.Page
 
                 ddlgodown.Items.Add(item);
             }
-
-
         }
 
     }

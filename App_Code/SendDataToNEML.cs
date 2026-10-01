@@ -11,11 +11,56 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Net;
-using System.Net.Http;
 using System.Text;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Services;
+
+internal static class LegacyJsonHttpClient
+{
+    public const SecurityProtocolType Tls12Protocol = (SecurityProtocolType)3072;
+
+    public static string Post(string url, string json, string authorization, out HttpStatusCode statusCode)
+    {
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+        request.Method = "POST";
+        request.ContentType = "application/json";
+        if (!string.IsNullOrEmpty(authorization))
+        {
+            request.Headers[HttpRequestHeader.Authorization] = authorization;
+        }
+
+        byte[] requestData = Encoding.UTF8.GetBytes(json);
+        request.ContentLength = requestData.Length;
+        using (Stream requestStream = request.GetRequestStream())
+        {
+            requestStream.Write(requestData, 0, requestData.Length);
+        }
+
+        HttpWebResponse response;
+        try
+        {
+            response = (HttpWebResponse)request.GetResponse();
+        }
+        catch (WebException exception)
+        {
+            response = exception.Response as HttpWebResponse;
+            if (response == null)
+            {
+                throw;
+            }
+        }
+
+        using (response)
+        using (Stream responseStream = response.GetResponseStream())
+        using (StreamReader reader = new StreamReader(responseStream, Encoding.UTF8))
+        {
+            statusCode = response.StatusCode;
+            return reader.ReadToEnd();
+        }
+    }
+}
+
 /// <summary>
 /// Summary description for SendDataToNEME
 /// </summary>
@@ -1218,15 +1263,13 @@ public class SendDataToNEML : System.Web.Services.WebService
     ///Get teh dispatch data from NeML
     ///
    // Static client to prevent socket exhaustion
-    private static readonly HttpClient client = new HttpClient();
-
     [WebMethod]
     public string GetTransactionData(string fromdate, string todate)   //(string username, string password, string fromdate, string todate)
     {
         try
         {
             // 1. Force TLS 1.2 (Required for many modern APIs)
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            ServicePointManager.SecurityProtocol = LegacyJsonHttpClient.Tls12Protocol;
 
             // 2. Perform Login to get the Token
             string token = LoginAndGetToken();  //(username, password);
@@ -1245,20 +1288,17 @@ public class SendDataToNEML : System.Web.Services.WebService
     {
         var loginUrl = "https://enwhr.esamridhi.in/api/v2/enwhr/auth/login";
         var loginData = new { username = "ENWHRMPWLC", password = "@3MPeNWHR0426" };
-        var content = new StringContent(JsonConvert.SerializeObject(loginData), Encoding.UTF8, "application/json");
-
-        var response = client.PostAsync(loginUrl, content).GetAwaiter().GetResult();
-
-        if (response.IsSuccessStatusCode)
+        HttpStatusCode statusCode;
+        string jsonResponse = LegacyJsonHttpClient.Post(loginUrl, JsonConvert.SerializeObject(loginData), null, out statusCode);
+        if ((int)statusCode >= 200 && (int)statusCode < 300)
         {
-            string jsonResponse = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             // Assuming the API returns a JSON object like { "token": "..." }
             dynamic result = JsonConvert.DeserializeObject(jsonResponse);
             string token = result.jwtToken;
             return token;
         }
 
-        return "Error during Login: " + response.StatusCode;
+        return "Error during Login: " + statusCode;
     }
 
     private string FetchDispatchDetails(string token, string fromdate, string todate)
@@ -1266,11 +1306,8 @@ public class SendDataToNEML : System.Web.Services.WebService
         var url = "https://enwhr.esamridhi.in/api/v2/enwhr/transactions/mpwlc/getDispatchDetailsByDate";
         //Old Url   "https://enwhr.esamridhi.in/api/v2/enwhr/transactions/getDispatchDetailsByDate";
 
-        var request = new HttpRequestMessage(HttpMethod.Post, url);
-        request.Headers.Add("Authorization", "Bearer " + token);
-
         // Optional: Only add Cookie if the API requires stateful sessions
-        // request.Headers.Add("Cookie", "JSESSIONID=..."); 
+        // Add a session cookie to the request only if the API requires one.
 
         var payload = new
         {
@@ -1279,10 +1316,8 @@ public class SendDataToNEML : System.Web.Services.WebService
             toDate = todate
         };
 
-        request.Content = new StringContent(JsonConvert.SerializeObject(payload), Encoding.UTF8, "application/json");
-
-        var response = client.SendAsync(request).GetAwaiter().GetResult();
-        string strJson = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+        HttpStatusCode statusCode;
+        string strJson = LegacyJsonHttpClient.Post(url, JsonConvert.SerializeObject(payload), "Bearer " + token, out statusCode);
         return ProcessAndInsert(strJson);
     }
 
@@ -1371,6 +1406,4 @@ public class SendDataToNEML : System.Web.Services.WebService
 
     }
 }
-
-
 
