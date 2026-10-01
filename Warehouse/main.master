@@ -149,7 +149,7 @@
     <link href='<%= Page.ResolveUrl("~/assets/New/css/bootstrap-theme.css")%>' rel="stylesheet" type="text/css">
 
     <!-- font awesome -->
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <link href='<%= Page.ResolveUrl("~/assets/New/css/style.css")%>' rel="stylesheet" type="text/css">
@@ -414,7 +414,7 @@
 
 
         <!--Java Script -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="<%= ResolveUrl("~/assets/js/bootstrap.min.js") %>"></script>
 
         <!--[if IE]>
 

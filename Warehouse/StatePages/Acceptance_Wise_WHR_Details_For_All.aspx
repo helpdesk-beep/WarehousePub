@@ -10,7 +10,7 @@
     <link href="../assets/New/css/bootstrap.min2.css" rel="stylesheet" />
     <link href="../CSS/style.css" rel="stylesheet" />
 
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
     <script src="../assets/New/js/select2.min.js"></script>
 
     <script>

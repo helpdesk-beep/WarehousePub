@@ -1,11 +1,11 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="WLC_FRM_01_02_03_Receipt_New.aspx.cs" MaintainScrollPositionOnPostback="true"
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="WLC_FRM_01_02_03_Receipt_New.aspx.cs" MaintainScrollPositionOnPostback="true"
     Inherits="IssueCenterLevel_Storage_WLC_FRM_01_02_03_Receipt_New" MasterPageFile="~/MasterPage/Gdwn.master"
     Title="Deposit at Issue Centre" %>
 
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
   <script src="http://malsup.github.io/jquery.blockUI.js"></script>
   <script type="text/javascript">
       $(document).ready(function () {
@@ -65,7 +65,7 @@ padding-top:20%;
     }
 </style>
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
 <script type="text/javascript">
     function ShowProgress() {
         setTimeout(function () {
@@ -79,7 +79,7 @@ padding-top:20%;
             loading.css({ top: top, left: left });
         }, 200);
     }
-    $('form').live("submit", function () {
+    $(document).on("submit", "form", function () {
         ShowProgress();
     });
 </script>

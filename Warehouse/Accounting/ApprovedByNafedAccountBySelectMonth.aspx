@@ -8,7 +8,7 @@
     <link href="../CSS/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
     <script type="text/javascript">
         function PrintDiv() {
             var divContents = document.getElementById("PrintDiv").innerHTML;

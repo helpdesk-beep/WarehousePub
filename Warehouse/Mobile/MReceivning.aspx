@@ -9,10 +9,10 @@
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></asp:ToolkitScriptManager>
   <div id="divContainer">
     <script src="assets/js/jquery.js" type="text/javascript"></script>
-      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+      <script src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
       <script type="text/javascript">
-          $(window).load(function () {
+          $(window).on("load", function () {
               // Animate loader off screen
               $(".se-pre-con").fadeOut("slow");;
           });
@@ -22,8 +22,8 @@
           datefield.setAttribute("type", "date")
           if (datefield.type != "date") { //if browser doesn't support input type="date", load files for jQuery UI Date Picker
               document.write('<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />\n')
-              document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"><\/script>\n')
-              document.write('<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"><\/script>\n')
+              document.write('<script src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"><\/script>\n')
+              document.write('<script src="<%= ResolveUrl("~/NEW_CSS/js/jquery-ui.js") %>"><\/script>\n')
           }
 </script>
       <script>

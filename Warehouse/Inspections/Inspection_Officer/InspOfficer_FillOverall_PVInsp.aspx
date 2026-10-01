@@ -6,9 +6,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <link rel="stylesheet" href="httpS://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="httpS://code.jquery.com/ui/1.8.3/themes/base/jquery-ui.css" />
-    <script type="text/javascript" src="httpS://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script type="text/javascript" src="httpS://code.jquery.com/ui/1.8.3/jquery-ui.js"></script>
-    <script src="httpS://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/NEW_CSS/js/jquery-ui.js") %>"></script>
+    <script src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>" type="text/javascript"></script>
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 
@@ -1745,11 +1745,11 @@
             </table>
         </div>
     </div>
-    <%--<script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>--%>
+    <%--<script type="text/javascript" src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/NEW_CSS/js/jquery-ui.js") %>"></script>--%>
 
-    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
+    <script src="<%= ResolveUrl("~/NEW_CSS/js/jquery-ui.js") %>"></script>
     <script>
         $(document).ready(function () {
             $("[id$=txtexdate]").datepicker({

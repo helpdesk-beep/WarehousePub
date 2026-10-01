@@ -47,7 +47,7 @@ padding-top:20%;
         z-index: 999;
     }
 </style>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
 <script type="text/javascript">
     function ShowProgress() {
         setTimeout(function () {
@@ -61,7 +61,7 @@ padding-top:20%;
             loading.css({ top: top, left: left });
         }, 200);
     }
-    $('form').live("submit", function () {
+    $(document).on("submit", "form", function () {
         ShowProgress();
     });
 </script>

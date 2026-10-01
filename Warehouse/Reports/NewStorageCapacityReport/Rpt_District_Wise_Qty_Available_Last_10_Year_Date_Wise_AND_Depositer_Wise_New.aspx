@@ -66,7 +66,7 @@
 
 <asp:Content ID="Content5" ContentPlaceHolderID="ContentPageScript" runat="Server">
     <%--<script src="../../JS/table2excel.js"></script>--%>
-    <%--<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>--%>
+    <%--<script src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>--%>
     <script>
         var grid = $('#<%= GridView1.ClientID %>');
 

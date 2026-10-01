@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
        <%--Dropdown Search--%>
-   <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+   <script src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
    <link href="../assets/New/css/select2.min.css" rel="stylesheet" />
    <script type="text/javascript" src="../assets/New/js/select2.min.js"></script>
    <script type="text/javascript">
@@ -36,7 +36,7 @@
     });
 </script>
      <%--Dropdown Search End--%>
- <%--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>--%>
+ <%--<script type="text/javascript" src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>--%>
     <style type="text/css">
         .style1 {
             width: 346px;

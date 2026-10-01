@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
     <link href="../Assets/css/bootstrap-datepicker.css" rel="stylesheet" />
     
-    <script type="text/javascript" src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js'></script>
+    <script type="text/javascript" src='<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>'></script>
     <script type="text/javascript" src="../Assets/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript">
         window.history.forward();

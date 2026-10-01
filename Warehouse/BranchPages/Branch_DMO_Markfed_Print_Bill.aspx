@@ -6,7 +6,7 @@
 <head runat="server">
    <title>DMO_Markfed Storage Bill</title>
     <link href="http://mpsc.mp.nic.in/Warehouse/Administration/assets/css/Table-MultiDesigns.css" rel="stylesheet" type="text/css" />
-    <script src="http://mpsc.mp.nic.in/Warehouse/Administration/assets/jQuery%20Package/jquery-1.10.2/jquery-1.10.2.js" type="text/javascript"></script>
+    <script src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>" type="text/javascript"></script>
     <style>
         body {
             font-family: "Segoe UI", Calibri, Arial, sans-serif;

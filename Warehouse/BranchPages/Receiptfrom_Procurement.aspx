@@ -5,7 +5,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+ <script src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
   <script src="http://malsup.github.io/jquery.blockUI.js"></script>
   <script type="text/javascript">
       $(document).ready(function () {

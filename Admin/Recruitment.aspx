@@ -98,7 +98,7 @@
             });
         });
     </script>
-     <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
+     <script type="text/javascript" src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
     <script type="text/javascript">
         $(function () {
             $('[id*=txtTitle]').keydown(function (e) {

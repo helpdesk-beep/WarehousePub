@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- jQuery & Select2 -->
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
     <link href="../../assets/New/css/select2.min.css" rel="stylesheet" />
     <script src="../../assets/New/js/select2.min.js"></script>
 

@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
     <!-- JQuery -->
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
 
     <!-- Select2 -->
     <link href="../assets/New/css/select2.min.css" rel="stylesheet" />

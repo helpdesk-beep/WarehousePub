@@ -162,8 +162,8 @@
     </script>
 
     <!-- Bootstrap -->
-    <script type="text/javascript" src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js'></script>
-    <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js'></script>
+    <script type="text/javascript" src='<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>'></script>
+    <script type="text/javascript" src='<%= ResolveUrl("~/assets/js/bootstrap.min.js") %>'></script>
     <!-- Bootstrap -->
     <!-- Bootstrap DatePicker -->
     <link rel="stylesheet" href="../assets/New/css/bootstrap-datepicker.css" type="text/css" />

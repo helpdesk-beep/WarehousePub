@@ -9,7 +9,7 @@
     <link href="../assets/New/css/bootstrap.min2.css" rel="stylesheet" />
     <link href="../CSS/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
-    <script type="text/javascript" src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js'></script>
+    <script type="text/javascript" src='<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>'></script>
     <script type="text/javascript" src="../assets/New/js/select2.min.js"></script>
     <link href="../assets/New/css/select2.min.css" rel="stylesheet" />
     <style type="text/css">
@@ -160,7 +160,7 @@
 
 
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
     <script type="text/javascript">
         function ShowProgress() {
             setTimeout(function () {
@@ -174,7 +174,7 @@
                 loading.css({ top: top, left: left });
             }, 200);
         }
-        $('form').live("submit", function () {
+        $(document).on("submit", "form", function () {
             ShowProgress();
         });
     </script>

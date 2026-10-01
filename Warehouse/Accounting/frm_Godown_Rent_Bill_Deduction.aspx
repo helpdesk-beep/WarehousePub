@@ -1,7 +1,7 @@
 ﻿    <%@ Page Language="C#" MasterPageFile="~/MasterPage/Gdwn.master" AutoEventWireup="true" CodeFile="frm_Godown_Rent_Bill_Deduction.aspx.cs" Inherits="Accounting_frm_Godown_Rent_Bill_Deduction" Title="Untitled Page" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+ <script type="text/javascript" src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
     <style type="text/css">
    
         .style1

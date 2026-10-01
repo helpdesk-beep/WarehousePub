@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <link href=”https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/0.1.0/css/footable.min.css”
         rel=”stylesheet” type=”text/css” />
-    <script type=”text/javascript” src=”http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js”></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
     <script type=”text/javascript” src=”https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/0.1.0/js/footable.min.js”></script>
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script type=”text/javascript”>
@@ -370,4 +370,3 @@
         }
     </style>
 </asp:Content>
-

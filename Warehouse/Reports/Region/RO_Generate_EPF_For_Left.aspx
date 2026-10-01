@@ -69,7 +69,7 @@
            
         }
     </style>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
     <script type="text/javascript">
         function PrintDiv_Actual() {
             var divContents = document.getElementById("printActualBill").innerHTML;
