@@ -12,7 +12,7 @@
       <script src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
       <script type="text/javascript">
-          $(window).load(function () {
+          $(window).on("load", function () {
               // Animate loader off screen
               $(".se-pre-con").fadeOut("slow");;
           });

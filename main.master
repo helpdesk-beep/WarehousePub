@@ -491,7 +491,7 @@
                 }, 'google_translate_element');
             }
             // Dropdown fix ke liye naya logic
-            $(window).load(function () {
+            $(window).on("load", function () {
                 // Jab dropdown change ho, toh hum check karenge
                 $('.goog-te-combo').on('change', function () {
                     var lang = $(this).val();

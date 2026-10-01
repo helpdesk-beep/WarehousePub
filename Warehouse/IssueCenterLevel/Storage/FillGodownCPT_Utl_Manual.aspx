@@ -69,7 +69,7 @@ padding-top:20%;
             loading.css({ top: top, left: left });
         }, 200);
     }
-    $('form').live("submit", function () {
+    $(document).on("submit", "form", function () {
         ShowProgress();
     });
 

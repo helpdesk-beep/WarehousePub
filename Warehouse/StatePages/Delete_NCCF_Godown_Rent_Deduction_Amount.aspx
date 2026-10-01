@@ -257,7 +257,7 @@
 
         // Apply loader on forms postback bindings
         $(document).ready(function () {
-            $('form').live("submit", function () {
+            $(document).on("submit", "form", function () {
                 ShowProgress();
             });
 

@@ -150,11 +150,11 @@
     </style>
     <script type="text/javascript" src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
     <script type="text/javascript">
-        $("[src*=plus]").live("click", function () {
+        $(document).on("click", "[src*=plus]", function () {
             $(this).closest("tr").after("<tr><td></td><td colspan = '999'>" + $(this).next().html() + "</td></tr>")
             $(this).attr("src", "../images/minus.jpg");
         });
-        $("[src*=minus]").live("click", function () {
+        $(document).on("click", "[src*=minus]", function () {
             $(this).attr("src", "../images/Plus.jpg");
             $(this).closest("tr").next().remove();
         });
