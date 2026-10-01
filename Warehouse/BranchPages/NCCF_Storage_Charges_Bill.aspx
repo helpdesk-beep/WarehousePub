@@ -12,7 +12,7 @@
     <link href="../assets/New/css/select2.min.css" rel="stylesheet" />
     <link href="../CSS/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
-    <script type="text/javascript" src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js'></script>
+    <script type="text/javascript" src='<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>'></script>
     <script type="text/javascript">
         window.history.forward();
         function noBack() { window.history.forward(); }

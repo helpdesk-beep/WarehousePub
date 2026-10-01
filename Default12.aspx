@@ -521,6 +521,6 @@
     <audio id="audio_mp3" src="/curtain/music/MP_Gaan.mpeg" loop="loop"></audio>
     </div>
    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
 
 </asp:Content>

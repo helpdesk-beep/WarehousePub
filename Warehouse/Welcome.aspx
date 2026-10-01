@@ -2,7 +2,7 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <script src="http://mpsc.mp.nic.in/Warehouse/Administration/assets/jQuery%20Package/jquery-1.10.2/jquery-1.10.2.js" type="text/javascript"></script>
+    <script src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>" type="text/javascript"></script>
     <script src="http://mpsc.mp.nic.in/Warehouse/Administration/assets/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="http://mpsc.mp.nic.in/Warehouse/Administration/assets/js/bootstrap.bundle.min.js" type="text/javascript"></script>
     <style type="text/css">

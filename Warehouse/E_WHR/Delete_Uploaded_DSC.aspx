@@ -180,7 +180,7 @@
             </asp:UpdatePanel>--%>
         </center>
     </fieldset>
-    <script type="text/javascript" src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js'></script>
+    <script type="text/javascript" src='<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>'></script>
     <script type="text/javascript" src="../assets/New/js/select2.min.js"></script>
     <script type="text/javascript">
         $(function () { $("[id*=ddlDistrict]").select2(); });

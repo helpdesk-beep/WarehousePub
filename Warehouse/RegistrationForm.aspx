@@ -10,7 +10,7 @@
     <link href="assets/datatable/css/buttons.dataTables.min.css" rel="stylesheet" />
     <link href="assets/datatable/css/jquery.dataTables.min.css" rel="stylesheet" />
     <!-- Bootstrap -->
-    <script type="text/javascript" src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js'></script>
+    <script type="text/javascript" src='<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>'></script>
     <script type="text/javascript">
         window.history.forward();
         function noBack() { window.history.forward(); }

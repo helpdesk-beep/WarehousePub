@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage/StateMaster.master" AutoEventWireup="true" CodeFile="Update_Currect_Storage_Bill_With_RentBill.aspx.cs" Inherits="Accounting_Update_Currect_Storage_Bill_With_RentBill" Title="कटोत्रा" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
     <style type="text/css">
         .style1 {
             width: 346px;
@@ -11,7 +11,7 @@
             width: 539px;
         }
     </style>
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
     <link href="../assets/New/css/select2.min.css" rel="stylesheet" />
     <script type="text/javascript" src="../assets/New/js/select2.min.js"></script>
     <script type="text/javascript">

@@ -1,11 +1,11 @@
-<%@ Page Language="C#" MasterPageFile="~/MasterPage/StateMaster.master" AutoEventWireup="true" CodeFile="UpdateFlag_N_to_Y_in_Godown.aspx.cs" Inherits="StatePages_UpdateFlag_N_to_Y_in_Godown" Title="Lic Update" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage/StateMaster.master" AutoEventWireup="true" CodeFile="UpdateFlag_N_to_Y_in_Godown.aspx.cs" Inherits="StatePages_UpdateFlag_N_to_Y_in_Godown" Title="Lic Update" %>
 
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <%--Update New--%>
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
     <link href="../assets/New/css/select2.min.css" rel="stylesheet" />
     <script type="text/javascript" src="../assets/New/js/select2.min.js"></script>
     <script type="text/javascript">

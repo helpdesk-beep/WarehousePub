@@ -522,8 +522,8 @@
                             </asp:GridView>
  </div>
          </fieldset>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/NEW_CSS/js/jquery-ui.js") %>"></script>
     <script language="javascript" type="text/javascript">
         function NumberOnly(e) {
             var charCode = (e.which) ? e.which : e.keyCode;

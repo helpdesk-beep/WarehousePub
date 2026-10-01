@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/StateMaster.master" AutoEventWireup="true" CodeFile="~/StatePages/NCCF_Payment_Details_HO.aspx.cs" Inherits="StatePages_NCCF_Payment_Details_HO" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
     <link href="../assets/New/css/select2.min.css" rel="stylesheet" />
     <script type="text/javascript" src="../assets/New/js/select2.min.js"></script>
 

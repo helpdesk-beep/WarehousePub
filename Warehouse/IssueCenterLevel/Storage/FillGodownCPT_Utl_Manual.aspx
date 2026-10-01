@@ -1,4 +1,4 @@
-<%@ Page Language="C#" MasterPageFile="~/MasterPage/Gdwn.master" AutoEventWireup="true" CodeFile="FillGodownCPT_Utl_Manual.aspx.cs" Inherits="IssueCenterLevel_Storage_FillGodownCPT_Utl_Manual" Title="Untitled Page" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage/Gdwn.master" AutoEventWireup="true" CodeFile="FillGodownCPT_Utl_Manual.aspx.cs" Inherits="IssueCenterLevel_Storage_FillGodownCPT_Utl_Manual" Title="Untitled Page" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
@@ -55,7 +55,7 @@ padding-top:20%;
            width: 200px;
        }
    </style>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
 <script type="text/javascript">
     function ShowProgress() {
         setTimeout(function () {

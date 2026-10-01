@@ -166,7 +166,7 @@
             </div>
         </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
         <script src="../../JS/table2excel.js"></script>
         <script type="text/javascript">
             $(function () {

@@ -13,7 +13,7 @@
     <link href="../../assets/New/css/bootstrap-multiselect.css" rel="stylesheet" />
 
     <!-- JS FILES -->
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="<%= ResolveUrl("~/NEW_CSS/js/jquery-1.12.4.js") %>"></script>
     <script src="../assets/New/js/select2.min.js"></script>
     <script src="../../assets/New/js/bootstrap-multiselect.js"></script>
 
