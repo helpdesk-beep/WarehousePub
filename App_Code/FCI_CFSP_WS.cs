@@ -13,7 +13,6 @@ using System.Net;
 using System.IO;
 using System.CodeDom;
 using System.Threading.Tasks;
-using System.Net.Http;
 
 /// <summary>
 /// Summary description for FCI_CFSP_WS

@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using WLCDataLayer;
 using WLCBusinessLayer;
 using System.Data.SqlClient;
 using System.Configuration;
@@ -64,7 +63,7 @@ public partial class Region_Employee_Details : System.Web.UI.Page
         ddlbranch.Items.Clear();
         ddlbranch.Items.Add(item);
 
-        DataTable dt = new Common().GetBranch(ddldistrict.SelectedValue);
+        DataTable dt = WebsiteLookups.GetBranches(ddldistrict.SelectedValue);
         if (dt.Rows.Count > 0)
         {
             for (int i = 0; i < dt.Rows.Count; i++)

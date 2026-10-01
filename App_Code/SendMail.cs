@@ -137,7 +137,7 @@ public class SendMail : System.Web.Services.WebService
             //SmtpClient smtp = new SmtpClient();
             //smtp.Host = "smtp.gmail.com";
             //smtp.Port = 587;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            ServicePointManager.SecurityProtocol = LegacyJsonHttpClient.Tls12Protocol;
             SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
             smtp.EnableSsl = true;
             smtp.UseDefaultCredentials = false;

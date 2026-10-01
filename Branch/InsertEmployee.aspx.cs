@@ -5,7 +5,6 @@ using System.IO;
 using System.Configuration;
 using System.Web.UI.WebControls;
 using System.Data;
-using WLCDataLayer;
 using WLCBusinessLayer;
 
 public partial class Admin_InsertEmployee : System.Web.UI.Page
@@ -34,7 +33,7 @@ public partial class Admin_InsertEmployee : System.Web.UI.Page
         ddldistrict.Items.Clear();
         ddldistrict.Items.Add(item);
 
-        DataTable dt = new Common().GetDistrict(ddldistrict.SelectedValue);
+        DataTable dt = WebsiteLookups.GetDistricts(ddldistrict.SelectedValue);
         if (dt.Rows.Count > 0)
         {
             for (int i = 0; i < dt.Rows.Count; i++)
@@ -57,7 +56,7 @@ public partial class Admin_InsertEmployee : System.Web.UI.Page
         ddlbranch.Items.Clear();
         ddlbranch.Items.Add(item);
 
-        DataTable dt = new Common().GetBranch(ddldistrict.SelectedValue);
+        DataTable dt = WebsiteLookups.GetBranches(ddldistrict.SelectedValue);
         if (dt.Rows.Count > 0)
         {
             for (int i = 0; i < dt.Rows.Count; i++)

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Debug="true" ViewStateEncryptionMode="Always" Language="C#" MasterPageFile="/MasterPages/adminMaster.master" AutoEventWireup="true" CodeFile="UpdateImage.aspx.cs" Inherits="Admin_UpdateImage" %>
+<%@ Page Title="" Debug="true" ViewStateEncryptionMode="Always" Language="C#" MasterPageFile="~/MasterPages/adminMaster.master" AutoEventWireup="true" CodeFile="UpdateImage.aspx.cs" Inherits="Admin_UpdateImage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="PM" runat="Server">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
@@ -72,4 +72,3 @@
         </div>
     </div>
 </asp:Content>
-
